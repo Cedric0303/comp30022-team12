@@ -8,16 +8,17 @@
   - [Team Members](#team-members)
   - [General info](#general-info)
   - [Packages](#packages)
+  - [Installation](#installation)
 
 ## Team Members
 
-| Name | Task | State |
-| :---         |     :---:      |          ---: |
-| Maggie Wang     |     |  In Progress|
-| Feifan Zeng      |     |  In Progress |
-| Samantha Min Syuen Goh    |     |  In Progress |
-| Jun Li Chen    |     |  In Progress |
-| Jeongwoo Seo    |     |  In Progress |
+| Name | Task |
+| :---         |          ---: |
+| Maggie Wang     |     |
+| Feifan Zeng      |     |
+| Samantha Min Syuen Goh    |     |
+| Jun Li Chen    |     |
+| Jeongwoo Seo    |     |
 
 ## General info
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -25,3 +26,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ## Packages
 * `express`
 * `react`
+
+## Installation
+*Hopefully this is correct*
+- `git clone <repo>`
+- `cd <repo>`
+- `npm install` (install server packages)
+- `cd client`
+- `npm install` (install client packages)
