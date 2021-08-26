@@ -5,8 +5,9 @@ const passport = require("passport");
 
 const loginRouter = require("./routes/loginRouter.js");
 const userRouter = require("./routes/userRouter.js");
+const tagRouter = require("./routes/tagRouter.js");
 
-require("./auth/auth");
+require("./auth/auth.js");
 
 const PORT = process.env.PORT || 3001;
 
@@ -20,10 +21,17 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/account", loginRouter);
+
 app.use(
     "/api/users",
     passport.authenticate("jwt", { session: false }),
     userRouter
+);
+
+app.use(
+    "/api/tags",
+    passport.authenticate("jwt", { session: false }),
+    tagRouter
 );
 
 app.listen(PORT, () => {

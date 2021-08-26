@@ -73,8 +73,16 @@ SALT=10
 
 ## Implemented Backend API
 
-| Method | Route                 |
-| :----- | :-------------------- |
-| POST   | `/api/account/signup` |
-| GET    | `/api/account/login`  |
-| GET    | `/api/users`          |
+| Method | Route                    |
+| :----- | :----------------------- |
+| POST   | `/api/account/signup`    |
+| GET    | `/api/account/login`     |
+| GET    | `/api/users`             |
+| GET    | `/api/users/:uid`        |
+| POST   | `/api/users/:uid/edit`   |
+| POST   | `/api/users/:uid/delete` |
+| GET    | `/api/tags`              |
+| GET    | `/api/tags/:tid`         |
+| POST   | `/api/tags/create`       |
+| POST   | `/api/tags/:tid/edit`    |
+| POST   | `/api/tags/:tid/delete`  |

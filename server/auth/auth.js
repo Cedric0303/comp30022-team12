@@ -10,7 +10,7 @@ const db = require("../controllers/databaseController.js");
 
 const UserModel = require("../models/userModel.js");
 
-const User = db.collection("user");
+const Users = db.collection("users");
 
 passport.use(
     "signup",
@@ -22,7 +22,7 @@ passport.use(
         },
         async (req, username, password, done) => {
             try {
-                const exist = await User.findOne({ username: username });
+                const exist = await Users.findOne({ username: username });
                 if (exist == null) {
                     const hash = await bcrypt.hash(
                         password,
@@ -35,7 +35,7 @@ passport.use(
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
                     });
-                    await User.insertOne(newUser);
+                    await Users.insertOne(newUser);
                     return done(null, newUser);
                 } else {
                     return done("Error: User already exists!");
@@ -56,8 +56,7 @@ passport.use(
         },
         async (username, password, done) => {
             try {
-                console.log(username, password);
-                const user = await User.findOne({
+                const user = await Users.findOne({
                     username: username,
                 });
 
