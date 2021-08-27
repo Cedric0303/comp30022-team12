@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "it-project",
-    "dateExported": "2021-08-26T17:30:35.395Z",
+    "dateExported": "2021-08-27T18:37:27.012Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -128,6 +128,117 @@
             "body": {
                 "type": "json",
                 "raw": "{\n    \"tname\": \"default\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "containerId": "",
+            "sortNum": 70000,
+            "headers": [
+                { "name": "Accept", "value": "*/*" },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.io)"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiZGVmYXVsdCJ9LCJpYXQiOjE2Mjk3ODM2MzF9.0QUkI4xzJMEEx4ijE4iDOJJewBAhJG7GOXyawazMOJg"
+                }
+            ],
+            "colId": "011118f5-4ab7-4e71-9257-f005f5da5709",
+            "name": "http://localhost:3001/api/clients/",
+            "url": "http://localhost:3001/api/clients/",
+            "method": "GET",
+            "modified": "2021-08-27T18:00:11.315Z",
+            "created": "2021-08-27T17:59:50.794Z",
+            "_id": "f6dabe19-a189-4ebf-80c8-f79fe3bc50c4",
+            "params": [],
+            "tests": []
+        },
+        {
+            "containerId": "",
+            "sortNum": 80000,
+            "headers": [
+                { "name": "Accept", "value": "*/*" },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.io)"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiZGVmYXVsdCJ9LCJpYXQiOjE2Mjk3ODM2MzF9.0QUkI4xzJMEEx4ijE4iDOJJewBAhJG7GOXyawazMOJg"
+                }
+            ],
+            "colId": "011118f5-4ab7-4e71-9257-f005f5da5709",
+            "name": "http://localhost:3001/api/clients/create",
+            "url": "http://localhost:3001/api/clients/create",
+            "method": "POST",
+            "modified": "2021-08-27T18:35:16.365Z",
+            "created": "2021-08-27T18:01:45.783Z",
+            "_id": "e63367ca-4faa-4ad7-9df0-fd9fe1e865f7",
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"email\": \"sdd@ced.com\",\n    \"address\": \"Earth\",\n    \"phoneNumber\": \"030303030303\",\n    \"firstName\": \"ced\",\n    \"lastName\": \"ced\",\n    \"photoURL\": \"null\",\n    \"usernameReference\": \"Cedric0303\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "containerId": "",
+            "sortNum": 90000,
+            "headers": [
+                { "name": "Accept", "value": "*/*" },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.io)"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiZGVmYXVsdCJ9LCJpYXQiOjE2Mjk3ODM2MzF9.0QUkI4xzJMEEx4ijE4iDOJJewBAhJG7GOXyawazMOJg"
+                }
+            ],
+            "colId": "011118f5-4ab7-4e71-9257-f005f5da5709",
+            "name": "http://localhost:3001/api/clients/ced@ced.com/edit",
+            "url": "http://localhost:3001/api/clients/ced@ced.com/edit",
+            "method": "POST",
+            "modified": "2021-08-27T18:06:13.417Z",
+            "created": "2021-08-27T18:04:53.682Z",
+            "_id": "8d9d6ef3-cef2-457d-ad8e-c6b72602b5ac",
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"email\": \"ced@ced.com\",\n    \"address\": \"Earth\",\n    \"phoneNumber\": \"030303030303\",\n    \"firstName\": \"ced\",\n    \"lastName\": \"ced\",\n    \"photoURL\": \"null\",\n    \"usernameReference\": \"Cedric0303\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "containerId": "",
+            "sortNum": 100000,
+            "headers": [
+                { "name": "Accept", "value": "*/*" },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.io)"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiZGVmYXVsdCJ9LCJpYXQiOjE2Mjk3ODM2MzF9.0QUkI4xzJMEEx4ijE4iDOJJewBAhJG7GOXyawazMOJg"
+                }
+            ],
+            "colId": "011118f5-4ab7-4e71-9257-f005f5da5709",
+            "name": "http://localhost:3001/api/clients/ced@ced.com/addNote",
+            "url": "http://localhost:3001/api/clients/sdd@ced.com/addNote",
+            "method": "POST",
+            "modified": "2021-08-27T18:35:25.096Z",
+            "created": "2021-08-27T18:07:43.793Z",
+            "_id": "a78181c2-3b80-475f-acfc-3b32277e88be",
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"note\": \"this is a note i guess lol\"\n}",
                 "form": []
             },
             "tests": []

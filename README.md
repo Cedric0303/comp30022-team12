@@ -4,16 +4,18 @@
 
 ## Table of contents
 
--   [COMP30026 - IT Project](#comp30026---it-project)
-    -   [Table of contents](#table-of-contents)
-    -   [Team Members](#team-members)
-    -   [General Info](#general-info)
-    -   [Packages](#packages)
-    -   [Installation step](#installation-step)
-    -   [Start server](#start-server)
-    -   [Start client](#start-client)
-    -   [dotenv Variables](#dotenv-variables)
-    -   [Implemented Backend API](#implemented-backend-api)
+- [COMP30026 - IT Project](#comp30026---it-project)
+  - [Table of contents](#table-of-contents)
+  - [Team Members](#team-members)
+  - [General Info](#general-info)
+  - [Packages](#packages)
+  - [Installation step](#installation-step)
+  - [Start server](#start-server)
+  - [Start client](#start-client)
+  - [Start client and server concurrently](#start-client-and-server-concurrently)
+  - [Prettier](#prettier)
+  - [dotenv Variables](#dotenv-variables)
+  - [Implemented Backend API](#implemented-backend-api)
 
 ## Team Members
 
@@ -65,13 +67,13 @@ _Hopefully this is correct_
 
 -   `npm run dev` (in root folder)
 
-You may need to install concurrently, if so, run the following command 
+You may need to install concurrently, if so, run the following command
+
 -   `npm install -g concurrently`
 
 ## Prettier
 
 -   `npx prettier --write .`
-
 
 ## dotenv Variables
 
@@ -85,16 +87,23 @@ SALT=10
 
 ## Implemented Backend API
 
-| Method | Route                    |
-| :----- | :----------------------- |
-| POST   | `/api/account/signup`    |
-| GET    | `/api/account/login`     |
-| GET    | `/api/users`             |
-| GET    | `/api/users/:uid`        |
-| POST   | `/api/users/:uid/edit`   |
-| POST   | `/api/users/:uid/delete` |
-| GET    | `/api/tags`              |
-| GET    | `/api/tags/:tid`         |
-| POST   | `/api/tags/create`       |
-| POST   | `/api/tags/:tid/edit`    |
-| POST   | `/api/tags/:tid/delete`  |
+| Method | Route                          |
+| :----- | :----------------------------- |
+| POST   | `/api/account/signup`          |
+| GET    | `/api/account/login`           |
+| GET    | `/api/users`                   |
+| GET    | `/api/users/:uid`              |
+| POST   | `/api/users/:uid/edit`         |
+| POST   | `/api/users/:uid/remove`       |
+| GET    | `/api/tags`                    |
+| GET    | `/api/tags/:tid`               |
+| POST   | `/api/tags/create`             |
+| POST   | `/api/tags/:tid/edit`          |
+| POST   | `/api/tags/:tid/remove`        |
+| GET    | `/api/clients`                 |
+| GET    | `/api/clients/:cid`            |
+| POST   | `/api/clients/create`          |
+| POST   | `/api/clients/:cid/addNote`    |
+| POST   | `/api/clients/:cid/removeNote` |
+| POST   | `/api/clients/:cid/edit`       |
+| POST   | `/api/clients/:cid/remove`     |

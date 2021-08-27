@@ -6,6 +6,7 @@ const passport = require("passport");
 const loginRouter = require("./routes/loginRouter.js");
 const userRouter = require("./routes/userRouter.js");
 const tagRouter = require("./routes/tagRouter.js");
+const clientRouter = require("./routes/clientRouter.js");
 
 require("./auth/auth.js");
 
@@ -32,6 +33,12 @@ app.use(
     "/api/tags",
     passport.authenticate("jwt", { session: false }),
     tagRouter
+);
+
+app.use(
+    "/api/clients",
+    passport.authenticate("jwt", { session: false }),
+    clientRouter
 );
 
 app.listen(PORT, () => {
