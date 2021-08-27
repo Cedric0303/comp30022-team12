@@ -1,5 +1,5 @@
-import React from 'react';
-import Navbar from "../Components/Navbar/Navbar.js"
+import React from "react";
+import Navbar from "../Components/Navbar/Navbar.js";
 
 function AdminAddUser(props) {
     return (
