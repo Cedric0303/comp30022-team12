@@ -64,8 +64,14 @@ _Hopefully this is correct_
 ## Start client and server concurrently
 
 -   `npm run dev` (in root folder)
+
 You may need to install concurrently, if so, run the following command 
 -   `npm install -g concurrently`
+
+## Prettier
+
+-   `npx prettier --write .`
+
 
 ## dotenv Variables
 
