@@ -14,6 +14,7 @@ const getTags = async (req, res) => {
         })
         .toArray();
     res.json({
+        message: "Get tags successful!",
         tags: tags,
     });
 };
@@ -23,6 +24,7 @@ const getTag = async (req, res) => {
         name: req.params.tid,
     });
     res.json({
+        message: "Get tag successful!",
         tag: tag,
     });
 };
@@ -62,6 +64,7 @@ const editTag = async (req, res) => {
                 });
             }
             res.json({
+                message: "Edit tag successful!",
                 tag: doc.value,
             });
         }

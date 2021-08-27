@@ -14,6 +14,7 @@ const getUsers = async (req, res) => {
         })
         .toArray();
     res.json({
+        message: "Get users successful!",
         users: users,
     });
 };
@@ -23,6 +24,7 @@ const getUser = async (req, res) => {
         username: req.params.uid,
     });
     res.json({
+        message: "Get user successful!",
         user: user,
     });
 };
