@@ -4,6 +4,8 @@
   "description": "COMP30022 Team 12 IT Project",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently \"npm run server\" \"cd client && npm start\"",
+    "server": "nodemon server/index.js",
     "start": "node server/index.js",
     "build": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +23,7 @@
   "homepage": "https://github.com/Cedric0303/comp30022-team12#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "concurrently": "^6.2.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -30,6 +33,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.12",
     "prettier": "2.3.2"
   }
 }
