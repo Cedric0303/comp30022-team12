@@ -61,6 +61,10 @@ _Hopefully this is correct_
 -   `cd client`
 -   `npm start`
 
+## Start both
+
+- `npm run dev` (in root folder)
+
 ## dotenv Variables
 
 If running locally, please create a `.env` file in the root folder and copy the following code into it.
