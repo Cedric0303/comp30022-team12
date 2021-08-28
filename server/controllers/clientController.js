@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 
 const db = require("./databaseController.js");
 
+const TagModel = require("../models/tagModel.js");
 const { ClientModel, NoteModel } = require("../models/clientModel.js");
 
+const Tags = db.collection("tags");
 const Clients = db.collection("clients");
 const RecycleBin = db.collection("recycle-bin");
 
@@ -34,9 +36,16 @@ const getClients = async (req, res) => {
 };
 
 const getClient = async (req, res) => {
-    const client = await Clients.findOne({
-        email: req.params.cid,
-    });
+    const client = await Clients.findOne(
+        {
+            email: req.params.cid,
+        },
+        {
+            projection: {
+                _id: false,
+            },
+        }
+    );
     res.json({
         client: client,
     });
@@ -54,7 +63,10 @@ const addClientNote = async (req, res) => {
             $push: { notes: newNote },
         },
         {
-            returnDocument: "after",
+            projection: {
+                _id: false,
+            },
+            returnNewDocument: true,
         },
         (err, doc) => {
             if (err) {
@@ -83,7 +95,10 @@ const removeClientNote = async (req, res) => {
             },
         },
         {
-            returnDocument: "after",
+            projection: {
+                _id: false,
+            },
+            returnNewDocument: true,
         },
         (err, doc) => {
             if (err) {
@@ -99,24 +114,74 @@ const removeClientNote = async (req, res) => {
     );
 };
 
+const changeTag = async (req, res) => {
+    const changeTag = await Tags.findOne({
+        id: req.body.tagID,
+    });
+    await Clients.findOneAndUpdate(
+        {
+            email: req.params.cid,
+        },
+        {
+            $set: {
+                tag: changeTag.name,
+            },
+        },
+        {
+            projection: {
+                _id: false,
+            },
+            returnNewDocument: true,
+        },
+        (err, doc) => {
+            if (err) {
+                res.json({
+                    message: err,
+                });
+            }
+            res.json({
+                message: "Change tag successful!",
+                user: doc.value,
+            });
+        }
+    );
+};
+
 const addClient = async (req, res) => {
+    const defaultNewTag = await Tags.findOne({
+        id: "new",
+    });
     const newClient = new ClientModel({
         email: req.body.email,
         address: req.body.address,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         photoURL: req.body.photoURL,
-        usernameReference: req.body.username,
+        usernameReference: req.body.usernameReference,
+        tag: defaultNewTag.name,
         notes: [],
     });
     await Clients.insertOne(newClient);
+    const client = await Clients.findOne(
+        {
+            email: req.body.email,
+        },
+        {
+            projection: {
+                _id: false,
+            },
+        }
+    );
     res.json({
         message: "Client creation successful!",
-        client: newClient,
+        client: client,
     });
 };
 
 const editClient = async (req, res) => {
+    const tag = await Tags.findOne({
+        id: req.body.tagID,
+    });
     await Clients.findOneAndUpdate(
         {
             email: req.params.cid,
@@ -129,11 +194,15 @@ const editClient = async (req, res) => {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
-                usernameReference: req.body.username,
+                usernameReference: req.body.usernameReference,
+                tag: tag,
             },
         },
         {
-            returnDocument: "after",
+            projection: {
+                _id: false,
+            },
+            returnNewDocument: true,
         },
         (err, doc) => {
             if (err) {

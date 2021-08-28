@@ -20,9 +20,16 @@ const getTags = async (req, res) => {
 };
 
 const getTag = async (req, res) => {
-    const tag = await Tags.findOne({
-        name: req.params.tid,
-    });
+    const tag = await Tags.findOne(
+        {
+            name: req.params.tid,
+        },
+        {
+            projection: {
+                _id: false,
+            },
+        }
+    );
     res.json({
         message: "Get tag successful!",
         tag: tag,
@@ -36,9 +43,19 @@ const createTag = async (req, res) => {
         name: req.body.tname,
     });
     await Tags.insertOne(newTag);
+    const tag = await Tags.findOne(
+        {
+            id: tagID,
+        },
+        {
+            projection: {
+                _id: false,
+            },
+        }
+    );
     res.json({
         message: "Tag creation successful!",
-        tag: newTag,
+        tag: tag,
     });
 };
 
@@ -55,7 +72,10 @@ const editTag = async (req, res) => {
             },
         },
         {
-            returnDocument: "after",
+            projection: {
+                _id: false,
+            },
+            returnNewDocument: true,
         },
         (err, doc) => {
             if (err) {

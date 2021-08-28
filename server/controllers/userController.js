@@ -20,9 +20,16 @@ const getUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-    const user = await Users.findOne({
-        username: req.params.uid,
-    });
+    const user = await Users.findOne(
+        {
+            username: req.params.uid,
+        },
+        {
+            projection: {
+                _id: false,
+            },
+        }
+    );
     res.json({
         message: "Get user successful!",
         user: user,
@@ -42,12 +49,16 @@ const editUser = async (req, res) => {
             $set: {
                 username: req.body.username,
                 password: hash,
+                isAdmin: req.body.isAdmin,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
             },
         },
         {
-            returnDocument: "after",
+            projection: {
+                _id: false,
+            },
+            returnNewDocument: true,
         },
         (err, doc) => {
             if (err) {
