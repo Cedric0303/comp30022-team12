@@ -6,9 +6,11 @@ const clientController = require("../controllers/clientController.js");
 
 clientRouter.get("/", clientController.getClients);
 
+clientRouter.post("/", clientController.getClients);
+
 clientRouter.get("/:cid", clientController.getClient);
 
-clientRouter.post("/create", clientController.addClient);
+clientRouter.post("/create", clientController.createClient);
 
 clientRouter.post("/:cid/addNote", clientController.addClientNote);
 

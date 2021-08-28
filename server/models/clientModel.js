@@ -15,7 +15,7 @@ const clientSchema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     photoURL: { type: String },
-    usernameReference: { type: String, required: true },
+    userReference: { type: String, required: true },
     tag: { type: String },
     notes: [],
 });

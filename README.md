@@ -87,23 +87,36 @@ SALT=10
 
 ## Implemented Backend API
 
-| Method | Route                          |
-| :----- | :----------------------------- |
-| POST   | `/api/account/signup`          |
-| GET    | `/api/account/login`           |
-| GET    | `/api/users`                   |
-| GET    | `/api/users/:uid`              |
-| POST   | `/api/users/:uid/edit`         |
-| POST   | `/api/users/:uid/remove`       |
-| GET    | `/api/tags`                    |
-| GET    | `/api/tags/:tid`               |
-| POST   | `/api/tags/create`             |
-| POST   | `/api/tags/:tid/edit`          |
-| POST   | `/api/tags/:tid/remove`        |
-| GET    | `/api/clients`                 |
-| GET    | `/api/clients/:cid`            |
-| POST   | `/api/clients/create`          |
-| POST   | `/api/clients/:cid/addNote`    |
-| POST   | `/api/clients/:cid/removeNote` |
-| POST   | `/api/clients/:cid/edit`       |
-| POST   | `/api/clients/:cid/remove`     |
+| Method | Route                          |                   Function |
+| :----- | :----------------------------- | -------------------------: |
+| POST   | `/api/account/signup`          |        (Admin) Create user |
+| GET    | `/api/account/login`           |                 Login user |
+| GET    | `/api/users`                   |      (Admin) Get all users |
+| GET    | `/api/users/:uid`              |         (Admin) Get a user |
+| POST   | `/api/users/:uid/edit`         |        (Admin) Edit a user |
+| POST   | `/api/users/:uid/remove`       |      (Admin) Remove a user |
+| GET    | `/api/tags`                    |               Get all tags |
+| GET    | `/api/tags/:tid`               |                  Get a tag |
+| POST   | `/api/tags/create`             |       (Admin) Create a tag |
+| POST   | `/api/tags/:tid/edit`          |         (Admin) Edit a tag |
+| POST   | `/api/tags/:tid/remove`        |       (Admin) Remove a tag |
+| GET    | `/api/clients`                 |    (Admin) Get all clients |
+| POST   | `/api/clients`                 |     Get all user's clients |
+| GET    | `/api/clients/:cid`            |               Get a client |
+| POST   | `/api/clients/create`          |            Create a client |
+| POST   | `/api/clients/:cid/addNote`    |            Add client note |
+| POST   | `/api/clients/:cid/removeNote` |         Remove client note |
+| POST   | `/api/clients/:cid/edit`       |              Edit a client |
+| POST   | `/api/clients/:cid/remove`     |            Remove a client |
+| GET    | `/api/activities`              | (Admin) Get all activities |
+| POST   | `/api/activities`              |  Get all user's activities |
+| GET    | `/api/activities/:aid`         |            Get an activity |
+| POST   | `/api/activities/create`       |         Create an activity |
+| POST   | `/api/activities/:aid/edit`    |           Edit an activity |
+| POST   | `/api/activities/:aid/remove`  |         Remove an activity |
+| GET    | `/api/orders`                  |     (Admin) Get all orders |
+| POST   | `/api/orders`                  |      Get all user's orders |
+| GET    | `/api/orders/:oid`             |               Get an order |
+| POST   | `/api/orders/create`           |            Create an order |
+| POST   | `/api/orders/:oid/edit`        |              Edit an order |
+| POST   | `/api/orders/:oid/remove`      |            Remove an order |

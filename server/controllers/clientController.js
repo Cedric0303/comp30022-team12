@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const db = require("./databaseController.js");
 
-const TagModel = require("../models/tagModel.js");
 const { ClientModel, NoteModel } = require("../models/clientModel.js");
 
 const Tags = db.collection("tags");
@@ -10,7 +9,7 @@ const Clients = db.collection("clients");
 const RecycleBin = db.collection("recycle-bin");
 
 const getClients = async (req, res) => {
-    if (!req.body.uid) {
+    if (!req.body.userReference) {
         const clients = await Clients.find({})
             .project({
                 _id: false,
@@ -18,18 +17,19 @@ const getClients = async (req, res) => {
             })
             .toArray();
         res.json({
+            message: "Get all clients successful!",
             clients: clients,
         });
     } else {
         const clients = await Clients.find({
-            usernameReference: req,
+            userReference: req.body.userReference,
         })
             .project({
                 _id: false,
-                password: false,
             })
             .toArray();
         res.json({
+            message: "Get clients successful!",
             clients: clients,
         });
     }
@@ -47,6 +47,7 @@ const getClient = async (req, res) => {
         }
     );
     res.json({
+        message: "Get client successful!",
         client: client,
     });
 };
@@ -147,7 +148,7 @@ const changeTag = async (req, res) => {
     );
 };
 
-const addClient = async (req, res) => {
+const createClient = async (req, res) => {
     const defaultNewTag = await Tags.findOne({
         id: "new",
     });
@@ -157,14 +158,14 @@ const addClient = async (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         photoURL: req.body.photoURL,
-        usernameReference: req.body.usernameReference,
+        userReference: req.body.userReference,
         tag: defaultNewTag.name,
         notes: [],
     });
-    await Clients.insertOne(newClient);
+    const result = await Clients.insertOne(newClient);
     const client = await Clients.findOne(
         {
-            email: req.body.email,
+            _id: mongoose.Types.ObjectId(result.insertedId),
         },
         {
             projection: {
@@ -194,7 +195,7 @@ const editClient = async (req, res) => {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
-                usernameReference: req.body.usernameReference,
+                userReference: req.body.userReference,
                 tag: tag,
             },
         },
@@ -237,7 +238,7 @@ module.exports = {
     addClientNote,
     removeClientNote,
     changeTag,
-    addClient,
+    createClient,
     editClient,
     removeClient,
 };
