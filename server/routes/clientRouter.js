@@ -14,6 +14,8 @@ clientRouter.post("/:cid/addNote", clientController.addClientNote);
 
 clientRouter.post("/:cid/removeNote", clientController.removeClientNote);
 
+clientRouter.post("/:cid/changeTag", clientController.changeTag);
+
 clientRouter.post("/:cid/edit", clientController.editClient);
 
 clientRouter.post("/:cid/remove", clientController.removeClient);

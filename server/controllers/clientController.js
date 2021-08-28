@@ -236,6 +236,7 @@ module.exports = {
     getClient,
     addClientNote,
     removeClientNote,
+    changeTag,
     addClient,
     editClient,
     removeClient,

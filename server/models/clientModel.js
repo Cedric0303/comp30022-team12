@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const TagModel = require("./tagModel.js");
+
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
@@ -14,6 +16,7 @@ const clientSchema = new Schema({
     lastName: { type: String, required: true },
     photoURL: { type: String },
     usernameReference: { type: String, required: true },
+    tag: { type: String },
     notes: [],
 });
 
