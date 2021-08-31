@@ -10,6 +10,6 @@ userRouter.get("/:uid", userController.getUser);
 
 userRouter.post("/:uid/edit", userController.editUser);
 
-userRouter.post("/:uid/remove", userController.removeUser);
+userRouter.get("/:uid/remove", userController.removeUser);
 
 module.exports = userRouter;

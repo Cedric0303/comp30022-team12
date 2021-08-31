@@ -20,6 +20,6 @@ clientRouter.post("/:cid/changeTag", clientController.changeTag);
 
 clientRouter.post("/:cid/edit", clientController.editClient);
 
-clientRouter.post("/:cid/remove", clientController.removeClient);
+clientRouter.get("/:cid/remove", clientController.removeClient);
 
 module.exports = clientRouter;
