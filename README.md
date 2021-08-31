@@ -44,6 +44,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 -   `mongoose`
 -   `prettier` (also has a vscode extension)
 
+Client
+- `npm i --save @fortawesome/fontawesome-svg-core`
+- `npm install --save @fortawesome/free-solid-svg-icons`
+- `npm install --save @fortawesome/react-fontawesome`
+- `npm install --save @fortawesome/free-regular-svg-icons`
+
 ## Installation step
 
 _Hopefully this is correct_

@@ -1,0 +1,28 @@
+html {
+    background-color: #596E80;
+}
+
+.mainHeading {
+    font-size: 6vh;
+    font-weight: 700;
+    color: white;
+    margin: 0.3vh 0;
+    padding: 0;
+}
+
+#adminButtons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.6em;
+}
+
+.squareButton {
+    display: flex;
+    width: 12rem;
+    height: 12rem;
+    background-color: white;
+    color: #335D80;
+    justify-content: center;
+    align-items: center;
+    font-size: 6em;
+}
