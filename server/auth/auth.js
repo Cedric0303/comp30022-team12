@@ -38,7 +38,9 @@ passport.use(
                     await Users.insertOne(newUser);
                     return done(null, newUser);
                 } else {
-                    return done("Error: User already exists!");
+                    return done(null, false, {
+                        message: "Error: User already exists!",
+                    });
                 }
             } catch (error) {
                 done(error);

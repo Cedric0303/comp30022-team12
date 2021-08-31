@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-const TagModel = require("./tagModel.js");
-
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({

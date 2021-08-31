@@ -43,6 +43,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 -   `bcrypt`
 -   `mongoose`
 -   `prettier` (also has a vscode extension)
+-   `jest`
+-   `supertest`
 
 ## Installation step
 
@@ -94,12 +96,12 @@ SALT=10
 | GET    | `/api/users`                   |      (Admin) Get all users |
 | GET    | `/api/users/:uid`              |         (Admin) Get a user |
 | POST   | `/api/users/:uid/edit`         |        (Admin) Edit a user |
-| POST   | `/api/users/:uid/remove`       |      (Admin) Remove a user |
+| GET    | `/api/users/:uid/remove`       |      (Admin) Remove a user |
 | GET    | `/api/tags`                    |               Get all tags |
 | GET    | `/api/tags/:tid`               |                  Get a tag |
 | POST   | `/api/tags/create`             |       (Admin) Create a tag |
 | POST   | `/api/tags/:tid/edit`          |         (Admin) Edit a tag |
-| POST   | `/api/tags/:tid/remove`        |       (Admin) Remove a tag |
+| GET    | `/api/tags/:tid/remove`        |       (Admin) Remove a tag |
 | GET    | `/api/clients`                 |    (Admin) Get all clients |
 | POST   | `/api/clients`                 |     Get all user's clients |
 | GET    | `/api/clients/:cid`            |               Get a client |
@@ -107,16 +109,16 @@ SALT=10
 | POST   | `/api/clients/:cid/addNote`    |            Add client note |
 | POST   | `/api/clients/:cid/removeNote` |         Remove client note |
 | POST   | `/api/clients/:cid/edit`       |              Edit a client |
-| POST   | `/api/clients/:cid/remove`     |            Remove a client |
+| GET    | `/api/clients/:cid/remove`     |            Remove a client |
 | GET    | `/api/activities`              | (Admin) Get all activities |
 | POST   | `/api/activities`              |  Get all user's activities |
 | GET    | `/api/activities/:aid`         |            Get an activity |
 | POST   | `/api/activities/create`       |         Create an activity |
 | POST   | `/api/activities/:aid/edit`    |           Edit an activity |
-| POST   | `/api/activities/:aid/remove`  |         Remove an activity |
+| GET    | `/api/activities/:aid/remove`  |         Remove an activity |
 | GET    | `/api/orders`                  |     (Admin) Get all orders |
 | POST   | `/api/orders`                  |      Get all user's orders |
 | GET    | `/api/orders/:oid`             |               Get an order |
 | POST   | `/api/orders/create`           |            Create an order |
 | POST   | `/api/orders/:oid/edit`        |              Edit an order |
-| POST   | `/api/orders/:oid/remove`      |            Remove an order |
+| GET    | `/api/orders/:oid/remove`      |            Remove an order |
