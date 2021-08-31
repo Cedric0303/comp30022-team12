@@ -7,12 +7,15 @@ const Users = db.collection("users");
 const RecycleBin = db.collection("recycle-bin");
 
 const getUsers = async (req, res) => {
-    const users = await Users.find()
-        .project({
-            _id: false,
-            password: false,
-        })
-        .toArray();
+    const users = await Users.find(
+        {},
+        {
+            projection: {
+                _id: false,
+                password: false,
+            },
+        }
+    ).toArray();
     res.json({
         message: "Get users successful!",
         users: users,
@@ -78,10 +81,14 @@ const removeUser = async (req, res) => {
     const removeUser = await Users.findOne({
         username: req.params.uid,
     });
-    await RecycleBin.insertOne(removeUser);
+    await RecycleBin.insertOne({
+        removeUser,
+        createdAt: new Date(),
+    });
     await Users.deleteOne({
         username: req.params.uid,
     });
+    const result = await RecycleBin.getIndexes();
     res.json({
         message: "User removal successful!",
     });

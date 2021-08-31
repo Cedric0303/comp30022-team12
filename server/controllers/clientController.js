@@ -10,24 +10,29 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getClients = async (req, res) => {
     if (!req.body.userReference) {
-        const clients = await Clients.find({})
-            .project({
-                _id: false,
-                password: false,
-            })
-            .toArray();
+        const clients = await Clients.find(
+            {},
+            {
+                projection: {
+                    _id: false,
+                },
+            }
+        ).toArray();
         res.json({
             message: "Get all clients successful!",
             clients: clients,
         });
     } else {
-        const clients = await Clients.find({
-            userReference: req.body.userReference,
-        })
-            .project({
-                _id: false,
-            })
-            .toArray();
+        const clients = await Clients.find(
+            {
+                userReference: req.body.userReference,
+            },
+            {
+                projection: {
+                    _id: false,
+                },
+            }
+        ).toArray();
         res.json({
             message: "Get clients successful!",
             clients: clients,
@@ -155,6 +160,7 @@ const createClient = async (req, res) => {
     const newClient = new ClientModel({
         email: req.body.email,
         address: req.body.address,
+        phoneNumber: req.body.phoneNumber,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         photoURL: req.body.photoURL,

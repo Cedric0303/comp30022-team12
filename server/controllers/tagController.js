@@ -8,11 +8,14 @@ const Tags = db.collection("tags");
 const RecycleBin = db.collection("recycle-bin");
 
 const getTags = async (req, res) => {
-    const tags = await Tags.find()
-        .project({
-            _id: false,
-        })
-        .toArray();
+    const tags = await Tags.find(
+        {},
+        {
+            projection: {
+                _id: false,
+            },
+        }
+    ).toArray();
     res.json({
         message: "Get tags successful!",
         tags: tags,
