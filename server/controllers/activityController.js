@@ -112,11 +112,14 @@ const editActivity = async (req, res) => {
 
 const removeActivity = async (req, res) => {
     const removeActivity = await Activities.findOne({
-        _id: mongoose.Types.ObjectId(req.body.aid),
+        _id: mongoose.Types.ObjectId(req.params.aid),
     });
-    await RecycleBin.insertOne(removeActivity);
+    await RecycleBin.insertOne({
+        removeActivity,
+        createdAt: new Date(),
+    });
     await Activities.deleteOne({
-        _id: mongoose.Types.ObjectId(req.body.aid),
+        _id: mongoose.Types.ObjectId(req.params.aid),
     });
     res.json({
         message: "Activity removal successful!",

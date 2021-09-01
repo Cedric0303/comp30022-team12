@@ -10,6 +10,6 @@ const activitySchema = new Schema({
     timeEnd: { type: Date, required: true },
 });
 
-const activityModel = mongoose.model("activity", activitySchema);
+const ActivityModel = mongoose.model("activity", activitySchema);
 
-module.exports = activityModel;
+module.exports = ActivityModel;

@@ -96,11 +96,14 @@ const editTag = async (req, res) => {
 
 const removeTag = async (req, res) => {
     const removeTag = await Tags.findOne({
-        name: req.params.tid,
+        id: req.params.tid,
     });
-    await RecycleBin.insertOne(removeTag);
+    await RecycleBin.insertOne({
+        removeTag,
+        createdAt: new Date(),
+    });
     await Tags.deleteOne({
-        name: req.params.tid,
+        id: req.params.tid,
     });
     res.json({
         message: "Tag removal successful!",

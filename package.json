@@ -9,7 +9,8 @@
         "client": "npm start --prefix client",
         "start": "node server/index.js",
         "build": "cd client && npm install && npm run build",
-        "test": "jest --testEnvironment=node --verbose --forceExit"
+        "test": "jest --testEnvironment=node --verbose --maxWorkers=1 --forceExit",
+        "test-server": "jest --testEnvironment=node --verbose --maxWorkers=1 --forceExit -- /server/__test__/"
     },
     "repository": {
         "type": "git",

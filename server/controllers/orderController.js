@@ -74,7 +74,7 @@ const createOrder = async (req, res) => {
             _id: result.insertedId,
         });
         res.json({
-            message: "Create order successful!",
+            message: "Order creation successful!",
             order: order,
         });
     } else {
@@ -138,8 +138,11 @@ const removeOrder = async (req, res) => {
     const removeOrder = await Orders.findOne({
         _id: mongoose.Types.ObjectId(req.body.oid),
     });
-    await RecycleBin.insertOne(removeOrder);
-    await Activities.deleteOne({
+    await RecycleBin.insertOne({
+        removeOrder,
+        createdAt: new Date(),
+    });
+    await Orders.deleteOne({
         _id: mongoose.Types.ObjectId(req.body.oid),
     });
     res.json({

@@ -229,7 +229,10 @@ const removeClient = async (req, res) => {
     const removeClient = await Clients.findOne({
         email: req.params.cid,
     });
-    await RecycleBin.insertOne(removeClient);
+    await RecycleBin.insertOne({
+        removeClient,
+        createdAt: new Date(),
+    });
     await Clients.deleteOne({
         email: req.params.cid,
     });

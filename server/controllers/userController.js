@@ -88,7 +88,6 @@ const removeUser = async (req, res) => {
     await Users.deleteOne({
         username: req.params.uid,
     });
-    const result = await RecycleBin.getIndexes();
     res.json({
         message: "User removal successful!",
     });
