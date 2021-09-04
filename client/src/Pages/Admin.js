@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function Admin(props) {
     return (
         <main>
+            <Navbar />
             <h2 class="mainHeading">Admin</h2>
             <div id="adminButtons">
                 <div class="squareButton"><FontAwesomeIcon icon="user" /></div>

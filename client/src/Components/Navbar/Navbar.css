@@ -1,0 +1,46 @@
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 4px 36px;
+    overflow: hidden;
+    background-color: inherit;
+}
+
+.navLeft {
+    float: left;
+}
+
+.navText {
+    display: block;
+    color: #a4c1d9;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.nav li a:hover, #signOut:hover {
+    color: #7aade1;
+}
+
+.active {
+    color: #7aade1;
+}
+
+#logoText {
+    color: black;
+    padding: 14px 0px;
+}
+
+#logo {
+    padding-right: 8px;
+    border-right: 2px solid black;
+    border-radius: 5%;
+    max-width: 80px;
+    height: auto;
+}
+
+.navRight {
+    float: right;
+}
