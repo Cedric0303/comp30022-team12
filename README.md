@@ -43,14 +43,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 -   `bcrypt`
 -   `mongoose`
 -   `prettier` (also has a vscode extension)
--   `jest`
+-   `babel-jest`
 -   `supertest`
+-   `cors`
+-   `axios`
 
 Client
-- `npm i --save @fortawesome/fontawesome-svg-core`
-- `npm install --save @fortawesome/free-solid-svg-icons`
-- `npm install --save @fortawesome/react-fontawesome`
-- `npm install --save @fortawesome/free-regular-svg-icons`
+
+-   `npm i --save @fortawesome/fontawesome-svg-core`
+-   `npm install --save @fortawesome/free-solid-svg-icons`
+-   `npm install --save @fortawesome/react-fontawesome`
+-   `npm install --save @fortawesome/free-regular-svg-icons`
 
 ## Installation step
 
