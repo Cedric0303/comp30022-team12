@@ -24,7 +24,6 @@
     },
     "homepage": "https://github.com/Cedric0303/comp30022-team12#readme",
     "dependencies": {
-        "axios": "^0.21.3",
         "bcrypt": "^5.0.1",
         "concurrently": "^6.2.1",
         "dotenv": "^10.0.0",
