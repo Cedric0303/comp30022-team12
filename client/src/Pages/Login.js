@@ -45,6 +45,13 @@ const Login = (props) => {
         }
     };
 
+    // 13 is the recognized number of the Enter key
+    const onEnterPress = (e) => {
+        if(e.keyCode == 13){
+            handleLogin();
+        }
+    }
+
     const redirectToHome = () => {
         props.history.push("/home");
     };
@@ -56,6 +63,7 @@ const Login = (props) => {
     return (
         <div>
             <h2>Login Page</h2>
+            <form onSubmit = {handleLogin}>
             <label>Username: </label>
             <input
                 type="text"
@@ -74,8 +82,10 @@ const Login = (props) => {
                 placeholder="Password"
                 value={state.password}
                 onChange={handleChange}
+                onKeyDown={onEnterPress}
             />
             <p />
+            </form>
             <button onClick={handleLogin}>Login</button>
         </div>
     );
