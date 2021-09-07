@@ -30,7 +30,8 @@
     font-weight: 600;
 }
 
-.nav li a:hover, #signOut:hover {
+.nav li a:hover,
+#signOut:hover {
     color: #7aade1;
 }
 

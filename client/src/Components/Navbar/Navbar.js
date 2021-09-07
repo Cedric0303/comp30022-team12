@@ -1,29 +1,69 @@
 import React from "react";
-import {NavLink} from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import logo from "./logo.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Navbar(props) {
-
     // Render admin tab if logged in user is an admin
     const adminNav = () => {
-        if (true/*props.user.isAdmin*/) {
-            return <li className="navLeft"><NavLink activeClassName="active" className="navText" to="/admin">Admin</NavLink></li>
+        if (true /*props.user.isAdmin*/) {
+            return (
+                <li className="navLeft">
+                    <NavLink
+                        activeClassName="active"
+                        className="navText"
+                        to="/admin"
+                    >
+                        Admin
+                    </NavLink>
+                </li>
+            );
         }
-    }
-    
+    };
+
     return (
         <div>
             <ul className="nav">
-                <li className="navLeft"><a href="/home">
-                    <img id="logo" src={logo} alt="bobafish logo" />
-                </a></li>
-                <li className="navLeft"><NavLink activeClassName="active" className="navText" to="/home">Home</NavLink></li>
-                <li className="navLeft"><NavLink activeClassName="active" className="navText" to="/calendar">Calendar</NavLink></li>
-                <li className="navLeft"><NavLink activeClassName="active" className="navText" to="/clients">Clients</NavLink></li>
+                <li className="navLeft">
+                    <a href="/home">
+                        <img id="logo" src={logo} alt="bobafish logo" />
+                    </a>
+                </li>
+                <li className="navLeft">
+                    <NavLink
+                        activeClassName="active"
+                        className="navText"
+                        to="/home"
+                    >
+                        Home
+                    </NavLink>
+                </li>
+                <li className="navLeft">
+                    <NavLink
+                        activeClassName="active"
+                        className="navText"
+                        to="/calendar"
+                    >
+                        Calendar
+                    </NavLink>
+                </li>
+                <li className="navLeft">
+                    <NavLink
+                        activeClassName="active"
+                        className="navText"
+                        to="/clients"
+                    >
+                        Clients
+                    </NavLink>
+                </li>
                 {adminNav()}
-                <li className="navRight"><a className="navText" href="/">Sign Out <FontAwesomeIcon icon="sign-out-alt" id="signOut"/></a></li>
+                <li className="navRight">
+                    <a className="navText" href="/">
+                        Sign Out{" "}
+                        <FontAwesomeIcon icon="sign-out-alt" id="signOut" />
+                    </a>
+                </li>
             </ul>
         </div>
     );
