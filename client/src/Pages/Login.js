@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { BACKEND_API_URL } from "../Constants/Constants.js";
 import axios from "axios";
 
 const Login = (props) => {
@@ -25,7 +24,10 @@ const Login = (props) => {
                 password: state.password,
             };
             axios
-                .post(BACKEND_API_URL + "/account/login", payload)
+                .post(
+                    process.env.REACT_APP_BACKEND_API_URL + "/account/login",
+                    payload
+                )
                 .then((response) => {
                     setState((prevState) => ({
                         ...prevState,
@@ -47,10 +49,10 @@ const Login = (props) => {
 
     // 13 is the recognized number of the Enter key
     const onEnterPress = (e) => {
-        if(e.keyCode == 13){
+        if (e.keyCode === 13) {
             handleLogin();
         }
-    }
+    };
 
     const redirectToHome = () => {
         props.history.push("/home");
@@ -63,28 +65,28 @@ const Login = (props) => {
     return (
         <div>
             <h2>Login Page</h2>
-            <form onSubmit = {handleLogin}>
-            <label>Username: </label>
-            <input
-                type="text"
-                className="form-control"
-                id="username"
-                placeholder="Enter username"
-                value={state.username}
-                onChange={handleChange}
-            />
-            <p />
-            <label>Password: </label>
-            <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Password"
-                value={state.password}
-                onChange={handleChange}
-                onKeyDown={onEnterPress}
-            />
-            <p />
+            <form onSubmit={handleLogin}>
+                <label>Username: </label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder="Enter username"
+                    value={state.username}
+                    onChange={handleChange}
+                />
+                <p />
+                <label>Password: </label>
+                <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    value={state.password}
+                    onChange={handleChange}
+                    onKeyDown={onEnterPress}
+                />
+                <p />
             </form>
             <button onClick={handleLogin}>Login</button>
         </div>
