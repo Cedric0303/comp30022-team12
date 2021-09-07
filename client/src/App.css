@@ -4,6 +4,16 @@ html {
     font-family: Urbanist, sans-serif;
 }
 
+a {
+    color: initial;
+    text-decoration: none;
+}
+
+.hoverable:hover {
+    cursor: pointer;
+    filter: brightness(0.85);
+}
+
 .App {
     text-align: center;
 }

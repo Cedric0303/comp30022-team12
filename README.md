@@ -43,8 +43,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 -   `bcrypt`
 -   `mongoose`
 -   `prettier` (also has a vscode extension)
--   `jest`
+-   `babel-jest`
 -   `supertest`
+-   `cors`
+-   `axios`
 
 Client
 

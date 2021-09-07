@@ -1,6 +1,7 @@
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
+const cors = require("cors");
 const passport = require("passport");
 
 const loginRouter = require("./routes/loginRouter.js");
@@ -16,8 +17,17 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+app.use(cors());
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(express.json());
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });

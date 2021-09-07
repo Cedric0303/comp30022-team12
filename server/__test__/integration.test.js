@@ -344,7 +344,7 @@ describe("#7 Activity test (logged in)", () => {
     });
     test("Test 2: Create an activity", async () => {
         let testActivity = {
-            clientReference: "default@default.default",
+            clientReference: "ced@ced.com",
             userReference: "default",
             type: "default",
             timeStart: "123",
@@ -358,6 +358,7 @@ describe("#7 Activity test (logged in)", () => {
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
+                console.log(res.body.message);
                 assert(
                     res.body.message.includes("Activity creation successful!")
                 );
@@ -367,7 +368,7 @@ describe("#7 Activity test (logged in)", () => {
 
     test("Test 3: Edit an activity", async () => {
         let editActivity = {
-            clientReference: "default@default.default",
+            clientReference: "ced@ced.com",
             userReference: "default",
             type: "default",
             timeStart: "123",
@@ -427,7 +428,7 @@ describe("#9 Order test (logged in)", () => {
         username: "default",
         password: "default",
     };
-    let aid = null;
+    let oid = null;
 
     beforeAll(() =>
         agent
@@ -451,7 +452,7 @@ describe("#9 Order test (logged in)", () => {
     });
     test("Test 2: Create an order", async () => {
         let testOrder = {
-            clientReference: "default@default.default",
+            clientReference: "ced@ced.com",
             userReference: "default",
             orderArray: [
                 {
@@ -482,7 +483,7 @@ describe("#9 Order test (logged in)", () => {
 
     test("Test 3: Edit an order", async () => {
         let editOrder = {
-            clientReference: "default@default.default",
+            clientReference: "ced@ced.com",
             userReference: "default",
             orderArray: [
                 {
