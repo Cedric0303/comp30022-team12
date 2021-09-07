@@ -16,7 +16,6 @@ function Navbar(props) {
     return (
         <div>
             <ul className="nav">
-                <li className="navLeft"><a className="navText" id="logoText" href="/home">bobafish CRM</a></li>
                 <li className="navLeft"><a href="/home">
                     <img id="logo" src={logo} alt="bobafish logo" />
                 </a></li>
