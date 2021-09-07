@@ -20,11 +20,17 @@
     font-weight: 600;
 }
 
-.nav li a:hover, #signOut:hover {
+.active {
+    display: block;
     color: #7aade1;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 600;
 }
 
-.active {
+.nav li a:hover, #signOut:hover {
     color: #7aade1;
 }
 
