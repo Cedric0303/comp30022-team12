@@ -4,6 +4,7 @@ import Navbar from "../Components/Navbar/Navbar.js";
 function AdminAddUser(props) {
     return (
         <div>
+            <Navbar />
             <h2>Admin Add User</h2>
         </div>
     );
