@@ -2,8 +2,12 @@ html {
     background-color: #596E80;
 }
 
+main {
+    margin: 0 6vw;
+}
+
 .mainHeading {
-    font-size: 6vh;
+    font-size: 5.3vh;
     font-weight: 700;
     color: white;
     margin: 0.3vh 0;
@@ -18,11 +22,21 @@ html {
 
 .squareButton {
     display: flex;
-    width: 12rem;
-    height: 12rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 0.3vh;
+    color: white;
+    font-size: 1.2em;
+}
+
+.squareButton .AdminIcon {
+    display: flex;
+    width: 6rem;
+    height: 6rem;
     background-color: white;
     color: #335D80;
     justify-content: center;
     align-items: center;
-    font-size: 6em;
+    padding: 2em;
 }
