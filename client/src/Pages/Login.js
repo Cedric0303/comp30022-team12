@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import { render } from "@testing-library/react";
 
 const Login = (props) => {
     const [state, setState] = useState({
         username: "",
         password: "",
     });
+
+    const [errorMsg, setErrorMsg] = useState('');
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -42,7 +45,8 @@ const Login = (props) => {
                     }
                 })
                 .catch(() => {
-                    redirectToLandingPage();
+                    //redirectToLandingPage();
+                    setErrorMsg('The username or password you entered is incorrect. Please try again.');
                 });
         }
     };
@@ -88,8 +92,9 @@ const Login = (props) => {
                 />
                 <p />
             </form>
+            <p>{errorMsg ? errorMsg : ''}</p>
             <button onClick={handleLogin}>Login</button>
-        </div>
+            </div>
     );
 };
 
