@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { render } from "@testing-library/react";
 import './css/login.css';
-import logo from './css/bobafish-logo.png';
+import logo from './css/bobafish-logo.svg';
 
 const Login = (props) => {
     const [state, setState] = useState({
@@ -73,31 +73,33 @@ const Login = (props) => {
 
     return (
         <div>
-            <p className="header"> Login Page</p>
-            <p><img src={logo} className="logo"></img></p>
+            <img src={logo} className="logo"></img>
 
             <form className="form" onSubmit={handleLogin}>
-                <label>Username: </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Username"
-                    value={state.username}
-                    onChange={handleChange}
-                />
-                <p />
-                <label>Password: </label>
-                <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Password"
-                    value={state.password}
-                    onChange={handleChange}
-                    // onKeyDown={onEnterPress}
-                />
-                <p />
+                <div id="usernameInput">
+                    <label>Username: </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="username"
+                        placeholder="Username"
+                        value={state.username}
+                        onChange={handleChange}
+                    />
+                </div>
+                
+                <div id="passwordInput">
+                    <label>Password: </label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        placeholder="Password"
+                        value={state.password}
+                        onChange={handleChange}
+                        // onKeyDown={onEnterPress}
+                    />
+                </div>
             </form>
             <p>{errorMsg ? errorMsg : ''}</p>
             <button className="loginButton" onClick={handleLogin}>Login</button>
