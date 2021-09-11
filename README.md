@@ -4,18 +4,18 @@
 
 ## Table of contents
 
-- [COMP30026 - IT Project](#comp30026---it-project)
-  - [Table of contents](#table-of-contents)
-  - [Team Members](#team-members)
-  - [General Info](#general-info)
-  - [Packages](#packages)
-  - [Installation step](#installation-step)
-  - [Start server](#start-server)
-  - [Start client](#start-client)
-  - [Start client and server concurrently](#start-client-and-server-concurrently)
-  - [Prettier](#prettier)
-  - [dotenv Variables](#dotenv-variables)
-  - [Implemented Backend API](#implemented-backend-api)
+-   [COMP30026 - IT Project](#comp30026---it-project)
+    -   [Table of contents](#table-of-contents)
+    -   [Team Members](#team-members)
+    -   [General Info](#general-info)
+    -   [Packages](#packages)
+    -   [Installation step](#installation-step)
+    -   [Start server](#start-server)
+    -   [Start client](#start-client)
+    -   [Start client and server concurrently](#start-client-and-server-concurrently)
+    -   [Prettier](#prettier)
+    -   [dotenv Variables](#dotenv-variables)
+    -   [Implemented Backend API](#implemented-backend-api)
 
 ## Team Members
 
