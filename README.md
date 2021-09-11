@@ -54,6 +54,7 @@ Client
 -   `npm install --save @fortawesome/free-solid-svg-icons`
 -   `npm install --save @fortawesome/react-fontawesome`
 -   `npm install --save @fortawesome/free-regular-svg-icons`
+-   `react-helmet`
 
 ## Installation step
 

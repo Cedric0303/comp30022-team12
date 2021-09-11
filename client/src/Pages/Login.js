@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Helmet} from "react-helmet";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { render } from "@testing-library/react";
@@ -73,6 +74,9 @@ const Login = (props) => {
 
     return (
         <div>
+            <Helmet>
+                <html style="background-color: #5E779D" />
+            </Helmet>
             <img src={logo} className="logo"></img>
 
             <form className="form" onSubmit={handleLogin}>
