@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {Helmet} from "react-helmet";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { render } from "@testing-library/react";
+//import { render } from "@testing-library/react";
 import './css/login.css';
 import logo from './css/bobafish-logo.svg';
 
@@ -68,9 +68,9 @@ const Login = (props) => {
         props.history.push("/home");
     };
 
-    const redirectToLandingPage = () => {
-        props.history.push("/");
-    };
+    //const redirectToLandingPage = () => {
+    //    props.history.push("/");
+    //};
 
     return (
         <div>
@@ -105,7 +105,7 @@ const Login = (props) => {
                     />
                 </div>
             </form>
-            <p>{errorMsg ? errorMsg : ''}</p>
+            <p className="errorMsg">{errorMsg ? errorMsg : ''}</p>
             <button className="loginButton" onClick={handleLogin}>Login</button>
             </div>
     );

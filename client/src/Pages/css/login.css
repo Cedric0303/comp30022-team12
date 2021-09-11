@@ -8,7 +8,6 @@
 
 .loginButton {
   cursor: pointer;
-  padding: 8px;
   min-width: 64px;
   border-radius: 5px;
   
@@ -51,4 +50,10 @@
   color: rgb(46, 46, 46);
 
   padding: 0.1em 0.2em;
+}
+
+.errorMsg {
+    text-align: center;
+    font-family: inherit;
+    color: ivory;
 }
