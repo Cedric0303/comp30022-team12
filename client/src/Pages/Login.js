@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 //import { render } from "@testing-library/react";
-import './css/login.css';
-import logo from './css/bobafish-logo.svg';
+import "./css/login.css";
+import logo from "./css/bobafish-logo.svg";
 
 const Login = (props) => {
     const [state, setState] = useState({
@@ -12,7 +12,7 @@ const Login = (props) => {
         password: "",
     });
 
-    const [errorMsg, setErrorMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState("");
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -23,7 +23,13 @@ const Login = (props) => {
     };
 
     const handleLogin = () => {
-        if (state.username.length && state.password.length) {
+        if (!state.username.length && !state.password.length) {
+            setErrorMsg("Please enter a valid username and password.");
+        } else if (!state.username.length) {
+            setErrorMsg("Please enter a valid username.");
+        } else if (!state.password.length) {
+            setErrorMsg("Please enter a valid password.");
+        } else {
             const payload = {
                 username: state.username,
                 password: state.password,
@@ -48,7 +54,9 @@ const Login = (props) => {
                 })
                 .catch(() => {
                     //redirectToLandingPage();
-                    setErrorMsg('The username or password you entered is incorrect. Please try again.');
+                    setErrorMsg(
+                        "The username or password you entered is incorrect. Please try again."
+                    );
                 });
         }
     };
@@ -91,7 +99,7 @@ const Login = (props) => {
                         onChange={handleChange}
                     />
                 </div>
-                
+
                 <div id="passwordInput">
                     <label>Password: </label>
                     <input
@@ -105,9 +113,11 @@ const Login = (props) => {
                     />
                 </div>
             </form>
-            <p className="errorMsg">{errorMsg ? errorMsg : ''}</p>
-            <button className="loginButton" onClick={handleLogin}>Login</button>
-            </div>
+            <p className="errorMsg">{errorMsg ? errorMsg : ""}</p>
+            <button className="loginButton" onClick={handleLogin}>
+                Login
+            </button>
+        </div>
     );
 };
 
