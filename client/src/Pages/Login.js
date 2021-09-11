@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
@@ -17,7 +17,6 @@ const Login = (props) => {
     };
 
     const handleLogin = () => {
-        console.log(state);
         if (state.username.length && state.password.length) {
             const payload = {
                 username: state.username,
@@ -46,6 +45,10 @@ const Login = (props) => {
                 });
         }
     };
+
+    useEffect(() => {
+        document.addEventListener("keydown", onEnterPress, false);
+    });
 
     // 13 is the recognized number of the Enter key
     const onEnterPress = (e) => {
@@ -84,7 +87,7 @@ const Login = (props) => {
                     placeholder="Password"
                     value={state.password}
                     onChange={handleChange}
-                    onKeyDown={onEnterPress}
+                    // onKeyDown={onEnterPress}
                 />
                 <p />
             </form>
