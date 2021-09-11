@@ -4,18 +4,18 @@
 
 ## Table of contents
 
--   [COMP30026 - IT Project](#comp30026---it-project)
-    -   [Table of contents](#table-of-contents)
-    -   [Team Members](#team-members)
-    -   [General Info](#general-info)
-    -   [Packages](#packages)
-    -   [Installation step](#installation-step)
-    -   [Start server](#start-server)
-    -   [Start client](#start-client)
-    -   [Start client and server concurrently](#start-client-and-server-concurrently)
-    -   [Prettier](#prettier)
-    -   [dotenv Variables](#dotenv-variables)
-    -   [Implemented Backend API](#implemented-backend-api)
+- [COMP30026 - IT Project](#comp30026---it-project)
+  - [Table of contents](#table-of-contents)
+  - [Team Members](#team-members)
+  - [General Info](#general-info)
+  - [Packages](#packages)
+  - [Installation step](#installation-step)
+  - [Start server](#start-server)
+  - [Start client](#start-client)
+  - [Start client and server concurrently](#start-client-and-server-concurrently)
+  - [Prettier](#prettier)
+  - [dotenv Variables](#dotenv-variables)
+  - [Implemented Backend API](#implemented-backend-api)
 
 ## Team Members
 
@@ -33,27 +33,40 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Packages
 
+-   `axios`
+-   `bcrypt`
+-   `concurrently`
+-   `cors`
+-   `dotenv`
 -   `express`
 -   `react`
--   `dotenv`
--   `passport`
--   `passport-local`
--   `passport-jwt`
 -   `jsonwebtoken`
--   `bcrypt`
 -   `mongoose`
--   `prettier` (also has a vscode extension)
--   `babel-jest`
+-   `passport`
+-   `passport-jwt`
+-   `passport-local`
+-   `jest`
+-   `nodemon`
+-   `prettier`
 -   `supertest`
--   `cors`
--   `axios`
 
 Client
 
--   `npm i --save @fortawesome/fontawesome-svg-core`
--   `npm install --save @fortawesome/free-solid-svg-icons`
--   `npm install --save @fortawesome/react-fontawesome`
--   `npm install --save @fortawesome/free-regular-svg-icons`
+-   `@fortawesome/fontawesome-svg-core`
+-   `@fortawesome/free-regular-svg-icons`
+-   `@fortawesome/free-solid-svg-icons`
+-   `@fortawesome/react-fontawesome`
+-   `@testing-library/jest-dom`
+-   `@testing-library/react`
+-   `@testing-library/user-event`
+-   `axios`
+-   `react`
+-   `react-dom`
+-   `react-helmet`
+-   `react-router-dom`
+-   `react-scripts`
+-   `web-vitals`
+-   `eslint-plugin-react`
 
 ## Installation step
 

@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+//import { render } from "@testing-library/react";
+import "./css/login.css";
+import logo from "./css/bobafish-logo.svg";
 
 const Login = (props) => {
     const [state, setState] = useState({
         username: "",
         password: "",
     });
+
+    const [errorMsg, setErrorMsg] = useState("");
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -17,8 +23,13 @@ const Login = (props) => {
     };
 
     const handleLogin = () => {
-        console.log(state);
-        if (state.username.length && state.password.length) {
+        if (!state.username.length && !state.password.length) {
+            setErrorMsg("Please enter a valid username and password.");
+        } else if (!state.username.length) {
+            setErrorMsg("Please enter a valid username.");
+        } else if (!state.password.length) {
+            setErrorMsg("Please enter a valid password.");
+        } else {
             const payload = {
                 username: state.username,
                 password: state.password,
@@ -42,10 +53,17 @@ const Login = (props) => {
                     }
                 })
                 .catch(() => {
-                    redirectToLandingPage();
+                    //redirectToLandingPage();
+                    setErrorMsg(
+                        "The username or password you entered is incorrect. Please try again."
+                    );
                 });
         }
     };
+
+    useEffect(() => {
+        document.addEventListener("keydown", onEnterPress, false);
+    });
 
     // 13 is the recognized number of the Enter key
     const onEnterPress = (e) => {
@@ -58,37 +76,47 @@ const Login = (props) => {
         props.history.push("/home");
     };
 
-    const redirectToLandingPage = () => {
-        props.history.push("/");
-    };
+    //const redirectToLandingPage = () => {
+    //    props.history.push("/");
+    //};
 
     return (
         <div>
-            <h2>Login Page</h2>
-            <form onSubmit={handleLogin}>
-                <label>Username: </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Enter username"
-                    value={state.username}
-                    onChange={handleChange}
-                />
-                <p />
-                <label>Password: </label>
-                <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Password"
-                    value={state.password}
-                    onChange={handleChange}
-                    onKeyDown={onEnterPress}
-                />
-                <p />
+            <Helmet>
+                <html style="background-color: #5E779D" />
+            </Helmet>
+            <img src={logo} className="logo"></img>
+
+            <form className="form" onSubmit={handleLogin}>
+                <div id="usernameInput">
+                    <label>Username: </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="username"
+                        placeholder="Username"
+                        value={state.username}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div id="passwordInput">
+                    <label>Password: </label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        placeholder="Password"
+                        value={state.password}
+                        onChange={handleChange}
+                        // onKeyDown={onEnterPress}
+                    />
+                </div>
             </form>
-            <button onClick={handleLogin}>Login</button>
+            <p className="errorMsg">{errorMsg ? errorMsg : ""}</p>
+            <button className="loginButton" onClick={handleLogin}>
+                Login
+            </button>
         </div>
     );
 };
