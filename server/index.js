@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(express.json());
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", process.env.REACT_APP_FRONTEND_URL); // update to match the domain you will make the request from
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
@@ -37,7 +37,7 @@ app.use("/api/account", loginRouter);
 
 app.use(
     "/api/users",
-    passport.authenticate("jwt", { session: false }),
+    // passport.authenticate("jwt", { session: false }),
     userRouter
 );
 

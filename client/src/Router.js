@@ -35,7 +35,7 @@ class Router extends React.Component {
                         component={AdminAddUser}
                     ></Route>
                     <Route
-                        path="/admin/users/edit"
+                        path="/admin/users/:userID/edit"
                         exact
                         component={AdminEditUser}
                     ></Route>

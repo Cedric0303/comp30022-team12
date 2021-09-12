@@ -1,0 +1,8 @@
+.userEdit {
+    float: right;
+    color: black;
+}
+
+.userEdit:hover {
+    color: grey;
+}
