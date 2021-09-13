@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-//import { render } from "@testing-library/react";
+import jwt from "jwt-decode";
+import Auth from "./Auth.js";
 import "./css/login.css";
 import logo from "./css/bobafish-logo.svg";
 
 const Login = (props) => {
-    const [state, setState] = useState({
+    const [user, setState] = useState({
         username: "",
         password: "",
     });
@@ -21,18 +22,17 @@ const Login = (props) => {
             [id]: value,
         }));
     };
-
     const handleLogin = () => {
-        if (!state.username.length && !state.password.length) {
+        if (!user.username.length && !user.password.length) {
             setErrorMsg("Please enter a valid username and password.");
-        } else if (!state.username.length) {
+        } else if (!user.username.length) {
             setErrorMsg("Please enter a valid username.");
-        } else if (!state.password.length) {
+        } else if (!user.password.length) {
             setErrorMsg("Please enter a valid password.");
         } else {
             const payload = {
-                username: state.username,
-                password: state.password,
+                username: user.username,
+                password: user.password,
             };
             axios
                 .post(
@@ -40,20 +40,22 @@ const Login = (props) => {
                     payload
                 )
                 .then((response) => {
-                    setState((prevState) => ({
-                        ...prevState,
-                        message: response.data.message,
-                    }));
                     if (response.status === 200) {
+                        const token = response.data.token;
+                        const data = jwt(token);
+                        setState((prevState) => ({
+                            ...prevState,
+                            message: response.data.message,
+                        }));
                         localStorage.setItem(
                             "accessToken",
                             response.data.token
                         );
+                        Auth.authenticate(data.user);
                         redirectToHome();
                     }
                 })
                 .catch(() => {
-                    //redirectToLandingPage();
                     setErrorMsg(
                         "The username or password you entered is incorrect. Please try again."
                     );
@@ -76,10 +78,6 @@ const Login = (props) => {
         props.history.push("/home");
     };
 
-    //const redirectToLandingPage = () => {
-    //    props.history.push("/");
-    //};
-
     return (
         <div>
             <Helmet>
@@ -95,7 +93,7 @@ const Login = (props) => {
                         className="form-control"
                         id="username"
                         placeholder="Username"
-                        value={state.username}
+                        value={user.username}
                         onChange={handleChange}
                     />
                 </div>
@@ -107,9 +105,8 @@ const Login = (props) => {
                         className="form-control"
                         id="password"
                         placeholder="Password"
-                        value={state.password}
+                        value={user.password}
                         onChange={handleChange}
-                        // onKeyDown={onEnterPress}
                     />
                 </div>
             </form>

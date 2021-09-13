@@ -1,4 +1,7 @@
 const jwt = require("jsonwebtoken");
+const db = require("./databaseController.js");
+
+const Users = db.collection("users");
 
 const signup = async (req, res) => {
     res.json({
@@ -8,9 +11,13 @@ const signup = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const body = {
+    const user = await Users.findOne({
         username: req.body.username,
-        isAdmin: req.body.isAdmin,
+    });
+
+    const body = {
+        username: user.username,
+        isAdmin: user.isAdmin,
     };
     const token = jwt.sign({ user: body }, process.env.SECRET_KEY);
     res.json({
