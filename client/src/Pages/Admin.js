@@ -21,33 +21,33 @@ function Admin(props) {
                         className="navButton"
                         to="/admin/users"
                     >
-                        <a class="squareButton hoverable">
+                        <div class="squareButton hoverable">
                             <FontAwesomeIcon class="AdminIcon" icon="user" />
                             Manage Users
-                        </a>
+                        </div>
                     </NavLink>
                     <NavLink
                         activeClassName="active"
                         className="navButton"
                         to="/admin/tags"
                     >
-                        <a class="squareButton hoverable">
+                        <div class="squareButton hoverable">
                             <FontAwesomeIcon class="AdminIcon" icon="tag" />
                             Manage Tags
-                        </a>
+                        </div>
                     </NavLink>
                     <NavLink
                         activeClassName="active"
                         className="navButton"
                         to="/admin/users"
                     >
-                        <a class="squareButton hoverable">
+                        <div class="squareButton hoverable">
                             <FontAwesomeIcon
                                 class="AdminIcon"
                                 icon="user-tie"
                             />
                             Manage Clients
-                        </a>
+                        </div>
                     </NavLink>
                 </div>
             </main>
