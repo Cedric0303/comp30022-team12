@@ -358,7 +358,6 @@ describe("#7 Activity test (logged in)", () => {
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
-                console.log(res.body.message);
                 assert(
                     res.body.message.includes("Activity creation successful!")
                 );
