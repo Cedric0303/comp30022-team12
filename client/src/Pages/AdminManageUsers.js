@@ -30,7 +30,7 @@ function AdminManageUsers(props) {
                 <div className="usersBox">
                     <ul id="usersList">
                         <li>
-                            <a id="addUser" href="admin/users/create">
+                            <a id="addUser" href="users/create">
                                 <span>Add New User  </span>
                                 <FontAwesomeIcon icon="user-plus" />
                             </a>

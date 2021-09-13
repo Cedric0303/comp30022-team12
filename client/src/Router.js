@@ -44,7 +44,7 @@ class Router extends React.Component {
                         component={AdminAddUser}
                     ></ProtectedRoute>
                     <ProtectedRoute
-                        path="/admin/users/edit"
+                        path="/admin/users/:userID/edit"
                         exact
                         component={AdminEditUser}
                     ></ProtectedRoute>

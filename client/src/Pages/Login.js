@@ -36,7 +36,7 @@ const Login = (props) => {
             };
             axios
                 .post(
-                    process.env.REACT_APP_BACKEND_API_URL + "/account/login",
+                    process.env.REACT_APP_BACKEND_API_URL + "/api/account/login",
                     payload
                 )
                 .then((response) => {
