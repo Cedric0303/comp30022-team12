@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import ProtectedRoute from "./Pages/ProtectedRoute.js";
 
 //Landing page
 import LandingPage from "./Pages/LandingPage.js";
@@ -22,30 +23,46 @@ class Router extends React.Component {
                 <Switch>
                     <Route path="/" exact component={LandingPage}></Route>
                     <Route path="/login" exact component={Login}></Route>
-                    <Route path="/home" exact component={Home}></Route>
-                    <Route path="/admin" exact component={Admin}></Route>
-                    <Route
+                    <ProtectedRoute
+                        path="/home"
+                        exact
+                        component={Home}
+                    ></ProtectedRoute>
+                    <ProtectedRoute
+                        path="/admin"
+                        exact
+                        component={Admin}
+                    ></ProtectedRoute>
+                    <ProtectedRoute
                         path="/admin/users"
                         exact
                         component={AdminManageUsers}
-                    ></Route>
-                    <Route
+                    ></ProtectedRoute>
+                    <ProtectedRoute
                         path="/admin/users/create"
                         exact
                         component={AdminAddUser}
-                    ></Route>
-                    <Route
+                    ></ProtectedRoute>
+                    <ProtectedRoute
                         path="/admin/users/edit"
                         exact
                         component={AdminEditUser}
-                    ></Route>
-                    <Route
+                    ></ProtectedRoute>
+                    <ProtectedRoute
                         path="/admin/tags"
                         exact
                         component={AdminManageTags}
-                    ></Route>
-                    <Route path="/calendar" exact component={Calendar}></Route>
-                    <Route path="/clients" exact component={Clients}></Route>
+                    ></ProtectedRoute>
+                    <ProtectedRoute
+                        path="/calendar"
+                        exact
+                        component={Calendar}
+                    ></ProtectedRoute>
+                    <ProtectedRoute
+                        path="/clients"
+                        exact
+                        component={Clients}
+                    ></ProtectedRoute>
                 </Switch>
             </BrowserRouter>
         );
