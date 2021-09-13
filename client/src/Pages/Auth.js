@@ -1,3 +1,5 @@
+import jwt from "jwt-decode";
+
 const Auth = {
     username: null,
     isAuthenticated: false,
@@ -14,6 +16,10 @@ const Auth = {
         this.isAdmin = false;
     },
     getAuth() {
+        if (localStorage.hasOwnProperty("accessToken")) {
+            const token = jwt(localStorage.getItem("accessToken"));
+            this.authenticate(token);
+        }
         return this.isAuthenticated;
     },
     getUsername() {
