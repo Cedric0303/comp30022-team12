@@ -4,10 +4,13 @@ import "./Navbar.css";
 import logo from "./logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import Auth from "../../Pages/Auth.js";
+import SignOut from "../../Pages/SignOut.js";
+
 function Navbar(props) {
     // Render admin tab if logged in user is an admin
     const adminNav = () => {
-        if (true /*props.user.isAdmin*/) {
+        if (Auth.getIsAdmin) {
             return (
                 <li className="navLeft">
                     <NavLink
@@ -59,7 +62,7 @@ function Navbar(props) {
                 </li>
                 {adminNav()}
                 <li className="navRight">
-                    <a className="navText" href="/">
+                    <a className="navText" onClick={SignOut} href="/">
                         Sign Out{" "}
                         <FontAwesomeIcon icon="sign-out-alt" id="signOut" />
                     </a>

@@ -63,6 +63,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 -   `@testing-library/react`
 -   `@testing-library/user-event`
 -   `axios`
+-   `jwt-decode`
 -   `react`
 -   `react-dom`
 -   `react-helmet`
