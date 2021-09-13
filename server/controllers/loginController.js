@@ -3,13 +3,6 @@ const db = require("./databaseController.js");
 
 const Users = db.collection("users");
 
-const signup = async (req, res) => {
-    res.json({
-        message: "Signup successful!",
-        user: req.user,
-    });
-};
-
 const login = async (req, res) => {
     const user = await Users.findOne({
         username: req.body.username,
@@ -27,6 +20,5 @@ const login = async (req, res) => {
 };
 
 module.exports = {
-    signup,
     login,
 };
