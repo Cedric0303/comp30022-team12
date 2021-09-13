@@ -43,14 +43,14 @@ describe("#1 User test (logged in)", () => {
             lastName: "testUser",
         };
         return agent
-            .post("/api/account/signup")
+            .post("/api/users/create")
             .set("Authorization", "JWT " + jwt)
             .set("Content-Type", "application/json")
             .send(testUser)
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
-                assert(res.body.message.includes("Signup successful!"));
+                assert(res.body.message.includes("Create user successful!"));
             });
     });
 

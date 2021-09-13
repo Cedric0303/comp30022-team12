@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-// const mongoose = require("mongoose");
 
 const localStrategy = require("passport-local").Strategy;
 const JWTstrategy = require("passport-jwt").Strategy;
@@ -38,8 +37,8 @@ passport.use(
                     await Users.insertOne(newUser);
                     return done(null, newUser);
                 } else {
-                    return done(null, false, {
-                        message: "Error: User already exists!",
+                    return done(null, exist, {
+                        message: "User already exist!",
                     });
                 }
             } catch (error) {
