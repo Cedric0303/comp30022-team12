@@ -20,17 +20,17 @@
 
 ## Team Members
 
-| Name                   | Task |
-| :--------------------- | ---: |
-| Maggie Wang            |      |
-| Feifan Zeng            |      |
-| Samantha Min Syuen Goh |      |
-| Jun Li Chen            |      |
-| Jeongwoo Seo           |      |
+| Name                   |
+| :--------------------- |
+| Maggie Wang            |
+| Feifan Zeng            |
+| Samantha Min Syuen Goh |
+| Jun Li Chen            |
+| Jeongwoo Seo           |
 
 ## General Info
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+A personal CRM
 
 ## Packages
 
@@ -109,4 +109,6 @@ If running locally, please create a `.env` file in the root folder and copy the 
 MONGO_URL=mongodb+srv://comp30022:comp30022@ctrl-alt-elite.ys2d9.mongodb.net/it-project?retryWrites=true&w=majority
 SECRET_KEY=boba milk tea
 SALT=10
+REACT_APP_BACKEND_API_URL=http://localhost:3001
+REACT_APP_FRONTEND_URL=http://localhost:3000
 ```
