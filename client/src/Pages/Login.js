@@ -82,6 +82,9 @@ const Login = (props) => {
             <Helmet>
                 <html style="background-color: #596e80;" />
             </Helmet>
+
+            <h1 className="title">bobafish CRM</h1>
+
             <img src={logo} alt="bobafish logo" className="logo"></img>
 
             <form className="form" onSubmit={handleLogin}>
