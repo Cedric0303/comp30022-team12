@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AdminRoute from "./Pages/AdminRoute.js";
 import ProtectedRoute from "./Pages/ProtectedRoute.js";
 
 //Landing page
@@ -28,31 +29,31 @@ class Router extends React.Component {
                         exact
                         component={Home}
                     ></ProtectedRoute>
-                    <ProtectedRoute
+                    <AdminRoute
                         path="/admin"
                         exact
                         component={Admin}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
+                    ></AdminRoute>
+                    <AdminRoute
                         path="/admin/users"
                         exact
                         component={AdminManageUsers}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
+                    ></AdminRoute>
+                    <AdminRoute
                         path="/admin/users/create"
                         exact
                         component={AdminAddUser}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
+                    ></AdminRoute>
+                    <AdminRoute
                         path="/admin/users/:userID/edit"
                         exact
                         component={AdminEditUser}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
+                    ></AdminRoute>
+                    <AdminRoute
                         path="/admin/tags"
                         exact
                         component={AdminManageTags}
-                    ></ProtectedRoute>
+                    ></AdminRoute>
                     <ProtectedRoute
                         path="/calendar"
                         exact
