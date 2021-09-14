@@ -22,7 +22,7 @@ passport.use(
         async (req, username, password, done) => {
             try {
                 const exist = await Users.findOne({ username: username });
-                if (exist == null) {
+                if (exist === null) {
                     const hash = await bcrypt.hash(
                         password,
                         parseInt(process.env.SALT)
@@ -61,7 +61,7 @@ passport.use(
                     username: username,
                 });
 
-                if (user == null) {
+                if (user === null) {
                     return done(null, false, { message: "User not found" });
                 }
 
