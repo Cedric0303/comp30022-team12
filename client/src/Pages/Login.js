@@ -82,7 +82,7 @@ const Login = (props) => {
     return (
         <div>
             <Helmet>
-                <html style={{ "background-color": "#596e80" }} />
+                <html style="background-color: #596e80;" />
             </Helmet>
             <img src={logo} alt="bobafish logo" className="logo"></img>
 

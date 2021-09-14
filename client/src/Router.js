@@ -3,8 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AdminRoute from "./Pages/AdminRoute.js";
 import ProtectedRoute from "./Pages/ProtectedRoute.js";
 
-//Landing page
-import LandingPage from "./Pages/LandingPage.js";
+import Login from "./Pages/Login.js";
 // Admin pages
 import Admin from "./Pages/Admin.js";
 import AdminAddUser from "./Pages/AdminAddUser.js";
@@ -12,7 +11,6 @@ import AdminEditUser from "./Pages/AdminEditUser.js";
 import AdminManageUsers from "./Pages/AdminManageUsers.js";
 import AdminManageTags from "./Pages/AdminManageTags.js";
 // Common pages
-import Login from "./Pages/Login.js";
 import Home from "./Pages/Home.js";
 import Calendar from "./Pages/Calendar.js";
 import Clients from "./Pages/Clients.js";
@@ -22,8 +20,7 @@ class Router extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path="/" exact component={LandingPage}></Route>
-                    <Route path="/login" exact component={Login}></Route>
+                    <Route path="/" exact component={Login}></Route>
                     <ProtectedRoute
                         path="/home"
                         exact
