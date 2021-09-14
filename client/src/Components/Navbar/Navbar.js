@@ -10,7 +10,7 @@ import SignOut from "../../Pages/SignOut.js";
 function Navbar(props) {
     // Render admin tab if logged in user is an admin
     const adminNav = () => {
-        if (Auth.getIsAdmin) {
+        if (Auth.getIsAdmin()) {
             return (
                 <li className="navLeft">
                     <NavLink

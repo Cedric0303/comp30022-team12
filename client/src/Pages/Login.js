@@ -36,7 +36,8 @@ const Login = (props) => {
             };
             axios
                 .post(
-                    process.env.REACT_APP_BACKEND_API_URL + "/account/login",
+                    process.env.REACT_APP_BACKEND_API_URL +
+                        "/api/account/login",
                     payload
                 )
                 .then((response) => {
@@ -81,9 +82,12 @@ const Login = (props) => {
     return (
         <div>
             <Helmet>
-                <html style="background-color: #5E779D" />
+                <html style="background-color: #596e80;" />
             </Helmet>
-            <img src={logo} className="logo"></img>
+
+            <h1 className="title">bobafish CRM</h1>
+
+            <img src={logo} alt="bobafish logo" className="logo"></img>
 
             <form className="form" onSubmit={handleLogin}>
                 <div id="usernameInput">

@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AdminRoute from "./Pages/AdminRoute.js";
 import ProtectedRoute from "./Pages/ProtectedRoute.js";
 
-//Landing page
-import LandingPage from "./Pages/LandingPage.js";
+import Login from "./Pages/Login.js";
 // Admin pages
 import Admin from "./Pages/Admin.js";
 import AdminAddUser from "./Pages/AdminAddUser.js";
@@ -11,7 +11,6 @@ import AdminEditUser from "./Pages/AdminEditUser.js";
 import AdminManageUsers from "./Pages/AdminManageUsers.js";
 import AdminManageTags from "./Pages/AdminManageTags.js";
 // Common pages
-import Login from "./Pages/Login.js";
 import Home from "./Pages/Home.js";
 import Calendar from "./Pages/Calendar.js";
 import Clients from "./Pages/Clients.js";
@@ -21,38 +20,37 @@ class Router extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path="/" exact component={LandingPage}></Route>
-                    <Route path="/login" exact component={Login}></Route>
+                    <Route path="/" exact component={Login}></Route>
                     <ProtectedRoute
                         path="/home"
                         exact
                         component={Home}
                     ></ProtectedRoute>
-                    <ProtectedRoute
+                    <AdminRoute
                         path="/admin"
                         exact
                         component={Admin}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
+                    ></AdminRoute>
+                    <AdminRoute
                         path="/admin/users"
                         exact
                         component={AdminManageUsers}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
+                    ></AdminRoute>
+                    <AdminRoute
                         path="/admin/users/create"
                         exact
                         component={AdminAddUser}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
-                        path="/admin/users/edit"
+                    ></AdminRoute>
+                    <AdminRoute
+                        path="/admin/users/:userID/edit"
                         exact
                         component={AdminEditUser}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
+                    ></AdminRoute>
+                    <AdminRoute
                         path="/admin/tags"
                         exact
                         component={AdminManageTags}
-                    ></ProtectedRoute>
+                    ></AdminRoute>
                     <ProtectedRoute
                         path="/calendar"
                         exact

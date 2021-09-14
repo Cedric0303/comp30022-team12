@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
         {},
         {
             projection: {
-                _id: false,
+                _id: true,
                 password: false,
             },
         }
