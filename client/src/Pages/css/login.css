@@ -1,55 +1,55 @@
 .logo {
-  width: 30vh;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  margin-top: 20vh;
+    width: 30vh;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20vh;
 }
 
 .loginButton {
-  cursor: pointer;
-  min-width: 64px;
-  border-radius: 5px;
-  
-  border: none;
-  background: #6eb2ff;
-  color: #ffffff;
-  margin: 0 auto;
-  padding: 0.5em 1em;
-  display: block;
+    cursor: pointer;
+    min-width: 64px;
+    border-radius: 5px;
 
-  font-family: inherit;
-  font-size: 1.2em;
-  font-weight: bold;
+    border: none;
+    background: #6eb2ff;
+    color: #ffffff;
+    margin: 0 auto;
+    padding: 0.5em 1em;
+    display: block;
+
+    font-family: inherit;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .loginButton:hover {
-  background: #1D76D8;
-  color: #ffffff;
+    background: #1d76d8;
+    color: #ffffff;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5em;
-  justify-content: center;
-  align-items: center;
-  color: #a2c8eb;
-  text-align: center;
-  margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+    justify-content: center;
+    align-items: center;
+    color: #a2c8eb;
+    text-align: center;
+    margin-top: 2%;
 
-  font-family: inherit;
-  font-size: 1.3em;
-  font-weight: 600;
+    font-family: inherit;
+    font-size: 1.3em;
+    font-weight: 600;
 }
 
 .form input {
-  font-family: inherit;
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: rgb(46, 46, 46);
+    font-family: inherit;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: rgb(46, 46, 46);
 
-  padding: 0.1em 0.2em;
+    padding: 0.1em 0.2em;
 }
 
 .errorMsg {

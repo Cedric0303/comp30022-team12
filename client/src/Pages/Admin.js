@@ -10,19 +10,19 @@ function Admin(props) {
     return (
         <div>
             <Helmet>
-                <html style="background-color: #596e80;" />
+                <html style={{ "background-color": "#596e80" }} />
             </Helmet>
             <Navbar />
             <main>
-                <h2 class="mainHeading">Admin</h2>
+                <h2 className="mainHeading">Admin</h2>
                 <div id="adminButtons">
                     <NavLink
                         activeClassName="active"
                         className="navButton"
                         to="/admin/users"
                     >
-                        <div class="squareButton hoverable">
-                            <FontAwesomeIcon class="AdminIcon" icon="user" />
+                        <div className="squareButton hoverable">
+                            <FontAwesomeIcon className="AdminIcon" icon="user" />
                             Manage Users
                         </div>
                     </NavLink>
@@ -31,8 +31,8 @@ function Admin(props) {
                         className="navButton"
                         to="/admin/tags"
                     >
-                        <div class="squareButton hoverable">
-                            <FontAwesomeIcon class="AdminIcon" icon="tag" />
+                        <div className="squareButton hoverable">
+                            <FontAwesomeIcon className="AdminIcon" icon="tag" />
                             Manage Tags
                         </div>
                     </NavLink>
@@ -41,9 +41,9 @@ function Admin(props) {
                         className="navButton"
                         to="/admin/users"
                     >
-                        <div class="squareButton hoverable">
+                        <div className="squareButton hoverable">
                             <FontAwesomeIcon
-                                class="AdminIcon"
+                                className="AdminIcon"
                                 icon="user-tie"
                             />
                             Manage Clients

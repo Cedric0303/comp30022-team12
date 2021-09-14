@@ -39,6 +39,23 @@ const getUser = async (req, res) => {
     });
 };
 
+const createUser = async (req, res) => {
+    const exist = Object.keys(req.authInfo).length > 0;
+    if (exist) {
+        res.json({
+            message: "User already exist!",
+        });
+    } else {
+        const user = await Users.findOne({
+            username: req.user.username,
+        });
+        res.json({
+            message: "Create user successful!",
+            user: user,
+        });
+    }
+};
+
 const editUser = async (req, res) => {
     const hash = await bcrypt.hash(
         req.body.password,
@@ -96,6 +113,7 @@ const removeUser = async (req, res) => {
 module.exports = {
     getUsers,
     getUser,
+    createUser,
     editUser,
     removeUser,
 };
