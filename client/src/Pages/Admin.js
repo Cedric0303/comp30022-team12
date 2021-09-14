@@ -10,7 +10,7 @@ function Admin(props) {
     return (
         <div>
             <Helmet>
-                <html style={{ "background-color": "#596e80" }} />
+                <html style="background-color: #596e80;" />
             </Helmet>
             <Navbar />
             <main>
