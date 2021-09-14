@@ -42,6 +42,8 @@ const Login = (props) => {
                 )
                 .then((response) => {
                     if (response.status === 200) {
+                        const token = response.data.token;
+                        const data = jwt(token);
                         setState((prevState) => ({
                             ...prevState,
                             message: response.data.message,
@@ -50,7 +52,7 @@ const Login = (props) => {
                             "accessToken",
                             response.data.token
                         );
-                        Auth.authenticate();
+                        Auth.authenticate(data.user);
                         redirectToHome();
                     }
                 })

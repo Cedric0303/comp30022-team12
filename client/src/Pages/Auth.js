@@ -11,6 +11,8 @@ const Auth = {
             this.username = token.user.username;
             this.isAuthenticated = true;
             this.isAdmin = token.user.isAdmin;
+        } else {
+            this.isAuthenticated = false;
         }
     },
     signout() {
@@ -24,11 +26,11 @@ const Auth = {
         return this.isAuthenticated;
     },
     getUsername() {
-        this.authenticate();
+        this.getAuth();
         return this.username;
     },
     getIsAdmin() {
-        this.authenticate();
+        this.getAuth();
         return this.isAdmin;
     },
 };
