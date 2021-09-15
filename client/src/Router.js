@@ -9,7 +9,7 @@ import Admin from "./Pages/Admin.js";
 import AdminAddUser from "./Pages/AdminAddUser.js";
 import AdminEditUser from "./Pages/AdminEditUser.js";
 import AdminManageUsers from "./Pages/AdminManageUsers.js";
-import AdminManageTags from "./Pages/AdminManageTags.js";
+import AdminManageStages from "./Pages/AdminManageStages.js";
 // Common pages
 import Home from "./Pages/Home.js";
 import Calendar from "./Pages/Calendar.js";
@@ -47,9 +47,9 @@ class Router extends React.Component {
                         component={AdminEditUser}
                     ></AdminRoute>
                     <AdminRoute
-                        path="/admin/tags"
+                        path="/admin/stages"
                         exact
-                        component={AdminManageTags}
+                        component={AdminManageStages}
                     ></AdminRoute>
                     <ProtectedRoute
                         path="/calendar"

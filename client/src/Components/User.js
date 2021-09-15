@@ -1,5 +1,5 @@
 import React from "react";
-import "./user.css";
+import "./css/user.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Format each user

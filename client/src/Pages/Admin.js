@@ -29,11 +29,11 @@ function Admin(props) {
                     <NavLink
                         activeClassName="active"
                         className="navButton"
-                        to="/admin/tags"
+                        to="/admin/stages"
                     >
                         <div className="squareButton hoverable">
                             <FontAwesomeIcon className="AdminIcon" icon="tag" />
-                            Manage Tags
+                            Manage Stages
                         </div>
                     </NavLink>
                     <NavLink
