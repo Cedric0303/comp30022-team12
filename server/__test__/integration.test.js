@@ -305,7 +305,7 @@ describe("#5 Client test (logged in)", () => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
                 assert(res.body.message.includes("Add note successful!"));
-                nid = res.body.note._id;
+                nid = res.body.nid;
             });
     });
 

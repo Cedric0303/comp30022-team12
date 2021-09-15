@@ -59,6 +59,7 @@ const getClient = async (req, res) => {
 
 const addClientNote = async (req, res) => {
     const newNote = new NoteModel({
+        _id: new mongoose.Types.ObjectId(),
         body: req.body.note,
     });
     await Clients.findOneAndUpdate(
@@ -82,7 +83,8 @@ const addClientNote = async (req, res) => {
             }
             res.json({
                 message: "Add note successful!",
-                note: doc.value,
+                user: doc.value,
+                nid: newNote._id,
             });
         }
     );
