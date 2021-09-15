@@ -6,7 +6,7 @@ const passport = require("passport");
 
 const loginRouter = require("./routes/loginRouter.js");
 const userRouter = require("./routes/userRouter.js");
-const tagRouter = require("./routes/tagRouter.js");
+const stageRouter = require("./routes/stageRouter.js");
 const clientRouter = require("./routes/clientRouter.js");
 const activityRouter = require("./routes/activityRouter.js");
 const orderRouter = require("./routes/orderRouter.js");
@@ -39,9 +39,9 @@ app.use(
 );
 
 app.use(
-    "/api/tags",
+    "/api/stages",
     passport.authenticate("jwt", { session: false }),
-    tagRouter
+    stageRouter
 );
 
 app.use(

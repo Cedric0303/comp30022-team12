@@ -107,7 +107,7 @@ describe("#2 User test (not logged in)", () => {
     });
 });
 
-describe("#3 Tag test (logged in)", () => {
+describe("#3 Stage test (logged in)", () => {
     let agent = request.agent(app);
     let jwt = null;
     let user = {
@@ -125,77 +125,79 @@ describe("#3 Tag test (logged in)", () => {
             })
     );
 
-    test("Test 1: Get all tags", async () => {
+    test("Test 1: Get all stages", async () => {
         return agent
-            .get("/api/tags")
+            .get("/api/stages")
             .set("Authorization", "JWT " + jwt)
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
-                assert(res.body.message.includes("Get tags successful!"));
+                assert(res.body.message.includes("Get stages successful!"));
             });
     });
 
-    test("Test 2: Create a tag", async () => {
-        let testTag = {
-            tname: "test tag",
+    test("Test 2: Create a stage", async () => {
+        let testStage = {
+            sname: "test stage",
+            position: "-1",
         };
         return agent
-            .post("/api/tags/create")
+            .post("/api/stages/create")
             .set("Authorization", "JWT " + jwt)
             .set("Content-Type", "application/json")
-            .send(testTag)
+            .send(testStage)
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
-                assert(res.body.message.includes("Tag creation successful!"));
+                assert(res.body.message.includes("Stage creation successful!"));
             });
     });
 
-    test("Test 3: Edit a tag", async () => {
-        let editTag = {
-            tname: "edit tag",
+    test("Test 3: Edit a stage", async () => {
+        let editStage = {
+            sname: "edit stage",
+            position: "-69",
         };
         return agent
-            .post("/api/tags/test_tag/edit")
+            .post("/api/stages/test_stage/edit")
             .set("Authorization", "JWT " + jwt)
             .set("Content-Type", "application/json")
-            .send(editTag)
+            .send(editStage)
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
-                assert(res.body.message.includes("Edit tag successful!"));
+                assert(res.body.message.includes("Edit stage successful!"));
             });
     });
 
-    test("Test 4: Get a tag", async () => {
+    test("Test 4: Get a stage", async () => {
         return agent
-            .get("/api/tags/edit_tag")
+            .get("/api/stages/edit_stage")
             .set("Authorization", "JWT " + jwt)
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
-                assert(res.body.message.includes("Get tag successful!"));
+                assert(res.body.message.includes("Get stage successful!"));
             });
     });
 
-    test("Test 5: Remove a tag", async () => {
+    test("Test 5: Remove a stage", async () => {
         return agent
-            .get("/api/tags/edit_tag/remove")
+            .get("/api/stages/edit_stage/remove")
             .set("Authorization", "JWT " + jwt)
             .then((res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
-                assert(res.body.message.includes("Tag removal successful!"));
+                assert(res.body.message.includes("Stage removal successful!"));
             });
     });
 });
 
-describe("#4 Tag test (not logged in)", () => {
+describe("#4 Stage test (not logged in)", () => {
     let agent = request.agent(app);
 
-    test("Test 1: Get all tags", async () => {
-        return agent.get("/api/tags").then((res) => {
+    test("Test 1: Get all stages", async () => {
+        return agent.get("/api/stages").then((res) => {
             expect(res.statusCode).toBe(401);
         });
     });
@@ -208,6 +210,7 @@ describe("#5 Client test (logged in)", () => {
         username: "default",
         password: "default",
     };
+    let nid = null;
 
     beforeAll(() =>
         agent
@@ -289,7 +292,56 @@ describe("#5 Client test (logged in)", () => {
             });
     });
 
-    test("Test 5: Remove a client", async () => {
+    test("Test 5: Add client note", async () => {
+        let addClientNote = {
+            note: "add client note test",
+        };
+        return agent
+            .post("/api/clients/edit@edit.edit/addNote")
+            .set("Authorization", "JWT " + jwt)
+            .set("Content-Type", "application/json")
+            .send(addClientNote)
+            .then((res) => {
+                expect(res.statusCode).toBe(200);
+                expect(res.type).toBe("application/json");
+                assert(res.body.message.includes("Add note successful!"));
+                nid = res.body.note._id;
+            });
+    });
+
+    test("Test 6: Remove client note", async () => {
+        let removeClientNote = {
+            nid: nid,
+        };
+        return agent
+            .post("/api/clients/edit@edit.edit/removeNote")
+            .set("Authorization", "JWT " + jwt)
+            .set("Content-Type", "application/json")
+            .send(removeClientNote)
+            .then((res) => {
+                expect(res.statusCode).toBe(200);
+                expect(res.type).toBe("application/json");
+                assert(res.body.message.includes("Remove note successful!"));
+            });
+    });
+
+    test("Test 7: Change client stage", async () => {
+        let changeClientStage = {
+            stageID: "default",
+        };
+        return agent
+            .post("/api/clients/edit@edit.edit/changeStage")
+            .set("Authorization", "JWT " + jwt)
+            .set("Content-Type", "application/json")
+            .send(changeClientStage)
+            .then((res) => {
+                expect(res.statusCode).toBe(200);
+                expect(res.type).toBe("application/json");
+                assert(res.body.message.includes("Change stage successful!"));
+            });
+    });
+
+    test("Test 8: Remove a client", async () => {
         return agent
             .get("/api/clients/edit@edit.edit/remove")
             .set("Authorization", "JWT " + jwt)
