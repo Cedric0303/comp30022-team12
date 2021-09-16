@@ -46,7 +46,11 @@ function AdminManageStages(props) {
     return (
         <div className="manageStages pageContainer">
             <Helmet>
-                <html style="background-color: #596e80;" />
+                <style type="text/css">{`
+                    html {
+                        background-color: #596e80;
+                    }
+                `}</style>
             </Helmet>
             <Navbar />
             <main className="manageStagesBox">

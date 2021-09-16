@@ -82,7 +82,11 @@ const Login = (props) => {
     return (
         <div>
             <Helmet>
-                <html style="background-color: #5e779d;" />
+                <style type="text/css">{`
+                    html {
+                        background-color: #5e779d;
+                    }
+                `}</style>
             </Helmet>
 
             <h1 className="title">bobafish CRM</h1>
