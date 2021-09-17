@@ -1,0 +1,66 @@
+.manageStagesBox {
+    margin: 1vh 0 0;
+    padding: 0;
+}
+
+#stagesListActionBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.7em 6vw;
+}
+
+#stageSearchBar {
+    background-color: #ffffff;
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    width: 30vw;
+    min-width: 120px;
+    padding: 0.4vh 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+#addStageButton {
+    border: none;
+    background: none;
+
+    font-family: inherit;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+#addStageButton:hover {
+    cursor: pointer;
+    color: #636363;
+}
+
+#stagesHeading {
+    font-size: 3em;
+    color: white;
+    margin-bottom: 6px;
+    margin-left: 6vw;
+
+}
+
+#stagesListHeading {
+    font-size: 1.4em;
+    font-weight: 500;
+    padding: 0.3em 6vw;
+    border-top: 1px solid #cecece;
+    border-bottom: 1px solid #cecece;
+    background-color: #f6f6f6;
+}
+
+.stagesBox {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    height: 80vh;
+}
+
+.stagesBox ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

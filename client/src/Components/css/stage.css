@@ -1,0 +1,30 @@
+.stage {
+    font-size: 1.4em;
+    font-weight: 500;
+    padding: 0.4em 6vw 0.4em 0;
+    border-bottom: 1px solid #cecece;
+
+    display: grid;
+    grid-template-columns: 6vw 5fr 1fr;
+    justify-items: start;
+    align-items: center;
+}
+
+.stagePos {
+    justify-self: center;
+    font-weight: 800;
+}
+
+.stageEdit {
+    justify-self: end;
+    border: none;
+    background: none;
+    font-size: 1.3em;
+    margin: 0;
+    padding: 0;
+}
+
+.stageEdit:hover {
+    cursor: pointer;
+    color: #636363;
+}

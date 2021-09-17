@@ -136,14 +136,14 @@ const editOrder = async (req, res) => {
 
 const removeOrder = async (req, res) => {
     const removeOrder = await Orders.findOne({
-        _id: mongoose.Types.ObjectId(req.body.oid),
+        _id: mongoose.Types.ObjectId(req.params.oid),
     });
     await RecycleBin.insertOne({
-        removeOrder,
+        removeOrder: removeOrder,
         createdAt: new Date(),
     });
     await Orders.deleteOne({
-        _id: mongoose.Types.ObjectId(req.body.oid),
+        _id: mongoose.Types.ObjectId(req.params.oid),
     });
     res.json({
         message: "Order removal successful!",

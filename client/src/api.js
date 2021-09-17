@@ -49,3 +49,35 @@ export function useUsers() {
         error,
     };
 }
+
+// Get the list of stages from the database
+function getStages() {
+    const endpoint = BASE_URL + "/api/stages";
+    return axios
+        .get(endpoint, { withCredentials: true })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useStages() {
+    const [loading, setLoading] = useState(true);
+    const [stagesData, setStages] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getStages()
+            .then((stagesData) => {
+                setStages(stagesData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, []);
+    return {
+        loading,
+        stagesData,
+        error,
+    };
+}

@@ -10,7 +10,11 @@ function Admin(props) {
     return (
         <div>
             <Helmet>
-                <html style="background-color: #596e80;" />
+                <style type="text/css">{`
+                    html {
+                        background-color: #596e80;
+                    }
+                `}</style>
             </Helmet>
             <Navbar />
             <main>
@@ -29,11 +33,11 @@ function Admin(props) {
                     <NavLink
                         activeClassName="active"
                         className="navButton"
-                        to="/admin/tags"
+                        to="/admin/stages"
                     >
                         <div className="squareButton hoverable">
                             <FontAwesomeIcon className="AdminIcon" icon="tag" />
-                            Manage Tags
+                            Manage Stages
                         </div>
                     </NavLink>
                     <NavLink

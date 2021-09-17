@@ -4,7 +4,7 @@ const db = require("./databaseController.js");
 
 const { ClientModel, NoteModel } = require("../models/clientModel.js");
 
-const Tags = db.collection("tags");
+const Stages = db.collection("stages");
 const Clients = db.collection("clients");
 const RecycleBin = db.collection("recycle-bin");
 
@@ -59,6 +59,7 @@ const getClient = async (req, res) => {
 
 const addClientNote = async (req, res) => {
     const newNote = new NoteModel({
+        _id: new mongoose.Types.ObjectId(),
         body: req.body.note,
     });
     await Clients.findOneAndUpdate(
@@ -83,6 +84,7 @@ const addClientNote = async (req, res) => {
             res.json({
                 message: "Add note successful!",
                 user: doc.value,
+                nid: newNote._id,
             });
         }
     );
@@ -120,9 +122,9 @@ const removeClientNote = async (req, res) => {
     );
 };
 
-const changeTag = async (req, res) => {
-    const changeTag = await Tags.findOne({
-        id: req.body.tagID,
+const changeClientStage = async (req, res) => {
+    const changeStage = await Stages.findOne({
+        id: req.body.stageID,
     });
     await Clients.findOneAndUpdate(
         {
@@ -130,7 +132,7 @@ const changeTag = async (req, res) => {
         },
         {
             $set: {
-                tag: changeTag.name,
+                stage: changeStage.name,
             },
         },
         {
@@ -146,7 +148,7 @@ const changeTag = async (req, res) => {
                 });
             }
             res.json({
-                message: "Change tag successful!",
+                message: "Change stage successful!",
                 user: doc.value,
             });
         }
@@ -154,7 +156,7 @@ const changeTag = async (req, res) => {
 };
 
 const createClient = async (req, res) => {
-    const defaultNewTag = await Tags.findOne({
+    const defaultNewStage = await Stages.findOne({
         id: "new",
     });
     const newClient = new ClientModel({
@@ -165,7 +167,7 @@ const createClient = async (req, res) => {
         lastName: req.body.lastName,
         photoURL: req.body.photoURL,
         userReference: req.body.userReference,
-        tag: defaultNewTag.name,
+        stage: defaultNewStage.name,
         notes: [],
     });
     const result = await Clients.insertOne(newClient);
@@ -186,7 +188,7 @@ const createClient = async (req, res) => {
 };
 
 const editClient = async (req, res) => {
-    const tag = await Tags.findOne({
+    const stage = await Stages.findOne({
         id: req.body.tagID,
     });
     await Clients.findOneAndUpdate(
@@ -202,7 +204,7 @@ const editClient = async (req, res) => {
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
                 userReference: req.body.userReference,
-                tag: tag,
+                stage: stage,
             },
         },
         {
@@ -246,7 +248,7 @@ module.exports = {
     getClient,
     addClientNote,
     removeClientNote,
-    changeTag,
+    changeClientStage,
     createClient,
     editClient,
     removeClient,

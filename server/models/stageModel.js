@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const TagSchema = new Schema({
+const StageSchema = new Schema({
     id: { type: String, required: true, unique: true },
     name: { type: String, required: true, unique: true },
+    position: { type: Number, required: true },
 });
 
-const TagModel = mongoose.model("tag", TagSchema);
+const StageModel = mongoose.model("tag", StageSchema);
 
-module.exports = TagModel;
+module.exports = StageModel;
