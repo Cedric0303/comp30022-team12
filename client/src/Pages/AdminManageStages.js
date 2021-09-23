@@ -5,32 +5,19 @@ import { useStages } from "../api.js";
 import Stage from "../Components/Stage.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from 'react-modal'
+import Modal from 'react-modal';
 
 function AdminManageStages(props) {
-    const modalStyle = {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-        },
-    };
+
+    //hold the name of a new stage
+    const [stageName, setStageName] = useState("");
 
     Modal.setAppElement(document.getElementById('root') || undefined)
 
-    let subtitle;
+    //handles state of modal's show
     const [modalIsOpen, setIsOpen] = useState(false);
-
-    function openModal() {
-        setIsOpen(true);
-    }
-
-    function closeModal() {
-        setIsOpen(false)
-    }
+    function openModal() {setIsOpen(true);}
+    function closeModal() {setIsOpen(false);}
 
     const { loading, stagesData, error } = useStages();
 
@@ -82,19 +69,27 @@ function AdminManageStages(props) {
                 <h2 id="stagesHeading">Manage Stages</h2>
                 {pageMain()}
             </main>
+
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                style={modalStyle}
+                //onRequestClose={closeModal}
+                //style={modalStyle}
+                className="addModal"
                 contentLabel="Add New Stage"
             >
-                <h2>Hello</h2>
-                <button onClick={closeModal}>close</button>
-                <div>this is a modal!</div>
+                <h2>Add a new stage</h2>
                 <form>
-                    <input />
-                    <button>test</button>
+                <label>Name: </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="new-stage"
+                        //value={stageName}
+                    />    
                 </form>
+
+                <button>Add stage</button>
+                <button onClick={closeModal}>Cancel</button>
             </Modal>
         </div>
     );
