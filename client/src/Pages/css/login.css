@@ -17,14 +17,17 @@
     min-width: 64px;
     border-radius: 5px;
 
+    display: flex;
     border: none;
     background: #6eb2ff;
     color: #ffffff;
     margin: 0 auto;
     margin-top: 0.5%;
-    padding: 0.5em 1em;
-    display: block;
+    padding: 0.3em 0.7em;
 
+    justify-content: center;
+    align-items: center;
+    
     font-family: inherit;
     font-size: 1.2em;
     font-weight: bold;
@@ -50,7 +53,7 @@
     font-weight: 600;
 }
 
-.form input {
+.form label input {
     font-family: inherit;
     font-size: 1.3rem;
     font-weight: 400;

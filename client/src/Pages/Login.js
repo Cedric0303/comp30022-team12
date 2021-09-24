@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -22,7 +22,7 @@ const Login = (props) => {
             [id]: value,
         }));
     };
-    const handleLogin = () => {
+    const handleLogin = (event) => {
         if (!user.username.length && !user.password.length) {
             setErrorMsg("Please enter a valid username and password.");
         } else if (!user.username.length) {
@@ -62,18 +62,19 @@ const Login = (props) => {
                     );
                 });
         }
+        event.preventDefault();
     };
 
-    useEffect(() => {
-        document.addEventListener("keydown", onEnterPress, false);
-    });
+    // useEffect(() => {
+    //     document.addEventListener("keydown", onEnterPress, false);
+    // });
 
     // 13 is the recognized number of the Enter key
-    const onEnterPress = (e) => {
-        if (e.keyCode === 13) {
-            handleLogin();
-        }
-    };
+    // const onEnterPress = (e) => {
+    //     if (e.keyCode === 13) {
+    //         handleLogin();
+    //     }
+    // };
 
     const redirectToHome = () => {
         props.history.push("/home");
@@ -94,8 +95,7 @@ const Login = (props) => {
             <img src={logo} alt="bobafish logo" className="logo"></img>
 
             <form className="form" onSubmit={handleLogin}>
-                <div id="usernameInput">
-                    <label>Username: </label>
+                <label id="usernameInput">Username:&nbsp;
                     <input
                         type="text"
                         className="form-control"
@@ -104,10 +104,8 @@ const Login = (props) => {
                         value={user.username}
                         onChange={handleChange}
                     />
-                </div>
-
-                <div id="passwordInput">
-                    <label>Password: </label>
+                </label>
+                <label id="passwordInput">Password:&nbsp;
                     <input
                         type="password"
                         className="form-control"
@@ -116,12 +114,10 @@ const Login = (props) => {
                         value={user.password}
                         onChange={handleChange}
                     />
-                </div>
+                </label>
+                <p className="errorMsg">{errorMsg ? errorMsg : ""}</p>
+                <input type="submit" value="Login" className="loginButton" />
             </form>
-            <p className="errorMsg">{errorMsg ? errorMsg : ""}</p>
-            <button className="loginButton" onClick={handleLogin}>
-                Login
-            </button>
         </div>
     );
 };
