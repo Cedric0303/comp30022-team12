@@ -9,12 +9,7 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getStages = async (req, res) => {
     const stages = await Stages.find(
-        {},
-        {
-            projection: {
-                _id: false,
-            },
-        }
+        {}
     ).toArray();
     res.json({
         message: "Get stages successful!",
