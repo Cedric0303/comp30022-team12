@@ -111,6 +111,24 @@ function AdminManageStages(props) {
         // if different, highlight the changed positions
     }
 
+    const [searchQuery, setSearchQuery] = useState('');
+
+    // accepts array of stage objects only
+    function filterStages(stages, query) {
+        if (!query) {
+            return stages;
+        }
+
+        return stages.filter((stage) => {
+            const stageName = stage.name.toLowerCase();
+            if (stageName.includes(query) || stage.position.toString().includes(query)) {
+                return true;
+            }
+        });
+    }
+
+    const filteredStages = filterStages(stagesData.stages, searchQuery);
+
     const pageMain = () => {
         if (loading) {
             return (
@@ -129,10 +147,10 @@ function AdminManageStages(props) {
                 <div className="stagesBox">
                     <ul id="stagesList">
                         <li id="stagesListActionBar">
-                            <input
+                            <input 
                                 id="stageSearchBar"
                                 value={searchQuery}
-                                onInput={(e) => setSearchQuery(e.target.value)}
+                                onInput={e => setSearchQuery(e.target.value)}
                                 placeholder="Search stages"
                             />
                             <button id="addStageButton" onClick={openModal}>
