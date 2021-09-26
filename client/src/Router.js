@@ -14,6 +14,8 @@ import AdminManageStages from "./Pages/AdminManageStages.js";
 import Home from "./Pages/Home.js";
 import Calendar from "./Pages/Calendar.js";
 import Clients from "./Pages/Clients.js";
+import AddClient from "./Pages/AddClient.js";
+import EditClient from "./Pages/EditClient.js";
 
 class Router extends React.Component {
     render() {
@@ -60,6 +62,16 @@ class Router extends React.Component {
                         path="/clients"
                         exact
                         component={Clients}
+                    ></ProtectedRoute>
+                    <ProtectedRoute
+                        path="/clients/create"
+                        exact
+                        component={AddClient}
+                    ></ProtectedRoute>
+                    <ProtectedRoute
+                        path="/clients/:clientID/edit"
+                        exact
+                        component={EditClient}
                     ></ProtectedRoute>
                 </Switch>
             </BrowserRouter>

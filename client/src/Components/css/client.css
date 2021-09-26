@@ -1,0 +1,8 @@
+.clientEdit {
+    float: right;
+    color: black;
+}
+
+.clientEdit:hover {
+    color: grey;
+}

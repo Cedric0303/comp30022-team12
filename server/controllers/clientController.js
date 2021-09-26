@@ -12,11 +12,7 @@ const getClients = async (req, res) => {
     if (!req.body.userReference) {
         const clients = await Clients.find(
             {},
-            {
-                projection: {
-                    _id: false,
-                },
-            }
+            {}
         ).toArray();
         res.json({
             message: "Get all clients successful!",
@@ -27,11 +23,7 @@ const getClients = async (req, res) => {
             {
                 userReference: req.body.userReference,
             },
-            {
-                projection: {
-                    _id: false,
-                },
-            }
+            {}
         ).toArray();
         res.json({
             message: "Get clients successful!",

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Auth from "./Pages/Auth";
 
 const BASE_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -78,6 +79,39 @@ export function useStages() {
     return {
         loading,
         stagesData,
+        error,
+    };
+}
+
+// Get the list of clients from the database
+function getClients() {
+    const endpoint = BASE_URL + "/api/clients";
+    return axios
+        .post(endpoint, { userReference: Auth.getUsername(), withCredentials: true })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useClients() {
+    const [loading, setLoading] = useState(true);
+    const [clientsData, setClients] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getClients()
+            .then((clientsData) => {
+                setClients(clientsData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, []);
+    console.log(clientsData)
+    return {
+        loading,
+        clientsData,
         error,
     };
 }
