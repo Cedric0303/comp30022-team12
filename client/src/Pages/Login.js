@@ -40,6 +40,7 @@ const Login = (props) => {
         }));
     };
     const handleLogin = (event) => {
+        setErrorMsg("Loading...");
         if (!user.username.length && !user.password.length) {
             setErrorMsg("Please enter a valid username and password.");
         } else if (!user.username.length) {
@@ -73,10 +74,18 @@ const Login = (props) => {
                         redirectToHome();
                     }
                 })
-                .catch(() => {
-                    setErrorMsg(
-                        "The username or password you entered is incorrect. Please try again."
-                    );
+                .catch((e) => {
+                    console.log(e.toJSON());
+                    let errorMessage = e.toJSON().message;
+                    if (errorMessage.includes(401)) {
+                        setErrorMsg(
+                            "The username or password you entered is incorrect. Please try again."
+                        );
+                    } else if (errorMessage.includes("Network Error")) {
+                        setErrorMsg(
+                            "Backend API server is offline. Please try again at a later time."
+                        );
+                    }
                 });
         }
         event.preventDefault();
