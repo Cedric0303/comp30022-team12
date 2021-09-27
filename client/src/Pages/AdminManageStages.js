@@ -6,6 +6,7 @@ import Stage from "../Components/Stage.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from 'react-modal'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 function AdminManageStages(props) {
     const modalStyle = {
@@ -82,9 +83,17 @@ function AdminManageStages(props) {
                             </button>
                         </li>
                         <li id="stagesListHeading">Stage</li>
-                        {filteredStages.map((stage) => (
-                            <Stage key={stage._id} {...stage} />
-                        ))}
+                        <DragDropContext>
+                            <Droppable droppableId="stagesDroppable">
+                                {(provided) => (
+                                    <div id="stages" {...provided.droppableProps} ref={provided.innerRef}>
+                                        {filteredStages.map((stage) => (
+                                            <Stage key={stage._id} {...stage} />
+                                        ))}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
                     </ul>
                 </div>
             );
