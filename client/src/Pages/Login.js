@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -8,6 +8,23 @@ import "./css/login.css";
 import logo from "./css/bobafish-logo.svg";
 
 const Login = (props) => {
+    useEffect(
+        () =>
+            axios
+                .get(process.env.REACT_APP_BACKEND_API_URL + "/api")
+                .then((response) => {
+                    if (response.status === 200) {
+                        console.log("Backend API server online.");
+                    }
+                })
+                .catch(() => {
+                    setErrorMsg(
+                        "Backend API server is offline. Please try again at a later time."
+                    );
+                }),
+        []
+    );
+
     const [user, setState] = useState({
         username: "",
         password: "",
@@ -95,7 +112,8 @@ const Login = (props) => {
             <img src={logo} alt="bobafish logo" className="logo"></img>
 
             <form className="form" onSubmit={handleLogin}>
-                <label id="usernameInput">Username:&nbsp;
+                <label id="usernameInput">
+                    Username:&nbsp;
                     <input
                         type="text"
                         className="form-control"
@@ -105,7 +123,8 @@ const Login = (props) => {
                         onChange={handleChange}
                     />
                 </label>
-                <label id="passwordInput">Password:&nbsp;
+                <label id="passwordInput">
+                    Password:&nbsp;
                     <input
                         type="password"
                         className="form-control"

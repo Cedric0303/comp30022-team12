@@ -4,11 +4,8 @@
     "description": "COMP30022 Team 12 IT Project",
     "main": "index.js",
     "scripts": {
-        "dev": "concurrently \"npm run server\" \"npm run client\"",
         "server": "nodemon server/index.js",
-        "client": "npm start --prefix client",
         "start": "node server/index.js",
-        "build": "cd client && npm install && npm run build",
         "test": "jest --testEnvironment=node --verbose --maxWorkers=1 --forceExit",
         "test-server": "jest --testEnvironment=node --verbose --maxWorkers=1 --forceExit -- /server/__test__/"
     },
