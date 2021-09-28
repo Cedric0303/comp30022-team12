@@ -47,7 +47,11 @@ function AdminManageUsers(props) {
     return (
         <div className="manageUsers">
             <Helmet>
-                <html style="background-color: #596e80;" />
+                <style type="text/css">{`
+                    html {
+                        background-color: #596e80;
+                    }
+                `}</style>
             </Helmet>
             <Navbar />
             <main className="manageUsersBox">

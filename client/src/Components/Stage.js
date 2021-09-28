@@ -5,12 +5,21 @@ import { Draggable } from "react-beautiful-dnd";
 
 // Format each tag
 export default function Stage(stage) {
-    const { _id, id, position, name } = stage;
+    const { _id, id, position, name, disableDragging } = stage;
+    let dragIconStyle = "";
+    if (disableDragging === true) {
+        dragIconStyle = "draggableIcon hideDragIcon"
+    } else {
+        dragIconStyle = "draggableIcon"
+    }
 
     return (
-        <Draggable draggableId={_id} index={position}>
+        <Draggable isDragDisabled={disableDragging} draggableId={_id} index={position}>
             {(provided) => (
                 <li className="stage" id={id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                    <div className={dragIconStyle}>
+                        <FontAwesomeIcon icon="bars" />
+                    </div>
                     <div className="stagePos">
                         {position}
                     </div>

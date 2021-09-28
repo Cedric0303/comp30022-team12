@@ -30,28 +30,37 @@ function AdminManageStages(props) {
     }
 
     function closeModal() {
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
     const { loading, stagesData, error } = useStages();
 
     const [searchQuery, setSearchQuery] = useState('');
 
+    let disableDragging = false;
+
     // accepts array of stage objects only
+    // returns array of filtered stage objects
     function filterStages(stages, query) {
         if (!query) {
+            disableDragging = false;
             return stages;
+        } else {
+            disableDragging = true;
+            return stages.filter((stage) => {
+                const stageName = stage.name.toLowerCase();
+                if (stageName.includes(query) || stage.position.toString().includes(query)) {
+                    return true;
+                }
+            });
         }
-
-        return stages.filter((stage) => {
-            const stageName = stage.name.toLowerCase();
-            if (stageName.includes(query) || stage.position.toString().includes(query)) {
-                return true;
-            }
-        });
     }
-
+    
     const filteredStages = filterStages(stagesData.stages, searchQuery);
+
+    function handleOnDragEnd(result) {
+        console.log(result);
+    }
 
     const pageMain = () => {
         if (loading) {
@@ -83,13 +92,14 @@ function AdminManageStages(props) {
                             </button>
                         </li>
                         <li id="stagesListHeading">Stage</li>
-                        <DragDropContext>
+                        <DragDropContext onDragEnd={handleOnDragEnd}>
                             <Droppable droppableId="stagesDroppable">
                                 {(provided) => (
                                     <div id="stages" {...provided.droppableProps} ref={provided.innerRef}>
                                         {filteredStages.map((stage) => (
-                                            <Stage key={stage._id} {...stage} />
+                                            <Stage key={stage._id} {...stage} disableDragging={disableDragging} />
                                         ))}
+                                        {provided.placeholder}
                                     </div>
                                 )}
                             </Droppable>
