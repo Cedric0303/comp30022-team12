@@ -56,7 +56,7 @@ function AdminAddUser(props) {
         <div>
             <Navbar />
             <h2 className="mainHeading">Admin Add User</h2>
-            <form method="post" onSubmit={onSubmit}>
+            <form method="post" onSubmit={onSubmit} className="add-user-form">
                 <div className="field">
                     <label className="form-label">First Name</label>
                     <input 

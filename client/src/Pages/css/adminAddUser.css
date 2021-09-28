@@ -19,7 +19,7 @@
     padding: 0;
 }
 
-form {
+.add-user-form {
     padding-top: 50px;
     margin: 0 6vw;
     display: grid;
@@ -48,7 +48,6 @@ input {
 #password-field {
     display: flex;
 }
-
 
 
 .form-button {
