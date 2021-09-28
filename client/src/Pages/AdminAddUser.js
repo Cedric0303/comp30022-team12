@@ -66,7 +66,6 @@ function AdminAddUser(props) {
                                     className="add-user-input"
                                     required
                                     type="text" 
-                                    //name="firstName" 
                                     placeholder="First Name" 
                                     value={firstName}
                                     onChange={e => setFirstName(e.target.value)}
@@ -78,7 +77,6 @@ function AdminAddUser(props) {
                                     className="add-user-input"
                                     required 
                                     type="text" 
-                                    //name="lastName" 
                                     placeholder="Last Name" 
                                     value={lastName}
                                     onChange={e => setLastName(e.target.value)}
@@ -92,7 +90,6 @@ function AdminAddUser(props) {
                                     className="add-user-input"
                                     required
                                     type="text" 
-                                    //name="username" 
                                     placeholder="Username" 
                                     value={username}
                                     onChange={e => setUsername(e.target.value)}
@@ -104,7 +101,6 @@ function AdminAddUser(props) {
                                     className="add-user-input"
                                     required
                                     type={isRevealPwd ? "text" : "password"} 
-                                    //name="password" 
                                     placeholder="Password" 
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
@@ -113,6 +109,7 @@ function AdminAddUser(props) {
                                     style={{height: "40%", width:"auto", paddingLeft:"10px"}}
                                     title={isRevealPwd ? "Hide Password" : "Show Password"}
                                     src={isRevealPwd ? hidePwdImg : showPwdImg}
+                                    alt={isRevealPwd ? "Hide Password Icon" : "Show Password Icon"}
                                     onClick={() => setIsRevealPwd(!isRevealPwd)}
                                 />
                             </div>
@@ -123,9 +120,7 @@ function AdminAddUser(props) {
                     <a className="cancel-option" href="/admin/users">
                         Cancel
                     </a>
-                </div>
-                
-
+                </div>           
             </div>
             
             <button className="add-user-button" id="create-user" onClick={onSubmit}>
