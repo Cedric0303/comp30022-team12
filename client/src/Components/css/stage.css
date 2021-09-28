@@ -23,6 +23,11 @@
     opacity: 0;
 }
 
+.stagePos {
+    justify-self: center;
+    font-weight: 800;
+}
+
 .stageEdit {
     justify-self: end;
     border: none;

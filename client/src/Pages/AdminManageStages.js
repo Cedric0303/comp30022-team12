@@ -113,21 +113,11 @@ function AdminManageStages(props) {
 
     const [searchQuery, setSearchQuery] = useState('');
 
-    // accepts array of stage objects only
-    function filterStages(stages, query) {
-        if (!query) {
-            return stages;
-        }
+    let disableDragging = false;
 
-        return stages.filter((stage) => {
-            const stageName = stage.name.toLowerCase();
-            if (stageName.includes(query) || stage.position.toString().includes(query)) {
-                return true;
-            }
-        });
+    function handleOnDragEnd(result) {
+        console.log(result);
     }
-
-    const filteredStages = filterStages(stagesData.stages, searchQuery);
 
     const pageMain = () => {
         if (loading) {
