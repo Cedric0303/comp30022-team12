@@ -38,7 +38,7 @@ passport.use(
                     return done(null, newUser);
                 } else {
                     return done(null, exist, {
-                        message: "User already exist!",
+                        message: "User already exists!",
                     });
                 }
             } catch (error) {

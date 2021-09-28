@@ -43,7 +43,7 @@ const createUser = async (req, res) => {
     const exist = Object.keys(req.authInfo).length > 0;
     if (exist) {
         res.json({
-            message: "User already exist!",
+            message: "User already exists!",
         });
     } else {
         const user = await Users.findOne({
