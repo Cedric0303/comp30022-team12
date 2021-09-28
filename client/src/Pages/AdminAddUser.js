@@ -58,9 +58,9 @@ function AdminAddUser(props) {
             <h2 className="mainHeading">Admin Add User</h2>
             <form method="post" onSubmit={onSubmit} className="add-user-form">
                 <div className="field">
-                    <label className="form-label">First Name</label>
+                    <label className="add-user-label">First Name</label>
                     <input 
-                        className="form-input"
+                        className="add-user-input"
                         required
                         type="text" 
                         //name="firstName" 
@@ -70,9 +70,9 @@ function AdminAddUser(props) {
                     />
                 </div>
                 <div className="field">
-                    <label className="form-label">Last Name</label>
+                    <label className="add-user-label">Last Name</label>
                     <input 
-                        className="form-input"
+                        className="add-user-input"
                         required 
                         type="text" 
                         //name="lastName" 
@@ -82,9 +82,9 @@ function AdminAddUser(props) {
                     />
                 </div>
                 <div className="field">
-                    <label className="form-label">Username</label>
+                    <label className="add-user-label">Username</label>
                     <input 
-                        className="form-input"
+                        className="add-user-input"
                         required
                         type="text" 
                         //name="username" 
@@ -94,9 +94,9 @@ function AdminAddUser(props) {
                     />
                 </div>
                 <div className="field" id="password-field">
-                    <label className="form-label">Password</label>
+                    <label className="add-user-label">Password</label>
                     <input 
-                        className="form-input"
+                        className="add-user-input"
                         required
                         type={isRevealPwd ? "text" : "password"} 
                         //name="password" 
