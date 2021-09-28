@@ -1,8 +1,21 @@
-.clientEdit {
-    float: right;
+.actionButtons {
     color: black;
+    margin-right: 10px;
 }
 
-.clientEdit:hover {
+.actionButtons span {
+    font-size: 12px;
+    padding: 6px;
+}
+
+.meetingAction {
+    padding: 8px 12px;
+}
+
+.orderAction {
+    padding: 8px 14px;
+}
+
+.meetingAction:hover, .orderAction:hover {
     color: grey;
 }

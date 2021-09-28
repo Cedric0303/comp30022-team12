@@ -181,11 +181,11 @@ const createClient = async (req, res) => {
 
 const editClient = async (req, res) => {
     const stage = await Stages.findOne({
-        id: req.body.tagID,
+        id: req.body.stage,
     });
     await Clients.findOneAndUpdate(
         {
-            email: req.params.cid,
+            _id: mongoose.Types.ObjectId(req.params.cid),
         },
         {
             $set: {
@@ -196,7 +196,7 @@ const editClient = async (req, res) => {
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
                 userReference: req.body.userReference,
-                stage: stage,
+                stage: stage.name,
             },
         },
         {

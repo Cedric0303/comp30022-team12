@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar.js";
 import "./css/clients.css";
 import { useClients } from "../api.js";
@@ -23,23 +24,24 @@ function Clients(props) {
                     <ul>Something went wrong: {error.message}</ul>
                 </div>
             );
-        } else {
+        } else if (clientsData.clients !== undefined) {
             return (
                 <div className="clientsBox">
-                    <ul id="clientsList">
-                        <li>
-                            <a id="addClient" href="clients/create">
-                                <span>Add New Client </span>
-                                <FontAwesomeIcon icon="user-plus" />
-                            </a>
-                        </li>
-                        <li id="clientsListHeading">Name</li>
+                    <table id="clientsList">
+                        <thead id="clientsListHeading">
+                            <tr>
+                                <th>Name</th>
+                                <th id="lastInteracted">Last Interacted</th>
+                                <th id="clientStage">Stage</th>
+                                <th id="clientActions">Quick Actions</th>
+                            </tr>
+                        </thead>   
                         {clientsData.clients.map((client) => (
-                            <div key={client._id} className="specificclient">
+                            <tbody key={client._id} className="specificClient">
                                 <Client {...client} />
-                            </div>
+                            </tbody>
                         ))}
-                    </ul>
+                    </table>
                 </div>
             );
         }
@@ -49,7 +51,13 @@ function Clients(props) {
         <div className="clients">
             <Navbar />
             <main className="clientsBox">
-                <h2 id="clientsHeading">Clients</h2>
+                <h2 id="clientsHeading">
+                    Clients
+                    <NavLink id="addClient" to="clients/create">
+                        <span>New Client </span>
+                        <FontAwesomeIcon icon="user-plus" />
+                    </NavLink>
+                </h2>
                 {pageMain()}
             </main>
             

@@ -15,7 +15,9 @@ import Home from "./Pages/Home.js";
 import Calendar from "./Pages/Calendar.js";
 import Clients from "./Pages/Clients.js";
 import AddClient from "./Pages/AddClient.js";
+import SpecificClient from "./Pages/SpecificClient.js";
 import EditClient from "./Pages/EditClient.js";
+import OrderHistory from "./Pages/OrderHistory.js";
 
 class Router extends React.Component {
     render() {
@@ -69,9 +71,19 @@ class Router extends React.Component {
                         component={AddClient}
                     ></ProtectedRoute>
                     <ProtectedRoute
+                        path="/clients/:clientID"
+                        exact
+                        component={SpecificClient}
+                    ></ProtectedRoute>
+                    <ProtectedRoute
                         path="/clients/:clientID/edit"
                         exact
                         component={EditClient}
+                    ></ProtectedRoute>
+                    <ProtectedRoute
+                        path="/clients/:clientID/orders"
+                        exact
+                        component={OrderHistory}
                     ></ProtectedRoute>
                 </Switch>
             </BrowserRouter>

@@ -43,7 +43,7 @@ function Admin(props) {
                     <NavLink
                         activeClassName="active"
                         className="navButton"
-                        to="/admin/users"
+                        to="/clients"
                     >
                         <div className="squareButton hoverable">
                             <FontAwesomeIcon

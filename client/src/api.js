@@ -108,7 +108,7 @@ export function useClients() {
                 setLoading(false);
             });
     }, []);
-    console.log(clientsData)
+    console.log(clientsData.clients)
     return {
         loading,
         clientsData,

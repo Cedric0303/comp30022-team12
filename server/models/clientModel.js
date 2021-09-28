@@ -16,7 +16,7 @@ const clientSchema = new Schema({
     userReference: { type: String, required: true },
     stage: { type: String },
     notes: [],
-});
+},{timestamps: true});
 
 const ClientModel = mongoose.model("client", clientSchema);
 const NoteModel = mongoose.model("note", noteSchema);
