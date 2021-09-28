@@ -48,7 +48,7 @@ function AdminAddUser(props) {
             }
         } 
         else {
-            alert("Please ensure all fields are not empty.")
+            alert("All fields must have a value!")
         }
     }
 
