@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { postUser } from "../api.js";
+import "./css/adminAddUser.css";
 
 
 function validate_password(p) {
@@ -50,11 +51,12 @@ function AdminAddUser(props) {
     return (
         <div>
             <Navbar />
-            <h2>Admin Add User</h2>
-            <form method="post" onSubmit={onSubmit} className="add-user-form">
+            <h2 className="mainHeading">Admin Add User</h2>
+            <form method="post" onSubmit={onSubmit}>
                 <div className="field">
-                    <label>First Name</label>
+                    <label className="form-label">First Name</label>
                     <input 
+                        className="form-input"
                         required
                         type="text" 
                         //name="firstName" 
@@ -64,8 +66,9 @@ function AdminAddUser(props) {
                     />
                 </div>
                 <div className="field">
-                    <label>Last Name</label>
-                    <input
+                    <label className="form-label">Last Name</label>
+                    <input 
+                        className="form-input"
                         required 
                         type="text" 
                         //name="lastName" 
@@ -75,8 +78,9 @@ function AdminAddUser(props) {
                     />
                 </div>
                 <div className="field">
-                    <label>Username</label>
+                    <label className="form-label">Username</label>
                     <input 
+                        className="form-input"
                         required
                         type="text" 
                         //name="username" 
@@ -86,8 +90,9 @@ function AdminAddUser(props) {
                     />
                 </div>
                 <div className="field">
-                    <label>Password</label>
+                    <label className="form-label">Password</label>
                     <input 
+                        className="form-input"
                         required
                         type="password" 
                         //name="password" 
@@ -96,10 +101,11 @@ function AdminAddUser(props) {
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
-                <button onClick={onSubmit}>
-                    Submit
-                </button>
+                
             </form>
+            <button className="form-button" onClick={onSubmit}>
+                Create User
+            </button>
         </div>
     );
 }
