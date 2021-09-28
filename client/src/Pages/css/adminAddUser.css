@@ -25,6 +25,11 @@ form {
     display: grid;
 }
 
+.field {
+    display: flex;
+    align-items: center;
+}
+
 label {
     padding: 12px 12px 12px 0;
     float: left;
@@ -39,6 +44,12 @@ input {
     border-radius: 10px;
     width: 400px;
 }
+
+#password-field {
+    display: flex;
+}
+
+
 
 .form-button {
     margin: 6vw 6vw;

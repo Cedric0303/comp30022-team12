@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { postUser } from "../api.js";
 import "./css/adminAddUser.css";
+import showPwdImg from "./css/show-password.png";
+import hidePwdImg from "./css/hide-password.png";
 
 
 function validate_password(p) {
@@ -19,6 +21,8 @@ function AdminAddUser(props) {
     const [isAdmin, setIsAdmin] = useState(false)
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
+
+    const [isRevealPwd, setIsRevealPwd] = useState(false);
 
     function notEmpty() {
         if (firstName === "" || lastName === "" || username === "" || password === "") {
@@ -89,18 +93,25 @@ function AdminAddUser(props) {
                         onChange={e => setUsername(e.target.value)}
                     />
                 </div>
-                <div className="field">
+                <div className="field" id="password-field">
                     <label className="form-label">Password</label>
                     <input 
                         className="form-input"
                         required
-                        type="password" 
+                        type={isRevealPwd ? "text" : "password"} 
                         //name="password" 
                         placeholder="Password" 
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
+                    <img 
+                        style={{height: "40%", width:"auto", paddingLeft:"10px"}}
+                        title={isRevealPwd ? "Hide Password" : "Show Password"}
+                        src={isRevealPwd ? hidePwdImg : showPwdImg}
+                        onClick={() => setIsRevealPwd(!isRevealPwd)}
+                    />
                 </div>
+                
                 
             </form>
             <button className="form-button" onClick={onSubmit}>
