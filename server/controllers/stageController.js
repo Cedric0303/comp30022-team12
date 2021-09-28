@@ -9,7 +9,12 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getStages = async (req, res) => {
     const stages = await Stages.find(
-        {}
+        {},
+        {
+            projection: {
+                _id: false,
+            },
+        }
     ).toArray();
     res.json({
         message: "Get stages successful!",
@@ -91,6 +96,31 @@ const editStage = async (req, res) => {
     );
 };
 
+const editStages = async (req, res) => {
+    const changeStages = req.body.stageArray;
+    for (var i in changeStages) {
+        var oldSID = changeStages[i].oldSID;
+        var newStageName = changeStages[i].newStageName;
+        var newSID = newStageName.replace(/\s+/g, "_");
+        var newPosition = changeStages[i].newPosition;
+        await Stages.findOneAndUpdate(
+            {
+                id: oldSID,
+            },
+            {
+                $set: {
+                    id: newSID,
+                    name: newStageName,
+                    position: newPosition,
+                },
+            }
+        );
+    }
+    res.json({
+        message: "Edit stages successful!",
+    });
+};
+
 const removeStage = async (req, res) => {
     const removeStage = await Stages.findOne({
         id: req.params.sid,
@@ -112,5 +142,6 @@ module.exports = {
     getStage,
     createStage,
     editStage,
+    editStages,
     removeStage,
 };
