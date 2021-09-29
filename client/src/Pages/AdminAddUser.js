@@ -46,6 +46,9 @@ function AdminAddUser(props) {
             if (true) { //validate password
                 postUser(registerBody);
             }
+            else {
+                alert("Passwords must only be comprised of letters and numbers and be between 8-20 characters.")
+            }
         } 
         else {
             alert("All fields must have a value!")
