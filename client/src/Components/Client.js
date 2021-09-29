@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Client(client) {
     const { _id, firstName, lastName, stage } = client;
 
-    console.log(client.stage);
-
     return (
         <tr className="clientWrapper">
             <td>

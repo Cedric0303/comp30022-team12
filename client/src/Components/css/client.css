@@ -17,6 +17,7 @@
 }
 
 .meetingAction:hover,
-.orderAction:hover {
+.orderAction:hover,
+.clientFullName:hover {
     color: grey;
 }

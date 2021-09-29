@@ -1,0 +1,104 @@
+.add-user-heading{
+    font-size: 5.3vh;
+    font-weight: 700;
+    color: #223e55;
+    margin: 0 6vw;
+    padding: 0;
+}
+
+.add-user-container {
+    display: flex;
+    margin: 0 6vw;
+}
+
+/* right justify Cancel button*/
+#item-right {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 50%;
+    padding: 10px;
+}
+
+.cancel-option {
+    font-weight: 400;
+    font-size: x-large;
+    color: #E13D55;
+    text-decoration: underline;
+}
+
+.cancel-option:hover{
+    color: #b83548;
+}
+
+/* Form */
+
+.add-user-form {
+    font-size: 20px;
+    font-weight: 500;
+    padding-top: 50px;
+    display: grid;
+    width: 50%;
+}
+
+.field-group {
+    padding-bottom: 40px;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+}
+
+.add-user-label {
+    padding: 12px 12px 12px 0;
+    float: left;
+    width: 100px;
+    margin-top: 6px;
+
+}
+
+/* change colour for name-info labels */
+#name-info > .field > .add-user-label {
+    color: whitesmoke;
+}
+
+/* change colour for login-info labels */
+#login-info > .field > .add-user-label {
+    color: #4CC9F0;
+}
+
+.add-user-input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    width: 400px;
+    border-style: none;
+}
+
+
+#password-field {
+    display: flex;
+}
+
+/* Buttons */
+
+.add-user-button  {
+    margin: 6vw;
+    height: 45px;
+    width: 160px;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+}
+
+#create-user {
+    color: white;
+    font-size: x-large;
+    background-color: #52B788;
+}
+
+/* Button colour darkens on hover */
+#create-user:hover {
+    background-color: #48AD7E;
+}
+
