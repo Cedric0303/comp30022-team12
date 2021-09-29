@@ -6,17 +6,20 @@ const noteSchema = new Schema({
     body: { type: String, required: true },
 });
 
-const clientSchema = new Schema({
-    email: { type: String, required: true, unique: true },
-    address: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    photoURL: { type: String },
-    userReference: { type: String, required: true },
-    stage: { type: String },
-    notes: [],
-},{timestamps: true});
+const clientSchema = new Schema(
+    {
+        email: { type: String, required: true, unique: true },
+        address: { type: String, required: true },
+        phoneNumber: { type: String, required: true },
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        photoURL: { type: String },
+        userReference: { type: String, required: true },
+        stage: { type: String },
+        notes: [],
+    },
+    { timestamps: true }
+);
 
 const ClientModel = mongoose.model("client", clientSchema);
 const NoteModel = mongoose.model("note", noteSchema);

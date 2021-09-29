@@ -7,9 +7,8 @@ import Client from "../Components/Client.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Clients(props) {
-
     const { loading, clientsData, error } = useClients();
-    console.log(clientsData.clients)
+    console.log(clientsData.clients);
 
     const pageMain = () => {
         if (loading) {
@@ -24,7 +23,7 @@ function Clients(props) {
                     <ul>Something went wrong: {error.message}</ul>
                 </div>
             );
-        } else if (clientsData.clients !== undefined) {
+        } else if (clientsData.clients.length !== 0) {
             return (
                 <div className="clientsBox">
                     <table id="clientsList">
@@ -35,13 +34,19 @@ function Clients(props) {
                                 <th id="clientStage">Stage</th>
                                 <th id="clientActions">Quick Actions</th>
                             </tr>
-                        </thead>   
+                        </thead>
                         {clientsData.clients.map((client) => (
                             <tbody key={client._id} className="specificClient">
                                 <Client {...client} />
                             </tbody>
                         ))}
                     </table>
+                </div>
+            );
+        } else {
+            return (
+                <div className="clientsBox">
+                    <ul>Start adding clients!</ul>
                 </div>
             );
         }
@@ -60,7 +65,6 @@ function Clients(props) {
                 </h2>
                 {pageMain()}
             </main>
-            
         </div>
     );
 }

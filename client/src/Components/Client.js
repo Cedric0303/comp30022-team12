@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Client(client) {
     const { _id, firstName, lastName, stage } = client;
 
-    console.log(client.stage)
+    console.log(client.stage);
 
     return (
         <tr className="clientWrapper">
@@ -19,21 +19,25 @@ export default function Client(client) {
                 </NavLink>
             </td>
             <td>
-                <span className="lastInteracted">
-                    Date
-                </span>
+                <span className="lastInteracted">Date</span>
             </td>
             <td>
-                <span className="clientStage">
-                    {stage}
-                </span>
+                <span className="clientStage">{stage}</span>
             </td>
             <td className="actionButtons">
-                <NavLink className="meetingAction" activeClassName="activeAction" to="clients">
+                <NavLink
+                    className="meetingAction"
+                    activeClassName="activeAction"
+                    to="clients"
+                >
                     <FontAwesomeIcon icon="calendar-alt" />
                     <span>Meetings</span>
                 </NavLink>
-                <NavLink className="orderAction" activeClassName="activeAction" to={"/clients/" + _id + "/orders"}>
+                <NavLink
+                    className="orderAction"
+                    activeClassName="activeAction"
+                    to={"/clients/" + _id + "/orders"}
+                >
                     <FontAwesomeIcon icon="receipt" />
                     <span>Orders</span>
                 </NavLink>

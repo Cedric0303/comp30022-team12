@@ -10,10 +10,7 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getClients = async (req, res) => {
     if (!req.body.userReference) {
-        const clients = await Clients.find(
-            {},
-            {}
-        ).toArray();
+        const clients = await Clients.find({}, {}).toArray();
         res.json({
             message: "Get all clients successful!",
             clients: clients,

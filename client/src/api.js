@@ -87,7 +87,10 @@ export function useStages() {
 function getClients() {
     const endpoint = BASE_URL + "/api/clients";
     return axios
-        .post(endpoint, { userReference: Auth.getUsername(), withCredentials: true })
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            withCredentials: true,
+        })
         .then((res) => res.data);
 }
 
@@ -108,7 +111,7 @@ export function useClients() {
                 setLoading(false);
             });
     }, []);
-    console.log(clientsData.clients)
+    console.log(clientsData.clients);
     return {
         loading,
         clientsData,
