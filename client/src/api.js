@@ -81,3 +81,21 @@ export function useStages() {
         error,
     };
 }
+
+export function postUser(registerBody) {
+    const endpoint = BASE_URL + "/api/users/create";
+    return axios
+        .post(endpoint, registerBody, { withCredentials: true })
+        .then((res) => {
+            var message = res.data.message;
+            if(message === "User already exists!") {
+                alert(res.data.message);
+                return false;
+            }
+            else { // Created new user!
+                alert(res.data.message);
+                window.location.href = "/admin/users/create";
+            }
+        });
+}
+
