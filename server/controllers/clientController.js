@@ -204,7 +204,7 @@ const editClient = async (req, res) => {
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
                 userReference: req.body.userReference,
-                stage: stage.name,
+                stage: stage,
             },
         },
         {
