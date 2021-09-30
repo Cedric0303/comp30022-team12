@@ -3,7 +3,94 @@
     height: auto;
     display: block;
     margin: 0 auto;
-    margin-top:10vh;
+    margin-top: 10vh;
+    animation: show 2.5s ease forwards;
+}
+
+#logoText {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 140%);
+    animation: fill 1s ease forwards 2.5s;
+}
+
+#logoText path:nth-child(1) {
+    stroke-dasharray: 134px;
+    stroke-dashoffset: 134px;
+    animation: line-anim 2s ease forwards;
+}
+#logoText path:nth-child(2) {
+    stroke-dasharray: 78px;
+    stroke-dashoffset: 78px;
+    animation: line-anim 2s ease forwards 0.1s;
+}
+#logoText path:nth-child(3) {
+    stroke-dasharray: 134px;
+    stroke-dashoffset: 134px;
+    animation: line-anim 2s ease forwards 0.2s;
+}
+#logoText path:nth-child(4) {
+    stroke-dasharray: 105px;
+    stroke-dashoffset: 105px;
+    animation: line-anim 2s ease forwards 0.3s;
+}
+#logoText path:nth-child(5) {
+    stroke-dasharray: 110px;
+    stroke-dashoffset: 110px;
+    animation: line-anim 2s ease forwards 0.4s;
+}
+#logoText path:nth-child(6) {
+    stroke-dasharray: 60px;
+    stroke-dashoffset: 60px;
+    animation: line-anim 2s ease forwards 0.5s;
+}
+#logoText path:nth-child(7) {
+    stroke-dasharray: 120px;
+    stroke-dashoffset: 120px;
+    animation: line-anim 2s ease forwards 0.6s;
+}
+#logoText path:nth-child(8) {
+    stroke-dasharray: 155px;
+    stroke-dashoffset: 155px;
+    animation: line-anim 2s ease forwards 0.7s;
+}
+#logoText path:nth-child(9) {
+    stroke-dasharray: 155px;
+    stroke-dashoffset: 155px;
+    animation: line-anim 2s ease forwards 0.8s;
+}
+#logoText path:nth-child(10) {
+    stroke-dasharray: 140px;
+    stroke-dashoffset: 140px;
+    animation: line-anim 2s ease forwards 0.9s;
+}
+#logoText path:nth-child(11) {
+    stroke-dasharray: 240px;
+    stroke-dashoffset: 240px;
+    animation: line-anim 2s ease forwards 1s;
+}
+
+@keyframes line-anim {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill {
+    from {
+        fill: transparent;
+    }
+    to {
+        fill: white;
+    }
+}
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
 }
 
 .title {
@@ -27,7 +114,7 @@
 
     justify-content: center;
     align-items: center;
-    
+
     font-family: inherit;
     font-size: 1.2em;
     font-weight: bold;
