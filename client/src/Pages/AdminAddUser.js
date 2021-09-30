@@ -122,9 +122,9 @@ function AdminAddUser(props) {
                     </form>
                 </div>
                 <div className="add-user-container-item" id="item-right">
-                    <a className="cancel-option" href="/admin/users">
+                    <NavLink to="/admin/users" className="cancel-option">
                         Cancel
-                    </a>
+                    </NavLink>
                 </div>           
             </div>
             
