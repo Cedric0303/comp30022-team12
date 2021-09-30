@@ -10,7 +10,14 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getClients = async (req, res) => {
     if (!req.body.userReference) {
-        const clients = await Clients.find({}, {}).toArray();
+        const clients = await Clients.find(
+            {},
+            {
+                projection: {
+                    _id: false,
+                },
+            }
+        ).toArray();
         res.json({
             message: "Get all clients successful!",
             clients: clients,
@@ -20,7 +27,11 @@ const getClients = async (req, res) => {
             {
                 userReference: req.body.userReference,
             },
-            {}
+            {
+                projection: {
+                    _id: false,
+                },
+            }
         ).toArray();
         res.json({
             message: "Get clients successful!",
@@ -178,11 +189,11 @@ const createClient = async (req, res) => {
 
 const editClient = async (req, res) => {
     const stage = await Stages.findOne({
-        id: req.body.stage,
+        id: req.body.tagID,
     });
     await Clients.findOneAndUpdate(
         {
-            _id: mongoose.Types.ObjectId(req.params.cid),
+            email: req.params.cid,
         },
         {
             $set: {
