@@ -17,13 +17,20 @@ const getActivities = async (req, res) => {
             activities: activities,
         });
     } else {
-        const activities = await Activities.find({
-            userReference: req.body.userReference,
-        }).toArray();
-        res.json({
-            message: "Get activities successful!",
-            activities: activities,
-        });
+        try {
+            const activities = await Activities.find({
+                userReference: req.body.userReference,
+            }).toArray();
+            res.json({
+                message: "Get activities successful!",
+                activities: activities,
+            });
+        } catch {
+            res.json({
+                message: "No activities available!",
+                activities: [],
+            });
+        }
     }
 };
 

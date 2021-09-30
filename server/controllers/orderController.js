@@ -17,13 +17,20 @@ const getOrders = async (req, res) => {
             orders: orders,
         });
     } else {
-        const orders = await Orders.find({
-            userReference: req.body.userReference,
-        }).toArray();
-        res.json({
-            message: "Get orders successful!",
-            orders: orders,
-        });
+        try {
+            const orders = await Orders.find({
+                userReference: req.body.userReference,
+            }).toArray();
+            res.json({
+                message: "Get orders successful!",
+                orders: orders,
+            });
+        } catch {
+            res.json({
+                message: "No orders available!",
+                orders: [],
+            });
+        }
     }
 };
 

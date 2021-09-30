@@ -23,20 +23,27 @@ const getClients = async (req, res) => {
             clients: clients,
         });
     } else {
-        const clients = await Clients.find(
-            {
-                userReference: req.body.userReference,
-            },
-            {
-                projection: {
-                    _id: false,
+        try {
+            const clients = await Clients.find(
+                {
+                    userReference: req.body.userReference,
                 },
-            }
-        ).toArray();
-        res.json({
-            message: "Get clients successful!",
-            clients: clients,
-        });
+                {
+                    projection: {
+                        _id: false,
+                    },
+                }
+            ).toArray();
+            res.json({
+                message: "Get clients successful!",
+                clients: clients,
+            });
+        } catch {
+            res.json({
+                message: "No clients available!",
+                clients: [],
+            });
+        }
     }
 };
 

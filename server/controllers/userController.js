@@ -7,19 +7,26 @@ const Users = db.collection("users");
 const RecycleBin = db.collection("recycle-bin");
 
 const getUsers = async (req, res) => {
-    const users = await Users.find(
-        {},
-        {
-            projection: {
-                _id: true,
-                password: false,
-            },
-        }
-    ).toArray();
-    res.json({
-        message: "Get users successful!",
-        users: users,
-    });
+    try {
+        const users = await Users.find(
+            {},
+            {
+                projection: {
+                    _id: false,
+                    password: false,
+                },
+            }
+        ).toArray();
+        res.json({
+            message: "Get users successful!",
+            users: users,
+        });
+    } catch {
+        res.json({
+            message: "No users available!",
+            users: [],
+        });
+    }
 };
 
 const getUser = async (req, res) => {

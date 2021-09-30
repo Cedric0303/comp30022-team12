@@ -8,18 +8,25 @@ const Stages = db.collection("stages");
 const RecycleBin = db.collection("recycle-bin");
 
 const getStages = async (req, res) => {
-    const stages = await Stages.find(
-        {},
-        {
-            projection: {
-                _id: false,
-            },
-        }
-    ).toArray();
-    res.json({
-        message: "Get stages successful!",
-        stages: stages,
-    });
+    try {
+        const stages = await Stages.find(
+            {},
+            {
+                projection: {
+                    _id: false,
+                },
+            }
+        ).toArray();
+        res.json({
+            message: "Get stages successful!",
+            stages: stages,
+        });
+    } catch {
+        res.json({
+            message: "No stages available!",
+            stages: [],
+        });
+    }
 };
 
 const getStage = async (req, res) => {
