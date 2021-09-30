@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from 'react-router-dom'
 import Navbar from "../Components/Navbar/Navbar.js";
 import { postUser } from "../api.js";
 import "./css/adminAddUser.css";
@@ -117,10 +118,10 @@ function AdminAddUser(props) {
                         </div>
                     </form>
                 </div>
-                <div className="add-user-container-right" id="item-right">
-                    <a className="cancel-option" href="/admin/users">
+                <div className="add-user-container-item" id="item-right">
+                    <NavLink to="/admin/users" activeClassName="cancel-option">
                         Cancel
-                    </a>
+                    </NavLink>
                 </div>           
             </div>
             
