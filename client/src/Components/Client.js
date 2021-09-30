@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Format each client
 export default function Client(client) {
-    const { _id, firstName, lastName, stage } = client;
+    const { email, firstName, lastName, stage } = client;
 
     return (
         <tr className="clientWrapper">
             <td>
-                <NavLink to={"/clients/" + _id}>
+                <NavLink to={"/clients/" + email}>
                     <span className="clientFullName">
                         {firstName} {lastName}
                     </span>
@@ -34,7 +34,7 @@ export default function Client(client) {
                 <NavLink
                     className="orderAction"
                     activeClassName="activeAction"
-                    to={"/clients/" + _id + "/orders"}
+                    to={"/clients/" + email + "/orders"}
                 >
                     <FontAwesomeIcon icon="receipt" />
                     <span>Orders</span>
