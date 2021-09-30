@@ -7,19 +7,18 @@
 }
 
 .add-user-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin: 0 6vw;
 }
 
 /* right justify Cancel button*/
 #item-right {
-    display: flex;
-    flex-direction: row-reverse;
-    width: 50%;
     padding: 10px;
+    text-align: right;
 }
 
-.cancel-option {
+.cancel-option {  
     font-weight: 400;
     font-size: x-large;
     color: #E13D55;

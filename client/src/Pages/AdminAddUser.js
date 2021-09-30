@@ -121,7 +121,7 @@ function AdminAddUser(props) {
                         </div>
                     </form>
                 </div>
-                <div className="add-user-container-right" id="item-right">
+                <div className="add-user-container-item" id="item-right">
                     <a className="cancel-option" href="/admin/users">
                         Cancel
                     </a>
