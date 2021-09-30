@@ -26,7 +26,7 @@ export default function Client(client) {
                 <NavLink
                     className="meetingAction"
                     activeClassName="activeAction"
-                    to="clients"
+                    to="calendar"
                 >
                     <FontAwesomeIcon icon="calendar-alt" />
                     <span>Meetings</span>

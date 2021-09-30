@@ -12,7 +12,7 @@ import AdminManageUsers from "./Pages/AdminManageUsers.js";
 import AdminManageStages from "./Pages/AdminManageStages.js";
 // Common pages
 import Home from "./Pages/Home.js";
-import Calendar from "./Pages/Calendar.js";
+import CalendarPage from "./Pages/CalendarPage.js";
 import Clients from "./Pages/Clients.js";
 import AddClient from "./Pages/AddClient.js";
 import SpecificClient from "./Pages/SpecificClient.js";
@@ -58,7 +58,7 @@ class Router extends React.Component {
                     <ProtectedRoute
                         path="/calendar"
                         exact
-                        component={Calendar}
+                        component={CalendarPage}
                     ></ProtectedRoute>
                     <ProtectedRoute
                         path="/clients"

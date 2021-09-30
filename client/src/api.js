@@ -117,6 +117,7 @@ export function useClients() {
         error,
     };
 }
+
 export function postUser(registerBody) {
     const endpoint = BASE_URL + "/api/users/create";
     return axios
@@ -134,3 +135,37 @@ export function postUser(registerBody) {
         });
 }
 
+// Get the list of clients from the database
+function getActivities() {
+    const endpoint = BASE_URL + "/api/activities";
+    return axios
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useActivities() {
+    const [loading, setLoading] = useState(true);
+    const [activitiesData, setActivities] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getActivities()
+            .then((activitiesData) => {
+                setActivities(activitiesData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, []);
+    return {
+        loading,
+        activitiesData,
+        error,
+    };
+}
