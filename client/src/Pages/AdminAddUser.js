@@ -11,16 +11,15 @@ function validate_password(p) {
     var number = /[0-9]/;
     var minLength = 8;
     var maxLength = 20;
-    return letter.test(p) && number.test(p) && p >= minLength && p <= maxLength;
+    return (letter.test(p) || number.test(p)) && p.length >= minLength && p.length <= maxLength;
 }
 
 function AdminAddUser(props) {
 
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [isAdmin, setIsAdmin] = useState(false)
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const [isRevealPwd, setIsRevealPwd] = useState(false);
 
@@ -38,16 +37,18 @@ function AdminAddUser(props) {
             const registerBody = {
                 username: username,
                 password: password,
-                isAdmin: isAdmin,
+                isAdmin: false,
                 firstName: firstName,
                 lastName: lastName,
             };
 
-            if (true) { //validate password
+            if (validate_password(password)) { //validate password
+                console.log(password)
                 postUser(registerBody);
             }
             else {
-                alert("Passwords must only be comprised of letters and numbers and be between 8-20 characters.")
+                console.log(password);
+                alert("Passwords must be only comprised of letters and numbers and be between 8-20 characters.")
             }
         } 
         else {
@@ -100,6 +101,7 @@ function AdminAddUser(props) {
                             </div>
                             <div className="field" id="password-field">
                                 <label className="add-user-label">Password:</label>
+                                
                                 <input 
                                     className="add-user-input"
                                     required
