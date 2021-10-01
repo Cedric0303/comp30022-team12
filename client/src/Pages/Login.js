@@ -65,17 +65,6 @@ const Login = (props) => {
         event.preventDefault();
     };
 
-    // useEffect(() => {
-    //     document.addEventListener("keydown", onEnterPress, false);
-    // });
-
-    // 13 is the recognized number of the Enter key
-    // const onEnterPress = (e) => {
-    //     if (e.keyCode === 13) {
-    //         handleLogin();
-    //     }
-    // };
-
     const redirectToHome = () => {
         props.history.push("/home");
     };

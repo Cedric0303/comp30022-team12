@@ -81,3 +81,18 @@ export function useStages() {
         error,
     };
 }
+
+export function postStage(newStage) {
+    const endpoint = BASE_URL + "/api/stages/create";    
+    return axios
+        .post(endpoint, newStage)
+        .then((response) => {
+            var message = response.data.message;
+            if(response.status === 200){
+                alert(message);
+            }
+        })
+        .catch(() => {    
+        });
+    
+}
