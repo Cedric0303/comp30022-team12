@@ -150,6 +150,9 @@ function AdminManageStages(props) {
                     <input type="submit" value="Add Stage" className="addStageButton" />
                     <input value="Cancel" className="stageCancelButton" onClick={closeModal} />    
                 </form>
+
+                <button>Add stage</button>
+                <button onClick={closeModal}>Cancel</button>
             </Modal>
         </div>
     );
