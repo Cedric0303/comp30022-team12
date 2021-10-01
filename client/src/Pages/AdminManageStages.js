@@ -6,6 +6,7 @@ import Stage from "../Components/Stage.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from 'react-modal';
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function AdminManageStages(props) {
 
@@ -20,6 +21,33 @@ function AdminManageStages(props) {
     function closeModal() {setIsOpen(false);}
 
     const { loading, stagesData, error } = useStages();
+
+    const [searchQuery, setSearchQuery] = useState('');
+
+    let disableDragging = false;
+
+    // accepts array of stage objects only
+    // returns array of filtered stage objects
+    function filterStages(stages, query) {
+        if (!query) {
+            disableDragging = false;
+            return stages;
+        } else {
+            disableDragging = true;
+            return stages.filter((stage) => {
+                const stageName = stage.name.toLowerCase();
+                if (stageName.includes(query) || stage.position.toString().includes(query)) {
+                    return true;
+                }
+            });
+        }
+    }
+    
+    const filteredStages = filterStages(stagesData.stages, searchQuery);
+
+    function handleOnDragEnd(result) {
+        console.log(result);
+    }
 
     const pageMain = () => {
         if (loading) {
@@ -39,22 +67,35 @@ function AdminManageStages(props) {
                 <div className="stagesBox">
                     <ul id="stagesList">
                         <li id="stagesListActionBar">
-                            <input id="stageSearchBar"></input>
+                            <input 
+                                id="stageSearchBar"
+                                value={searchQuery}
+                                onInput={e => setSearchQuery(e.target.value)}
+                                placeholder="Search stages"
+                            />
                             <button id="addStageButton" onClick={openModal}>
                                 <span>Add New Stage </span>
                                 <FontAwesomeIcon icon="plus" />
                             </button>
                         </li>
                         <li id="stagesListHeading">Stage</li>
-                        {stagesData.stages.map((stage) => (
-                            <Stage {...stage} />
-                        ))}
+                        <DragDropContext onDragEnd={handleOnDragEnd}>
+                            <Droppable droppableId="stagesDroppable">
+                                {(provided) => (
+                                    <div id="stages" {...provided.droppableProps} ref={provided.innerRef}>
+                                        {filteredStages.map((stage) => (
+                                            <Stage key={stage._id} {...stage} disableDragging={disableDragging} />
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
                     </ul>
                 </div>
             );
         }
     };
-
     return (
         <div className="manageStages pageContainer">
             <Helmet>
@@ -69,11 +110,8 @@ function AdminManageStages(props) {
                 <h2 id="stagesHeading">Manage Stages</h2>
                 {pageMain()}
             </main>
-
             <Modal
                 isOpen={modalIsOpen}
-                //onRequestClose={closeModal}
-                //style={modalStyle}
                 className="addModal"
                 contentLabel="Add New Stage"
             >
