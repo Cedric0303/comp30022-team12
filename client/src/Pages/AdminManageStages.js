@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
-import { useStages } from "../api.js";
+import { useStages, postStage } from "../api.js";
 import Stage from "../Components/Stage.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +9,11 @@ import Modal from 'react-modal';
 
 function AdminManageStages(props) {
 
-    //hold the name of a new stage
-    const [stageName, setStageName] = useState("");
+    //hold the details of a new stage
+    const [newStage, setNewStage] = useState({
+        stageName: "",
+        position: 0,
+    });
 
     Modal.setAppElement(document.getElementById('root') || undefined)
 
@@ -18,6 +21,14 @@ function AdminManageStages(props) {
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal() {setIsOpen(true);}
     function closeModal() {setIsOpen(false);}
+
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setNewStage((prevState) => ({
+            ...prevState,
+            [id]: value,
+        }));
+    };
 
     const { loading, stagesData, error } = useStages();
 
@@ -78,18 +89,28 @@ function AdminManageStages(props) {
                 contentLabel="Add New Stage"
             >
                 <h2>Add a new stage</h2>
-                <form>
-                <label>Name: </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="new-stage"
-                        //value={stageName}
-                    />    
-                </form>
+                <form onSubmit={postStage(newStage)}>
+                    <label>Name: </label>
+                        <input
+                            type="text"
+                            id="stageName"
+                            required
+                            value={newStage.stageName}
+                            onChange={handleChange}
+                        />
 
-                <button>Add stage</button>
-                <button onClick={closeModal}>Cancel</button>
+                    <label>Position: </label>
+                        <input
+                            type="number" 
+                            id="position"
+                            required
+                            value={newStage.position}
+                            onChange={handleChange}
+                        />
+
+                    <input type="submit" value="Add Stage" className="addStageButton" />
+                    <input value="Cancel" className="stageCancelButton" onClick={closeModal} />    
+                </form>
             </Modal>
         </div>
     );
