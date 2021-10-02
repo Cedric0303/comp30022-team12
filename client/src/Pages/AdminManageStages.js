@@ -11,10 +11,10 @@ function AdminManageStages(props) {
 
     //hold the details of a new stage
     const initialState = {
-        stageName: "",
+        sname: "",
         position: 0
     };
-    const [{ stageName, position }, setNewStage] = useState(initialState);
+    const [newStage, setNewStage] = useState(initialState);
     const resetStage = () => {setNewStage({ ...initialState });};
 
     Modal.setAppElement(document.getElementById('root') || undefined)
@@ -34,6 +34,13 @@ function AdminManageStages(props) {
             [id]: value,
         }));
     };
+
+    const handleAdd = (e) => {
+        if(newStage.sname && newStage.position >= 0){
+            postStage(newStage);
+            resetStage();
+        }
+    }
 
     const { loading, stagesData, error } = useStages();
 
@@ -94,13 +101,13 @@ function AdminManageStages(props) {
                 contentLabel="Add New Stage"
             >
                 <h2>Add a new stage</h2>
-                <form>
+                <form onSubmit={handleAdd}>
                     <label>Name:
                         <input
                             type="text"
-                            id="stageName"
+                            id="sname"
                             required
-                            value={stageName}
+                            value={newStage.sname}
                             onChange={handleChange}
                         />
                     </label>
@@ -111,7 +118,7 @@ function AdminManageStages(props) {
                             id="position"
                             min="0"
                             required
-                            value={position}
+                            value={newStage.position}
                             onChange={handleChange}
                         />
                     </label>  
