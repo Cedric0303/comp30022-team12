@@ -166,6 +166,21 @@ function AdminManageStages(props) {
                 </form>
                 
             </Modal>
+
+            <Modal
+                isOpen={modalIsOpen}
+                className="editModal"
+                contentLabel="Edit Stage"
+            >
+                <h2>Hello</h2>
+                <button onClick={closeAndClear}>Cancel</button>
+                <div>this is a modal!</div>
+                <form>
+                    <input />
+                    <button>test</button>
+                </form>
+            </Modal>
+
         </div>
     );
 }
