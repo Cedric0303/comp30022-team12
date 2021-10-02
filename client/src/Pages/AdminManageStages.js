@@ -5,22 +5,22 @@ import { getStages } from "../api.js";
 import Stage from "../Components/Stage.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from 'react-modal'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import Modal from "react-modal";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function AdminManageStages(props) {
     const modalStyle = {
         content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
         },
     };
 
-    Modal.setAppElement(document.getElementById('root') || undefined)
+    Modal.setAppElement(document.getElementById("root") || undefined);
 
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -49,7 +49,7 @@ function AdminManageStages(props) {
             });
     }, []);
 
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState("");
 
     let disableDragging = false;
 
@@ -61,13 +61,15 @@ function AdminManageStages(props) {
             return stages;
         } else {
             disableDragging = true;
+            var pattern = query
+                .split("")
+                .map((x) => {
+                    return `(?=.*${x})`;
+                })
+                .join("");
+            var regex = new RegExp(`^${pattern}`, "i");
             return stages.filter((stage) => {
-                const stageName = stage.name.toLowerCase();
-                if (stageName.includes(query) || (stage.position+1).toString().includes(query)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return regex.test(stage.name);
             });
         }
     }
@@ -77,16 +79,20 @@ function AdminManageStages(props) {
     const reorder = (list, startIndex, endIndex) => {
         const result = Array.from(list);
         const [moved] = result.splice(startIndex, 1);
-        result.splice(endIndex, 0, moved)
-        return result
-    }
+        result.splice(endIndex, 0, moved);
+        return result;
+    };
 
     function handleOnDragEnd(result) {
         if (!result.destination) {
             return;
         }
 
-        const newStageOrder = reorder(stagesData, result.source.index, result.destination.index);
+        const newStageOrder = reorder(
+            stagesData,
+            result.source.index,
+            result.destination.index
+        );
         setStages(newStageOrder);
     }
 
@@ -108,10 +114,10 @@ function AdminManageStages(props) {
                 <div className="stagesBox">
                     <ul id="stagesList">
                         <li id="stagesListActionBar">
-                            <input 
+                            <input
                                 id="stageSearchBar"
                                 value={searchQuery}
-                                onInput={e => setSearchQuery(e.target.value)}
+                                onInput={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search stages"
                             />
                             <button id="addStageButton" onClick={openModal}>
@@ -123,9 +129,20 @@ function AdminManageStages(props) {
                         <DragDropContext onDragEnd={handleOnDragEnd}>
                             <Droppable droppableId="stagesDroppable">
                                 {(provided) => (
-                                    <div id="stages" {...provided.droppableProps} ref={provided.innerRef}>
+                                    <div
+                                        id="stages"
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                    >
                                         {filteredStages.map((stage, index) => (
-                                            <Stage key={stage._id} {...stage} index={index} disableDragging={disableDragging} />
+                                            <Stage
+                                                key={stage._id}
+                                                {...stage}
+                                                index={index}
+                                                disableDragging={
+                                                    disableDragging
+                                                }
+                                            />
                                         ))}
                                         {provided.placeholder}
                                     </div>
