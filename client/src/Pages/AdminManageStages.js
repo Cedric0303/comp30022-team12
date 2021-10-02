@@ -69,7 +69,7 @@ function AdminManageStages(props) {
                 .join("");
             var regex = new RegExp(`^${pattern}`, "i");
             return stages.filter((stage) => {
-                return regex.test(stage.name);
+                return regex.test(stage.name) || regex.test(stage.position + 1);
             });
         }
     }
