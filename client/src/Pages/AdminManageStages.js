@@ -17,7 +17,7 @@ function AdminManageStages(props) {
     const [newStage, setNewStage] = useState(initialState);
     const resetStage = () => {setNewStage({ ...initialState });};
 
-    Modal.setAppElement(document.getElementById('root') || undefined)
+    Modal.setAppElement(document.getElementById("root") || undefined);
 
     //handles state of modal's show
     const [addModalIsOpen, setAddIsOpen] = useState(false);
@@ -125,10 +125,10 @@ function AdminManageStages(props) {
                 <div className="stagesBox">
                     <ul id="stagesList">
                         <li id="stagesListActionBar">
-                            <input 
+                            <input
                                 id="stageSearchBar"
                                 value={searchQuery}
-                                onInput={e => setSearchQuery(e.target.value)}
+                                onInput={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search stages"
                             />
                             <button id="addStageButton" onClick={openModal}>
