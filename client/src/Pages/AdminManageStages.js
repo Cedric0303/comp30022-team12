@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
-import { useStages } from "../api.js";
+import { getStages } from "../api.js";
 import Stage from "../Components/Stage.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from 'react-modal'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 function AdminManageStages(props) {
     const modalStyle = {
@@ -22,7 +22,6 @@ function AdminManageStages(props) {
 
     Modal.setAppElement(document.getElementById('root') || undefined)
 
-    let subtitle;
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
@@ -33,7 +32,22 @@ function AdminManageStages(props) {
         setIsOpen(false);
     }
 
-    const { loading, stagesData, error } = useStages();
+    // const { loading, stagesData, error } = useStages();
+    const [loading, setLoading] = useState(true);
+    const [stagesData, setStages] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getStages()
+            .then((stagesData) => {
+                setStages(stagesData.stages);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, []);
 
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -49,17 +63,31 @@ function AdminManageStages(props) {
             disableDragging = true;
             return stages.filter((stage) => {
                 const stageName = stage.name.toLowerCase();
-                if (stageName.includes(query) || stage.position.toString().includes(query)) {
+                if (stageName.includes(query) || (stage.position+1).toString().includes(query)) {
                     return true;
+                } else {
+                    return false;
                 }
             });
         }
     }
-    
-    const filteredStages = filterStages(stagesData.stages, searchQuery);
+
+    const filteredStages = filterStages(stagesData, searchQuery);
+
+    const reorder = (list, startIndex, endIndex) => {
+        const result = Array.from(list);
+        const [moved] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, moved)
+        return result
+    }
 
     function handleOnDragEnd(result) {
-        console.log(result);
+        if (!result.destination) {
+            return;
+        }
+
+        const newStageOrder = reorder(stagesData, result.source.index, result.destination.index);
+        setStages(newStageOrder);
     }
 
     const pageMain = () => {
@@ -96,8 +124,8 @@ function AdminManageStages(props) {
                             <Droppable droppableId="stagesDroppable">
                                 {(provided) => (
                                     <div id="stages" {...provided.droppableProps} ref={provided.innerRef}>
-                                        {filteredStages.map((stage) => (
-                                            <Stage key={stage._id} {...stage} disableDragging={disableDragging} />
+                                        {filteredStages.map((stage, index) => (
+                                            <Stage key={stage._id} {...stage} index={index} disableDragging={disableDragging} />
                                         ))}
                                         {provided.placeholder}
                                     </div>
