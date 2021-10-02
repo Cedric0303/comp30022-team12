@@ -11,17 +11,22 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 function AdminManageStages(props) {
 
     //hold the details of a new stage
-    const [newStage, setNewStage] = useState({
+    const initialState = {
         stageName: "",
-        position: 0,
-    });
+        position: 0
+    };
+    const [{ stageName, position }, setNewStage] = useState(initialState);
+    const resetStage = () => {setNewStage({ ...initialState });};
 
     Modal.setAppElement(document.getElementById('root') || undefined)
 
     //handles state of modal's show
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal() {setIsOpen(true);}
-    function closeModal() {setIsOpen(false);}
+    function closeAndClear() {
+        setIsOpen(false);
+        resetStage();
+    }
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -128,28 +133,31 @@ function AdminManageStages(props) {
                 contentLabel="Add New Stage"
             >
                 <h2>Add a new stage</h2>
-                <form onSubmit={postStage(newStage)}>
-                    <label>Name: </label>
+                <form>
+                    <label>Name:
                         <input
                             type="text"
                             id="stageName"
                             required
-                            value={newStage.stageName}
+                            value={stageName}
                             onChange={handleChange}
                         />
+                    </label>
 
-                    <label>Position: </label>
+                    <label>Position:
                         <input
                             type="number" 
                             id="position"
+                            min="0"
                             required
-                            value={newStage.position}
+                            value={position}
                             onChange={handleChange}
                         />
-
-                    <input type="submit" value="Add Stage" className="addStageButton" />
-                    <input value="Cancel" className="stageCancelButton" onClick={closeModal} />    
+                    </label>  
+                    <button type="submit" className="addStageButton">Add Stage</button>
+                    <button className="stageCancelButton" onClick={closeAndClear}>Cancel</button>  
                 </form>
+                
             </Modal>
         </div>
     );
