@@ -105,18 +105,6 @@ function AdminManageStages(props) {
             result.destination.index
         );
         setStages(newStageOrder);
-
-        // get an array of previous positions
-        // get an array of new positions
-        // if different, highlight the changed positions
-    }
-
-    const [searchQuery, setSearchQuery] = useState('');
-
-    let disableDragging = false;
-
-    function handleOnDragEnd(result) {
-        console.log(result);
     }
 
     const pageMain = () => {
