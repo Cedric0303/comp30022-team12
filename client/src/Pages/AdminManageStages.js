@@ -88,12 +88,17 @@ function AdminManageStages(props) {
             return;
         }
 
+        // update stagesData with new order of stages
         const newStageOrder = reorder(
             stagesData,
             result.source.index,
             result.destination.index
         );
         setStages(newStageOrder);
+
+        // get an array of previous positions
+        // get an array of new positions
+        // if different, highlight the changed positions
     }
 
     const pageMain = () => {
@@ -126,29 +131,38 @@ function AdminManageStages(props) {
                             </button>
                         </li>
                         <li id="stagesListHeading">Stage</li>
-                        <DragDropContext onDragEnd={handleOnDragEnd}>
-                            <Droppable droppableId="stagesDroppable">
-                                {(provided) => (
-                                    <div
-                                        id="stages"
-                                        {...provided.droppableProps}
-                                        ref={provided.innerRef}
-                                    >
-                                        {filteredStages.map((stage, index) => (
-                                            <Stage
-                                                key={stage._id}
-                                                {...stage}
-                                                index={index}
-                                                disableDragging={
-                                                    disableDragging
-                                                }
-                                            />
-                                        ))}
-                                        {provided.placeholder}
+                        <div id="stageContainer">
+                            <div id="stagePosColumn">
+                                {stagesData.map((e, index)=>(
+                                    <div key={index} className="stagePos">
+                                        {index+1}
                                     </div>
-                                )}
-                            </Droppable>
-                        </DragDropContext>
+                                ))}
+                            </div>
+                            <DragDropContext onDragEnd={handleOnDragEnd}>
+                                <Droppable droppableId="stagesDroppable">
+                                    {(provided) => (
+                                        <div
+                                            id="stages"
+                                            {...provided.droppableProps}
+                                            ref={provided.innerRef}
+                                        >
+                                            {filteredStages.map((stage, index) => (
+                                                <Stage
+                                                    key={stage._id}
+                                                    {...stage}
+                                                    index={index}
+                                                    disableDragging={
+                                                        disableDragging
+                                                    }
+                                                />
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </DragDropContext>
+                        </div>
                     </ul>
                 </div>
             );
