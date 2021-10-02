@@ -124,11 +124,11 @@ export function postUser(registerBody) {
         .post(endpoint, registerBody, { withCredentials: true })
         .then((res) => {
             var message = res.data.message;
-            if(message === "User already exists!") {
+            if (message === "User already exists!") {
                 alert(res.data.message);
                 return false;
-            }
-            else { // Created new user!
+            } else {
+                // Created new user!
                 alert(res.data.message);
                 window.location.href = "/admin/users/create";
             }

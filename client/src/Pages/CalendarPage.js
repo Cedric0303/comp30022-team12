@@ -6,11 +6,10 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useActivities } from "../api.js";
 
 function CalendarPage(props) {
-
     const { loading, activitiesData, error } = useActivities();
 
     const localizer = momentLocalizer(moment);
-    
+
     const pageMain = () => {
         if (loading) {
             return (
@@ -25,12 +24,11 @@ function CalendarPage(props) {
                 </div>
             );
         } else {
-
             // Convert Strings to Dates (JSON returns Strings)
-            activitiesData.activities.forEach( (act) => {
+            activitiesData.activities.forEach((act) => {
                 act.timeStart = new Date(act.timeStart);
-                act.timeEnd = new Date(act.timeEnd)
-            })
+                act.timeEnd = new Date(act.timeEnd);
+            });
 
             return (
                 <div>
@@ -46,7 +44,7 @@ function CalendarPage(props) {
             );
         }
     };
-    
+
     return (
         <div>
             <Navbar />

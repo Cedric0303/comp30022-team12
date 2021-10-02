@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { postUser } from "../api.js";
 import "./css/adminAddUser.css";
 import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
-
 
 function validate_password(p) {
     var letter = /[a-zA-Z]/;
@@ -16,7 +16,6 @@ function validate_password(p) {
 }
 
 function AdminAddUser(props) {
-
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -25,7 +24,12 @@ function AdminAddUser(props) {
     const [isRevealPwd, setIsRevealPwd] = useState(false);
 
     function notEmpty() {
-        if (firstName === "" || lastName === "" || username === "" || password === "") {
+        if (
+            firstName === "" ||
+            lastName === "" ||
+            username === "" ||
+            password === ""
+        ) {
             return false;
         }
         return true;
@@ -42,76 +46,116 @@ function AdminAddUser(props) {
                 lastName: lastName,
             };
 
-            if (validate_password(password)) { //validate password
+            if (validate_password(password)) {
+                //validate password
                 postUser(registerBody);
+            } else {
+                alert(
+                    "Passwords must only be comprised of letters and numbers and be between 8-20 characters."
+                );
             }
-            else {
-                alert("Passwords must only be comprised of letters and numbers and be between 8-20 characters.")
-            }
-        } 
-        else {
-            alert("All fields must have a value!")
+        } else {
+            alert("All fields must have a value!");
         }
-    }
+    };
 
     return (
         <div>
+            <Helmet>
+                <style type="text/css">{`
+                    html {
+                        background-color: #596e80;
+                    }
+                `}</style>
+            </Helmet>
             <Navbar />
             <h2 className="add-user-heading">Admin Add User</h2>
             <div className="add-user-container">
-                <div className="add-user-container-item" id="item-left">    
-                    <form method="post" onSubmit={onSubmit} className="add-user-form">
+                <div className="add-user-container-item" id="item-left">
+                    <form
+                        method="post"
+                        onSubmit={onSubmit}
+                        className="add-user-form"
+                    >
                         <div className="field-group" id="name-info">
                             <div className="field">
-                                <label className="add-user-label">First Name:</label>
-                                <input 
+                                <label className="add-user-label">
+                                    First Name:
+                                </label>
+                                <input
                                     className="add-user-input"
                                     required
-                                    type="text" 
-                                    placeholder="First Name" 
+                                    type="text"
+                                    placeholder="First Name"
                                     value={firstName}
-                                    onChange={e => setFirstName(e.target.value)}
+                                    onChange={(e) =>
+                                        setFirstName(e.target.value)
+                                    }
                                 />
                             </div>
                             <div className="field">
-                                <label className="add-user-label">Last Name:</label>
-                                <input 
+                                <label className="add-user-label">
+                                    Last Name:
+                                </label>
+                                <input
                                     className="add-user-input"
-                                    required 
-                                    type="text" 
-                                    placeholder="Last Name" 
+                                    required
+                                    type="text"
+                                    placeholder="Last Name"
                                     value={lastName}
-                                    onChange={e => setLastName(e.target.value)}
+                                    onChange={(e) =>
+                                        setLastName(e.target.value)
+                                    }
                                 />
                             </div>
                         </div>
                         <div className="field-group" id="login-info">
                             <div className="field">
-                                <label className="add-user-label">Username:</label>
-                                <input 
+                                <label className="add-user-label">
+                                    Username:
+                                </label>
+                                <input
                                     className="add-user-input"
                                     required
-                                    type="text" 
-                                    placeholder="Username" 
+                                    type="text"
+                                    placeholder="Username"
                                     value={username}
-                                    onChange={e => setUsername(e.target.value)}
+                                    onChange={(e) =>
+                                        setUsername(e.target.value)
+                                    }
                                 />
                             </div>
                             <div className="field" id="password-field">
-                                <label className="add-user-label">Password:</label>
-                                <input 
+                                <label className="add-user-label">
+                                    Password:
+                                </label>
+                                <input
                                     className="add-user-input"
                                     required
-                                    type={isRevealPwd ? "text" : "password"} 
-                                    placeholder="Password" 
+                                    type={isRevealPwd ? "text" : "password"}
+                                    placeholder="Password"
                                     value={password}
-                                    onChange={e => setPassword(e.target.value)}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
                                 />
-                                <img 
-                                    style={{height: "40%", width:"auto", paddingLeft:"10px"}}
-                                    title={isRevealPwd ? "Hide Password" : "Show Password"}
+                                <img
+                                    style={{
+                                        height: "40%",
+                                        width: "auto",
+                                        paddingLeft: "10px",
+                                    }}
+                                    title={
+                                        isRevealPwd
+                                            ? "Hide Password"
+                                            : "Show Password"
+                                    }
                                     src={isRevealPwd ? hidePwdImg : showPwdImg}
-                                    alt={isRevealPwd ? "Hide Password Icon" : "Show Password Icon"}
+                                    alt={
+                                        isRevealPwd
+                                            ? "Hide Password Icon"
+                                            : "Show Password Icon"
+                                    }
                                     onClick={() => setIsRevealPwd(!isRevealPwd)}
                                 />
                             </div>
@@ -122,10 +166,14 @@ function AdminAddUser(props) {
                     <NavLink to="/admin/users" activeClassName="cancel-option">
                         Cancel
                     </NavLink>
-                </div>           
+                </div>
             </div>
-            
-            <button className="add-user-button" id="create-user" onClick={onSubmit}>
+
+            <button
+                className="add-user-button"
+                id="create-user"
+                onClick={onSubmit}
+            >
                 Create User
             </button>
         </div>
