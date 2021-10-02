@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./css/user.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -11,9 +12,9 @@ export default function User(user) {
             <span className="userFullName">
                 {firstName} {lastName}
             </span>
-            <a className="userEdit" href={"/admin/users/" + _id + "/edit"}>
+            <NavLink className="userEdit" to={"/admin/users/" + _id + "/edit"}>
                 <FontAwesomeIcon icon="edit" />
-            </a>
+            </NavLink>
         </li>
     );
 }

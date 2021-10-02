@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Auth from "./Pages/Auth";
 
 const BASE_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -82,20 +83,89 @@ export function useStages() {
     };
 }
 
+// Get the list of clients from the database
+function getClients() {
+    const endpoint = BASE_URL + "/api/clients";
+    return axios
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useClients() {
+    const [loading, setLoading] = useState(true);
+    const [clientsData, setClients] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getClients()
+            .then((clientsData) => {
+                setClients(clientsData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, []);
+    return {
+        loading,
+        clientsData,
+        error,
+    };
+}
+
 export function postUser(registerBody) {
     const endpoint = BASE_URL + "/api/users/create";
     return axios
         .post(endpoint, registerBody, { withCredentials: true })
         .then((res) => {
             var message = res.data.message;
-            if(message === "User already exists!") {
+            if (message === "User already exists!") {
                 alert(res.data.message);
                 return false;
-            }
-            else { // Created new user!
+            } else {
+                // Created new user!
                 alert(res.data.message);
                 window.location.href = "/admin/users/create";
             }
         });
 }
 
+// Get the list of clients from the database
+function getActivities() {
+    const endpoint = BASE_URL + "/api/activities";
+    return axios
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useActivities() {
+    const [loading, setLoading] = useState(true);
+    const [activitiesData, setActivities] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getActivities()
+            .then((activitiesData) => {
+                setActivities(activitiesData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, []);
+    return {
+        loading,
+        activitiesData,
+        error,
+    };
+}

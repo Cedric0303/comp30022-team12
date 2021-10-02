@@ -1,0 +1,73 @@
+.clients {
+    height: 100%;
+    margin: 0;
+}
+
+.clientsBox {
+    min-height: 84vh;
+    margin: 0;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+}
+
+#clientsHeading {
+    background-color: #5e779d;
+    font-size: 5.3vh;
+    font-weight: 700;
+    color: white;
+    padding: 0.3vh 6vw 1vh;
+}
+
+#addClient {
+    font-size: 20px;
+    float: right;
+    padding-top: 18px;
+    color: white;
+}
+
+#addClient:hover {
+    color: #7aade1;
+}
+
+.clientsBox ul {
+    padding: 12px 6vw;
+}
+
+#clientsList {
+    width: 100%;
+    border-collapse: collapse;
+    border-style: hidden;
+    border-bottom: 1px solid #cecece;
+}
+
+#clientsList th:first-child,
+td:first-child {
+    padding-left: 6vw;
+}
+
+#clientsList th:not(:first-child),
+td:not(:first-child) {
+    padding-left: 10px;
+}
+
+#clientsList th,
+td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: 1px solid #cecece;
+}
+
+#lastInteracted,
+#clientStage {
+    width: 18%;
+}
+
+#clientActions {
+    width: 24%;
+}
+
+#clientsListHeading {
+    background-color: #f6f6f6;
+    text-align: left;
+}

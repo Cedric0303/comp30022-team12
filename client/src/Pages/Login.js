@@ -95,7 +95,8 @@ const Login = (props) => {
             <img src={logo} alt="bobafish logo" className="logo"></img>
 
             <form className="form" onSubmit={handleLogin}>
-                <label id="usernameInput">Username:&nbsp;
+                <label id="usernameInput">
+                    Username:&nbsp;
                     <input
                         type="text"
                         className="form-control"
@@ -105,7 +106,8 @@ const Login = (props) => {
                         onChange={handleChange}
                     />
                 </label>
-                <label id="passwordInput">Password:&nbsp;
+                <label id="passwordInput">
+                    Password:&nbsp;
                     <input
                         type="password"
                         className="form-control"

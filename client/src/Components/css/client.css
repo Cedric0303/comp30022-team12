@@ -1,0 +1,23 @@
+.actionButtons {
+    color: black;
+    margin-right: 10px;
+}
+
+.actionButtons span {
+    font-size: 12px;
+    padding: 6px;
+}
+
+.meetingAction {
+    padding: 8px 12px;
+}
+
+.orderAction {
+    padding: 8px 14px;
+}
+
+.meetingAction:hover,
+.orderAction:hover,
+.clientFullName:hover {
+    color: grey;
+}
