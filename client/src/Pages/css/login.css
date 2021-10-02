@@ -93,23 +93,16 @@
     }
 }
 
-.title {
-    font-family: inherit;
-    text-align: center;
-    margin-top: 5vh;
-}
-
 .loginButton {
     cursor: pointer;
     min-width: 64px;
     border-radius: 5px;
-
     display: flex;
     border: none;
     background: #6eb2ff;
     color: #ffffff;
     margin: 0 auto;
-    margin-top: 0.5%;
+    margin-top: 2vh;
     padding: 0.3em 0.7em;
 
     justify-content: center;
@@ -126,31 +119,70 @@
 }
 
 .form {
-    display: flex;
+    display: inline-block;
+    width: 20vw;
     flex-direction: column;
-    row-gap: 0.5em;
-    justify-content: center;
-    align-items: center;
+    text-align: left;
     color: #a2c8eb;
-    text-align: center;
     margin-top: 2%;
-
     font-family: inherit;
     font-size: 1.3em;
     font-weight: 600;
+    vertical-align: top;
 }
 
-.form label input {
+#formID {
+    margin-top: 1vh;
+    text-align: center;
+    animation: fill2 2s ease forwards;
+}
+
+@keyframes fill2 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
+}
+
+.form input[type="text"],
+input[type="password"] {
+    width: 100%;
+    border-style: none;
     font-family: inherit;
     font-size: 1.3rem;
     font-weight: 400;
     color: rgb(46, 46, 46);
+    padding: 0.1rem 0.2rem;
+    margin-top: 2%;
+    margin-bottom: 6%;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: ridge;
+    border-color: ivory;
+    background-color: transparent;
+}
 
-    padding: 0.1em 0.2em;
+.form input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
 }
 
 .errorMsg {
+    margin-top: 1.5vh;
     text-align: center;
     font-family: inherit;
+    font-size: 1.3em;
+    font-weight: 500;
     color: ivory;
+}
+
+#usernameInput {
+    text-align: left;
+}
+
+#passwordInput {
+    text-align: left;
 }

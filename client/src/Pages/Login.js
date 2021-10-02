@@ -23,6 +23,7 @@ const Login = (props) => {
         }));
     };
     const handleLogin = (event) => {
+        setErrorMsg("Loading...");
         if (!user.username.length && !user.password.length) {
             setErrorMsg("Please enter a valid username and password.");
         } else if (!user.username.length) {
@@ -30,6 +31,7 @@ const Login = (props) => {
         } else if (!user.password.length) {
             setErrorMsg("Please enter a valid password.");
         } else {
+            setErrorMsg("Connected.");
             const payload = {
                 username: user.username,
                 password: user.password,
@@ -168,34 +170,43 @@ const Login = (props) => {
 
             {/* <h1 className="title">bobafish CRM</h1> */}
 
-            <img src={logo} alt="bobafish logo" className="logo"></img>
-
-            <form className="form" onSubmit={handleLogin}>
-                <label id="usernameInput">
-                    Username:&nbsp;
+            <img
+                title="bobafish"
+                src={logo}
+                alt="bobafish logo"
+                className="logo"
+            ></img>
+            <div id="formID">
+                <form className="form" onSubmit={handleLogin}>
+                    <label id="usernameInput">Username</label>
+                    <br />
                     <input
                         type="text"
                         className="form-control"
                         id="username"
-                        placeholder="Username"
+                        // placeholder="Username"
                         value={user.username}
                         onChange={handleChange}
                     />
-                </label>
-                <label id="passwordInput">
-                    Password:&nbsp;
+                    <br />
+                    <label id="passwordInput">Password</label>
+                    <br />
                     <input
                         type="password"
                         className="form-control"
                         id="password"
-                        placeholder="Password"
+                        // placeholder="Password"
                         value={user.password}
                         onChange={handleChange}
                     />
-                </label>
+                    <input
+                        type="submit"
+                        value="Login"
+                        className="loginButton"
+                    />
+                </form>
                 <p className="errorMsg">{errorMsg ? errorMsg : ""}</p>
-                <input type="submit" value="Login" className="loginButton" />
-            </form>
+            </div>
         </div>
     );
 };
