@@ -36,13 +36,7 @@ const getStage = async (req, res) => {
 
 const createStage = async (req, res) => {
     const stageID = req.body.sname.replace(/\s+/g, "_");
-    const newStage = new StageModel({
-        id: stageID,
-        name: req.body.sname,
-        position: req.body.position,
-    });
-    await Stages.insertOne(newStage);
-    const stage = await Stages.findOne(
+    const exist = await Stages.findOne(
         {
             id: stageID,
         },
@@ -52,10 +46,23 @@ const createStage = async (req, res) => {
             },
         }
     );
-    res.json({
-        message: "Stage creation successful!",
-        stage: stage,
-    });
+    if (exist) {
+        res.json({
+            message: "Stage already exist!",
+            stage: exist,
+        });
+    } else {
+        const newStage = new StageModel({
+            id: stageID,
+            name: req.body.sname,
+            position: req.body.position,
+        });
+        await Stages.insertOne(newStage);
+        res.json({
+            message: "Stage creation successful!",
+            stage: newStage,
+        });
+    }
 };
 
 const editStage = async (req, res) => {
