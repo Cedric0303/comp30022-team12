@@ -135,24 +135,60 @@ export function postUser(registerBody) {
         });
 }
 
-// Get the list of clients from the database
-function getActivities() {
-    const endpoint = BASE_URL + "/api/activities";
+// Get the client from the database
+function getClient(cid) {
+    const endpoint = BASE_URL + "/api/clients/" + cid;
     return axios
-        .post(endpoint, {
-            userReference: Auth.getUsername(),
+        .get(endpoint, {
             withCredentials: true,
         })
         .then((res) => res.data);
 }
 
 // Use loading, normal, and error states with the returned data
-export function useActivities() {
+export function useClient(cid) {
+    const [loading, setLoading] = useState(true);
+    const [clientData, setClient] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getClient(cid)
+            .then((clientData) => {
+                setClient(clientData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, [cid]);
+    return {
+        loading,
+        clientData,
+        error,
+    };
+}
+
+
+// Get the list of activities from the database
+function getActivities(cid) {
+    const endpoint = BASE_URL + "/api/activities";
+    return axios
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            cid: cid,
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useActivities(cid) {
     const [loading, setLoading] = useState(true);
     const [activitiesData, setActivities] = useState([]);
     const [error, setError] = useState(null);
     useEffect(() => {
-        getActivities()
+        getActivities(cid)
             .then((activitiesData) => {
                 setActivities(activitiesData);
                 setLoading(false);
@@ -162,10 +198,46 @@ export function useActivities() {
                 setError(e);
                 setLoading(false);
             });
-    }, []);
+    }, [cid]);
     return {
         loading,
         activitiesData,
+        error,
+    };
+}
+
+// Get the list of orders from the database
+function getOrders(cid) {
+    const endpoint = BASE_URL + "/api/orders";
+    return axios
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            cid: cid,
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useOrders(cid) {
+    const [loading, setLoading] = useState(true);
+    const [ordersData, setOrders] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getOrders(cid)
+            .then((ordersData) => {
+                setOrders(ordersData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, [cid]);
+    return {
+        loading,
+        ordersData,
         error,
     };
 }

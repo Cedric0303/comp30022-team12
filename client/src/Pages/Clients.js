@@ -7,6 +7,7 @@ import Client from "../Components/Client.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Clients(props) {
+    
     const { loading, clientsData, error } = useClients();
 
     const pageMain = () => {

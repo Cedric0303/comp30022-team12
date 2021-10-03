@@ -1,0 +1,43 @@
+.portalContent p {
+    padding: 5px 12px;
+}
+
+.portalHeading {
+    font-size: 18px;
+    padding: 5px 12px;
+    background-color: #b3ddfd;
+}
+
+.portalSub {
+    font-size: 16px;
+    padding: 5px 12px;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.portalRow {
+    font-size: 16px;
+    padding: 5px 12px;
+    border-bottom: 1px solid #b3ddfd;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.rightAlign {
+    float: right;
+    text-align: right;
+}
+
+.addNote {
+    font-family: inherit;
+    float: right;
+    background: none;
+    border: none;
+    font-size: 16px;
+}
+
+.addNote:hover {
+    color: grey;
+}
