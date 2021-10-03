@@ -12,6 +12,8 @@ stageRouter.post("/create", stageController.createStage);
 
 stageRouter.post("/:sid/edit", stageController.editStage);
 
+stageRouter.post("/editStages", stageController.editStages);
+
 stageRouter.get("/:sid/remove", stageController.removeStage);
 
 module.exports = stageRouter;
