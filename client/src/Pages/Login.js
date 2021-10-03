@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -8,6 +8,23 @@ import "./css/login.css";
 import logo from "./css/bobafish-logo.svg";
 
 const Login = (props) => {
+    useEffect(
+        () =>
+            axios
+                .get(process.env.REACT_APP_BACKEND_API_URL + "/api")
+                .then((response) => {
+                    if (response.status === 200) {
+                        console.log("Backend API server online.");
+                    }
+                })
+                .catch(() => {
+                    setErrorMsg(
+                        "Backend API server is offline. Please try again at a later time."
+                    );
+                }),
+        []
+    );
+
     const [user, setState] = useState({
         username: "",
         password: "",
@@ -23,6 +40,7 @@ const Login = (props) => {
         }));
     };
     const handleLogin = (event) => {
+        setErrorMsg("Loading...");
         if (!user.username.length && !user.password.length) {
             setErrorMsg("Please enter a valid username and password.");
         } else if (!user.username.length) {
@@ -56,10 +74,18 @@ const Login = (props) => {
                         redirectToHome();
                     }
                 })
-                .catch(() => {
-                    setErrorMsg(
-                        "The username or password you entered is incorrect. Please try again."
-                    );
+                .catch((e) => {
+                    console.log(e.toJSON());
+                    let errorMessage = e.toJSON().message;
+                    if (errorMessage.includes(401)) {
+                        setErrorMsg(
+                            "The username or password you entered is incorrect. Please try again."
+                        );
+                    } else if (errorMessage.includes("Network Error")) {
+                        setErrorMsg(
+                            "Backend API server is offline. Please try again at a later time."
+                        );
+                    }
                 });
         }
         event.preventDefault();
