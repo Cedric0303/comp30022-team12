@@ -21,10 +21,10 @@ function AdminManageStages(props) {
     Modal.setAppElement(document.getElementById('root') || undefined)
 
     //handles state of modal's show
-    const [modalIsOpen, setIsOpen] = useState(false);
-    function openModal() {setIsOpen(true);}
+    const [addModalIsOpen, setAddIsOpen] = useState(false);
+    function openModal() {setAddIsOpen(true);}
     function closeAndClear() {
-        setIsOpen(false);
+        setAddIsOpen(false);
         resetStage();
     }
 
@@ -195,9 +195,7 @@ function AdminManageStages(props) {
                 {pageMain()}
             </main>
             <Modal
-                isOpen={modalIsOpen}
-                //onRequestClose={closeModal}
-                //style={modalStyle}
+                isOpen={addModalIsOpen}
                 className="addModal"
                 contentLabel="Add New Stage"
             >
@@ -226,7 +224,6 @@ function AdminManageStages(props) {
                     <button type="submit" className="addStageButton">Add Stage</button>
                     <button className="stageCancelButton" onClick={closeAndClear}>Cancel</button>  
                 </form>
-                
             </Modal>
         </div>
     );
