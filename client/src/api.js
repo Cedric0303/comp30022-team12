@@ -51,7 +51,7 @@ export function useUsers() {
 }
 
 // Get the list of stages from the database
-function getStages() {
+export function getStages() {
     const endpoint = BASE_URL + "/api/stages";
     return axios
         .get(endpoint, { withCredentials: true })
@@ -66,7 +66,7 @@ export function useStages() {
     useEffect(() => {
         getStages()
             .then((stagesData) => {
-                setStages(stagesData);
+                setStages(stagesData.stages);
                 setLoading(false);
             })
             .catch((e) => {

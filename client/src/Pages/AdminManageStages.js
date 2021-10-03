@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
-import { useStages, postStage } from "../api.js";
+import { getStages, postStage } from "../api.js";
 import Stage from "../Components/Stage.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from 'react-modal';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Modal from "react-modal";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function AdminManageStages(props) {
-
+    
     //hold the details of a new stage
     const initialState = {
         sname: "",
@@ -43,9 +43,24 @@ function AdminManageStages(props) {
         }
     }
 
-    const { loading, stagesData, error } = useStages();
+    // const { loading, stagesData, error } = useStages();
+    const [loading, setLoading] = useState(true);
+    const [stagesData, setStages] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getStages()
+            .then((stagesData) => {
+                setStages(stagesData.stages);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, []);
 
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState("");
 
     let disableDragging = false;
 
@@ -57,19 +72,44 @@ function AdminManageStages(props) {
             return stages;
         } else {
             disableDragging = true;
+            var pattern = query
+                .split("")
+                .map((x) => {
+                    return `(?=.*${x})`;
+                })
+                .join("");
+            var regex = new RegExp(`^${pattern}`, "i");
             return stages.filter((stage) => {
-                const stageName = stage.name.toLowerCase();
-                if (stageName.includes(query) || stage.position.toString().includes(query)) {
-                    return true;
-                }
+                return regex.test(stage.name) || regex.test(stage.position + 1);
             });
         }
     }
-    
-    const filteredStages = filterStages(stagesData.stages, searchQuery);
+
+    const filteredStages = filterStages(stagesData, searchQuery);
+
+    const reorder = (list, startIndex, endIndex) => {
+        const result = Array.from(list);
+        const [moved] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, moved);
+        return result;
+    };
 
     function handleOnDragEnd(result) {
-        console.log(result);
+        if (!result.destination) {
+            return;
+        }
+
+        // update stagesData with new order of stages
+        const newStageOrder = reorder(
+            stagesData,
+            result.source.index,
+            result.destination.index
+        );
+        setStages(newStageOrder);
+
+        // get an array of previous positions
+        // get an array of new positions
+        // if different, highlight the changed positions
     }
 
     const pageMain = () => {
@@ -90,10 +130,10 @@ function AdminManageStages(props) {
                 <div className="stagesBox">
                     <ul id="stagesList">
                         <li id="stagesListActionBar">
-                            <input 
+                            <input
                                 id="stageSearchBar"
                                 value={searchQuery}
-                                onInput={e => setSearchQuery(e.target.value)}
+                                onInput={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search stages"
                             />
                             <button id="addStageButton" onClick={openModal}>
@@ -102,23 +142,44 @@ function AdminManageStages(props) {
                             </button>
                         </li>
                         <li id="stagesListHeading">Stage</li>
-                        <DragDropContext onDragEnd={handleOnDragEnd}>
-                            <Droppable droppableId="stagesDroppable">
-                                {(provided) => (
-                                    <div id="stages" {...provided.droppableProps} ref={provided.innerRef}>
-                                        {filteredStages.map((stage) => (
-                                            <Stage key={stage._id} {...stage} disableDragging={disableDragging} />
-                                        ))}
-                                        {provided.placeholder}
+                        <div id="stageContainer">
+                            <div id="stagePosColumn">
+                                {stagesData.map((e, index)=>(
+                                    <div key={index} className="stagePos">
+                                        {index+1}
                                     </div>
-                                )}
-                            </Droppable>
-                        </DragDropContext>
+                                ))}
+                            </div>
+                            <DragDropContext onDragEnd={handleOnDragEnd}>
+                                <Droppable droppableId="stagesDroppable">
+                                    {(provided) => (
+                                        <div
+                                            id="stages"
+                                            {...provided.droppableProps}
+                                            ref={provided.innerRef}
+                                        >
+                                            {filteredStages.map((stage, index) => (
+                                                <Stage
+                                                    key={stage._id}
+                                                    {...stage}
+                                                    index={index}
+                                                    disableDragging={
+                                                        disableDragging
+                                                    }
+                                                />
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </DragDropContext>
+                        </div>
                     </ul>
                 </div>
             );
         }
     };
+
     return (
         <div className="manageStages pageContainer">
             <Helmet>
@@ -133,7 +194,6 @@ function AdminManageStages(props) {
                 <h2 id="stagesHeading">Manage Stages</h2>
                 {pageMain()}
             </main>
-
             <Modal
                 isOpen={modalIsOpen}
                 className="addModal"
@@ -166,21 +226,6 @@ function AdminManageStages(props) {
                 </form>
                 
             </Modal>
-
-            <Modal
-                isOpen={modalIsOpen}
-                className="editModal"
-                contentLabel="Edit Stage"
-            >
-                <h2>Hello</h2>
-                <button onClick={closeAndClear}>Cancel</button>
-                <div>this is a modal!</div>
-                <form>
-                    <input />
-                    <button>test</button>
-                </form>
-            </Modal>
-
         </div>
     );
 }

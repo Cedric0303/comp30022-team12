@@ -80,3 +80,24 @@
     outline: none;
     padding: 20px;
 }
+
+#stageContainer {
+    display: grid;
+    grid-template-columns: 3em 1fr;
+}
+
+.stagePos {
+    margin: 0;
+    padding: 0.4em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 800;
+    font-size: 1.4em;
+
+    box-sizing: border-box;
+    height: 2.5em;
+
+    background-color: #cecece;
+}
