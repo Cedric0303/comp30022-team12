@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Format each client
 export default function Client(client) {
-
     const { email, firstName, lastName, stage, updatedAt } = client;
 
     return (
@@ -14,14 +13,15 @@ export default function Client(client) {
             <td>
                 <NavLink to={"/clients/" + email}>
                     <span className="clientFullName">
-                        {firstName} {lastName} <FontAwesomeIcon icon="chevron-right" />
+                        {firstName} {lastName}{" "}
+                        <FontAwesomeIcon icon="chevron-right" />
                     </span>
                 </NavLink>
             </td>
             <td>
                 {/* The last time the client's profile was changed in any way */}
                 {/* Also includes adding an activity/order */}
-                <span className="lastInteracted"> 
+                <span className="lastInteracted">
                     <Moment format="Do MMM YY">{updatedAt}</Moment>
                 </span>
             </td>
@@ -36,8 +36,8 @@ export default function Client(client) {
                         pathname: "../calendar",
                         state: {
                             client: client,
-                            fromClient: true
-                        } 
+                            fromClient: true,
+                        },
                     }}
                 >
                     <FontAwesomeIcon icon="calendar-alt" />

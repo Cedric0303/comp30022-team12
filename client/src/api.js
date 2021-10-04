@@ -169,7 +169,6 @@ export function useClient(cid) {
     };
 }
 
-
 // Get the list of activities from the database
 function getActivities(cid) {
     const endpoint = BASE_URL + "/api/activities";
@@ -253,7 +252,7 @@ export function postNewNote(noteBody) {
 
 export function deleteNote(noteBody) {
     const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/removeNote";
-    console.log(noteBody)
+    console.log(noteBody);
     return axios
         .post(endpoint, { nid: noteBody.nid, withCredentials: true })
         .then(() => {

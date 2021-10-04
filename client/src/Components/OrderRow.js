@@ -2,7 +2,6 @@ import React from "react";
 
 // Format each meeting
 export default function OrderRow(order) {
-
     const { _id, orderTotal } = order;
 
     return (

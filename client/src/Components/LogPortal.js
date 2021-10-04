@@ -2,7 +2,6 @@ import React from "react";
 import "./css/portal.css";
 
 export default function LogPortal(props) {
-
     // const portalContent = () => {
     //     if (loading) {
     //         return (
@@ -31,5 +30,5 @@ export default function LogPortal(props) {
             <p className="portalHeading">Activity Log</p>
             {/* {portalContent()} */}
         </div>
-    )
+    );
 }

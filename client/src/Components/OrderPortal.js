@@ -6,8 +6,7 @@ import OrderRow from "./OrderRow.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function OrderPortal(props) {
-
-    const { loading, ordersData, error } = useOrders(props.cid)
+    const { loading, ordersData, error } = useOrders(props.cid);
 
     const portalContent = () => {
         if (loading) {
@@ -26,18 +25,18 @@ export default function OrderPortal(props) {
             return (
                 <div className="portalContent">
                     {ordersData.orders.map((order) => (
-                        <OrderRow  key={order._id} {...order} />
+                        <OrderRow key={order._id} {...order} />
                     ))}
                 </div>
-            )
+            );
         }
-    }
+    };
     return (
         <div className="clientOrdersPortal">
-            <NavLink
-                to={"/clients/" + props.cid + "/orders"}
-            >
-                <p className="portalHeading">Order History  <FontAwesomeIcon icon="chevron-right" /></p>
+            <NavLink to={"/clients/" + props.cid + "/orders"}>
+                <p className="portalHeading">
+                    Order History <FontAwesomeIcon icon="chevron-right" />
+                </p>
             </NavLink>
             <div className="portalSub">
                 <span className="leftAlign">Order ID</span>
@@ -45,5 +44,5 @@ export default function OrderPortal(props) {
             </div>
             {portalContent()}
         </div>
-    )
+    );
 }

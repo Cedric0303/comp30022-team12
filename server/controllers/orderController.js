@@ -93,14 +93,16 @@ const createOrder = async (req, res) => {
                 }
             );
         }
-        await Clients.findOneAndUpdate({
-            email: req.body.clientReference,
-        },
-        {
-            $set: {
-                updatedAt: new Date(),
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
             },
-        });
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         const order = await Orders.findOne({
             _id: result.insertedId,
         });
@@ -123,14 +125,16 @@ const editOrder = async (req, res) => {
         username: req.body.userReference,
     });
     if (client && user) {
-        await Clients.findOneAndUpdate({
-            email: req.body.clientReference,
-        },
-        {
-            $set: {
-                updatedAt: new Date(),
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
             },
-        });
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         const orderItems = req.body.orderArray;
         for (var i in orderItems) {
             var newOrderItem = new OrderItemModel({

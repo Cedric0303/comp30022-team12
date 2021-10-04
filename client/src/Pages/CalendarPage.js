@@ -6,14 +6,13 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useActivities } from "../api.js";
 
 function CalendarPage(props) {
-
     const getCid = () => {
         if (props.location.state === null) {
             return null;
         } else if (props.location.state.client) {
             return props.location.state.client.email;
         }
-    }
+    };
 
     const { loading, activitiesData, error } = useActivities(getCid());
 
@@ -25,11 +24,14 @@ function CalendarPage(props) {
         } else if (props.location.state.client) {
             return (
                 <div>
-                    <p>Showing meetings with {props.location.state.client.firstName}</p>
+                    <p>
+                        Showing meetings with{" "}
+                        {props.location.state.client.firstName}
+                    </p>
                 </div>
             );
         }
-    }
+    };
 
     const fromClient = () => {
         if (props.location.state === null) {
@@ -37,7 +39,7 @@ function CalendarPage(props) {
         } else {
             return "agenda";
         }
-    }
+    };
 
     const pageMain = () => {
         if (loading) {

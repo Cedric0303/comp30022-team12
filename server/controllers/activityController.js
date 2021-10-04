@@ -80,14 +80,16 @@ const createActivity = async (req, res) => {
             _id: mongoose.Types.ObjectId(result.insertedId),
         });
         // update last interaction time with client
-        await Clients.findOneAndUpdate({
+        await Clients.findOneAndUpdate(
+            {
                 email: req.body.clientReference,
             },
             {
                 $set: {
                     updatedAt: new Date(),
                 },
-            });
+            }
+        );
         res.json({
             message: "Activity creation successful!",
             activity: activity,
@@ -107,14 +109,16 @@ const editActivity = async (req, res) => {
         username: req.body.userReference,
     });
     if (client && user) {
-        await Clients.findOneAndUpdate({
-            email: req.body.clientReference,
-        },
-        {
-            $set: {
-                updatedAt: new Date(),
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
             },
-        });
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         await Activities.findOneAndUpdate(
             {
                 _id: mongoose.Types.ObjectId(req.params.aid),

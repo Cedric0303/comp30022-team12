@@ -6,9 +6,10 @@ import MeetingRow from "../Components/MeetingRow.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function MeetingPortal(props) {
-    
-    const { loading, activitiesData, error } = useActivities(props.client.email)
-    
+    const { loading, activitiesData, error } = useActivities(
+        props.client.email
+    );
+
     const portalContent = () => {
         if (loading) {
             return (
@@ -29,9 +30,9 @@ export default function MeetingPortal(props) {
                         <MeetingRow key={activity._id} {...activity} />
                     ))}
                 </div>
-            )
+            );
         }
-    }
+    };
     return (
         <div className="clientMeetingsPortal">
             <NavLink
@@ -39,14 +40,15 @@ export default function MeetingPortal(props) {
                     pathname: "../calendar",
                     state: {
                         client: props.client,
-                        fromClient: true
-                    } 
+                        fromClient: true,
+                    },
                 }}
             >
-                <p className="portalHeading">Meetings <FontAwesomeIcon icon="chevron-right" /></p>
+                <p className="portalHeading">
+                    Meetings <FontAwesomeIcon icon="chevron-right" />
+                </p>
             </NavLink>
             {portalContent()}
-
         </div>
-    )
+    );
 }

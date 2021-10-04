@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import NoteRow from "../Components/NoteRow.js"
+import NoteRow from "../Components/NoteRow.js";
 import { postNewNote } from "../api.js";
 import "./css/portal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function NotePortal(props) {
-
     const [isOpen, setIsOpen] = useState(false);
     const [note, setNote] = useState("");
 
-    Modal.setAppElement(document.getElementById('root') || undefined);
+    Modal.setAppElement(document.getElementById("root") || undefined);
 
     // Open and close the modal
     function toggleModal() {
@@ -24,15 +23,15 @@ export default function NotePortal(props) {
     const onSubmit = (e) => {
         e.preventDefault();
         if (!note) {
-            alert("Note must not be empty!")
+            alert("Note must not be empty!");
         } else {
             const noteBody = {
                 cid: props.client.email,
-                note: note
-            }
+                note: note,
+            };
             postNewNote(noteBody);
         }
-    }
+    };
 
     return (
         <div className="clientNotesPortal">
@@ -48,11 +47,7 @@ export default function NotePortal(props) {
                 contentLabel="Add Note"
                 className="addNoteModal"
             >
-                <form
-                    method="post"
-                    onSubmit={onSubmit}
-                    className="addNoteForm"
-                >
+                <form method="post" onSubmit={onSubmit} className="addNoteForm">
                     <h3 id="addNoteHeading">Add a new note</h3>
                     <textarea
                         className="noteField"
@@ -60,23 +55,19 @@ export default function NotePortal(props) {
                         type="text"
                         placeholder="Add your note here"
                         value={note}
-                        onChange={(e) =>
-                            setNote(e.target.value)
-                        }
+                        onChange={(e) => setNote(e.target.value)}
                     />
-                    <button
-                        type="submit"
-                        id="addNoteButton"
-                        onClick={onSubmit}
-                    >
+                    <button type="submit" id="addNoteButton" onClick={onSubmit}>
                         Add Note
                     </button>
-                    <button id="cancelAddNote" onClick={toggleModal}>Cancel</button>
+                    <button id="cancelAddNote" onClick={toggleModal}>
+                        Cancel
+                    </button>
                 </form>
             </Modal>
             {props.client.notes.map((note) => (
                 <NoteRow key={note._id} cid={props.client.email} note={note} />
             ))}
         </div>
-)
+    );
 }

@@ -10,8 +10,9 @@ import { useClient } from "../api.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function SpecificClient(props) {
-    
-    const { loading, clientData, error } = useClient(props.match.params.clientID);
+    const { loading, clientData, error } = useClient(
+        props.match.params.clientID
+    );
 
     const client = clientData.client;
 
@@ -27,7 +28,7 @@ function SpecificClient(props) {
         } else if (!clientData.client) {
             <div className="specificClientError">
                 <p>Something went wrong: No Client Found</p>
-            </div>
+            </div>;
         } else {
             return (
                 <div>
@@ -35,28 +36,51 @@ function SpecificClient(props) {
                         <h2 id="clientHeading">
                             {client.firstName} {client.lastName}
                         </h2>
-                        <NavLink to={"/clients/" + client.email + "/edit"} className="clientHeaderActions">
+                        <NavLink
+                            to={"/clients/" + client.email + "/edit"}
+                            className="clientHeaderActions"
+                        >
                             <div className="headerActionBox">
-                                <FontAwesomeIcon className="headerActionIcon" icon="edit" size="2x" />
+                                <FontAwesomeIcon
+                                    className="headerActionIcon"
+                                    icon="edit"
+                                    size="2x"
+                                />
                             </div>
                             <p>Edit Client</p>
                         </NavLink>
-                        <NavLink to={"/clients/" + client.email + "/scheduleMeeting"} className="clientHeaderActions">
-                            <div className="headerActionBox" id="scheduleMeeting">
-                                <FontAwesomeIcon className="headerActionIcon" icon="calendar-plus" size="2x" />
+                        <NavLink
+                            to={"/clients/" + client.email + "/scheduleMeeting"}
+                            className="clientHeaderActions"
+                        >
+                            <div
+                                className="headerActionBox"
+                                id="scheduleMeeting"
+                            >
+                                <FontAwesomeIcon
+                                    className="headerActionIcon"
+                                    icon="calendar-plus"
+                                    size="2x"
+                                />
                             </div>
                             <p>Schedule Meeting</p>
                         </NavLink>
                     </div>
                     <div id="clientInfo">
+                        <p>Stage: {client.stage}</p>
                         <p>
-                            Stage: {client.stage}
+                            {client.email}{" "}
+                            <FontAwesomeIcon
+                                className="contactIcon"
+                                icon="envelope"
+                            />
                         </p>
                         <p>
-                            {client.email} <FontAwesomeIcon className="contactIcon" icon="envelope" />
-                        </p>
-                        <p>
-                            {client.phoneNumber} <FontAwesomeIcon className="contactIcon" icon="phone" />
+                            {client.phoneNumber}{" "}
+                            <FontAwesomeIcon
+                                className="contactIcon"
+                                icon="phone"
+                            />
                         </p>
                     </div>
                     <div className="clientGrid">
@@ -73,9 +97,7 @@ function SpecificClient(props) {
     return (
         <div>
             <Navbar />
-            <main className="specificClient">
-                {pageMain()}
-            </main>
+            <main className="specificClient">{pageMain()}</main>
         </div>
     );
 }
