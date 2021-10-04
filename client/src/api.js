@@ -241,3 +241,22 @@ export function useOrders(cid) {
         error,
     };
 }
+
+export function postNewNote(noteBody) {
+    const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/addNote";
+    return axios
+        .post(endpoint, { note: noteBody.note, withCredentials: true })
+        .then(() => {
+            window.location.reload();
+        });
+}
+
+export function deleteNote(noteBody) {
+    const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/removeNote";
+    console.log(noteBody)
+    return axios
+        .post(endpoint, { nid: noteBody.nid, withCredentials: true })
+        .then(() => {
+            window.location.reload();
+        });
+}

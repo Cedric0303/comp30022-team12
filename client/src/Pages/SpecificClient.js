@@ -48,7 +48,7 @@ function SpecificClient(props) {
                         <MeetingPortal client={client} />
                         <LogPortal cid={client.email} />
                         <OrderPortal cid={client.email} />
-                        <NotePortal notes={client.notes} />
+                        <NotePortal client={client} />
                     </div>
                 </div>
             );
