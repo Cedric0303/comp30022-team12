@@ -83,7 +83,7 @@ const addClientNote = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -93,7 +93,7 @@ const addClientNote = async (req, res) => {
             }
             res.json({
                 message: "Add note successful!",
-                user: doc.value,
+                client: doc.value,
                 nid: newNote._id,
             });
         }
@@ -119,7 +119,7 @@ const removeClientNote = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -129,7 +129,7 @@ const removeClientNote = async (req, res) => {
             }
             res.json({
                 message: "Remove note successful!",
-                user: doc.value,
+                client: doc.value,
             });
         }
     );
@@ -153,7 +153,7 @@ const changeClientStage = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -226,7 +226,7 @@ const editClient = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {

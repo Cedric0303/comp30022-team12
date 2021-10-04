@@ -41,7 +41,7 @@
     size: 5x;
 }
 
-#scheduleMeeting {
+#scheduleMeetingButton {
     margin-right: 10px;
 }
 
@@ -74,7 +74,6 @@
 
 .clientGrid div {
     background-color: white;
-    overflow: scroll;
 }
 
 .clientGrid a:hover {

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function NotePortal(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [note, setNote] = useState("");
+    const [notes, setNotes] = useState(props.client.notes);
 
     Modal.setAppElement(document.getElementById("root") || undefined);
 
@@ -22,14 +23,15 @@ export default function NotePortal(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (!note) {
+        if (!note.trim().length) {
             alert("Note must not be empty!");
         } else {
             const noteBody = {
                 cid: props.client.email,
                 note: note,
             };
-            postNewNote(noteBody);
+            postNewNote(noteBody).then((res) => setNotes(res.notes));
+            toggleModal();
         }
     };
 
@@ -65,9 +67,11 @@ export default function NotePortal(props) {
                     </button>
                 </form>
             </Modal>
-            {props.client.notes.map((note) => (
-                <NoteRow key={note._id} cid={props.client.email} note={note} />
-            ))}
+            <div className="portalContent">
+                {notes.map((note) => (
+                    <NoteRow key={note._id} cid={props.client.email} note={note} />
+                ))}
+            </div>  
         </div>
     );
 }

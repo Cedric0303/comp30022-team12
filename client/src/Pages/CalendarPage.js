@@ -7,7 +7,7 @@ import { useActivities } from "../api.js";
 
 function CalendarPage(props) {
     const getCid = () => {
-        if (props.location.state === null) {
+        if (props.location.state === null || props.location.state === undefined) {
             return null;
         } else if (props.location.state.client) {
             return props.location.state.client.email;
@@ -19,7 +19,7 @@ function CalendarPage(props) {
     const localizer = momentLocalizer(moment);
 
     const selectedClient = () => {
-        if (props.location.state === null) {
+        if (props.location.state === null || props.location.state === undefined) {
             return;
         } else if (props.location.state.client) {
             return (
@@ -34,7 +34,7 @@ function CalendarPage(props) {
     };
 
     const fromClient = () => {
-        if (props.location.state === null) {
+        if (props.location.state === null || props.location.state === undefined) {
             return "month";
         } else {
             return "agenda";
@@ -51,12 +51,7 @@ function CalendarPage(props) {
                 </div>
             );
         } else {
-            // Convert Strings to Dates (JSON returns Strings)
-            activitiesData.activities.forEach((act) => {
-                act.timeStart = new Date(act.timeStart);
-                act.timeEnd = new Date(act.timeEnd);
-            });
-
+            
             return (
                 <div>
                     {selectedClient()}

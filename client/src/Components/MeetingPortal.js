@@ -26,6 +26,7 @@ export default function MeetingPortal(props) {
         } else {
             return (
                 <div className="portalContent">
+                    {/* Meetings sorted by date (newest first) */}
                     {activitiesData.activities.map((activity) => (
                         <MeetingRow key={activity._id} {...activity} />
                     ))}

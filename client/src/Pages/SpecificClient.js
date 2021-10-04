@@ -50,12 +50,18 @@ function SpecificClient(props) {
                             <p>Edit Client</p>
                         </NavLink>
                         <NavLink
-                            to={"/clients/" + client.email + "/scheduleMeeting"}
+                            to={{
+                                pathname: "/calendar/scheduleMeeting",
+                                state: {
+                                    client: client,
+                                    fromClient: true,
+                                },
+                            }}
                             className="clientHeaderActions"
                         >
                             <div
                                 className="headerActionBox"
-                                id="scheduleMeeting"
+                                id="scheduleMeetingButton"
                             >
                                 <FontAwesomeIcon
                                     className="headerActionIcon"
