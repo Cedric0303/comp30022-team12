@@ -55,18 +55,24 @@ A personal CRM
 
 #### Frontend
 
+-   `@date-io/moment`
 -   `@fortawesome/fontawesome-svg-core`
 -   `@fortawesome/free-regular-svg-icons`
 -   `@fortawesome/free-solid-svg-icons`
 -   `@fortawesome/react-fontawesome`
+-   `@material-ui/pickers`
 -   `@testing-library/jest-dom`
 -   `@testing-library/react`
 -   `@testing-library/user-event`
 -   `axios`
 -   `jwt-decode`
+-   `moment`
 -   `react`
+-   `react-big-calendar`
 -   `react-dom`
 -   `react-helmet`
+-   `react-modal`
+-   `react-moment`
 -   `react-router-dom`
 -   `react-scripts`
 -   `web-vitals`
