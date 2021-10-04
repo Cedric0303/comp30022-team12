@@ -1,11 +1,11 @@
-.portalContent p {
-    padding: 5px 12px;
-}
-
 .portalHeading {
+    position: sticky;
+    top: 0;
     font-size: 18px;
     padding: 5px 12px;
     background-color: #b3ddfd;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .portalSub {
@@ -13,6 +13,19 @@
     padding: 5px 12px;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
+}
+
+.portalContent {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 128px;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.portalContent p {
+    padding: 5px 12px;
 }
 
 .portalRow {

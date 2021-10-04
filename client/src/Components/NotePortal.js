@@ -65,9 +65,11 @@ export default function NotePortal(props) {
                     </button>
                 </form>
             </Modal>
-            {props.client.notes.map((note) => (
-                <NoteRow key={note._id} cid={props.client.email} note={note} />
-            ))}
+            <div className="portalContent">
+                {props.client.notes.map((note) => (
+                    <NoteRow key={note._id} cid={props.client.email} note={note} />
+                ))}
+            </div>  
         </div>
     );
 }
