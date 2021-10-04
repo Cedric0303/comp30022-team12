@@ -16,10 +16,26 @@ const getActivities = async (req, res) => {
             message: "Get all activities successful!",
             activities: activities,
         });
+    } else if (!req.body.clientReference) {
+        try {
+            const activities = await Activities.find({
+                userReference: req.body.userReference,
+            }).toArray();
+            res.json({
+                message: "Get activities successful!",
+                activities: activities,
+            });
+        } catch {
+            res.json({
+                message: "No activities available!",
+                activities: [],
+            });
+        }
     } else {
         try {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
+                clientReference: req.body.clientReference,
             }).toArray();
             res.json({
                 message: "Get activities successful!",
@@ -63,6 +79,17 @@ const createActivity = async (req, res) => {
         const activity = await Activities.findOne({
             _id: mongoose.Types.ObjectId(result.insertedId),
         });
+        // update last interaction time with client
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
+            },
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         res.json({
             message: "Activity creation successful!",
             activity: activity,
@@ -82,6 +109,16 @@ const editActivity = async (req, res) => {
         username: req.body.userReference,
     });
     if (client && user) {
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
+            },
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         await Activities.findOneAndUpdate(
             {
                 _id: mongoose.Types.ObjectId(req.params.aid),

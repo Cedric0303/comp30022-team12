@@ -6,17 +6,44 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useActivities } from "../api.js";
 
 function CalendarPage(props) {
-    const { loading, activitiesData, error } = useActivities();
+    const getCid = () => {
+        if (props.location.state === null) {
+            return null;
+        } else if (props.location.state.client) {
+            return props.location.state.client.email;
+        }
+    };
+
+    const { loading, activitiesData, error } = useActivities(getCid());
 
     const localizer = momentLocalizer(moment);
 
-    const pageMain = () => {
-        if (loading) {
+    const selectedClient = () => {
+        if (props.location.state === null) {
+            return;
+        } else if (props.location.state.client) {
             return (
-                <div className="clientsBox">
-                    <ul>Loading...</ul>
+                <div>
+                    <p>
+                        Showing meetings with{" "}
+                        {props.location.state.client.firstName}
+                    </p>
                 </div>
             );
+        }
+    };
+
+    const fromClient = () => {
+        if (props.location.state === null) {
+            return "month";
+        } else {
+            return "agenda";
+        }
+    };
+
+    const pageMain = () => {
+        if (loading) {
+            return;
         } else if (error) {
             return (
                 <div className="clientsBox">
@@ -32,8 +59,10 @@ function CalendarPage(props) {
 
             return (
                 <div>
+                    {selectedClient()}
                     <Calendar
                         localizer={localizer}
+                        defaultView={fromClient()}
                         events={activitiesData.activities}
                         startAccessor="timeStart"
                         endAccessor="timeEnd"

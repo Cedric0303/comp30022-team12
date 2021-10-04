@@ -75,6 +75,9 @@ const addClientNote = async (req, res) => {
         },
         {
             $push: { notes: newNote },
+            $set: {
+                updatedAt: new Date(),
+            },
         },
         {
             projection: {
@@ -108,6 +111,9 @@ const removeClientNote = async (req, res) => {
                     _id: mongoose.Types.ObjectId(req.body.nid),
                 },
             },
+            $set: {
+                updatedAt: new Date(),
+            },
         },
         {
             projection: {
@@ -140,6 +146,7 @@ const changeClientStage = async (req, res) => {
         {
             $set: {
                 stage: changeStage.name,
+                updatedAt: new Date(),
             },
         },
         {
@@ -177,10 +184,10 @@ const createClient = async (req, res) => {
         stage: defaultNewStage.name,
         notes: [],
     });
-    const result = await Clients.insertOne(newClient);
+    const result = await newClient.save();
     const client = await Clients.findOne(
         {
-            _id: mongoose.Types.ObjectId(result.insertedId),
+            _id: result._id,
         },
         {
             projection: {
@@ -212,6 +219,7 @@ const editClient = async (req, res) => {
                 photoURL: req.body.photoURL,
                 userReference: req.body.userReference,
                 stage: stage,
+                updatedAt: new Date(),
             },
         },
         {

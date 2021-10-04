@@ -16,10 +16,26 @@ const getOrders = async (req, res) => {
             message: "Get all orders successful!",
             orders: orders,
         });
+    } else if (!req.body.clientReference) {
+        try {
+            const orders = await Orders.find({
+                userReference: req.body.userReference,
+            }).toArray();
+            res.json({
+                message: "Get orders successful!",
+                orders: orders,
+            });
+        } catch {
+            res.json({
+                message: "No orders available!",
+                orders: [],
+            });
+        }
     } else {
         try {
             const orders = await Orders.find({
                 userReference: req.body.userReference,
+                clientReference: req.body.clientReference,
             }).toArray();
             res.json({
                 message: "Get orders successful!",
@@ -77,6 +93,16 @@ const createOrder = async (req, res) => {
                 }
             );
         }
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
+            },
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         const order = await Orders.findOne({
             _id: result.insertedId,
         });
@@ -99,6 +125,16 @@ const editOrder = async (req, res) => {
         username: req.body.userReference,
     });
     if (client && user) {
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
+            },
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         const orderItems = req.body.orderArray;
         for (var i in orderItems) {
             var newOrderItem = new OrderItemModel({

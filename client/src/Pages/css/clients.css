@@ -58,13 +58,16 @@ td {
     border: 1px solid #cecece;
 }
 
-#lastInteracted,
-#clientStage {
+#lastInteracted {
     width: 18%;
 }
 
+#clientStage {
+    width: 14%;
+}
+
 #clientActions {
-    width: 24%;
+    width: 30%;
 }
 
 #clientsListHeading {

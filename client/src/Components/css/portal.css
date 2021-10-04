@@ -1,0 +1,130 @@
+.portalContent p {
+    padding: 5px 12px;
+}
+
+.portalHeading {
+    font-size: 18px;
+    padding: 5px 12px;
+    background-color: #b3ddfd;
+}
+
+.portalSub {
+    font-size: 16px;
+    padding: 5px 12px;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.portalRow {
+    font-size: 16px;
+    padding: 5px 12px;
+    border-bottom: 1px solid #b3ddfd;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.rightAlign {
+    float: right;
+    text-align: right;
+}
+
+.addNote {
+    font-family: inherit;
+    float: right;
+    background: none;
+    border: none;
+    font-size: 16px;
+}
+
+.addNote:hover {
+    cursor: pointer;
+    color: grey;
+}
+
+.addNoteModal {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 700px;
+    height: 360px;
+    margin: auto;
+    background-color: white;
+    border-radius: 15px;
+    border: 2px solid #b3ddfd;
+}
+
+#addNoteHeading {
+    font-size: 24px;
+    padding-bottom: 20px;
+}
+
+.addNoteForm {
+    padding: 40px;
+}
+
+.noteField {
+    font-family: inherit;
+    width: 100%;
+    height: 200px;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    padding: 10px;
+    line-height: 1.8;
+}
+
+.noteField:focus {
+    outline: none;
+}
+
+.addNoteForm button {
+    float: right;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+#addNoteButton {
+    color: white;
+    margin-left: 10px;
+    background-color: #78cd1b;
+}
+
+#addNoteButton:hover {
+    background-color: #569417;
+}
+
+#cancelAddNote {
+    background-color: lightgrey;
+    color: black;
+}
+
+#cancelAddNote:hover {
+    text-decoration: underline;
+}
+
+.crossNote {
+    float: right;
+    padding-right: 6px;
+}
+
+.crossNote:hover {
+    cursor: pointer;
+    color: red;
+    text-decoration: underline;
+}
+
+.cancelDelete {
+    float: right;
+    padding-right: 6px;
+}
+
+.cancelDelete:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
