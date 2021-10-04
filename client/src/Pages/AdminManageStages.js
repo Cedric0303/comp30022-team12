@@ -3,6 +3,7 @@ import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
 import { getStages, postStage } from "../api.js";
 import Stage from "../Components/Stage.js";
+import StageUpdateButtons from "../Components/StageUpdateButtons.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
@@ -87,6 +88,8 @@ function AdminManageStages(props) {
 
     const filteredStages = filterStages(stagesData, searchQuery);
 
+    const [posUpdateable, setPosUpdateable] = useState(false);
+
     const reorder = (list, startIndex, endIndex) => {
         const result = Array.from(list);
         const [moved] = result.splice(startIndex, 1);
@@ -108,8 +111,6 @@ function AdminManageStages(props) {
         return updatedList;
     }
 
-
-
     function handleOnDragEnd(result) {
         if (!result.destination) {
             return;
@@ -122,9 +123,20 @@ function AdminManageStages(props) {
             result.destination.index
         );
         setStages(updateCurrentPositions(newStageOrder));
-    }
-    console.log(stagesData);
 
+        let movedStages = false;
+        for (let i=0; i<stagesData.length; i++) {
+            if (stagesData[i].movedPos) {
+                movedStages = true;
+            }
+        }
+        if (movedStages) {
+            setPosUpdateable(true);
+        } else {
+            setPosUpdateable(false);
+        }
+    }
+    
     const pageMain = () => {
         if (loading) {
             return (
@@ -149,6 +161,7 @@ function AdminManageStages(props) {
                                 onInput={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search stages"
                             />
+                            <StageUpdateButtons active={posUpdateable} />
                             <button id="addStageButton" onClick={openModal}>
                                 <span>Add New Stage </span>
                                 <FontAwesomeIcon icon="plus" />
