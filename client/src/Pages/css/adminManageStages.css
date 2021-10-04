@@ -85,3 +85,11 @@
 
     background-color: #cecece;
 }
+
+.stagePos.posChanged {
+    background-color: #c1ff7a;
+}
+
+.hide {
+    display: none;
+}
