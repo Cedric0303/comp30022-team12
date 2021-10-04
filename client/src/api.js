@@ -175,7 +175,7 @@ function getActivities(cid) {
     return axios
         .post(endpoint, {
             userReference: Auth.getUsername(),
-            cid: cid,
+            clientReference: cid,
             withCredentials: true,
         })
         .then((res) => res.data);
@@ -211,7 +211,7 @@ function getOrders(cid) {
     return axios
         .post(endpoint, {
             userReference: Auth.getUsername(),
-            cid: cid,
+            clientReference: cid,
             withCredentials: true,
         })
         .then((res) => res.data);

@@ -16,7 +16,7 @@ const getActivities = async (req, res) => {
             message: "Get all activities successful!",
             activities: activities,
         });
-    } else if (!req.body.cid) {
+    } else if (!req.body.clientReference) {
         try {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
@@ -35,7 +35,7 @@ const getActivities = async (req, res) => {
         try {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
-                clientReference: req.body.cid,
+                clientReference: req.body.clientReference,
             }).toArray();
             res.json({
                 message: "Get activities successful!",

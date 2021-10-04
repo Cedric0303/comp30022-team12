@@ -25,7 +25,7 @@ function SpecificClient(props) {
                     <p>Something went wrong: {error.message}</p>
                 </div>
             );
-        } else if (!clientData.client) {
+        } else if (!client) {
             <div className="specificClientError">
                 <p>Something went wrong: No Client Found</p>
             </div>;
