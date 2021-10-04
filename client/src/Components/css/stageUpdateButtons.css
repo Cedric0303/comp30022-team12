@@ -21,7 +21,7 @@
     cursor: pointer;
 }
 
-#confirmChangesButton:enabled {
+#saveChangesButton:enabled {
     background-color: #baff6b;
 }
 
