@@ -16,8 +16,15 @@
     font-family: inherit;
 }
 
-#updateButtons button:hover {
+#updateButtons button:enabled:hover {
     filter: brightness(0.8);
     cursor: pointer;
 }
 
+#confirmChangesButton:enabled {
+    background-color: #baff6b;
+}
+
+#cancelChangesButton:enabled {
+    background-color: #ff8851;
+}

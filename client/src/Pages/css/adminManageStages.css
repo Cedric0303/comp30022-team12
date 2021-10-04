@@ -60,10 +60,6 @@
     background-color: #f6f6f6;
 }
 
-#stages > :last-child {
-    border-bottom: 2px solid #cecece;
-}
-
 .stagesBox {
     background-color: white;
     margin: 0;
@@ -99,7 +95,7 @@
 }
 
 .stagePos {
-    margin: 0;
+    margin: -1px 0 0 0;
     padding: 0.4em 0;
     display: flex;
     justify-content: center;
