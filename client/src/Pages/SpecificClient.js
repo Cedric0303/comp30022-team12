@@ -61,7 +61,7 @@ function SpecificClient(props) {
                         >
                             <div
                                 className="headerActionBox"
-                                id="scheduleMeeting"
+                                id="scheduleMeetingButton"
                             >
                                 <FontAwesomeIcon
                                     className="headerActionIcon"

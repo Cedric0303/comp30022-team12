@@ -34,7 +34,7 @@ function CalendarPage(props) {
     };
 
     const fromClient = () => {
-        if (props.location.state === null) {
+        if (props.location.state === null || props.location.state === undefined) {
             return "month";
         } else {
             return "agenda";
@@ -51,12 +51,7 @@ function CalendarPage(props) {
                 </div>
             );
         } else {
-            // Convert Strings to Dates (JSON returns Strings)
-            activitiesData.activities.forEach((act) => {
-                act.timeStart = new Date(act.timeStart);
-                act.timeEnd = new Date(act.timeEnd);
-            });
-
+            
             return (
                 <div>
                     {selectedClient()}

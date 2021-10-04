@@ -11,7 +11,7 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getActivities = async (req, res) => {
     if (!req.body.userReference) {
-        const activities = await Activities.find({}).toArray();
+        const activities = await Activities.find({}).sort({timeStart: -1}).toArray();
         res.json({
             message: "Get all activities successful!",
             activities: activities,
@@ -20,7 +20,7 @@ const getActivities = async (req, res) => {
         try {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
-            }).toArray();
+            }).sort({timeStart: -1}).toArray();
             res.json({
                 message: "Get activities successful!",
                 activities: activities,
@@ -36,7 +36,7 @@ const getActivities = async (req, res) => {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
                 clientReference: req.body.clientReference,
-            }).toArray();
+            }).sort({timeStart: -1}).toArray();
             res.json({
                 message: "Get activities successful!",
                 activities: activities,

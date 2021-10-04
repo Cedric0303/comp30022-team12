@@ -22,7 +22,7 @@ export default function NotePortal(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (!note) {
+        if (!note.trim().length) {
             alert("Note must not be empty!");
         } else {
             const noteBody = {
