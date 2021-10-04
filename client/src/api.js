@@ -246,27 +246,22 @@ export function useOrders(cid) {
     };
 }
 
-export function postNewNote(noteBody) {
+export async function postNewNote(noteBody) {
     const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/addNote";
-    return axios
+    const res = await axios
         .post(endpoint, { note: noteBody.note, withCredentials: true })
-        .then(() => {
-            window.location.reload();
-        });
+    return res.data.user;
 }
 
 export function deleteNote(noteBody) {
     const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/removeNote";
     return axios
         .post(endpoint, { nid: noteBody.nid, withCredentials: true })
-        .then(() => {
-            window.location.reload();
-        });
+        .then((res) => res.data);
 }
 
 export function postMeeting(meetingBody) {
     const endpoint = BASE_URL + "/api/activities/create";
-    console.log(meetingBody);
     return axios
         .post(endpoint, { 
             clientReference: meetingBody.cid,

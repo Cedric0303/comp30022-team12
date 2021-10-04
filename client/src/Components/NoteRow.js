@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function NoteRow(props) {
     const { _id, body } = props.note;
     const [confirmedDelete, setConfirmedDelete] = useState(false);
+    const [deleted, setDeleted] = useState(false);
 
     function toggleDelete() {
         setConfirmedDelete(!confirmedDelete);
@@ -17,8 +18,21 @@ export default function NoteRow(props) {
             nid: _id,
         };
 
-        deleteNote(noteBody);
+        deleteNote(noteBody).then(setDeleted(true));
     };
+
+    const pageMain = () => {
+        if (deleted) {
+            return;
+        } else {
+            return (
+                <div className="portalRow">
+                    <span>{body}</span>
+                    {confirmDelete()}
+                </div>
+            );
+        }
+    }
 
     const confirmDelete = () => {
         if (confirmedDelete) {
@@ -44,9 +58,8 @@ export default function NoteRow(props) {
     };
 
     return (
-        <div className="portalRow">
-            <span>{body}</span>
-            {confirmDelete()}
+        <div>
+            {pageMain()}
         </div>
     );
 }

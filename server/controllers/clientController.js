@@ -83,7 +83,7 @@ const addClientNote = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnOriginal: false
         },
         (err, doc) => {
             if (err) {

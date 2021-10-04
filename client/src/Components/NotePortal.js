@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function NotePortal(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [note, setNote] = useState("");
+    const [notes, setNotes] = useState(props.client.notes);
 
     Modal.setAppElement(document.getElementById("root") || undefined);
 
@@ -29,7 +30,8 @@ export default function NotePortal(props) {
                 cid: props.client.email,
                 note: note,
             };
-            postNewNote(noteBody);
+            postNewNote(noteBody).then((res) => setNotes(res.notes));
+            toggleModal();
         }
     };
 
@@ -66,7 +68,7 @@ export default function NotePortal(props) {
                 </form>
             </Modal>
             <div className="portalContent">
-                {props.client.notes.map((note) => (
+                {notes.map((note) => (
                     <NoteRow key={note._id} cid={props.client.email} note={note} />
                 ))}
             </div>  
