@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar.js";
 import NotePortal from "../Components/NotePortal.js";
 import MeetingPortal from "../Components/MeetingPortal.js";
@@ -30,9 +31,23 @@ function SpecificClient(props) {
         } else {
             return (
                 <div>
-                    <h2 id="clientHeading">
-                        {client.firstName} {client.lastName}
-                    </h2>
+                    <div id="clientHeader">
+                        <h2 id="clientHeading">
+                            {client.firstName} {client.lastName}
+                        </h2>
+                        <NavLink to={"/clients/" + client.email + "/edit"} className="clientHeaderActions">
+                            <div className="headerActionBox">
+                                <FontAwesomeIcon className="headerActionIcon" icon="edit" size="2x" />
+                            </div>
+                            <p>Edit Client</p>
+                        </NavLink>
+                        <NavLink to={"/clients/" + client.email + "/scheduleMeeting"} className="clientHeaderActions">
+                            <div className="headerActionBox" id="scheduleMeeting">
+                                <FontAwesomeIcon className="headerActionIcon" icon="calendar-plus" size="2x" />
+                            </div>
+                            <p>Schedule Meeting</p>
+                        </NavLink>
+                    </div>
                     <div id="clientInfo">
                         <p>
                             Stage: {client.stage}

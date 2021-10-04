@@ -10,6 +10,40 @@
     font-weight: 700;
     color: white;
     padding-bottom: 10px;
+    display: inline;
+}
+
+.clientHeaderActions {
+    float: right;
+}
+
+.clientHeaderActions:hover {
+    color: #7aade1;
+    text-decoration: underline white;
+}
+
+.headerActionBox {
+    background-color: white;
+    text-align: center;
+    width: 54px;
+    padding: 6px 0px;
+    border-radius: 5px;
+}
+
+.clientHeaderActions p {
+    width: 54px;
+    font-size: 13px;
+    text-align: center;
+    color: white;
+}
+
+
+.headerActionIcon {
+    size: 5x;
+}
+
+#scheduleMeeting {
+    margin-right: 10px;
 }
 
 #clientInfo p {

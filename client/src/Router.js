@@ -18,6 +18,7 @@ import AddClient from "./Pages/AddClient.js";
 import SpecificClient from "./Pages/SpecificClient.js";
 import EditClient from "./Pages/EditClient.js";
 import OrderHistory from "./Pages/OrderHistory.js";
+import ScheduleMeeting from "./Pages/ScheduleMeeting.js";
 
 class Router extends React.Component {
     render() {
@@ -84,6 +85,11 @@ class Router extends React.Component {
                         path="/clients/:clientID/orders"
                         exact
                         component={OrderHistory}
+                    ></ProtectedRoute>
+                    <ProtectedRoute
+                        path="/clients/:clientID/scheduleMeeting"
+                        exact
+                        component={ScheduleMeeting}
                     ></ProtectedRoute>
                 </Switch>
             </BrowserRouter>
