@@ -50,6 +50,7 @@ function AdminManageStages(props) {
         getStages()
             .then((stagesData) => {
                 setStages(stagesData.stages);
+                setStages(prevStages => updateCurrentPositions(prevStages));
                 setLoading(false);
             })
             .catch((e) => {
@@ -93,6 +94,22 @@ function AdminManageStages(props) {
         return result;
     };
 
+    const updateCurrentPositions = input => {
+        const updatedList = input.map((current, index) => {
+            const currentStage = current;
+            currentStage.newPos = index;
+            if (currentStage.position !== index) {
+                currentStage.movedPos = true;
+            } else {
+                currentStage.movedPos = false;
+            }
+            return currentStage;
+        })
+        return updatedList;
+    }
+
+
+
     function handleOnDragEnd(result) {
         if (!result.destination) {
             return;
@@ -104,12 +121,9 @@ function AdminManageStages(props) {
             result.source.index,
             result.destination.index
         );
-        setStages(newStageOrder);
-
-        // get an array of previous positions
-        // get an array of new positions
-        // if different, highlight the changed positions
+        setStages(updateCurrentPositions(newStageOrder));
     }
+    console.log(stagesData);
 
     const pageMain = () => {
         if (loading) {
@@ -143,11 +157,21 @@ function AdminManageStages(props) {
                         <li id="stagesListHeading">Stage</li>
                         <div id="stageContainer">
                             <div id="stagePosColumn">
-                                {stagesData.map((e, index)=>(
-                                    <div key={index} className="stagePos">
-                                        {index+1}
-                                    </div>
-                                ))}
+                                {stagesData.map((e, index)=>{
+                                    if (disableDragging === false) {
+                                        if (e.movedPos === true) {
+                                            return <div key={index} className="stagePos posChanged">
+                                                {index+1}
+                                            </div>
+                                        } else {
+                                            return <div key={index} className="stagePos">
+                                                {index+1}
+                                            </div>
+                                        }
+                                    } else {
+                                        return false;
+                                    }
+                                })}
                             </div>
                             <DragDropContext onDragEnd={handleOnDragEnd}>
                                 <Droppable droppableId="stagesDroppable">
