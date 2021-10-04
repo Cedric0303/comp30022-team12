@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
 import { useUsers } from "../api.js";
@@ -27,10 +28,10 @@ function AdminManageUsers(props) {
                 <div className="usersBox">
                     <ul id="usersList">
                         <li>
-                            <a id="addUser" href="users/create">
+                            <NavLink id="addUser" to="users/create">
                                 <span>Add New User </span>
                                 <FontAwesomeIcon icon="user-plus" />
-                            </a>
+                            </NavLink>
                         </li>
                         <li id="usersListHeading">Name</li>
                         {usersData.users.map((user) => (
@@ -47,7 +48,11 @@ function AdminManageUsers(props) {
     return (
         <div className="manageUsers">
             <Helmet>
-                <html style="background-color: #596e80;" />
+                <style type="text/css">{`
+                    html {
+                        background-color: #596e80;
+                    }
+                `}</style>
             </Helmet>
             <Navbar />
             <main className="manageUsersBox">

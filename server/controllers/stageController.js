@@ -87,7 +87,7 @@ const editStage = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {

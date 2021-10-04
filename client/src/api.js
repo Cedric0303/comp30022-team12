@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Auth from "./Pages/Auth";
 
 const BASE_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -82,20 +83,195 @@ export function useStages() {
     };
 }
 
+// Get the list of clients from the database
+function getClients() {
+    const endpoint = BASE_URL + "/api/clients";
+    return axios
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useClients() {
+    const [loading, setLoading] = useState(true);
+    const [clientsData, setClients] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getClients()
+            .then((clientsData) => {
+                setClients(clientsData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, []);
+    return {
+        loading,
+        clientsData,
+        error,
+    };
+}
+
 export function postUser(registerBody) {
     const endpoint = BASE_URL + "/api/users/create";
     return axios
         .post(endpoint, registerBody, { withCredentials: true })
         .then((res) => {
             var message = res.data.message;
-            if(message === "User already exists!") {
+            if (message === "User already exists!") {
                 alert(res.data.message);
                 return false;
-            }
-            else { // Created new user!
+            } else {
+                // Created new user!
                 alert(res.data.message);
                 window.location.href = "/admin/users/create";
             }
         });
 }
 
+// Get the client from the database
+function getClient(cid) {
+    const endpoint = BASE_URL + "/api/clients/" + cid;
+    return axios
+        .get(endpoint, {
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useClient(cid) {
+    const [loading, setLoading] = useState(true);
+    const [clientData, setClient] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getClient(cid)
+            .then((clientData) => {
+                setClient(clientData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, [cid]);
+    return {
+        loading,
+        clientData,
+        error,
+    };
+}
+
+// Get the list of activities from the database
+function getActivities(cid) {
+    const endpoint = BASE_URL + "/api/activities";
+    return axios
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            clientReference: cid,
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useActivities(cid) {
+    const [loading, setLoading] = useState(true);
+    const [activitiesData, setActivities] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getActivities(cid)
+            .then((activitiesData) => {
+                // Convert Strings to Dates (JSON returns Strings)
+                activitiesData.activities.forEach((act) => {
+                    act.timeStart = new Date(act.timeStart);
+                    act.timeEnd = new Date(act.timeEnd);
+                });
+                setActivities(activitiesData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, [cid]);
+    return {
+        loading,
+        activitiesData,
+        error,
+    };
+}
+
+// Get the list of orders from the database
+function getOrders(cid) {
+    const endpoint = BASE_URL + "/api/orders";
+    return axios
+        .post(endpoint, {
+            userReference: Auth.getUsername(),
+            clientReference: cid,
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned data
+export function useOrders(cid) {
+    const [loading, setLoading] = useState(true);
+    const [ordersData, setOrders] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getOrders(cid)
+            .then((ordersData) => {
+                setOrders(ordersData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, [cid]);
+    return {
+        loading,
+        ordersData,
+        error,
+    };
+}
+
+export async function postNewNote(noteBody) {
+    const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/addNote";
+    return axios
+        .post(endpoint, { note: noteBody.note, withCredentials: true })
+        .then((res) => res.data.client);
+}
+
+export function deleteNote(noteBody) {
+    const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/removeNote";
+    return axios
+        .post(endpoint, { nid: noteBody.nid, withCredentials: true })
+        .then((res) => res.data);
+}
+
+export function postMeeting(meetingBody) {
+    const endpoint = BASE_URL + "/api/activities/create";
+    return axios
+        .post(endpoint, {
+            clientReference: meetingBody.cid,
+            userReference: Auth.getUsername(),
+            timeStart: meetingBody.start,
+            timeEnd: meetingBody.end,
+            type: meetingBody.name,
+            withCredentials: true,
+        })
+        .then(() => {
+            window.location.href = "/clients/" + meetingBody.cid;
+        });
+}

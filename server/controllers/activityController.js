@@ -11,16 +11,38 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getActivities = async (req, res) => {
     if (!req.body.userReference) {
-        const activities = await Activities.find({}).toArray();
+        const activities = await Activities.find({})
+            .sort({ timeStart: -1 })
+            .toArray();
         res.json({
             message: "Get all activities successful!",
             activities: activities,
         });
+    } else if (!req.body.clientReference) {
+        try {
+            const activities = await Activities.find({
+                userReference: req.body.userReference,
+            })
+                .sort({ timeStart: -1 })
+                .toArray();
+            res.json({
+                message: "Get activities successful!",
+                activities: activities,
+            });
+        } catch {
+            res.json({
+                message: "No activities available!",
+                activities: [],
+            });
+        }
     } else {
         try {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
-            }).toArray();
+                clientReference: req.body.clientReference,
+            })
+                .sort({ timeStart: -1 })
+                .toArray();
             res.json({
                 message: "Get activities successful!",
                 activities: activities,
@@ -63,6 +85,17 @@ const createActivity = async (req, res) => {
         const activity = await Activities.findOne({
             _id: mongoose.Types.ObjectId(result.insertedId),
         });
+        // update last interaction time with client
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
+            },
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         res.json({
             message: "Activity creation successful!",
             activity: activity,
@@ -82,6 +115,16 @@ const editActivity = async (req, res) => {
         username: req.body.userReference,
     });
     if (client && user) {
+        await Clients.findOneAndUpdate(
+            {
+                email: req.body.clientReference,
+            },
+            {
+                $set: {
+                    updatedAt: new Date(),
+                },
+            }
+        );
         await Activities.findOneAndUpdate(
             {
                 _id: mongoose.Types.ObjectId(req.params.aid),
@@ -96,7 +139,7 @@ const editActivity = async (req, res) => {
                 },
             },
             {
-                returnNewDocument: true,
+                returnDocument: "after",
             },
             (err, doc) => {
                 if (err) {

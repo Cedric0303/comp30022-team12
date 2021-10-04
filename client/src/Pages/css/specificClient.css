@@ -1,0 +1,101 @@
+.specificClient {
+    margin: 0;
+    font-size: 20px;
+    padding: 0.3vh 6vw 1vh;
+}
+
+#clientHeading {
+    background-color: #5e779d;
+    font-size: 5.3vh;
+    font-weight: 700;
+    color: white;
+    padding-bottom: 10px;
+    display: inline;
+}
+
+.clientHeaderActions {
+    float: right;
+}
+
+.clientHeaderActions:hover {
+    color: #7aade1;
+    text-decoration: underline white;
+}
+
+.headerActionBox {
+    background-color: white;
+    text-align: center;
+    width: 54px;
+    padding: 6px 0;
+    border-radius: 5px;
+}
+
+.clientHeaderActions p {
+    width: 54px;
+    font-size: 13px;
+    text-align: center;
+    color: white;
+}
+
+.headerActionIcon {
+    size: 5x;
+}
+
+#scheduleMeetingButton {
+    margin-right: 10px;
+}
+
+#clientInfo p {
+    color: white;
+    padding-top: 10px;
+}
+
+.contactIcon {
+    color: #7aade1;
+}
+
+.clientNotes {
+    font-size: 18px;
+    background-color: white;
+}
+
+.clientGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 160px 160px 160px;
+    grid-template-areas:
+        "meetings ."
+        "log orders"
+        "notes notes";
+    gap: 15px;
+    grid-column: 50%;
+    margin-top: 15px;
+}
+
+.clientGrid div {
+    background-color: white;
+}
+
+.clientGrid a:hover {
+    text-decoration: underline;
+}
+
+.clientNotesPortal {
+    border-radius: 15px;
+    grid-area: notes;
+}
+
+.clientMeetingsPortal {
+    border-radius: 15px;
+    grid-area: meetings;
+}
+
+.clientOrdersPortal {
+    border-radius: 15px;
+    grid-area: orders;
+}
+
+.clientLogPortal {
+    border-radius: 15px;
+    grid-area: log;
+}
