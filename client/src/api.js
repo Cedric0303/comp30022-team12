@@ -248,9 +248,9 @@ export function useOrders(cid) {
 
 export async function postNewNote(noteBody) {
     const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/addNote";
-    const res = await axios
+    return axios
         .post(endpoint, { note: noteBody.note, withCredentials: true })
-    return res.data.user;
+        .then((res) => res.data.client);
 }
 
 export function deleteNote(noteBody) {
@@ -263,13 +263,14 @@ export function deleteNote(noteBody) {
 export function postMeeting(meetingBody) {
     const endpoint = BASE_URL + "/api/activities/create";
     return axios
-        .post(endpoint, { 
+        .post(endpoint, {
             clientReference: meetingBody.cid,
             userReference: Auth.getUsername(),
-            timeStart: meetingBody.start ,
+            timeStart: meetingBody.start,
             timeEnd: meetingBody.end,
             type: meetingBody.name,
-            withCredentials: true })
+            withCredentials: true,
+        })
         .then(() => {
             window.location.href = "/clients/" + meetingBody.cid;
         });
