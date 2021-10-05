@@ -40,8 +40,15 @@ const getStage = async (req, res) => {
 };
 
 const createStage = async (req, res) => {
+    const maxPos = Stages.find().sort({ position: -1 }).limit(1);
     const stageID = req.body.sname.replace(/\s+/g, "_");
-    const exist = await Stages.findOne(
+    const newStage = new StageModel({
+        id: stageID,
+        name: req.body.sname,
+        position: parseInt(maxPos) + 1,
+    });
+    await Stages.insertOne(newStage);
+    const stage = await Stages.findOne(
         {
             id: stageID,
         },
@@ -80,7 +87,6 @@ const editStage = async (req, res) => {
             $set: {
                 id: stageID,
                 name: req.body.sname,
-                position: req.body.position,
             },
         },
         {
@@ -139,9 +145,26 @@ const removeStage = async (req, res) => {
     await Stages.deleteOne({
         id: req.params.sid,
     });
+    await reorderStages();
     res.json({
         message: "Stage removal successful!",
     });
+};
+
+const reorderStages = async () => {
+    const allStage = await Stages.find({}).sort({ position: 1 }).toArray();
+    for (let i = 0; i < allStage.length; i++) {
+        await Stages.findOneAndUpdate(
+            {
+                id: allStage[i],
+            },
+            {
+                $set: {
+                    position: i,
+                },
+            }
+        );
+    }
 };
 
 module.exports = {
