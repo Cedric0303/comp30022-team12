@@ -136,7 +136,7 @@ const reorderStages = async () => {
     for (let i = 0; i < allStage.length; i++) {
         await Stages.findOneAndUpdate(
             {
-                id: allStage[i],
+                id: allStage[i].id,
             },
             {
                 $set: {
