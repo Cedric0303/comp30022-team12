@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
-import { getStages, postStagePosUpdate } from "../api.js";
+import { getStages, postStage, postStagePosUpdate } from "../api.js";
 import Stage from "../Components/Stage.js";
 import StageUpdateButtons from "../Components/StageUpdateButtons.js";
 import "./css/adminManageStages.css";
@@ -10,27 +10,37 @@ import Modal from "react-modal";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function AdminManageStages(props) {
-    const modalStyle = {
-        content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-        },
+    
+    //hold the details of a new stage
+    const initialState = {
+        sname: ""
     };
+    const [newStage, setNewStage] = useState(initialState);
+    const resetStage = () => {setNewStage({ ...initialState });};
 
     Modal.setAppElement(document.getElementById("root") || undefined);
 
-    const [modalIsOpen, setIsOpen] = useState(false);
-
-    function openModal() {
-        setIsOpen(true);
+    //handles state of modal's show
+    const [addModalIsOpen, setAddIsOpen] = useState(false);
+    function openModal() {setAddIsOpen(true);}
+    function closeAndClear() {
+        setAddIsOpen(false);
+        resetStage();
     }
 
-    function closeModal() {
-        setIsOpen(false);
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setNewStage((prevState) => ({
+            ...prevState,
+            [id]: value,
+        }));
+    };
+
+    const handleAdd = (e) => {
+        if(newStage.sname){
+            postStage(newStage);
+            resetStage();
+        }
     }
 
     // const { loading, stagesData, error } = useStages();
@@ -238,17 +248,24 @@ function AdminManageStages(props) {
                 {pageMain()}
             </main>
             <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                style={modalStyle}
+                isOpen={addModalIsOpen}
+                className="addModal"
+                overlayClassName="addModalOverlay"
                 contentLabel="Add New Stage"
             >
-                <h2>Hello</h2>
-                <button onClick={closeModal}>close</button>
-                <div>this is a modal!</div>
-                <form>
-                    <input />
-                    <button>test</button>
+                <h2 id="addStageTitle">Add a new stage</h2>
+                <form id="addStageForm" onSubmit={handleAdd}>
+                    <label id="addStageName">Name:
+                        <input
+                            type="text"
+                            id="sname"
+                            required
+                            value={newStage.sname}
+                            onChange={handleChange}
+                        />
+                    </label>  
+                    <button type="submit" className="addStageButton">Add Stage</button>
+                    <button className="stageCancelButton" onClick={closeAndClear}>Cancel</button>  
                 </form>
             </Modal>
         </div>

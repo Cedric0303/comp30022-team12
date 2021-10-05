@@ -51,10 +51,23 @@ const createStage = async (req, res) => {
             },
         }
     );
-    res.json({
-        message: "Stage creation successful!",
-        stage: stage,
-    });
+    if (exist) {
+        res.json({
+            message: "Stage already exist!",
+            stage: exist,
+        });
+    } else {
+        const newStage = new StageModel({
+            id: stageID,
+            name: req.body.sname,
+            position: req.body.position,
+        });
+        await Stages.insertOne(newStage);
+        res.json({
+            message: "Stage creation successful!",
+            stage: newStage,
+        });
+    }
 };
 
 const editStage = async (req, res) => {
