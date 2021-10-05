@@ -82,6 +82,7 @@ export default function Stage(stage) {
                             required
                             value={currStage.sname}
                             onChange={handleChange}
+                            placeholder={name}
                         />
                     </label>  
                     <button type="submit" className="editStageButton">Edit Stage</button>
