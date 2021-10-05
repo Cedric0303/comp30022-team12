@@ -147,7 +147,7 @@
 }
 
 .form input[type="text"],
-input[type="password"] {
+.form input[type="password"] {
     width: 100%;
     border-style: none;
     font-family: inherit;
@@ -166,7 +166,7 @@ input[type="password"] {
 }
 
 .form input[type="text"]:focus,
-input[type="password"]:focus {
+.form input[type="password"]:focus {
     outline: none;
 }
 
