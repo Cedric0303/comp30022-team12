@@ -7,38 +7,56 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { DateTimePicker } from "@material-ui/pickers";
-import { useActivities } from "../api.js";
+import { alpha } from "@material-ui/core/styles";
+import Select from 'react-select';
+import { useActivities, useClients } from "../api.js";
 import { postMeeting } from "../api.js";
 import "./css/scheduleMeeting.css";
 
 function ScheduleMeeting(props) {
-    const getCid = () => {
+    
+    const givenClient = () => {
         if (
             props.location.state === null ||
             props.location.state === undefined
         ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    const getCid = () => {
+        if (!givenClient()) {
             return null;
         } else if (props.location.state.client) {
             return props.location.state.client.email;
         }
     };
 
+    const [client, setClient] = useState(getCid());
+
     const { loading, activitiesData, error } = useActivities(getCid());
+    const { cliLoading, clientsData, cliError } = useClients();
 
     const [startDateTime, setStartDateTime] = useState(new Date());
     const [endDateTime, setEndDateTime] = useState(new Date());
     const [meetingName, setMeetingName] = useState("");
+    const [selectedClient, setSelectedClient] = useState();
+
     const localizer = momentLocalizer(moment);
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (!meetingName.trim().length) {
+        if (!client) {
+            alert("Select a client!");
+        } else if (!meetingName.trim().length) {
             alert("Meeting must have a name!");
         } else if (startDateTime >= endDateTime) {
             alert("End time must be after start time");
         } else {
             const meetingBody = {
-                cid: props.location.state.client.email,
+                cid: client,
                 start: startDateTime,
                 end: endDateTime,
                 name: meetingName,
@@ -47,22 +65,71 @@ function ScheduleMeeting(props) {
         }
     };
 
+    const handleSelect = (selectedClient) => {
+        setSelectedClient(selectedClient);
+        setClient(selectedClient.value)
+    }
+
+    const clientsToOptions = () => {
+        var clientOptions = [];
+        if (clientsData.clients) {
+            clientsData.clients.map((client) => (
+                clientOptions.push({
+                    value: client.email,
+                    label: client.firstName + " " + client.lastName,
+                })
+            ))
+            return clientOptions;
+        }
+    }
+
+    const selectClient = () => {
+        if (givenClient()) {
+            return;
+        } else {
+            if (cliLoading) {
+                return;
+            } else if (cliError) {
+                return (
+                    <div>
+                        <p>Something went wrong: {cliError.message}</p>
+                    </div>
+                )
+            } else {
+                const options = clientsToOptions();
+                return (
+                    <div>
+                        <label>
+                            Select a client:
+                        </label>
+                        <Select 
+                            className="selectClient"
+                            value={selectedClient}
+                            onChange={handleSelect}
+                            options={options}
+                            maxMenuHeight={240}
+                        />
+                    </div>
+                )
+            }
+        }
+    }
+
+    const cancelRedirect = () => {
+        if (!givenClient()) {
+            return "/calendar";
+        } else {
+            return "/clients/" + props.location.state.client.email;
+        }
+    }
+
     const pageHeading = () => {
-        if (
-            props.location.state === null ||
-            props.location.state === undefined
-        ) {
+        if (!givenClient()) {
             return (
                 <div>
                     <h2 className="scheduleMeetingHeading">
-                        No Client Selected
+                        <span className="unbold">Schedule Meeting</span>
                     </h2>
-                    <div>
-                        <p>
-                            Return to a client's page to schedule a meeting with
-                            them.
-                        </p>
-                    </div>
                 </div>
             );
         } else if (props.location.state.client) {
@@ -92,6 +159,7 @@ function ScheduleMeeting(props) {
                 <div className="scheduleGrid">
                     <div className="scheduleForm">
                         <form method="post" onSubmit={onSubmit}>
+                            {selectClient()}
                             <div className="inputMeetingName">
                                 <label>Meeting name:</label>
                                 <input
@@ -106,15 +174,15 @@ function ScheduleMeeting(props) {
                             </div>
                             <MuiPickersUtilsProvider utils={MomentUtils}>
                                 <div className="startTime">
+                                    <label className="timeLabel">Start Time:</label>
                                     <DateTimePicker
-                                        label="Pick a start time"
                                         inputVariant="outlined"
                                         value={startDateTime}
                                         onChange={setStartDateTime}
                                     />
                                 </div>
+                                <label className="timeLabel">End Time:</label>
                                 <DateTimePicker
-                                    label="Pick a end time"
                                     inputVariant="outlined"
                                     value={endDateTime}
                                     onChange={setEndDateTime}
@@ -123,10 +191,8 @@ function ScheduleMeeting(props) {
                             <div className="meetingButtons">
                                 <NavLink
                                     className="cancelMeeting"
-                                    to={
-                                        "/clients/" +
-                                        props.location.state.client.email
-                                    }
+                                    activeClassName=""
+                                    to={cancelRedirect}
                                 >
                                     Cancel
                                 </NavLink>

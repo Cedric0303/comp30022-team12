@@ -28,9 +28,20 @@
     color: white;
 }
 
+.scheduleForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.selectClient {
+    color: black;
+    opacity: 1;
+    width: 195px;
+}
+
 .inputMeetingName {
-    font-size: 18px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .meetingNameField {
