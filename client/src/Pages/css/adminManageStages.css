@@ -73,22 +73,6 @@
     padding: 0;
 }
 
-.addModal {
-    position: fixed;
-    height: 20%;
-    width: 20%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  
-    border: 1px solid #ccc;
-    background: white;
-    overflow: auto;
-    border-radius: 4px;
-    outline: none;
-    padding: 20px;
-}
-
 #stageContainer {
     display: grid;
     grid-template-columns: 3em 1fr;
@@ -116,4 +100,80 @@
 
 .hide {
     display: none;
+}
+
+/* add stage modal styling */
+
+.addModal {
+    position: absolute;
+    height: max-content;
+    width: max-content;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    border: none;
+    border-radius: 20px;
+
+    background: white;
+    overflow: auto;
+    outline: none;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.addModalOverlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #70707065;
+}
+
+#addStageTitle {
+    font-size: 1.8em;
+}
+
+#addStageForm {
+    display: grid;
+    grid-template-areas: 
+        "input input"
+        "confirm cancel";
+}
+
+#addStageName {
+    grid-area: input;
+    display: flex;
+    column-gap: 1vw;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0.7em 0;
+    font-size: 1.3em;
+}
+
+#addStageName input {
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.addStageButton {
+    grid-area: confirm;
+    
+    border: none;
+    border-radius: 8px;
+
+    width: max-content;
+    padding: 0.6em 1.2em;
+    background: #90ee24;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
 }
