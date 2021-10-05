@@ -87,7 +87,7 @@ export default function Stage(stage) {
                             placeholder={name}
                         />
                     </label>
-                    <button type="submit" className="editStageButton">Edit Stage</button>
+                    <button type="submit" className="editStageButton">Save Changes</button>
                     <button className="stageCancelButton" onClick={closeAndClear}>Cancel</button>
                 </form> 
             </Modal>
