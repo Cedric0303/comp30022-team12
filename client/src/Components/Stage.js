@@ -16,8 +16,7 @@ export default function Stage(stage) {
     
     //hold the details of a new stage
     const initialState = {
-        sname: "",
-        position: 0
+        sname: ""
     };
     const [newStage, setNewStage] = useState(initialState);
     const resetStage = () => {setNewStage({ ...initialState });};
@@ -70,17 +69,6 @@ export default function Stage(stage) {
                             id="sname"
                             required
                             value={newStage.sname}
-                            onChange={handleChange}
-                        />
-                    </label>
-
-                    <label>Position:
-                        <input
-                            type="number" 
-                            id="position"
-                            min="0"
-                            required
-                            value={newStage.position}
                             onChange={handleChange}
                         />
                     </label>  
