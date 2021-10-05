@@ -12,21 +12,21 @@
 }
 
 /* right justify Cancel button*/
-#item-right {
+.add-user-container-item #item-right {
     display: flex;
     flex-direction: row-reverse;
     width: 50%;
     padding: 10px;
 }
 
-.cancel-option {
+.add-user-container-item > .cancel-option {
     font-weight: 400;
     font-size: x-large;
     color: #e13d55;
     text-decoration: underline;
 }
 
-.cancel-option:hover {
+.add-user-container-item > .cancel-option:hover {
     color: #b83548;
 }
 

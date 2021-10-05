@@ -5,3 +5,110 @@
     margin: 0 6vw;
     padding: 0;
 }
+
+
+.edit-user-container {
+    display: flex;
+    margin: 0 6vw;
+}
+
+
+/* Form */
+.edit-user-form {
+    font-size: 20px;
+    font-weight: 500;
+    padding-top: 50px;
+    display: grid;
+    width: 50%;
+}
+
+.field-group {
+    padding-bottom: 40px;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+}
+
+.edit-user-label {
+    padding: 12px 12px 12px 0;
+    float: left;
+    width: 100px;
+    margin-top: 6px;
+}
+
+/* change colour for name-info labels */
+#name-info > .field > .edit-user-label {
+    color: whitesmoke;
+}
+
+/* change colour for login-info labels */
+#login-info > .field > .edit-user-label {
+    color: #4cc9f0;
+}
+
+.edit-user-input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    width: 400px;
+    border-style: none;
+}
+
+#password-field {
+    display: flex;
+}
+
+
+/* Right justify Cancel button*/
+.edit-user-container #item-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Styling for Red Underline Options */
+.edit-user-container-item > .cancel-option, .edit-user-changes > .delete-option {
+    font-weight: 400;
+    font-size: x-large;
+    color: #e13d55;
+    text-decoration: underline;
+}
+
+.edit-user-container-item > .cancel-option:hover, .edit-user-changes > .delete-option:hover {
+    color: #b83548;
+}
+
+
+/* Confirm Button, Delete User */
+
+.edit-user-changes {
+    display: flex;
+    justify-content: space-between;
+    margin: 6vw;
+}
+
+.edit-user-button {
+    height: 45px;
+    width: auto;
+    padding: 0px 10px;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+}
+
+#confirm-changes {
+    color: white;
+    font-size: x-large;
+    background-color: #4cc9f0;
+}
+
+/* Button colour darkens on hover */
+#confirm-changes:hover {
+    background-color: #37a3c4;
+}
+
