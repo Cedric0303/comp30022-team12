@@ -52,11 +52,15 @@ export function useUsers() {
 }
 
 // Get the list of stages from the database
-function getStages() {
+export function getStages() {
     const endpoint = BASE_URL + "/api/stages";
     return axios
         .get(endpoint, { withCredentials: true })
-        .then((res) => res.data);
+        .then((res) => {
+            let stagesData = res.data
+            stagesData.stages.sort((a,b) => (a.position - b.position));
+            return stagesData;
+        });
 }
 
 // Use loading, normal, and error states with the returned data
@@ -67,7 +71,7 @@ export function useStages() {
     useEffect(() => {
         getStages()
             .then((stagesData) => {
-                setStages(stagesData);
+                setStages(stagesData.stages);
                 setLoading(false);
             })
             .catch((e) => {
@@ -282,5 +286,20 @@ export function postClient(registerBody) {
         .post(endpoint, registerBody, { withCredentials: true })
         .then(() => {
             window.location.href = "/clients";
+        });
+}
+
+export function postStagePosUpdate(payload) {
+    const endpoint = BASE_URL + "/api/stages/editStages";
+    return axios
+        .post(endpoint, payload, { withCredentials: true })
+        .then((res) => {
+            if (res.status !== 200) {
+                alert("Failed to save new stage order! ");
+                return false;
+            } else {
+                alert("Successfully saved new stage order!");
+                window.location.href = "/admin/stages";
+            }
         });
 }

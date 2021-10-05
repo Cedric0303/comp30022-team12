@@ -1,18 +1,31 @@
 .stage {
     font-size: 1.4em;
     font-weight: 500;
+
+    margin: -1px 0;
     padding: 0.4em 6vw 0.4em 0;
-    border-bottom: 1px solid #cecece;
+
+    border: 1px solid #cecece;
+    box-sizing: border-box;
+    height: 2.5em;
 
     display: grid;
-    grid-template-columns: 6vw 5fr 1fr;
+    grid-template-columns: 2vw 8fr 1fr;
     justify-items: start;
     align-items: center;
+
+    background-color: white;
 }
 
-.stagePos {
-    justify-self: center;
-    font-weight: 800;
+.draggableIcon {
+    padding-left: 0.3em;
+    color: #585858;
+    opacity: 1;
+    transform: scaleX(0.8);
+}
+
+.draggableIcon.hideDragIcon {
+    opacity: 0;
 }
 
 .stageEdit {
