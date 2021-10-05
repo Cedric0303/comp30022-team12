@@ -11,11 +11,33 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getOrders = async (req, res) => {
     if (!req.body.userReference) {
-        const orders = await Orders.find({}).toArray();
-        res.json({
-            message: "Get all orders successful!",
-            orders: orders,
-        });
+        try {
+            const orders = await Orders.find({}).toArray();
+            res.json({
+                message: "Get all orders successful!",
+                orders: orders,
+            });
+        } catch {
+            res.json({
+                message: "No orders available!",
+                orders: [],
+            });
+        }
+    } else if (!req.body.clientReference) {
+        try {
+            const orders = await Orders.find({
+                userReference: req.body.userReference,
+            }).toArray();
+            res.json({
+                message: "Get orders successful!",
+                orders: orders,
+            });
+        } catch {
+            res.json({
+                message: "No orders available!",
+                orders: [],
+            });
+        }
     } else {
         const orders = await Orders.find({
             userReference: req.body.userReference,
@@ -50,6 +72,7 @@ const createOrder = async (req, res) => {
             clientReference: client.email,
             userReference: user.username,
             orderTotal: req.body.orderTotal,
+            updatedAt: new Date(),
         });
         const result = await Orders.insertOne(newOrder);
         const orderItems = req.body.orderArray;

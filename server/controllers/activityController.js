@@ -17,13 +17,20 @@ const getActivities = async (req, res) => {
             activities: activities,
         });
     } else {
-        const activities = await Activities.find({
-            userReference: req.body.userReference,
-        }).toArray();
-        res.json({
-            message: "Get activities successful!",
-            activities: activities,
-        });
+        try {
+            const activities = await Activities.find({
+                userReference: req.body.userReference,
+            }).toArray();
+            res.json({
+                message: "Get activities successful!",
+                activities: activities,
+            });
+        } catch {
+            res.json({
+                message: "No activities available!",
+                activities: [],
+            });
+        }
     }
 };
 
@@ -51,6 +58,7 @@ const createActivity = async (req, res) => {
             type: req.body.type,
             timeStart: new Date(req.body.timeStart),
             timeEnd: new Date(req.body.timeEnd),
+            updatedAt: new Date(),
         });
         const result = await Activities.insertOne(newActivity);
         const activity = await Activities.findOne({
@@ -86,10 +94,11 @@ const editActivity = async (req, res) => {
                     type: req.body.type,
                     timeStart: new Date(req.body.timeStart),
                     timeEnd: new Date(req.body.timeEnd),
+                    updatedAt: new Date(),
                 },
             },
             {
-                returnNewDocument: true,
+                returnDocument: "after",
             },
             (err, doc) => {
                 if (err) {

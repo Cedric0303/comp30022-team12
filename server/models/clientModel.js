@@ -15,6 +15,7 @@ const clientSchema = new Schema({
     photoURL: { type: String },
     userReference: { type: String, required: true },
     stage: { type: String },
+    updatedAt: { type: Date, required: true },
     notes: [],
 });
 

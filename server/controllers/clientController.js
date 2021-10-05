@@ -73,7 +73,7 @@ const addClientNote = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -106,7 +106,7 @@ const removeClientNote = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -139,7 +139,7 @@ const changeClientStage = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -168,6 +168,7 @@ const createClient = async (req, res) => {
         photoURL: req.body.photoURL,
         userReference: req.body.userReference,
         stage: defaultNewStage.name,
+        updatedAt: new Date(),
         notes: [],
     });
     const result = await Clients.insertOne(newClient);
@@ -211,7 +212,7 @@ const editClient = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {

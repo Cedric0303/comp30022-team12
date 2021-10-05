@@ -78,7 +78,7 @@ const editUser = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
