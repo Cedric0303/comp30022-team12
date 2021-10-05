@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
-import { getStages, postStage } from "../api.js";
+import { getStages, postStage, postStagePosUpdate } from "../api.js";
 import Stage from "../Components/Stage.js";
+import StageUpdateButtons from "../Components/StageUpdateButtons.js";
 import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
@@ -48,8 +49,9 @@ function AdminManageStages(props) {
     const [error, setError] = useState(null);
     useEffect(() => {
         getStages()
-            .then((stagesData) => {
-                setStages(stagesData.stages);
+            .then((data) => {
+                setStages(data.stages);
+                setStages(prevStages => updateCurrentPositions(prevStages));
                 setLoading(false);
             })
             .catch((e) => {
@@ -62,7 +64,7 @@ function AdminManageStages(props) {
     const [searchQuery, setSearchQuery] = useState("");
 
     let disableDragging = false;
-
+    
     // accepts array of stage objects only
     // returns array of filtered stage objects
     function filterStages(stages, query) {
@@ -72,19 +74,21 @@ function AdminManageStages(props) {
         } else {
             disableDragging = true;
             var pattern = query
-                .split("")
-                .map((x) => {
-                    return `(?=.*${x})`;
-                })
-                .join("");
+            .split("")
+            .map((x) => {
+                return `(?=.*${x})`;
+            })
+            .join("");
             var regex = new RegExp(`^${pattern}`, "i");
             return stages.filter((stage) => {
                 return regex.test(stage.name) || regex.test(stage.position + 1);
             });
         }
     }
-
+    
     const filteredStages = filterStages(stagesData, searchQuery);
+    
+    const [posUpdateable, setPosUpdateable] = useState(false);
 
     const reorder = (list, startIndex, endIndex) => {
         const result = Array.from(list);
@@ -92,6 +96,20 @@ function AdminManageStages(props) {
         result.splice(endIndex, 0, moved);
         return result;
     };
+
+    const updateCurrentPositions = input => {
+        const updatedList = input.map((current, index) => {
+            const currentStage = current;
+            currentStage.newPos = index;
+            if (currentStage.position !== index) {
+                currentStage.movedPos = true;
+            } else {
+                currentStage.movedPos = false;
+            }
+            return currentStage;
+        })
+        return updatedList;
+    }
 
     function handleOnDragEnd(result) {
         if (!result.destination) {
@@ -104,13 +122,38 @@ function AdminManageStages(props) {
             result.source.index,
             result.destination.index
         );
-        setStages(newStageOrder);
+        setStages(updateCurrentPositions(newStageOrder));
 
-        // get an array of previous positions
-        // get an array of new positions
-        // if different, highlight the changed positions
+        // check if stages have been moved from their initial order
+        let movedStages = false;
+        for (let i=0; i<stagesData.length; i++) {
+            if (stagesData[i].movedPos) {
+                movedStages = true;
+            }
+        }
+        if (movedStages) {
+            setPosUpdateable(true);
+        } else {
+            setPosUpdateable(false);
+        }
     }
 
+    const cancelChanges = () => {
+        window.location.href = "/admin/stages";
+    }
+
+    const saveChanges = () => {
+        let payload = {"stageArray":[]};
+        for (let i=0; i<stagesData.length; i++) {
+            payload.stageArray.push({
+                "oldSID": stagesData[i].id,
+                "newStageName": stagesData[i].name,
+                "newPosition": stagesData[i].newPos
+            })
+        }
+        postStagePosUpdate(payload);
+    }
+    
     const pageMain = () => {
         if (loading) {
             return (
@@ -135,6 +178,7 @@ function AdminManageStages(props) {
                                 onInput={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search stages"
                             />
+                            <StageUpdateButtons active={!disableDragging ? posUpdateable : false} saveChanges={saveChanges} cancelChanges={cancelChanges} />
                             <button id="addStageButton" onClick={openModal}>
                                 <span>Add New Stage </span>
                                 <FontAwesomeIcon icon="plus" />
@@ -143,11 +187,21 @@ function AdminManageStages(props) {
                         <li id="stagesListHeading">Stage</li>
                         <div id="stageContainer">
                             <div id="stagePosColumn">
-                                {stagesData.map((e, index)=>(
-                                    <div key={index} className="stagePos">
-                                        {index+1}
-                                    </div>
-                                ))}
+                                {stagesData.map((e, index)=>{
+                                    if (disableDragging === false) {
+                                        if (e.movedPos === true) {
+                                            return <div key={index} className="stagePos posChanged">
+                                                {index+1}
+                                            </div>
+                                        } else {
+                                            return <div key={index} className="stagePos">
+                                                {index+1}
+                                            </div>
+                                        }
+                                    } else {
+                                        return false;
+                                    }
+                                })}
                             </div>
                             <DragDropContext onDragEnd={handleOnDragEnd}>
                                 <Droppable droppableId="stagesDroppable">

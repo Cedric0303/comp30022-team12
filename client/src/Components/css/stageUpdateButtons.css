@@ -1,0 +1,30 @@
+#updateButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    column-gap: 1vw;
+}
+
+#updateButtons button {
+    border: none;
+    border-radius: 8px;
+
+    padding: 0.5em 1em;
+
+    font-size: 1em;
+    font-family: inherit;
+}
+
+#updateButtons button:enabled:hover {
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+
+#saveChangesButton:enabled {
+    background-color: #baff6b;
+}
+
+#cancelChangesButton:enabled {
+    background-color: #ff8851;
+}
