@@ -296,6 +296,16 @@ export function postEditMeeting(meetingBody, aid) {
         });
 }
 
+// Delete a meeting
+export function deleteActivity(aid, cid) {
+    const endpoint = BASE_URL + "/api/activities/" + aid + "/remove";
+    return axios
+        .get(endpoint, { withCredentials: true })
+        .then(() => {
+            window.location.href = "/clients/" + cid;
+        });
+}
+
 export function postClient(registerBody) {
     const endpoint = BASE_URL + "/api/clients/create";
     return axios

@@ -82,7 +82,7 @@
     color: #b83548;
 }
 
-.saveMeetingButton {
+.meetingButtons button {
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 5px;
@@ -90,9 +90,33 @@
     font-family: inherit;
     color: white;
     margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.saveMeetingButton {
     background-color: #78cd1b;
 }
 
-.addMeetingButton:hover {
+.saveMeetingButton:hover {
     background-color: #569417;
+}
+
+.deleteMeetingButton {
+    background-color: #e13d55;
+}
+
+.deleteMeetingButton:hover {
+    background-color: #b83548;
+}
+
+.cancelDelete {
+    margin-left: 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: white;
+    text-decoration: underline;
+}
+
+.cancelDelete:hover {
+    color: whitesmoke;
 }

@@ -8,7 +8,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { DateTimePicker } from "@material-ui/pickers";
 import Select from 'react-select';
-import { useActivities, useClients } from "../api.js";
+import { useActivities, useClients, deleteActivity } from "../api.js";
 import { postNewMeeting, postEditMeeting } from "../api.js";
 import "./css/scheduleMeeting.css";
 
@@ -62,6 +62,8 @@ function ScheduleMeeting(props) {
     const [endDateTime, setEndDateTime] = useState(currentEnd);
     const [meetingName, setMeetingName] = useState(currentName);
     const [selectedClient, setSelectedClient] = useState();
+
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const localizer = momentLocalizer(moment);
 
@@ -149,6 +151,38 @@ function ScheduleMeeting(props) {
             return "/calendar";
         } else {
             return "/clients/" + clientReference;
+        }
+    }
+
+    const onDelete = () => {
+        deleteActivity(activity._id, clientReference);
+    }
+
+    const deleteMeeting = () => {
+        if (!activity) {
+            return;
+        } else {
+            if (showConfirm) {
+                return (
+                    <div>
+                        <span>Are you sure?</span>
+                        <button onClick={onDelete} className="deleteMeetingButton">Yes</button>
+                        <span onClick={()=>setShowConfirm(!showConfirm)} className="cancelDelete">No</span>
+                    </div>
+                );
+            } else {
+                return (
+                    <div>
+                        <button
+                            type="button"
+                            className="deleteMeetingButton"
+                            onClick={()=>setShowConfirm(!showConfirm)}
+                        >
+                            Delete Meeting
+                        </button>
+                    </div>
+                );
+            }
         }
     }
 
@@ -249,6 +283,7 @@ function ScheduleMeeting(props) {
                                 >
                                     Save Meeting
                                 </button>
+                                {deleteMeeting()}
                             </div>
                         </form>
                     </div>
