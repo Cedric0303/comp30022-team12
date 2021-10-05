@@ -12,8 +12,7 @@ function AdminManageStages(props) {
     
     //hold the details of a new stage
     const initialState = {
-        sname: "",
-        position: 0
+        sname: ""
     };
     const [newStage, setNewStage] = useState(initialState);
     const resetStage = () => {setNewStage({ ...initialState });};
@@ -37,7 +36,7 @@ function AdminManageStages(props) {
     };
 
     const handleAdd = (e) => {
-        if(newStage.sname && newStage.position >= 0){
+        if(newStage.sname){
             postStage(newStage);
             resetStage();
         }
@@ -207,17 +206,6 @@ function AdminManageStages(props) {
                             id="sname"
                             required
                             value={newStage.sname}
-                            onChange={handleChange}
-                        />
-                    </label>
-
-                    <label>Position:
-                        <input
-                            type="number" 
-                            id="position"
-                            min="0"
-                            required
-                            value={newStage.position}
                             onChange={handleChange}
                         />
                     </label>  
