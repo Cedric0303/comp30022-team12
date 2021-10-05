@@ -35,7 +35,7 @@ function AdminAddUser(props) {
         return true;
     }
 
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault(); //prevent reload
         if (notEmpty()) {
             const registerBody = {
@@ -74,7 +74,7 @@ function AdminAddUser(props) {
                 <div className="add-user-container-item" id="item-left">
                     <form
                         method="post"
-                        onSubmit={onSubmit}
+                        onSubmit={handleSubmit}
                         className="add-user-form"
                     >
                         <div className="field-group" id="name-info">
@@ -172,7 +172,7 @@ function AdminAddUser(props) {
             <button
                 className="add-user-button"
                 id="create-user"
-                onClick={onSubmit}
+                onClick={handleSubmit}
             >
                 Create User
             </button>
