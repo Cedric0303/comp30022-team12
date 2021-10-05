@@ -69,7 +69,7 @@ function AdminAddUser(props) {
                 `}</style>
             </Helmet>
             <Navbar />
-            <h2 className="add-user-heading">Admin Add User</h2>
+            <h2 className="add-user-heading">Add User</h2>
             <div className="add-user-container">
                 <div className="add-user-container-item" id="item-left">
                     <form
