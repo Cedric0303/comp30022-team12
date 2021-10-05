@@ -17,7 +17,7 @@ function AdminManageStages(props) {
     const [newStage, setNewStage] = useState(initialState);
     const resetStage = () => {setNewStage({ ...initialState });};
 
-    Modal.setAppElement(document.getElementById('root') || undefined)
+    Modal.setAppElement(document.getElementById("root") || undefined);
 
     //handles state of modal's show
     const [addModalIsOpen, setAddIsOpen] = useState(false);
