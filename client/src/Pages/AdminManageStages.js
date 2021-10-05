@@ -250,11 +250,12 @@ function AdminManageStages(props) {
             <Modal
                 isOpen={addModalIsOpen}
                 className="addModal"
+                overlayClassName="addModalOverlay"
                 contentLabel="Add New Stage"
             >
-                <h2>Add a new stage</h2>
-                <form onSubmit={handleAdd}>
-                    <label>Name:
+                <h2 id="addStageTitle">Add a new stage</h2>
+                <form id="addStageForm" onSubmit={handleAdd}>
+                    <label id="addStageName">Name:
                         <input
                             type="text"
                             id="sname"

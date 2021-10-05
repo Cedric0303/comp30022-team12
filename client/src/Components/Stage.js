@@ -71,11 +71,13 @@ export default function Stage(stage) {
             <Modal
                 isOpen={modalIsOpen}
                 className="editModal"
+                overlayClassName="editModalOverlay"
                 contentLabel="Edit Stage"
             >
-                <h2>Edit/remove a stage</h2>
-                <form onSubmit={handleEdit}>
-                    <label>Name:
+                <h2 className="editStageTitle">Edit stage</h2>
+                <button className="deleteStageButton" onClick={handleDelete}>Delete Stage</button>
+                <form className="editStageForm" onSubmit={handleEdit}>
+                    <label className="editStageName">Name:
                         <input
                             type="text"
                             id="sname"
@@ -84,11 +86,10 @@ export default function Stage(stage) {
                             onChange={handleChange}
                             placeholder={name}
                         />
-                    </label>  
+                    </label>
                     <button type="submit" className="editStageButton">Edit Stage</button>
                     <button className="stageCancelButton" onClick={closeAndClear}>Cancel</button>
                 </form> 
-                <button className="deleteStageButton" onClick={handleDelete}>Delete Stage</button>
             </Modal>
 
         </div>
