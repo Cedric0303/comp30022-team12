@@ -4,6 +4,9 @@ import { Helmet } from "react-helmet";
 import "./css/adminEditUser.css";
 
 function AdminEditUser(props) {
+
+    const username = props.match.params.userID;
+
     return (
         <div>
             <Helmet>
@@ -14,7 +17,7 @@ function AdminEditUser(props) {
                 `}</style>
             </Helmet>
             <Navbar />
-            <h2 className="edit-user-heading">Admin Edit User</h2>
+            <h2 className="edit-user-heading">Edit User</h2>
         </div>
     );
 }
