@@ -3,6 +3,7 @@ import "./css/stage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Draggable } from "react-beautiful-dnd";
 import Modal from "react-modal";
+import {editStage, deleteStage} from "../api.js";
 
 // Format each tag
 export default function Stage(stage) {
@@ -14,12 +15,12 @@ export default function Stage(stage) {
         dragIconStyle = "draggableIcon"
     }
     
-    //hold the details of a new stage
+    //hold the details of a stage to be edited/removed
     const initialState = {
         sname: ""
     };
-    const [newStage, setNewStage] = useState(initialState);
-    const resetStage = () => {setNewStage({ ...initialState });};
+    const [currStage, setCurrStage] = useState(initialState);
+    const resetStage = () => {setCurrStage({ ...initialState });};
 
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal() {setIsOpen(true);}
@@ -30,11 +31,22 @@ export default function Stage(stage) {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setNewStage((prevState) => ({
+        setCurrStage((prevState) => ({
             ...prevState,
             [id]: value,
         }));
     };
+
+    const handleEdit = (e) => {
+        if(currStage.sname){
+            editStage(currStage, id);
+        }
+    }
+
+    const handleDelete = (e) => {
+        deleteStage(id);
+        setIsOpen(false);
+    }
 
     Modal.setAppElement(document.getElementById('root') || undefined)
 
@@ -61,20 +73,21 @@ export default function Stage(stage) {
                 className="editModal"
                 contentLabel="Edit Stage"
             >
-                <h2>Edit a stage</h2>
-                <form>
+                <h2>Edit/remove a stage</h2>
+                <form onSubmit={handleEdit}>
                     <label>Name:
                         <input
                             type="text"
                             id="sname"
                             required
-                            value={newStage.sname}
+                            value={currStage.sname}
                             onChange={handleChange}
                         />
                     </label>  
-                    <button type="submit" className="addStageButton">Edit Stage</button>
+                    <button type="submit" className="editStageButton">Edit Stage</button>
                     <button className="stageCancelButton" onClick={closeAndClear}>Cancel</button>
                 </form> 
+                <button className="deleteStageButton" onClick={handleDelete}>Delete Stage</button>
             </Modal>
 
         </div>

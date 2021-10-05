@@ -330,8 +330,37 @@ export function postStage(newStage) {
         })
         .catch(() => {    
         });
-    
 }
+
+export function editStage(currStage, stageID) {
+    const endpoint = BASE_URL + "/api/stages/" + stageID + "/edit";
+    return axios
+        .post(endpoint, currStage)
+        .then((response) => {
+            var message = response.data.message;
+            if(response.status === 200){
+                alert(message);
+            }
+        })
+        .catch(() => {    
+        });
+}
+
+export function deleteStage(stageID) {
+    const endpoint = BASE_URL + "/api/stages/" + stageID + "/remove";
+    return axios
+        .get(endpoint)
+        .then((response) => {
+            var message = response.data.message;
+            if(response.status === 200){
+                alert(message);
+                window.location.reload();
+            }
+        })
+        .catch(() => {    
+        });
+}
+
 export function postStagePosUpdate(payload) {
     const endpoint = BASE_URL + "/api/stages/editStages";
     return axios
