@@ -75,6 +75,7 @@ A personal CRM
 -   `react-moment`
 -   `react-router-dom`
 -   `react-scripts`
+-   `validator`
 -   `web-vitals`
 -   `eslint-plugin-react`
 

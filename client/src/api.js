@@ -275,3 +275,12 @@ export function postMeeting(meetingBody) {
             window.location.href = "/clients/" + meetingBody.cid;
         });
 }
+
+export function postClient(registerBody) {
+    const endpoint = BASE_URL + "/api/clients/create";
+    return axios
+        .post(endpoint, registerBody, { withCredentials: true })
+        .then(() => {
+            window.location.href = "/clients";
+        });
+}

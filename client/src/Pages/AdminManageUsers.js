@@ -23,6 +23,22 @@ function AdminManageUsers(props) {
                     <ul>Something went wrong: {error.message}</ul>
                 </div>
             );
+        } else if (!usersData.users.length) {
+            return (
+                <div className="usersBox">
+                    <ul id="usersList">
+                        <li>
+                            <NavLink id="addUser" to="users/create">
+                                <span>Add New User </span>
+                                <FontAwesomeIcon icon="user-plus" />
+                            </NavLink>
+                        </li>
+                        <li>
+                            No users found, please reload or add new users.
+                        </li>
+                    </ul>
+                </div>
+            )
         } else {
             return (
                 <div className="usersBox">
@@ -35,8 +51,8 @@ function AdminManageUsers(props) {
                         </li>
                         <li id="usersListHeading">Name</li>
                         {usersData.users.map((user) => (
-                            <div key={user._id} className="specificUser">
-                                <User {...user} />
+                            <div key={user.username} className="specificUser">
+                                <User key={user.username} {...user} />
                             </div>
                         ))}
                     </ul>
