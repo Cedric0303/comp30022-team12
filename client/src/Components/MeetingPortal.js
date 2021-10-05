@@ -28,7 +28,7 @@ export default function MeetingPortal(props) {
                 <div className="portalContent">
                     {/* Meetings sorted by date (newest first) */}
                     {activitiesData.activities.map((activity) => (
-                        <MeetingRow key={activity._id} {...activity} />
+                        <MeetingRow key={activity._id} activity={activity} client={props.client} />
                     ))}
                 </div>
             );

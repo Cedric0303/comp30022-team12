@@ -262,11 +262,12 @@ export function deleteNote(noteBody) {
         .then((res) => res.data);
 }
 
-export function postMeeting(meetingBody) {
+// Add a new meeting
+export function postNewMeeting(meetingBody) {
     const endpoint = BASE_URL + "/api/activities/create";
     return axios
         .post(endpoint, {
-            clientReference: meetingBody.cid,
+            clientReference: meetingBody.clientReference,
             userReference: Auth.getUsername(),
             timeStart: meetingBody.start,
             timeEnd: meetingBody.end,
@@ -274,7 +275,24 @@ export function postMeeting(meetingBody) {
             withCredentials: true,
         })
         .then(() => {
-            window.location.href = "/clients/" + meetingBody.cid;
+            window.location.href = "/clients/" + meetingBody.clientReference;
+        });
+}
+
+// Edit an existing meeting
+export function postEditMeeting(meetingBody, aid) {
+    const endpoint = BASE_URL + "/api/activities/" + aid + "/edit";
+    return axios
+        .post(endpoint, {
+            clientReference: meetingBody.clientReference,
+            userReference: Auth.getUsername(),
+            timeStart: meetingBody.start,
+            timeEnd: meetingBody.end,
+            type: meetingBody.name,
+            withCredentials: true,
+        })
+        .then(() => {
+            window.location.href = "/clients/" + meetingBody.clientReference;
         });
 }
 

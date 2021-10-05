@@ -7,48 +7,68 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { DateTimePicker } from "@material-ui/pickers";
-import { alpha } from "@material-ui/core/styles";
 import Select from 'react-select';
 import { useActivities, useClients } from "../api.js";
-import { postMeeting } from "../api.js";
+import { postNewMeeting, postEditMeeting } from "../api.js";
 import "./css/scheduleMeeting.css";
 
+// Handles any scheduling- adds and edits meetings depending on the props
 function ScheduleMeeting(props) {
-    
-    const givenClient = () => {
+
+    // Check if a client has been passed through
+    const givenClientReference = () => {
         if (
             props.location.state === null ||
             props.location.state === undefined
         ) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    const getCid = () => {
-        if (!givenClient()) {
             return null;
         } else if (props.location.state.client) {
             return props.location.state.client.email;
+        } else {
+            return null;
         }
-    };
+    }
 
-    const [client, setClient] = useState(getCid());
+    // Set up default form values
+    var currentName = "";
+    var currentStart = new Date();
+    var currentEnd = new Date();
 
-    const { loading, activitiesData, error } = useActivities(getCid());
+    // Check if an activity has been passed through
+    const hasActivity = () => {
+        if (
+            props.location.state === null ||
+            props.location.state === undefined
+        ) {
+            return null;
+        } else if (props.location.state.activity) {
+            // Update rendered default values if editing the meeting
+            currentName = props.location.state.activity.type;
+            currentStart = props.location.state.activity.timeStart;
+            currentEnd = props.location.state.activity.timeEnd;
+            return props.location.state.activity;
+        } else {
+            return null;
+        }
+    }
+
+    const [clientReference, setClientReference] = useState(givenClientReference());
+    const activity = hasActivity();
+
+    const { loading, activitiesData, error } = useActivities(clientReference);
     const { cliLoading, clientsData, cliError } = useClients();
 
-    const [startDateTime, setStartDateTime] = useState(new Date());
-    const [endDateTime, setEndDateTime] = useState(new Date());
-    const [meetingName, setMeetingName] = useState("");
+    const [startDateTime, setStartDateTime] = useState(currentStart);
+    const [endDateTime, setEndDateTime] = useState(currentEnd);
+    const [meetingName, setMeetingName] = useState(currentName);
     const [selectedClient, setSelectedClient] = useState();
 
     const localizer = momentLocalizer(moment);
 
+    // Handle either the addition or edit of a meeting
     const onSubmit = (e) => {
         e.preventDefault();
-        if (!client) {
+        if (!clientReference) {
             alert("Select a client!");
         } else if (!meetingName.trim().length) {
             alert("Meeting must have a name!");
@@ -56,26 +76,33 @@ function ScheduleMeeting(props) {
             alert("End time must be after start time");
         } else {
             const meetingBody = {
-                cid: client,
+                clientReference: clientReference,
                 start: startDateTime,
                 end: endDateTime,
                 name: meetingName,
             };
-            postMeeting(meetingBody);
+            if (!activity) {
+                postNewMeeting(meetingBody);
+            } else {
+                postEditMeeting(meetingBody, activity._id);
+            }
+            
         }
     };
 
+    // Set a client as the client involved in the meeting
     const handleSelect = (selectedClient) => {
         setSelectedClient(selectedClient);
-        setClient(selectedClient.value)
+        setClientReference(selectedClient.value.email)
     }
 
+    // Creates an options object with the user's clients info
     const clientsToOptions = () => {
         var clientOptions = [];
         if (clientsData.clients) {
             clientsData.clients.map((client) => (
                 clientOptions.push({
-                    value: client.email,
+                    value: client,
                     label: client.firstName + " " + client.lastName,
                 })
             ))
@@ -83,8 +110,9 @@ function ScheduleMeeting(props) {
         }
     }
 
+    // Allows the user to select a client if not already specified
     const selectClient = () => {
-        if (givenClient()) {
+        if (givenClientReference()) {
             return;
         } else {
             if (cliLoading) {
@@ -115,16 +143,17 @@ function ScheduleMeeting(props) {
         }
     }
 
+    // Navigate back to the appropriate page
     const cancelRedirect = () => {
-        if (!givenClient()) {
+        if (!givenClientReference()) {
             return "/calendar";
         } else {
-            return "/clients/" + props.location.state.client.email;
+            return "/clients/" + clientReference;
         }
     }
 
     const pageHeading = () => {
-        if (!givenClient()) {
+        if (!clientReference) {
             return (
                 <div>
                     <h2 className="scheduleMeetingHeading">
@@ -132,16 +161,33 @@ function ScheduleMeeting(props) {
                     </h2>
                 </div>
             );
-        } else if (props.location.state.client) {
-            const client = props.location.state.client;
-            return (
-                <div>
-                    <h2 className="scheduleMeetingHeading">
-                        <span className="unbold">Schedule Meeting with </span>
-                        {client.firstName} {client.lastName}
-                    </h2>
-                </div>
-            );
+        } else if (clientReference) {
+            var client = null;
+            if (selectedClient) {
+                client = selectedClient.value;
+            } else {
+                client = props.location.state.client;
+            }
+            if (activity) {
+                return (
+                    <div>
+                        <h2 className="scheduleMeetingHeading">
+                            <span className="unbold">Meeting with </span>
+                            {client.firstName} {client.lastName}
+                        </h2>
+                        <p>Edit the form below to reschedule the meeting.</p>
+                    </div>
+                );
+            } else {
+                return (
+                    <div>
+                        <h2 className="scheduleMeetingHeading">
+                            <span className="unbold">Schedule Meeting with </span>
+                            {client.firstName} {client.lastName}
+                        </h2>
+                    </div>
+                );
+            }
         }
     };
 
@@ -198,10 +244,10 @@ function ScheduleMeeting(props) {
                                 </NavLink>
                                 <button
                                     type="submit"
-                                    className="addMeetingButton"
+                                    className="saveMeetingButton"
                                     onClick={onSubmit}
                                 >
-                                    Schedule Meeting
+                                    Save Meeting
                                 </button>
                             </div>
                         </form>
