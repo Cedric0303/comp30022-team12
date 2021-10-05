@@ -4,17 +4,19 @@ import Navbar from "../Components/Navbar/Navbar.js";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
 import { DateTimePicker } from "@material-ui/pickers";
 import { useActivities } from "../api.js";
 import { postMeeting } from "../api.js";
 import "./css/scheduleMeeting.css";
 
 function ScheduleMeeting(props) {
-
     const getCid = () => {
-        if (props.location.state === null || props.location.state === undefined) {
+        if (
+            props.location.state === null ||
+            props.location.state === undefined
+        ) {
             return null;
         } else if (props.location.state.client) {
             return props.location.state.client.email;
@@ -39,21 +41,27 @@ function ScheduleMeeting(props) {
                 cid: props.location.state.client.email,
                 start: startDateTime,
                 end: endDateTime,
-                name: meetingName
-            }
+                name: meetingName,
+            };
             postMeeting(meetingBody);
         }
     };
 
     const pageHeading = () => {
-        if (props.location.state === null || props.location.state === undefined) {
+        if (
+            props.location.state === null ||
+            props.location.state === undefined
+        ) {
             return (
                 <div>
                     <h2 className="scheduleMeetingHeading">
                         No Client Selected
                     </h2>
                     <div>
-                        <p>Return to a client's page to schedule a meeting with them.</p>
+                        <p>
+                            Return to a client's page to schedule a meeting with
+                            them.
+                        </p>
                     </div>
                 </div>
             );
@@ -62,7 +70,7 @@ function ScheduleMeeting(props) {
             return (
                 <div>
                     <h2 className="scheduleMeetingHeading">
-                        <span className="unbold">Schedule Meeting with{" "}</span>
+                        <span className="unbold">Schedule Meeting with </span>
                         {client.firstName} {client.lastName}
                     </h2>
                 </div>
@@ -80,7 +88,6 @@ function ScheduleMeeting(props) {
                 </div>
             );
         } else {
-
             return (
                 <div className="scheduleGrid">
                     <div className="scheduleForm">
@@ -92,16 +99,18 @@ function ScheduleMeeting(props) {
                                     required
                                     type="text"
                                     value={meetingName}
-                                    onChange={(e) => setMeetingName(e.target.value)}
+                                    onChange={(e) =>
+                                        setMeetingName(e.target.value)
+                                    }
                                 />
                             </div>
                             <MuiPickersUtilsProvider utils={MomentUtils}>
                                 <div className="startTime">
                                     <DateTimePicker
-                                    label="Pick a start time"
-                                    inputVariant="outlined"
-                                    value={startDateTime}
-                                    onChange={setStartDateTime}
+                                        label="Pick a start time"
+                                        inputVariant="outlined"
+                                        value={startDateTime}
+                                        onChange={setStartDateTime}
                                     />
                                 </div>
                                 <DateTimePicker
@@ -112,10 +121,20 @@ function ScheduleMeeting(props) {
                                 />
                             </MuiPickersUtilsProvider>
                             <div className="meetingButtons">
-                                <NavLink className="cancelMeeting" to={"/clients/" + props.location.state.client.email}>
+                                <NavLink
+                                    className="cancelMeeting"
+                                    to={
+                                        "/clients/" +
+                                        props.location.state.client.email
+                                    }
+                                >
                                     Cancel
                                 </NavLink>
-                                <button type="submit" className="addMeetingButton" onClick={onSubmit}>
+                                <button
+                                    type="submit"
+                                    className="addMeetingButton"
+                                    onClick={onSubmit}
+                                >
                                     Schedule Meeting
                                 </button>
                             </div>
@@ -143,7 +162,6 @@ function ScheduleMeeting(props) {
                 {pageHeading()}
                 {pageMain()}
             </main>
-            
         </div>
     );
 }

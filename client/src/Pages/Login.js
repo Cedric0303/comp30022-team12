@@ -205,7 +205,7 @@ const Login = (props) => {
                 <form className="form" onSubmit={handleLogin}>
                     <label id="usernameInput">Username</label>
                     <br />
-                      <input
+                    <input
                         type="text"
                         className="form-control"
                         id="username"

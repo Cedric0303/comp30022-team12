@@ -54,13 +54,11 @@ export function useUsers() {
 // Get the list of stages from the database
 export function getStages() {
     const endpoint = BASE_URL + "/api/stages";
-    return axios
-        .get(endpoint, { withCredentials: true })
-        .then((res) => {
-            let stagesData = res.data
-            stagesData.stages.sort((a,b) => (a.position - b.position));
-            return stagesData;
-        });
+    return axios.get(endpoint, { withCredentials: true }).then((res) => {
+        let stagesData = res.data;
+        stagesData.stages.sort((a, b) => a.position - b.position);
+        return stagesData;
+    });
 }
 
 // Use loading, normal, and error states with the returned data
@@ -284,8 +282,14 @@ export function postClient(registerBody) {
     const endpoint = BASE_URL + "/api/clients/create";
     return axios
         .post(endpoint, registerBody, { withCredentials: true })
-        .then(() => {
-            window.location.href = "/clients";
+        .then((res) => {
+            var message = res.data.message;
+            if (message === "Email already in use for another client") {
+                alert(res.data.message + "\nPlease input a different email");
+                return false;
+            } else {
+                window.location.href = "/clients";
+            }
         });
 }
 

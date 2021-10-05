@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import validator  from "validator";
+import validator from "validator";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { postClient, useStages } from "../api.js";
 import "./css/addClient.css";
@@ -16,7 +16,6 @@ function AddClient(props) {
     const [inputError, setInputError] = useState("");
 
     const { loading, stagesData, error } = useStages();
-    console.log(stagesData);
 
     function notEmpty() {
         if (
@@ -50,7 +49,6 @@ function AddClient(props) {
                 userReference: Auth.getUsername(),
             };
             postClient(registerBody);
-            
         }
     };
 
@@ -61,31 +59,45 @@ function AddClient(props) {
             return (
                 <div>
                     <p>Something went wrong: {error.message}</p>
+                    <p>Reload or contact your administrator.</p>
+                </div>
+            );
+        } else if (!stagesData.length) {
+            return (
+                <div>
+                    <p>
+                        No stages available. Please contact your administrator.
+                    </p>
                 </div>
             );
         } else {
             return (
                 <div>
-                    {stagesData.stages.map((stage) => (
+                    {stagesData.map((stage) => (
                         <div key={"div" + stage.id}>
-                            <label key={"label" + stage.id} className="stageChoice">
-                            <input 
-                                key={stage.id}
-                                type="radio"
-                                name="stage"
-                                value={stage.name}
-                                onChange={(e) =>
-                                    setClientStage(e.target.value)
-                                }
-                            />
-                            <span key={"span" + stage.id}>{stage.name}</span>
+                            <label
+                                key={"label" + stage.id}
+                                className="stageChoice"
+                            >
+                                <input
+                                    key={stage.id}
+                                    type="radio"
+                                    name="stage"
+                                    value={stage.name}
+                                    onChange={(e) =>
+                                        setClientStage(e.target.value)
+                                    }
+                                />
+                                <span key={"span" + stage.id}>
+                                    {stage.name}
+                                </span>
                             </label>
                         </div>
                     ))}
                 </div>
-            )
+            );
         }
-    }
+    };
 
     return (
         <div>
@@ -99,7 +111,9 @@ function AddClient(props) {
             >
                 <div className="addClientForm">
                     <div>
-                        <h3 className="clientFormSubheading">Personal Details</h3>
+                        <h3 className="clientFormSubheading">
+                            Personal Details
+                        </h3>
                         <div className="addClientInput">
                             <label className="addClientLabel">
                                 First Name:
@@ -110,30 +124,22 @@ function AddClient(props) {
                                 type="text"
                                 placeholder="First Name"
                                 value={firstName}
-                                onChange={(e) =>
-                                    setFirstName(e.target.value)
-                                }
+                                onChange={(e) => setFirstName(e.target.value)}
                             />
                         </div>
                         <div className="addClientInput">
-                            <label className="addClientLabel">
-                                Last Name:
-                            </label>
+                            <label className="addClientLabel">Last Name:</label>
                             <input
                                 className="addClientField"
                                 required
                                 type="text"
                                 placeholder="Last Name"
                                 value={lastName}
-                                onChange={(e) =>
-                                    setLastName(e.target.value)
-                                }
+                                onChange={(e) => setLastName(e.target.value)}
                             />
                         </div>
                         <div className="addClientInput">
-                            <label className="addClientLabel">
-                                Email:
-                            </label>
+                            <label className="addClientLabel">Email:</label>
                             <input
                                 className="addClientField"
                                 id="clientEmailField"
@@ -141,9 +147,7 @@ function AddClient(props) {
                                 type="text"
                                 placeholder="Email"
                                 value={email}
-                                onChange={(e) =>
-                                    setEmail(e.target.value)
-                                }
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="addClientInput">
@@ -157,15 +161,11 @@ function AddClient(props) {
                                 type="text"
                                 placeholder="Phone Number"
                                 value={phoneNo}
-                                onChange={(e) =>
-                                    setPhoneNo(e.target.value)
-                                }
+                                onChange={(e) => setPhoneNo(e.target.value)}
                             />
                         </div>
                         <div className="addClientInput">
-                            <label className="addClientLabel">
-                                Address:
-                            </label>
+                            <label className="addClientLabel">Address:</label>
                             <input
                                 className="addClientField"
                                 id="clientAddressField"
@@ -173,20 +173,15 @@ function AddClient(props) {
                                 type="text"
                                 placeholder="Address"
                                 value={address}
-                                onChange={(e) =>
-                                    setAddress(e.target.value)
-                                }
+                                onChange={(e) => setAddress(e.target.value)}
                             />
-                        </div>   
+                        </div>
                     </div>
                     <div className="clientStageChoice">
                         <h3 className="clientFormSubheading">Stage</h3>
                         {stage()}
                     </div>
-                    <button
-                        className="addClientButton"
-                        onClick={onSubmit}
-                    >
+                    <button className="addClientButton" onClick={onSubmit}>
                         Create Client
                     </button>
                     <span className="inputError">{inputError}</span>

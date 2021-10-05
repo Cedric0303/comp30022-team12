@@ -33,12 +33,10 @@ function AdminManageUsers(props) {
                                 <FontAwesomeIcon icon="user-plus" />
                             </NavLink>
                         </li>
-                        <li>
-                            No users found, please reload or add new users.
-                        </li>
+                        <li>No users found, please reload or add new users.</li>
                     </ul>
                 </div>
-            )
+            );
         } else {
             return (
                 <div className="usersBox">

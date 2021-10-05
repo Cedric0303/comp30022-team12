@@ -32,7 +32,7 @@ export default function NoteRow(props) {
                 </div>
             );
         }
-    }
+    };
 
     const confirmDelete = () => {
         if (confirmedDelete) {
@@ -57,9 +57,5 @@ export default function NoteRow(props) {
         }
     };
 
-    return (
-        <div>
-            {pageMain()}
-        </div>
-    );
+    return <div>{pageMain()}</div>;
 }
