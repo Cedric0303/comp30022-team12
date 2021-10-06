@@ -6,8 +6,9 @@
     padding: 0;
 }
 
-.edit-userbox ul {
+.edit-userbox {
     padding: 12px 6vw;
+    font-size: 20px;
 }
 
 .edit-user-container {

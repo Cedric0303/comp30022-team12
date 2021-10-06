@@ -163,8 +163,9 @@ export function postEditUser(registerBody, uid) {
 export function deleteUser(uid) {
     const endpoint = BASE_URL + "/api/users/" + uid + "/remove";
     return axios
-        .post(endpoint, { withCredentials: true })
+        .get(endpoint, { withCredentials: true })
         .then((res) => {
+            console.log("deleteUser res");
             if (res.data.message === "User removal successful!") {
                 alert(res.data.message);
                 window.location.href = "/admin/users";

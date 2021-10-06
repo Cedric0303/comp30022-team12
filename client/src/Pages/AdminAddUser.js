@@ -12,7 +12,7 @@ function validate_password(p) {
     var number = /[0-9]/;
     var minLength = 8;
     var maxLength = 20;
-    return letter.test(p) && number.test(p) && p >= minLength && p <= maxLength;
+    return (letter.test(p) || number.test(p)) && p.length >= minLength && p.length <= maxLength;
 }
 
 function AdminAddUser(props) {

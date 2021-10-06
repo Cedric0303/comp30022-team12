@@ -101,20 +101,20 @@ function AdminEditUser(props) {
                 setError(e);
                 setLoading(false);
             });
-    }, []);
+    });
     
 
     const pageMain = () => {
         if (loading) {
             return (
                 <div className="edit-userbox">
-                    <ul>Loading...</ul>
+                    Loading...
                 </div>
             );
         } else if (error) {
             return (
                 <div className="edit-userbox">
-                    <ul>Something went wrong: {error.message}</ul>
+                    Something went wrong: {error.message}
                 </div>
             );
         } else {
@@ -256,6 +256,7 @@ function AdminEditUser(props) {
                 isOpen={modalIsOpen}
                 contentLabel={"Confirm Delete User"}
                 overlayClassName={"delete-modal-overlay"}
+                ariaHideApp={false}
             >
                 <div className="delete-user-modal-text">
                     Delete this user for all eternity?
