@@ -12,7 +12,11 @@ function validate_password(p) {
     var number = /[0-9]/;
     var minLength = 8;
     var maxLength = 20;
-    return letter.test(p) && number.test(p) && p >= minLength && p <= maxLength;
+    return (
+        (letter.test(p) || number.test(p)) &&
+        p.length >= minLength &&
+        p.length <= maxLength
+    );
 }
 
 function AdminAddUser(props) {
@@ -35,7 +39,7 @@ function AdminAddUser(props) {
         return true;
     }
 
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault(); //prevent reload
         if (notEmpty()) {
             const registerBody = {
@@ -69,12 +73,12 @@ function AdminAddUser(props) {
                 `}</style>
             </Helmet>
             <Navbar />
-            <h2 className="add-user-heading">Admin Add User</h2>
+            <h2 className="add-user-heading">Add User</h2>
             <div className="add-user-container">
                 <div className="add-user-container-item" id="item-left">
                     <form
                         method="post"
-                        onSubmit={onSubmit}
+                        onSubmit={handleSubmit}
                         className="add-user-form"
                     >
                         <div className="field-group" id="name-info">
@@ -172,7 +176,7 @@ function AdminAddUser(props) {
             <button
                 className="add-user-button"
                 id="create-user"
-                onClick={onSubmit}
+                onClick={handleSubmit}
             >
                 Create User
             </button>
