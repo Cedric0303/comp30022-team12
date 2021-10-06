@@ -75,11 +75,15 @@
 }
 
 /* Styling for Red Underline Options */
-.edit-user-container-item > .cancel-option, .edit-user-changes > .delete-option {
+.edit-user-container-item > .cancel-option, .edit-user-changes > #delete-option {
     font-weight: 400;
     font-size: x-large;
     color: #e13d55;
     text-decoration: underline;
+}
+
+.edit-user-changes > #delete-option {
+    background: none;
 }
 
 .edit-user-container-item > .cancel-option:hover, .edit-user-changes > .delete-option:hover {
@@ -115,3 +119,62 @@
     background-color: #37a3c4;
 }
 
+
+/* Modal */
+.delete-user-modal {
+    text-align: center;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background: white;
+    border-radius: 10px;
+    z-index: 999;
+}
+
+.delete-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(8px);
+}
+
+.delete-user-modal-text {
+    font-size: 150%;
+    font-weight: 700;
+    margin: 0 0 15px;
+    padding-bottom: 2em;
+}
+
+/* Modal Buttons inherit from .edit-user-button */
+.delete-button-group {
+    display: grid;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-user {
+    color: white;
+    font-size: x-large;
+    background-color: #e13d55;
+}
+
+#delete-user:hover {
+  color: #b83548;
+}
+
+#cancel-delete {
+    color: #aaa;
+    font-size: x-large;
+    background: none;
+    border: none;
+}
+
+#cancel-delete:hover {
+  color: black;
+}

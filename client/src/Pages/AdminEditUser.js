@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Modal from "react-modal";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { getUser } from "../api.js";
-import { postEditUser } from "../api.js";
+import { postEditUser, deleteUser } from "../api.js";
 import "./css/adminEditUser.css";
 import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
@@ -27,7 +28,12 @@ function AdminEditUser(props) {
     const [password, setPassword] = useState("");
     
     const [isRevealPwd, setIsRevealPwd] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
+    // Open and close the modal
+    function toggleModal() {
+        setModalIsOpen(!modalIsOpen);
+    }
     
     const getUsername = () => {
         if (props.match.params === null || props.match.params === undefined) {
@@ -53,9 +59,13 @@ function AdminEditUser(props) {
         e.preventDefault();
         
         // Show alert if password is comprised of spaces or if password is invalid
-        if ((password.trim() === "" & password.length > 0) || (password !== "" && !validate_password(password))) {
+        if (
+            (password.trim() === "" & password.length > 0) || 
+            (password !== "" && !validate_password(password))
+        ) {
             alert(
-                "Passwords must only be comprised of letters and numbers and be between 8-20 characters. Please update your new password to meeting these requirements or leave the field empty."
+                "Passwords must only be comprised of letters and numbers and be between 8-20 characters." + 
+                "Please update your new password to meeting these requirements or leave the field empty."
             );
         } else if (requireFieldsFilled()) {
             const registerBody = {
@@ -71,8 +81,9 @@ function AdminEditUser(props) {
         }
     }
 
-    const handleDelete = () => {
-
+    const handleDelete = (e) => {
+        e.preventDefault();
+        deleteUser(props.match.params.userID);
     }
     
 
@@ -217,10 +228,13 @@ function AdminEditUser(props) {
                         >
                             Confirm Changes
                         </button>
-                        <NavLink to="/admin/users" activeClassName="delete-option" onClick={handleDelete}>
+                        <button 
+                            className="edit-user-button"
+                            id="delete-option" 
+                            onClick={() => {setModalIsOpen(true)}}>
                             Delete User
-                        </NavLink>
-                    </div>               
+                        </button>
+                    </div>       
                 </div>
             )
         }
@@ -237,6 +251,32 @@ function AdminEditUser(props) {
             </Helmet>
             <Navbar />
             {pageMain()}
+            <Modal
+                className="delete-user-modal"
+                isOpen={modalIsOpen}
+                contentLabel={"Confirm Delete User"}
+                overlayClassName={"delete-modal-overlay"}
+            >
+                <div className="delete-user-modal-text">
+                    Delete this user for all eternity?
+                </div>
+                <div className="delete-button-group">
+                    <button
+                        className="edit-user-button"
+                        id="delete-user"
+                        onClick={handleDelete}
+                    >
+                        Delete
+                    </button>
+                    <button
+                        className="edit-user-button"
+                        id="cancel-delete"
+                        onClick={() => {toggleModal()}}
+                    >
+                        Cancel
+                    </button>
+                </div>    
+            </Modal>      
         </div>
     );
 }
