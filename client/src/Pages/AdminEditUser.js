@@ -101,7 +101,7 @@ function AdminEditUser(props) {
                 setError(e);
                 setLoading(false);
             });
-    });
+    }, []);
     
 
     const pageMain = () => {
