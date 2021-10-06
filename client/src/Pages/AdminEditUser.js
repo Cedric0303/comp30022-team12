@@ -35,15 +35,6 @@ function AdminEditUser(props) {
         setModalIsOpen(!modalIsOpen);
     }
     
-    const getUsername = () => {
-        if (props.match.params === null || props.match.params === undefined) {
-            return null;
-        } else if (props.match.params.userID) {
-            return props.match.params.userID;
-        }
-    };
-
-    
     function requireFieldsFilled() {
         if (
             firstName === "" ||
@@ -88,14 +79,14 @@ function AdminEditUser(props) {
     
 
     useEffect(() => {
-        function getUsername() {
+        const getUsername = () => {
             if (props.match.params === null || props.match.params === undefined) {
                 return null;
             } else if (props.match.params.userID) {
                 return props.match.params.userID;
-            }
-        };
-
+            }            
+        }
+        
         getUser(getUsername())
             .then((userData) => {
                     setLoading(false);
@@ -109,7 +100,7 @@ function AdminEditUser(props) {
                 setError(e);
                 setLoading(false);
             });
-    }, []);
+    }, [props.match.params]);
     
 
     const pageMain = () => {
