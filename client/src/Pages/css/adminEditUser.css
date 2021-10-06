@@ -6,6 +6,9 @@
     padding: 0;
 }
 
+.edit-userbox ul {
+    padding: 12px 6vw;
+}
 
 .edit-user-container {
     display: flex;

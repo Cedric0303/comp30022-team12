@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Auth from "./Pages/Auth";
-import { get } from "mongoose";
 
 const BASE_URL = process.env.REACT_APP_BACKEND_API_URL;
 
