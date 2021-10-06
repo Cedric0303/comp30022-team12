@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Auth from "./Pages/Auth";
+import { get } from "mongoose";
 
 const BASE_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -18,6 +19,43 @@ axios.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+// Get a single user from the database 
+export function getUser(username) {
+    const endpoint = BASE_URL + "/api/users/" + username;
+    return axios
+        .get(endpoint, {
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
+// Use loading, normal, and error states with the returned user data
+/*
+export function useUser(username) {
+    const [loading, setLoading] = useState(true);
+    const [userData, setUser] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        getUser(username)
+            .then((userData) => {
+                setUser(userData);
+                setLoading(false);
+            })
+            .catch((e) => {
+                console.log(e);
+                setError(e);
+                setLoading(false);
+            });
+    }, [username]);
+    return {
+        loading,
+        userData: userData,
+        error,
+    };
+}
+*/
+
 
 // Get the list of users from the database
 function getUsers() {
