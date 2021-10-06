@@ -29,33 +29,6 @@ export function getUser(username) {
         .then((res) => res.data);
 }
 
-// Use loading, normal, and error states with the returned user data
-/*
-export function useUser(username) {
-    const [loading, setLoading] = useState(true);
-    const [userData, setUser] = useState([]);
-    const [error, setError] = useState(null);
-    useEffect(() => {
-        getUser(username)
-            .then((userData) => {
-                setUser(userData);
-                setLoading(false);
-            })
-            .catch((e) => {
-                console.log(e);
-                setError(e);
-                setLoading(false);
-            });
-    }, [username]);
-    return {
-        loading,
-        userData: userData,
-        error,
-    };
-}
-*/
-
-
 // Get the list of users from the database
 function getUsers() {
     const endpoint = BASE_URL + "/api/users";
@@ -168,6 +141,21 @@ export function postUser(registerBody) {
                 // Created new user!
                 alert(res.data.message);
                 window.location.href = "/admin/users/create";
+            }
+        });
+}
+
+export function postEditUser(registerBody, uid) {
+    const endpoint = BASE_URL + "/api/users/" + uid + "/edit";
+    return axios
+        .post(endpoint, registerBody, { withCredentials: true })
+        .then((res) => {
+            if (res.data.message === "Edit user successful!") {
+                alert(res.data.message);
+                window.location.href = "/admin/users";
+            } else {
+                alert(res.data.message);
+                return false;
             }
         });
 }

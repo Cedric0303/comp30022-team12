@@ -64,10 +64,26 @@ const createUser = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-    const hash = await bcrypt.hash(
+    let hash = await bcrypt.hash(
         req.body.password,
         parseInt(process.env.SALT)
     );
+
+    // Replace with old hash if password field was empty
+    if (req.body.password === "") {
+        const user = await Users.findOne(
+            {
+                username: req.params.uid,
+            },
+            {
+                projection: {
+                    password: true,
+                },
+            }
+        )
+        hash = user.password;
+    };
+
     await Users.findOneAndUpdate(
         {
             username: req.params.uid,

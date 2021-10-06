@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Navbar from "../Components/Navbar/Navbar.js";
-import "./css/adminEditUser.css";
 import { getUser } from "../api.js";
+import { postEditUser } from "../api.js";
+import "./css/adminEditUser.css";
 import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
 
@@ -18,15 +19,12 @@ function validate_password(p) {
 function AdminEditUser(props) {
 
     const [loading, setLoading] = useState(true);
-    const [userData, setUser] = useState([]);
     const [error, setError] = useState(null);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
-    const [hash, setHash] = useState("");
     
     const [isRevealPwd, setIsRevealPwd] = useState(false);
 
@@ -67,14 +65,10 @@ function AdminEditUser(props) {
                 firstName: firstName,
                 lastName: lastName,
             };
-            
-            // post registerBody
-            console.log("valid password")
-            console.log(registerBody);
+            postEditUser(registerBody, props.match.params.userID);
         } else {
             alert("First Name, Last Name and Username fields must have a value!");
         }
-
     }
 
     const handleDelete = () => {
@@ -85,9 +79,7 @@ function AdminEditUser(props) {
     useEffect(() => {
         getUser(getUsername())
             .then((userData) => {
-                    setUser(userData);
                     setLoading(false);
-                    setHash(userData.user.password);
                     // Prepopulate fields
                     setFirstName(userData.user.firstName);
                     setLastName(userData.user.lastName);
@@ -98,7 +90,7 @@ function AdminEditUser(props) {
                 setError(e);
                 setLoading(false);
             });
-    }, [userData]);
+    }, []);
     
 
     const pageMain = () => {
