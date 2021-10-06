@@ -55,7 +55,7 @@ function AdminEditUser(props) {
             (password !== "" && !validate_password(password))
         ) {
             alert(
-                "Passwords must only be comprised of letters and numbers and be between 8-20 characters." + 
+                "Passwords must only be comprised of letters and numbers and be between 8-20 characters. " + 
                 "Please update your new password to meeting these requirements or leave the field empty."
             );
         } else if (requireFieldsFilled()) {
@@ -86,7 +86,7 @@ function AdminEditUser(props) {
                 return props.match.params.userID;
             }            
         }
-        
+
         getUser(getUsername())
             .then((userData) => {
                     setLoading(false);
