@@ -88,6 +88,14 @@ function AdminEditUser(props) {
     
 
     useEffect(() => {
+        function getUsername() {
+            if (props.match.params === null || props.match.params === undefined) {
+                return null;
+            } else if (props.match.params.userID) {
+                return props.match.params.userID;
+            }
+        };
+
         getUser(getUsername())
             .then((userData) => {
                     setLoading(false);
