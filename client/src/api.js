@@ -19,7 +19,7 @@ axios.interceptors.request.use(
     }
 );
 
-// Get a single user from the database 
+// Get a single user from the database
 export function getUser(username) {
     const endpoint = BASE_URL + "/api/users/" + username;
     return axios
@@ -162,18 +162,16 @@ export function postEditUser(registerBody, uid) {
 
 export function deleteUser(uid) {
     const endpoint = BASE_URL + "/api/users/" + uid + "/remove";
-    return axios
-        .get(endpoint, { withCredentials: true })
-        .then((res) => {
-            console.log("deleteUser res");
-            if (res.data.message === "User removal successful!") {
-                alert(res.data.message);
-                window.location.href = "/admin/users";
-            } else {
-                alert(res.data.message);
-                return false;
-            }
-        });
+    return axios.get(endpoint, { withCredentials: true }).then((res) => {
+        console.log("deleteUser res");
+        if (res.data.message === "User removal successful!") {
+            alert(res.data.message);
+            window.location.href = "/admin/users";
+        } else {
+            alert(res.data.message);
+            return false;
+        }
+    });
 }
 
 // Get the client from the database

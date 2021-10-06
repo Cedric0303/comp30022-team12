@@ -14,11 +14,14 @@ function validate_password(p) {
     var number = /[0-9]/;
     var minLength = 8;
     var maxLength = 20;
-    return (letter.test(p) || number.test(p)) && p.length >= minLength && p.length <= maxLength;
+    return (
+        (letter.test(p) || number.test(p)) &&
+        p.length >= minLength &&
+        p.length <= maxLength
+    );
 }
 
 function AdminEditUser(props) {
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -26,7 +29,7 @@ function AdminEditUser(props) {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    
+
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -34,13 +37,9 @@ function AdminEditUser(props) {
     function toggleModal() {
         setModalIsOpen(!modalIsOpen);
     }
-    
+
     function requireFieldsFilled() {
-        if (
-            firstName === "" ||
-            lastName === "" ||
-            username === ""
-        ) {
+        if (firstName === "" || lastName === "" || username === "") {
             return false;
         }
         return true;
@@ -48,15 +47,15 @@ function AdminEditUser(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         // Show alert if password is comprised of spaces or if password is invalid
         if (
-            (password.trim() === "" & password.length > 0) || 
+            (password.trim() === "") & (password.length > 0) ||
             (password !== "" && !validate_password(password))
         ) {
             alert(
-                "Passwords must only be comprised of letters and numbers and be between 8-20 characters. " + 
-                "Please update your new password to meeting these requirements or leave the field empty."
+                "Passwords must only be comprised of letters and numbers and be between 8-20 characters. " +
+                    "Please update your new password to meeting these requirements or leave the field empty."
             );
         } else if (requireFieldsFilled()) {
             const registerBody = {
@@ -68,48 +67,47 @@ function AdminEditUser(props) {
             };
             postEditUser(registerBody, props.match.params.userID);
         } else {
-            alert("First Name, Last Name and Username fields must have a value!");
+            alert(
+                "First Name, Last Name and Username fields must have a value!"
+            );
         }
-    }
+    };
 
     const handleDelete = (e) => {
         e.preventDefault();
         deleteUser(props.match.params.userID);
-    }
-    
+    };
 
     useEffect(() => {
         const getUsername = () => {
-            if (props.match.params === null || props.match.params === undefined) {
+            if (
+                props.match.params === null ||
+                props.match.params === undefined
+            ) {
                 return null;
             } else if (props.match.params.userID) {
                 return props.match.params.userID;
-            }            
-        }
+            }
+        };
 
         getUser(getUsername())
             .then((userData) => {
-                    setLoading(false);
-                    // Prepopulate fields
-                    setFirstName(userData.user.firstName);
-                    setLastName(userData.user.lastName);
-                    setUsername(userData.user.username);
-                }
-            ).catch((e) => {
+                setLoading(false);
+                // Prepopulate fields
+                setFirstName(userData.user.firstName);
+                setLastName(userData.user.lastName);
+                setUsername(userData.user.username);
+            })
+            .catch((e) => {
                 console.log(e);
                 setError(e);
                 setLoading(false);
             });
     }, [props.match.params]);
-    
 
     const pageMain = () => {
         if (loading) {
-            return (
-                <div className="edit-userbox">
-                    Loading...
-                </div>
-            );
+            return <div className="edit-userbox">Loading...</div>;
         } else if (error) {
             return (
                 <div className="edit-userbox">
@@ -121,7 +119,10 @@ function AdminEditUser(props) {
                 <div>
                     <h2 className="edit-user-heading">Edit User</h2>
                     <div className="edit-user-container">
-                        <div className="edit-user-container-item" id="item-left">
+                        <div
+                            className="edit-user-container-item"
+                            id="item-left"
+                        >
                             <form
                                 method="post"
                                 onSubmit={handleSubmit}
@@ -181,7 +182,11 @@ function AdminEditUser(props) {
                                         </label>
                                         <input
                                             className="edit-user-input"
-                                            type={isRevealPwd ? "text" : "password"}
+                                            type={
+                                                isRevealPwd
+                                                    ? "text"
+                                                    : "password"
+                                            }
                                             placeholder="Password"
                                             value={password}
                                             onChange={(e) =>
@@ -199,23 +204,34 @@ function AdminEditUser(props) {
                                                     ? "Hide Password"
                                                     : "Show Password"
                                             }
-                                            src={isRevealPwd ? hidePwdImg : showPwdImg}
+                                            src={
+                                                isRevealPwd
+                                                    ? hidePwdImg
+                                                    : showPwdImg
+                                            }
                                             alt={
                                                 isRevealPwd
                                                     ? "Hide Password Icon"
                                                     : "Show Password Icon"
                                             }
-                                            onClick={() => setIsRevealPwd(!isRevealPwd)}
+                                            onClick={() =>
+                                                setIsRevealPwd(!isRevealPwd)
+                                            }
                                         />
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div className="edit-user-container-item" id="item-right">
-                            <NavLink to="/admin/users" activeClassName="cancel-option">
+                        <div
+                            className="edit-user-container-item"
+                            id="item-right"
+                        >
+                            <NavLink
+                                to="/admin/users"
+                                activeClassName="cancel-option"
+                            >
                                 Cancel
                             </NavLink>
-                            
                         </div>
                     </div>
 
@@ -227,17 +243,20 @@ function AdminEditUser(props) {
                         >
                             Confirm Changes
                         </button>
-                        <button 
+                        <button
                             className="edit-user-button"
-                            id="delete-option" 
-                            onClick={() => {setModalIsOpen(true)}}>
+                            id="delete-option"
+                            onClick={() => {
+                                setModalIsOpen(true);
+                            }}
+                        >
                             Delete User
                         </button>
-                    </div>       
+                    </div>
                 </div>
-            )
+            );
         }
-    }
+    };
 
     return (
         <div>
@@ -271,12 +290,14 @@ function AdminEditUser(props) {
                     <button
                         className="edit-user-button"
                         id="cancel-delete"
-                        onClick={() => {toggleModal()}}
+                        onClick={() => {
+                            toggleModal();
+                        }}
                     >
                         Cancel
                     </button>
-                </div>    
-            </Modal>      
+                </div>
+            </Modal>
         </div>
     );
 }

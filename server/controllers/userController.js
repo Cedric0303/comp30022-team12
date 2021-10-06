@@ -64,7 +64,6 @@ const createUser = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-    
     // find the user
     const user = await Users.findOne(
         {
@@ -76,17 +75,14 @@ const editUser = async (req, res) => {
                 isAdmin: true,
             },
         }
-    )
+    );
 
     let hash = user.password;
 
     // Replace with old hash if password field was empty
     if (req.body.password !== "") {
-        hash = await bcrypt.hash(
-            req.body.password,
-            parseInt(process.env.SALT)
-        );
-    };
+        hash = await bcrypt.hash(req.body.password, parseInt(process.env.SALT));
+    }
 
     await Users.findOneAndUpdate(
         {

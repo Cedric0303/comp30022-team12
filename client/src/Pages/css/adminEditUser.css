@@ -16,7 +16,6 @@
     margin: 0 6vw;
 }
 
-
 /* Form */
 .edit-user-form {
     font-size: 20px;
@@ -64,7 +63,6 @@
     display: flex;
 }
 
-
 /* Right justify Cancel button*/
 .edit-user-container #item-right {
     display: flex;
@@ -76,7 +74,8 @@
 }
 
 /* Styling for Red Underline Options */
-.edit-user-container-item > .cancel-option, .edit-user-changes > #delete-option {
+.edit-user-container-item > .cancel-option,
+.edit-user-changes > #delete-option {
     font-weight: 400;
     font-size: x-large;
     color: #e13d55;
@@ -87,10 +86,10 @@
     background: none;
 }
 
-.edit-user-container-item > .cancel-option:hover, .edit-user-changes > .delete-option:hover {
+.edit-user-container-item > .cancel-option:hover,
+.edit-user-changes > .delete-option:hover {
     color: #b83548;
 }
-
 
 /* Confirm Button, Delete User */
 
@@ -119,7 +118,6 @@
 #confirm-changes:hover {
     background-color: #37a3c4;
 }
-
 
 /* Modal */
 .delete-user-modal {
@@ -166,7 +164,7 @@
 }
 
 #delete-user:hover {
-  color: #b83548;
+    color: #b83548;
 }
 
 #cancel-delete {
@@ -177,5 +175,5 @@
 }
 
 #cancel-delete:hover {
-  color: black;
+    color: black;
 }

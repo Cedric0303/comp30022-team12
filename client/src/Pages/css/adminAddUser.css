@@ -11,7 +11,6 @@
     margin: 0 6vw;
 }
 
-
 /* Form */
 .add-user-form {
     font-size: 20px;
@@ -58,7 +57,6 @@
 #password-field {
     display: flex;
 }
-
 
 /* Right justify Cancel button*/
 .add-user-container #item-right {
