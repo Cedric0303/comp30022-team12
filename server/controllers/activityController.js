@@ -10,6 +10,7 @@ const Users = db.collection("users");
 const RecycleBin = db.collection("recycle-bin");
 
 const getActivities = async (req, res) => {
+    console.log(req.body.clientReference);
     if (!req.body.userReference) {
         const activities = await Activities.find({})
             .sort({ timeStart: -1 })
