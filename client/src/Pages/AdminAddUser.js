@@ -12,7 +12,7 @@ function validate_password(p) {
     var number = /[0-9]/;
     var minLength = 8;
     var maxLength = 20;
-    return letter.test(p) && number.test(p) && p >= minLength && p <= maxLength;
+    return (letter.test(p) || number.test(p)) && p.length >= minLength && p.length <= maxLength;
 }
 
 function AdminAddUser(props) {
@@ -51,7 +51,7 @@ function AdminAddUser(props) {
                 postUser(registerBody);
             } else {
                 alert(
-                    "Passwords must only be comprised of letters and numbers and be between 8-20 characters."
+                    "Passwords must only be comprised of letters or numbers and be between 8-20 characters."
                 );
             }
         } else {
