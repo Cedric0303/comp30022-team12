@@ -23,10 +23,11 @@ const getOrders = async (req, res) => {
                 orders: [],
             });
         }
-    } else if (!req.body.clientReference) {
+    } else if (req.body.clientReference) {
         try {
             const orders = await Orders.find({
                 userReference: req.body.userReference,
+                clientReference: req.body.clientReference,
             }).toArray();
             res.json({
                 message: "Get orders successful!",
@@ -42,7 +43,6 @@ const getOrders = async (req, res) => {
         try {
             const orders = await Orders.find({
                 userReference: req.body.userReference,
-                clientReference: req.body.clientReference,
             }).toArray();
             res.json({
                 message: "Get orders successful!",

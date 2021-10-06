@@ -174,6 +174,7 @@ export function useClient(cid) {
 // Get the list of activities from the database
 function getActivities(cid) {
     const endpoint = BASE_URL + "/api/activities";
+    console.log(cid)
     return axios
         .post(endpoint, {
             userReference: Auth.getUsername(),

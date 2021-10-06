@@ -18,10 +18,11 @@ const getActivities = async (req, res) => {
             message: "Get all activities successful!",
             activities: activities,
         });
-    } else if (!req.body.clientReference) {
+    } else if (req.body.clientReference) {
         try {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
+                clientReference: req.body.clientReference,
             })
                 .sort({ timeStart: -1 })
                 .toArray();
@@ -39,7 +40,6 @@ const getActivities = async (req, res) => {
         try {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
-                clientReference: req.body.clientReference,
             })
                 .sort({ timeStart: -1 })
                 .toArray();
