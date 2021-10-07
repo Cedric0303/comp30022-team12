@@ -55,7 +55,7 @@ function AdminAddUser(props) {
                 postUser(registerBody);
             } else {
                 alert(
-                    "Passwords must only be comprised of letters and numbers and be between 8-20 characters."
+                    "Passwords must only be comprised of letters or numbers and be between 8-20 characters."
                 );
             }
         } else {
