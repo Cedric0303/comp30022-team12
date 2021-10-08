@@ -20,21 +20,19 @@ axios.interceptors.request.use(
 );
 
 // Get a single user from the database
-export function getUser(username) {
+export async function getUser(username) {
     const endpoint = BASE_URL + "/api/users/" + username;
-    return axios
-        .get(endpoint, {
-            withCredentials: true,
-        })
-        .then((res) => res.data);
+    const res = await axios.get(endpoint, {
+        withCredentials: true,
+    });
+    return res.data;
 }
 
 // Get the list of users from the database
-function getUsers() {
+async function getUsers() {
     const endpoint = BASE_URL + "/api/users";
-    return axios
-        .get(endpoint, { withCredentials: true })
-        .then((res) => res.data);
+    const res = await axios.get(endpoint, { withCredentials: true });
+    return res.data;
 }
 
 // Use loading, normal, and error states with the returned data
@@ -62,15 +60,12 @@ export function useUsers() {
 }
 
 // Get the list of stages from the database
-export function getStages() {
+export async function getStages() {
     const endpoint = BASE_URL + "/api/stages";
-    return axios
-        .get(endpoint, { withCredentials: true })
-        .then((res) => {
-            let stagesData = res.data
-            stagesData.stages.sort((a,b) => (a.position - b.position));
-            return stagesData;
-        });
+    const res = await axios.get(endpoint, { withCredentials: true });
+    let stagesData = res.data;
+    stagesData.stages.sort((a, b) => a.position - b.position);
+    return stagesData;
 }
 
 // Use loading, normal, and error states with the returned data
@@ -98,14 +93,13 @@ export function useStages() {
 }
 
 // Get the list of clients from the database
-function getClients() {
+async function getClients() {
     const endpoint = BASE_URL + "/api/clients";
-    return axios
-        .post(endpoint, {
-            userReference: Auth.getUsername(),
-            withCredentials: true,
-        })
-        .then((res) => res.data);
+    const res = await axios.post(endpoint, {
+        userReference: Auth.getUsername(),
+        withCredentials: true,
+    });
+    return res.data;
 }
 
 // Use loading, normal, and error states with the returned data
@@ -132,60 +126,56 @@ export function useClients() {
     };
 }
 
-export function postUser(registerBody) {
+export async function postUser(registerBody) {
     const endpoint = BASE_URL + "/api/users/create";
-    return axios
-        .post(endpoint, registerBody, { withCredentials: true })
-        .then((res) => {
-            var message = res.data.message;
-            if (message === "User already exists!") {
-                alert(res.data.message);
-                return false;
-            } else {
-                // Created new user!
-                alert(res.data.message);
-                window.location.href = "/admin/users/create";
-            }
-        });
-}
-
-export function postEditUser(registerBody, uid) {
-    const endpoint = BASE_URL + "/api/users/" + uid + "/edit";
-    return axios
-        .post(endpoint, registerBody, { withCredentials: true })
-        .then((res) => {
-            if (res.data.message === "Edit user successful!") {
-                alert(res.data.message);
-                window.location.href = "/admin/users";
-            } else {
-                alert(res.data.message);
-                return false;
-            }
-        });
-}
-
-export function deleteUser(uid) {
-    const endpoint = BASE_URL + "/api/users/" + uid + "/remove";
-    return axios.get(endpoint, { withCredentials: true }).then((res) => {
-        console.log("deleteUser res");
-        if (res.data.message === "User removal successful!") {
-            alert(res.data.message);
-            window.location.href = "/admin/users";
-        } else {
-            alert(res.data.message);
-            return false;
-        }
+    const res = await axios.post(endpoint, registerBody, {
+        withCredentials: true,
     });
+    var message = res.data.message;
+    if (message === "User already exists!") {
+        alert(res.data.message);
+        return false;
+    } else {
+        // Created new user!
+        alert(res.data.message);
+        window.location.href = "/admin/users/create";
+    }
+}
+
+export async function postEditUser(registerBody, uid) {
+    const endpoint = BASE_URL + "/api/users/" + uid + "/edit";
+    const res = await axios.post(endpoint, registerBody, {
+        withCredentials: true,
+    });
+    if (res.data.message === "Edit user successful!") {
+        alert(res.data.message);
+        window.location.href = "/admin/users";
+    } else {
+        alert(res.data.message);
+        return false;
+    }
+}
+
+export async function deleteUser(uid) {
+    const endpoint = BASE_URL + "/api/users/" + uid + "/remove";
+    const res = await axios.get(endpoint, { withCredentials: true });
+    console.log("deleteUser res");
+    if (res.data.message === "User removal successful!") {
+        alert(res.data.message);
+        window.location.href = "/admin/users";
+    } else {
+        alert(res.data.message);
+        return false;
+    }
 }
 
 // Get the client from the database
-function getClient(cid) {
+async function getClient(cid) {
     const endpoint = BASE_URL + "/api/clients/" + cid;
-    return axios
-        .get(endpoint, {
-            withCredentials: true,
-        })
-        .then((res) => res.data);
+    const res = await axios.get(endpoint, {
+        withCredentials: true,
+    });
+    return res.data;
 }
 
 // Use loading, normal, and error states with the returned data
@@ -213,15 +203,14 @@ export function useClient(cid) {
 }
 
 // Get the list of activities from the database
-function getActivities(cid) {
+async function getActivities(cid) {
     const endpoint = BASE_URL + "/api/activities";
-    return axios
-        .post(endpoint, {
-            userReference: Auth.getUsername(),
-            clientReference: cid,
-            withCredentials: true,
-        })
-        .then((res) => res.data);
+    const res = await axios.post(endpoint, {
+        userReference: Auth.getUsername(),
+        clientReference: cid,
+        withCredentials: true,
+    });
+    return res.data;
 }
 
 // Use loading, normal, and error states with the returned data
@@ -254,15 +243,14 @@ export function useActivities(cid) {
 }
 
 // Get the list of orders from the database
-function getOrders(cid) {
+async function getOrders(cid) {
     const endpoint = BASE_URL + "/api/orders";
-    return axios
-        .post(endpoint, {
-            userReference: Auth.getUsername(),
-            clientReference: cid,
-            withCredentials: true,
-        })
-        .then((res) => res.data);
+    const res = await axios.post(endpoint, {
+        userReference: Auth.getUsername(),
+        clientReference: cid,
+        withCredentials: true,
+    });
+    return res.data;
 }
 
 // Use loading, normal, and error states with the returned data
@@ -296,82 +284,69 @@ export async function postNewNote(noteBody) {
         .then((res) => res.data.client);
 }
 
-export function deleteNote(noteBody) {
+export async function deleteNote(noteBody) {
     const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/removeNote";
-    return axios
-        .post(endpoint, { nid: noteBody.nid, withCredentials: true })
-        .then((res) => res.data);
+    const res = await axios.post(endpoint, {
+        nid: noteBody.nid,
+        withCredentials: true,
+    });
+    return res.data;
 }
 
-export function postMeeting(meetingBody) {
+export async function postMeeting(meetingBody) {
     const endpoint = BASE_URL + "/api/activities/create";
-    return axios
-        .post(endpoint, {
-            clientReference: meetingBody.cid,
-            userReference: Auth.getUsername(),
-            timeStart: meetingBody.start,
-            timeEnd: meetingBody.end,
-            type: meetingBody.name,
-            withCredentials: true,
-        })
-        .then(() => {
-            window.location.href = "/clients/" + meetingBody.cid;
-        });
+    await axios.post(endpoint, {
+        clientReference: meetingBody.cid,
+        userReference: Auth.getUsername(),
+        timeStart: meetingBody.start,
+        timeEnd: meetingBody.end,
+        type: meetingBody.name,
+        withCredentials: true,
+    });
+    window.location.href = "/clients/" + meetingBody.cid;
 }
-export function postStage(newStage) {
-    const endpoint = BASE_URL + "/api/stages/create";    
-    return axios
-        .post(endpoint, newStage)
-        .then((response) => {
-            var message = response.data.message;
-            if(response.status === 200){
-                alert(message);
-            }
-        })
-        .catch(() => {    
-        });
+export async function postStage(newStage) {
+    const endpoint = BASE_URL + "/api/stages/create";
+    try {
+        const response = await axios.post(endpoint, newStage);
+        var message = response.data.message;
+        if (response.status === 200) {
+            alert(message);
+        }
+    } catch (e) {}
 }
 
-export function editStage(currStage, stageID) {
+export async function editStage(currStage, stageID) {
     const endpoint = BASE_URL + "/api/stages/" + stageID + "/edit";
-    return axios
-        .post(endpoint, currStage)
-        .then((response) => {
-            var message = response.data.message;
-            if(response.status === 200){
-                alert(message);
-            }
-        })
-        .catch(() => {    
-        });
+    try {
+        const response = await axios.post(endpoint, currStage);
+        var message = response.data.message;
+        if (response.status === 200) {
+            alert(message);
+        }
+    } catch (e) {}
 }
 
-export function deleteStage(stageID) {
+export async function deleteStage(stageID) {
     const endpoint = BASE_URL + "/api/stages/" + stageID + "/remove";
-    return axios
-        .get(endpoint)
-        .then((response) => {
-            var message = response.data.message;
-            if(response.status === 200){
-                alert(message);
-                window.location.reload();
-            }
-        })
-        .catch(() => {    
-        });
+    try {
+        const response = await axios.get(endpoint);
+        var message = response.data.message;
+        if (response.status === 200) {
+            alert(message);
+            window.location.reload();
+        }
+    } catch (e) {}
 }
 
-export function postStagePosUpdate(payload) {
+export async function postStagePosUpdate(payload) {
     const endpoint = BASE_URL + "/api/stages/editStages";
-    return axios
-        .post(endpoint, payload, { withCredentials: true })
-        .then((res) => {
-            if (res.status !== 200) {
-                alert("Failed to save new stage order! ");
-                return false;
-            } else {
-                alert("Successfully saved new stage order!");
-                window.location.href = "/admin/stages";
-            }
-        });
+    const res = await axios.post(endpoint, payload, { withCredentials: true });
+    if (res.status !== 200) {
+        alert("Failed to save new stage order! ");
+        return false;
+    } else {
+        alert("Successfully saved new stage order!");
+        window.location.href = "/admin/stages";
+    }
 }
