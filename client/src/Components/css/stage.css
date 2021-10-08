@@ -57,7 +57,7 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  
+
     border: none;
     border-radius: 20px;
 
@@ -67,9 +67,9 @@ button:hover {
     padding: 20px;
 
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "title delete"
-        "form form"
+        "form form";
 }
 
 .editModalOverlay {
@@ -111,7 +111,7 @@ button:hover {
 .editStageForm {
     grid-area: form;
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "input input"
         "confirm cancel";
 }
@@ -135,7 +135,7 @@ button:hover {
 
 .editStageButton {
     grid-area: confirm;
-    
+
     border: none;
     border-radius: 8px;
 

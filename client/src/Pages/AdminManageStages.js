@@ -10,19 +10,22 @@ import Modal from "react-modal";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function AdminManageStages(props) {
-    
     //hold the details of a new stage
     const initialState = {
-        sname: ""
+        sname: "",
     };
     const [newStage, setNewStage] = useState(initialState);
-    const resetStage = () => {setNewStage({ ...initialState });};
+    const resetStage = () => {
+        setNewStage({ ...initialState });
+    };
 
     Modal.setAppElement(document.getElementById("root") || undefined);
 
     //handles state of modal's show
     const [addModalIsOpen, setAddIsOpen] = useState(false);
-    function openModal() {setAddIsOpen(true);}
+    function openModal() {
+        setAddIsOpen(true);
+    }
     function closeAndClear() {
         setAddIsOpen(false);
         resetStage();
@@ -37,11 +40,11 @@ function AdminManageStages(props) {
     };
 
     const handleAdd = (e) => {
-        if(newStage.sname){
+        if (newStage.sname) {
             postStage(newStage);
             resetStage();
         }
-    }
+    };
 
     // const { loading, stagesData, error } = useStages();
     const [loading, setLoading] = useState(true);
@@ -51,7 +54,7 @@ function AdminManageStages(props) {
         getStages()
             .then((data) => {
                 setStages(data.stages);
-                setStages(prevStages => updateCurrentPositions(prevStages));
+                setStages((prevStages) => updateCurrentPositions(prevStages));
                 setLoading(false);
             })
             .catch((e) => {
@@ -64,7 +67,7 @@ function AdminManageStages(props) {
     const [searchQuery, setSearchQuery] = useState("");
 
     let disableDragging = false;
-    
+
     // accepts array of stage objects only
     // returns array of filtered stage objects
     function filterStages(stages, query) {
@@ -74,20 +77,20 @@ function AdminManageStages(props) {
         } else {
             disableDragging = true;
             var pattern = query
-            .split("")
-            .map((x) => {
-                return `(?=.*${x})`;
-            })
-            .join("");
+                .split("")
+                .map((x) => {
+                    return `(?=.*${x})`;
+                })
+                .join("");
             var regex = new RegExp(`^${pattern}`, "i");
             return stages.filter((stage) => {
                 return regex.test(stage.name) || regex.test(stage.position + 1);
             });
         }
     }
-    
+
     const filteredStages = filterStages(stagesData, searchQuery);
-    
+
     const [posUpdateable, setPosUpdateable] = useState(false);
 
     const reorder = (list, startIndex, endIndex) => {
@@ -97,7 +100,7 @@ function AdminManageStages(props) {
         return result;
     };
 
-    const updateCurrentPositions = input => {
+    const updateCurrentPositions = (input) => {
         const updatedList = input.map((current, index) => {
             const currentStage = current;
             currentStage.newPos = index;
@@ -107,9 +110,9 @@ function AdminManageStages(props) {
                 currentStage.movedPos = false;
             }
             return currentStage;
-        })
+        });
         return updatedList;
-    }
+    };
 
     function handleOnDragEnd(result) {
         if (!result.destination) {
@@ -126,7 +129,7 @@ function AdminManageStages(props) {
 
         // check if stages have been moved from their initial order
         let movedStages = false;
-        for (let i=0; i<stagesData.length; i++) {
+        for (let i = 0; i < stagesData.length; i++) {
             if (stagesData[i].movedPos) {
                 movedStages = true;
             }
@@ -140,20 +143,20 @@ function AdminManageStages(props) {
 
     const cancelChanges = () => {
         window.location.href = "/admin/stages";
-    }
+    };
 
     const saveChanges = () => {
-        let payload = {"stageArray":[]};
-        for (let i=0; i<stagesData.length; i++) {
+        let payload = { stageArray: [] };
+        for (let i = 0; i < stagesData.length; i++) {
             payload.stageArray.push({
-                "oldSID": stagesData[i].id,
-                "newStageName": stagesData[i].name,
-                "newPosition": stagesData[i].newPos
-            })
+                oldSID: stagesData[i].id,
+                newStageName: stagesData[i].name,
+                newPosition: stagesData[i].newPos,
+            });
         }
         postStagePosUpdate(payload);
-    }
-    
+    };
+
     const pageMain = () => {
         if (loading) {
             return (
@@ -178,7 +181,13 @@ function AdminManageStages(props) {
                                 onInput={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search stages"
                             />
-                            <StageUpdateButtons active={!disableDragging ? posUpdateable : false} saveChanges={saveChanges} cancelChanges={cancelChanges} />
+                            <StageUpdateButtons
+                                active={
+                                    !disableDragging ? posUpdateable : false
+                                }
+                                saveChanges={saveChanges}
+                                cancelChanges={cancelChanges}
+                            />
                             <button id="addStageButton" onClick={openModal}>
                                 <span>Add New Stage </span>
                                 <FontAwesomeIcon icon="plus" />
@@ -187,16 +196,26 @@ function AdminManageStages(props) {
                         <li id="stagesListHeading">Stage</li>
                         <div id="stageContainer">
                             <div id="stagePosColumn">
-                                {stagesData.map((e, index)=>{
+                                {stagesData.map((e, index) => {
                                     if (disableDragging === false) {
                                         if (e.movedPos === true) {
-                                            return <div key={index} className="stagePos posChanged">
-                                                {index+1}
-                                            </div>
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="stagePos posChanged"
+                                                >
+                                                    {index + 1}
+                                                </div>
+                                            );
                                         } else {
-                                            return <div key={index} className="stagePos">
-                                                {index+1}
-                                            </div>
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="stagePos"
+                                                >
+                                                    {index + 1}
+                                                </div>
+                                            );
                                         }
                                     } else {
                                         return false;
@@ -257,7 +276,8 @@ function AdminManageStages(props) {
             >
                 <h2 id="addStageTitle">Add a new stage</h2>
                 <form id="addStageForm" onSubmit={handleAdd}>
-                    <label id="addStageName">Name:
+                    <label id="addStageName">
+                        Name:
                         <input
                             type="text"
                             id="sname"
@@ -265,9 +285,16 @@ function AdminManageStages(props) {
                             value={newStage.sname}
                             onChange={handleChange}
                         />
-                    </label>  
-                    <button type="submit" className="addStageButton">Add Stage</button>
-                    <button className="stageCancelButton" onClick={closeAndClear}>Cancel</button>  
+                    </label>
+                    <button type="submit" className="addStageButton">
+                        Add Stage
+                    </button>
+                    <button
+                        className="stageCancelButton"
+                        onClick={closeAndClear}
+                    >
+                        Cancel
+                    </button>
                 </form>
             </Modal>
         </div>

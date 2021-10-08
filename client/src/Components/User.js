@@ -12,7 +12,10 @@ export default function User(user) {
             <span className="userFullName">
                 {firstName} {lastName}
             </span>
-            <NavLink className="userEdit" to={"/admin/users/" + username + "/edit"}>
+            <NavLink
+                className="userEdit"
+                to={"/admin/users/" + username + "/edit"}
+            >
                 <FontAwesomeIcon icon="edit" />
             </NavLink>
         </li>

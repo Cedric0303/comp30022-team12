@@ -31,7 +31,8 @@ function AddClient(props) {
     }
 
     const onSubmit = (e) => {
-        e.preventDefault(); //prevent reload
+        e.preventDefault();
+        // Submit only if the details are entered correctly
         if (!notEmpty()) {
             setInputError("All fields must have a value!");
         } else if (!validator.isEmail(email)) {
@@ -52,6 +53,7 @@ function AddClient(props) {
         }
     };
 
+    // Render the stages section and check stages are available
     const stage = () => {
         if (loading) {
             return;

@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./css/stage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Draggable } from "react-beautiful-dnd";
 import Modal from "react-modal";
-import {editStage, deleteStage} from "../api.js";
+import { editStage, deleteStage } from "../api.js";
 
 // Format each tag
 export default function Stage(stage) {
@@ -14,16 +14,20 @@ export default function Stage(stage) {
     } else {
         dragIconStyle = "draggableIcon";
     }
-    
+
     //hold the details of a stage to be edited/removed
     const initialState = {
-        sname: ""
+        sname: "",
     };
     const [currStage, setCurrStage] = useState(initialState);
-    const resetStage = () => {setCurrStage({ ...initialState });};
+    const resetStage = () => {
+        setCurrStage({ ...initialState });
+    };
 
     const [modalIsOpen, setIsOpen] = useState(false);
-    function openModal() {setIsOpen(true);}
+    function openModal() {
+        setIsOpen(true);
+    }
     function closeAndClear() {
         setIsOpen(false);
         resetStage();
@@ -38,31 +42,39 @@ export default function Stage(stage) {
     };
 
     const handleEdit = (e) => {
-        if(currStage.sname){
+        if (currStage.sname) {
             editStage(currStage, id);
         }
-    }
+    };
 
     const handleDelete = (e) => {
         deleteStage(id);
         setIsOpen(false);
-    }
+    };
 
-    Modal.setAppElement(document.getElementById('root') || undefined)
+    Modal.setAppElement(document.getElementById("root") || undefined);
 
     return (
         <div>
-            <Draggable isDragDisabled={disableDragging} draggableId={_id} index={index}>
+            <Draggable
+                isDragDisabled={disableDragging}
+                draggableId={_id}
+                index={index}
+            >
                 {(provided) => (
-                    <li className="stage" id={id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                    <li
+                        className="stage"
+                        id={id}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                    >
                         <div className={dragIconStyle}>
                             <FontAwesomeIcon icon="bars" />
                         </div>
-                        <div className="stageName">
-                            {name}
-                        </div>
+                        <div className="stageName">{name}</div>
                         <button className="stageEdit" onClick={openModal}>
-                            <FontAwesomeIcon icon="pen"/>
+                            <FontAwesomeIcon icon="pen" />
                         </button>
                     </li>
                 )}
@@ -75,9 +87,12 @@ export default function Stage(stage) {
                 contentLabel="Edit Stage"
             >
                 <h2 className="editStageTitle">Edit stage</h2>
-                <button className="deleteStageButton" onClick={handleDelete}>Delete Stage</button>
+                <button className="deleteStageButton" onClick={handleDelete}>
+                    Delete Stage
+                </button>
                 <form className="editStageForm" onSubmit={handleEdit}>
-                    <label className="editStageName">Name:
+                    <label className="editStageName">
+                        Name:
                         <input
                             type="text"
                             id="sname"
@@ -87,11 +102,17 @@ export default function Stage(stage) {
                             placeholder={name}
                         />
                     </label>
-                    <button type="submit" className="editStageButton">Save Changes</button>
-                    <button className="stageCancelButton" onClick={closeAndClear}>Cancel</button>
-                </form> 
+                    <button type="submit" className="editStageButton">
+                        Save Changes
+                    </button>
+                    <button
+                        className="stageCancelButton"
+                        onClick={closeAndClear}
+                    >
+                        Cancel
+                    </button>
+                </form>
             </Modal>
-
         </div>
     );
 }
