@@ -175,7 +175,7 @@ export async function deleteUser(uid) {
 }
 
 // Get the client from the database
-async function getClient(cid) {
+export async function getClient(cid) {
     const endpoint = BASE_URL + "/api/clients/" + cid;
     const res = await axios.get(endpoint, {
         withCredentials: true,
