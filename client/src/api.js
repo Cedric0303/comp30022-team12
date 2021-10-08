@@ -164,7 +164,6 @@ export async function postEditUser(registerBody, uid) {
 export async function deleteUser(uid) {
     const endpoint = BASE_URL + "/api/users/" + uid + "/remove";
     const res = await axios.get(endpoint, { withCredentials: true });
-    console.log("deleteUser res");
     if (res.data.message === "User removal successful!") {
         alert(res.data.message);
         window.location.href = "/admin/users";
@@ -205,6 +204,34 @@ export function useClient(cid) {
         clientData,
         error,
     };
+}
+
+export function postEditClient(registerBody, cid) {
+    const endpoint = BASE_URL + "/api/clients/" + cid + "/edit";
+    return axios
+        .post(endpoint, registerBody, { withCredentials: true })
+        .then((res) => {
+            if (res.data.message === "Edit client successful!") {
+                alert(res.data.message);
+                window.location.href = "/clients/" + cid;
+            } else {
+                alert(res.data.message);
+                return false;
+            }
+        });
+}
+
+export function deleteClient(cid) {
+    const endpoint = BASE_URL + "/api/clients/" + cid + "/remove";
+    return axios.get(endpoint, { withCredentials: true }).then((res) => {
+        if (res.data.message === "Client removal successful!") {
+            alert(res.data.message);
+            window.location.href = "/clients";
+        } else {
+            alert(res.data.message);
+            return false;
+        }
+    });
 }
 
 // Get the list of activities from the database
