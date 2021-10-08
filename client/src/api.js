@@ -177,7 +177,7 @@ export function deleteUser(uid) {
 }
 
 // Get the client from the database
-function getClient(cid) {
+export function getClient(cid) {
     const endpoint = BASE_URL + "/api/clients/" + cid;
     return axios
         .get(endpoint, {
