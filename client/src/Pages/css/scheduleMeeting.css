@@ -115,8 +115,9 @@
     font-size: 14px;
     color: white;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .cancelDelete:hover {
-    color: whitesmoke;
+    color: lightgrey;
 }
