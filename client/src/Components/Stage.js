@@ -45,7 +45,8 @@ export default function Stage(stage) {
         if (currStage.sname) {
             editStage(currStage, id);
         }
-    };
+        e.preventDefault();
+    }
 
     const handleDelete = (e) => {
         deleteStage(id);
