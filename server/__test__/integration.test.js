@@ -267,6 +267,7 @@ describe("#5 Client test (logged in)", () => {
             firstName: "edit",
             lastName: "edit",
             photoURL: "edit",
+            stageID: "stage2",
             userReference: "default",
         };
         return agent
@@ -327,7 +328,7 @@ describe("#5 Client test (logged in)", () => {
 
     test("Test 7: Change client stage", async () => {
         let changeClientStage = {
-            stageID: "default",
+            stageID: "stage3",
         };
         return agent
             .post("/api/clients/edit@edit.edit/changeStage")
