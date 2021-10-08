@@ -95,10 +95,15 @@ export function useStages() {
 // Get the list of clients from the database
 async function getClients() {
     const endpoint = BASE_URL + "/api/clients";
-    const res = await axios.post(endpoint, {
-        userReference: Auth.getUsername(),
-        withCredentials: true,
-    });
+    const res = await axios.post(
+        endpoint,
+        {
+            userReference: Auth.getUsername(),
+        },
+        {
+            withCredentials: true,
+        }
+    );
     return res.data;
 }
 
@@ -205,11 +210,16 @@ export function useClient(cid) {
 // Get the list of activities from the database
 async function getActivities(cid) {
     const endpoint = BASE_URL + "/api/activities";
-    const res = await axios.post(endpoint, {
-        userReference: Auth.getUsername(),
-        clientReference: cid,
-        withCredentials: true,
-    });
+    const res = await axios.post(
+        endpoint,
+        {
+            userReference: Auth.getUsername(),
+            clientReference: cid,
+        },
+        {
+            withCredentials: true,
+        }
+    );
     return res.data;
 }
 
@@ -245,11 +255,16 @@ export function useActivities(cid) {
 // Get the list of orders from the database
 async function getOrders(cid) {
     const endpoint = BASE_URL + "/api/orders";
-    const res = await axios.post(endpoint, {
-        userReference: Auth.getUsername(),
-        clientReference: cid,
-        withCredentials: true,
-    });
+    const res = await axios.post(
+        endpoint,
+        {
+            userReference: Auth.getUsername(),
+            clientReference: cid,
+        },
+        {
+            withCredentials: true,
+        }
+    );
     return res.data;
 }
 
@@ -280,7 +295,7 @@ export function useOrders(cid) {
 export async function postNewNote(noteBody) {
     const endpoint = BASE_URL + "/api/clients/" + noteBody.cid + "/addNote";
     return axios
-        .post(endpoint, { note: noteBody.note, withCredentials: true })
+        .post(endpoint, { note: noteBody.note }, { withCredentials: true })
         .then((res) => res.data.client);
 }
 
@@ -295,14 +310,19 @@ export async function deleteNote(noteBody) {
 
 export async function postMeeting(meetingBody) {
     const endpoint = BASE_URL + "/api/activities/create";
-    await axios.post(endpoint, {
-        clientReference: meetingBody.cid,
-        userReference: Auth.getUsername(),
-        timeStart: meetingBody.start,
-        timeEnd: meetingBody.end,
-        type: meetingBody.name,
-        withCredentials: true,
-    });
+    await axios.post(
+        endpoint,
+        {
+            clientReference: meetingBody.cid,
+            userReference: Auth.getUsername(),
+            timeStart: meetingBody.start,
+            timeEnd: meetingBody.end,
+            type: meetingBody.name,
+        },
+        {
+            withCredentials: true,
+        }
+    );
     window.location.href = "/clients/" + meetingBody.cid;
 }
 export async function postStage(newStage) {
