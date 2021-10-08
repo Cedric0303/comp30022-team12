@@ -1,3 +1,8 @@
+button:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
 .stage {
     font-size: 1.4em;
     font-weight: 500;
@@ -40,4 +45,128 @@
 .stageEdit:hover {
     cursor: pointer;
     color: #636363;
+}
+
+/* edit stage modal styling */
+
+.editModal {
+    position: absolute;
+    height: max-content;
+    width: max-content;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    border: none;
+    border-radius: 20px;
+
+    background: white;
+    overflow: auto;
+    outline: none;
+    padding: 20px;
+
+    display: grid;
+    grid-template-areas: 
+        "title delete"
+        "form form"
+}
+
+.editModalOverlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #70707065;
+}
+
+.editStageTitle {
+    grid-area: title;
+    font-size: 1.8em;
+}
+
+.deleteStageButton {
+    grid-area: delete;
+    border: none;
+    background: none;
+
+    display: flex;
+    justify-self: end;
+    align-self: end;
+
+    width: fit-content;
+    height: fit-content;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: #d62626;
+}
+
+.deleteStageButton:hover {
+    text-decoration: underline;
+}
+
+.editStageForm {
+    grid-area: form;
+    display: grid;
+    grid-template-areas: 
+        "input input"
+        "confirm cancel";
+}
+
+.editStageName {
+    grid-area: input;
+    display: flex;
+    column-gap: 1vw;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 1em 0;
+    font-size: 1.3em;
+}
+
+.editStageName input {
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.editStageButton {
+    grid-area: confirm;
+    
+    border: none;
+    border-radius: 8px;
+
+    width: max-content;
+    padding: 0.6em 1.2em;
+    background: #81e411;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+}
+
+.stageCancelButton {
+    grid-area: cancel;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: #d62626;
+
+    border: none;
+    border-radius: 8px;
+
+    width: fit-content;
+    height: fit-content;
+
+    justify-self: end;
+    align-self: center;
+
+    background: none;
+}
+
+.stageCancelButton:hover {
+    text-decoration: underline;
 }
