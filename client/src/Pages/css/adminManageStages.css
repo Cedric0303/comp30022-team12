@@ -79,7 +79,7 @@
 }
 
 .stagePos {
-    margin: -1px 0 0 0;
+    margin: -1px 0 0;
     padding: 0.4em 0;
     display: flex;
     justify-content: center;
@@ -112,7 +112,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  
+
     border: none;
     border-radius: 20px;
 
@@ -141,7 +141,7 @@
 
 #addStageForm {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "input input"
         "confirm cancel";
 }
@@ -165,7 +165,7 @@
 
 .addStageButton {
     grid-area: confirm;
-    
+
     border: none;
     border-radius: 8px;
 

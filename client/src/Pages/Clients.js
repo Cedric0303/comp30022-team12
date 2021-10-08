@@ -35,8 +35,11 @@ function Clients(props) {
                             </tr>
                         </thead>
                         {clientsData.clients.map((client) => (
-                            <tbody key={client._id} className="specificClient">
-                                <Client {...client} />
+                            <tbody
+                                key={client.email}
+                                className="specificClient"
+                            >
+                                <Client key={client.email} {...client} />
                             </tbody>
                         ))}
                     </table>

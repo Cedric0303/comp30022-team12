@@ -40,6 +40,7 @@ const getStage = async (req, res) => {
 };
 
 const createStage = async (req, res) => {
+    const maxPos = Stages.find().sort({ position: -1 }).limit(1);
     const stageID = req.body.sname.replace(/\s+/g, "_");
     const exist = await Stages.findOne(
         {

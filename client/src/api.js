@@ -370,14 +370,32 @@ export async function deleteStage(stageID) {
     } catch (e) {}
 }
 
-export async function postStagePosUpdate(payload) {
+export function postClient(registerBody) {
+    const endpoint = BASE_URL + "/api/clients/create";
+    return axios
+        .post(endpoint, registerBody, { withCredentials: true })
+        .then((res) => {
+            var message = res.data.message;
+            if (message === "Email already in use for another client") {
+                alert(res.data.message + "\nPlease input a different email");
+                return false;
+            } else {
+                window.location.href = "/clients";
+            }
+        });
+}
+
+export function postStagePosUpdate(payload) {
     const endpoint = BASE_URL + "/api/stages/editStages";
-    const res = await axios.post(endpoint, payload, { withCredentials: true });
-    if (res.status !== 200) {
-        alert("Failed to save new stage order! ");
-        return false;
-    } else {
-        alert("Successfully saved new stage order!");
-        window.location.href = "/admin/stages";
-    }
+    return axios
+        .post(endpoint, payload, { withCredentials: true })
+        .then((res) => {
+            if (res.status !== 200) {
+                alert("Failed to save new stage order! ");
+                return false;
+            } else {
+                alert("Successfully saved new stage order!");
+                window.location.href = "/admin/stages";
+            }
+        });
 }

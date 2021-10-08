@@ -60,6 +60,7 @@ A personal CRM
 -   `@fortawesome/free-regular-svg-icons`
 -   `@fortawesome/free-solid-svg-icons`
 -   `@fortawesome/react-fontawesome`
+-    `@material-ui/core`
 -   `@material-ui/pickers`
 -   `@testing-library/jest-dom`
 -   `@testing-library/react`
@@ -68,6 +69,7 @@ A personal CRM
 -   `jwt-decode`
 -   `moment`
 -   `react`
+-   `react-beautiful-dnd`
 -   `react-big-calendar`
 -   `react-dom`
 -   `react-helmet`
@@ -75,6 +77,7 @@ A personal CRM
 -   `react-moment`
 -   `react-router-dom`
 -   `react-scripts`
+-   `validator`
 -   `web-vitals`
 -   `eslint-plugin-react`
 

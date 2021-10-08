@@ -170,41 +170,63 @@ const changeClientStage = async (req, res) => {
 };
 
 const createClient = async (req, res) => {
-    const defaultNewStage = await Stages.findOne({
-        id: "new",
-    });
-    const newClient = new ClientModel({
-        email: req.body.email,
-        address: req.body.address,
-        phoneNumber: req.body.phoneNumber,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        photoURL: req.body.photoURL,
-        userReference: req.body.userReference,
-        stage: defaultNewStage.name,
-        updatedAt: new Date(),
-        notes: [],
-    });
-    const result = await newClient.save();
-    const client = await Clients.findOne(
-        {
-            _id: result._id,
-        },
-        {
-            projection: {
-                _id: false,
-            },
+    const exist = await Clients.findOne({ email: req.body.email });
+    if (exist === null) {
+        // Check whether a stage was chosen in the request and assign accordingly
+        var newStage = null;
+
+        if (!req.body.stage) {
+            newStage = await Stages.findOne({
+                position: 0,
+            });
+        } else {
+            newStage = await Stages.findOne({
+                name: req.body.stage,
+            });
         }
-    );
-    res.json({
-        message: "Client creation successful!",
-        client: client,
-    });
+        // Set stage as null if no stages are in the database
+        var stageName = null;
+        if (newStage) {
+            stageName = newStage.name;
+        }
+
+        const newClient = new ClientModel({
+            email: req.body.email,
+            address: req.body.address,
+            phoneNumber: req.body.phoneNumber,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            photoURL: req.body.photoURL,
+            userReference: req.body.userReference,
+            stage: stageName,
+            updatedAt: new Date(),
+            notes: [],
+        });
+        const result = await newClient.save();
+        const client = await Clients.findOne(
+            {
+                _id: result._id,
+            },
+            {
+                projection: {
+                    _id: false,
+                },
+            }
+        );
+        res.json({
+            message: "Client creation successful!",
+            client: client,
+        });
+    } else {
+        res.json({
+            message: "Email already in use for another client",
+        });
+    }
 };
 
 const editClient = async (req, res) => {
     const stage = await Stages.findOne({
-        id: req.body.tagID,
+        id: req.body.stageID,
     });
     await Clients.findOneAndUpdate(
         {
