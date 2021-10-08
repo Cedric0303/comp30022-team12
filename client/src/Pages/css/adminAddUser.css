@@ -11,27 +11,7 @@
     margin: 0 6vw;
 }
 
-/* right justify Cancel button*/
-#item-right {
-    display: flex;
-    flex-direction: row-reverse;
-    width: 50%;
-    padding: 10px;
-}
-
-.cancel-option {
-    font-weight: 400;
-    font-size: x-large;
-    color: #e13d55;
-    text-decoration: underline;
-}
-
-.cancel-option:hover {
-    color: #b83548;
-}
-
 /* Form */
-
 .add-user-form {
     font-size: 20px;
     font-weight: 500;
@@ -78,12 +58,35 @@
     display: flex;
 }
 
+/* Right justify Cancel button*/
+.add-user-container #item-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Styling for Red Underline Options */
+.add-user-container-item > .cancel-option {
+    font-weight: 400;
+    font-size: x-large;
+    color: #e13d55;
+    text-decoration: underline;
+}
+
+.add-user-container-item > .cancel-option:hover {
+    color: #b83548;
+}
+
 /* Buttons */
 
 .add-user-button {
     margin: 6vw;
     height: 45px;
-    width: 160px;
+    width: auto;
+    padding: 0 10px;
     border-radius: 10px;
     border-style: none;
     cursor: pointer;

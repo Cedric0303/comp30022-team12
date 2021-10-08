@@ -226,7 +226,7 @@ const createClient = async (req, res) => {
 
 const editClient = async (req, res) => {
     const stage = await Stages.findOne({
-        id: req.body.tagID,
+        id: req.body.stageID,
     });
     await Clients.findOneAndUpdate(
         {

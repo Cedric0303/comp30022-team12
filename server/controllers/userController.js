@@ -64,10 +64,26 @@ const createUser = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-    const hash = await bcrypt.hash(
-        req.body.password,
-        parseInt(process.env.SALT)
+    // find the user
+    const user = await Users.findOne(
+        {
+            username: req.params.uid,
+        },
+        {
+            projection: {
+                password: true,
+                isAdmin: true,
+            },
+        }
     );
+
+    let hash = user.password;
+
+    // Replace with old hash if password field was empty
+    if (req.body.password !== "") {
+        hash = await bcrypt.hash(req.body.password, parseInt(process.env.SALT));
+    }
+
     await Users.findOneAndUpdate(
         {
             username: req.params.uid,
@@ -76,7 +92,7 @@ const editUser = async (req, res) => {
             $set: {
                 username: req.body.username,
                 password: hash,
-                isAdmin: req.body.isAdmin,
+                isAdmin: user.isAdmin,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
             },

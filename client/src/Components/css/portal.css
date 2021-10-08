@@ -139,12 +139,12 @@
     text-decoration: underline;
 }
 
-.cancelDelete {
+.cancelNoteDelete {
     float: right;
     padding-right: 6px;
 }
 
-.cancelDelete:hover {
+.cancelNoteDelete:hover {
     cursor: pointer;
     text-decoration: underline;
 }

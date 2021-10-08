@@ -8,11 +8,18 @@ const Stages = db.collection("stages");
 const RecycleBin = db.collection("recycle-bin");
 
 const getStages = async (req, res) => {
-    const stages = await Stages.find({}).toArray();
-    res.json({
-        message: "Get stages successful!",
-        stages: stages,
-    });
+    try {
+        const stages = await Stages.find({}).toArray();
+        res.json({
+            message: "Get stages successful!",
+            stages: stages,
+        });
+    } catch {
+        res.json({
+            message: "No stages available!",
+            stages: [],
+        });
+    }
 };
 
 const getStage = async (req, res) => {
@@ -35,13 +42,7 @@ const getStage = async (req, res) => {
 const createStage = async (req, res) => {
     const maxPos = Stages.find().sort({ position: -1 }).limit(1);
     const stageID = req.body.sname.replace(/\s+/g, "_");
-    const newStage = new StageModel({
-        id: stageID,
-        name: req.body.sname,
-        position: parseInt(maxPos) + 1,
-    });
-    await Stages.insertOne(newStage);
-    const stage = await Stages.findOne(
+    const exist = await Stages.findOne(
         {
             id: stageID,
         },
@@ -51,10 +52,24 @@ const createStage = async (req, res) => {
             },
         }
     );
-    res.json({
-        message: "Stage creation successful!",
-        stage: stage,
-    });
+    if (exist) {
+        res.json({
+            message: "Stage already exist!",
+            stage: exist,
+        });
+    } else {
+        const maxPos = await Stages.find().sort({ position: -1 }).limit(1).toArray();
+        const newStage = new StageModel({
+            id: stageID,
+            name: req.body.sname,
+            position: parseInt(maxPos[0].position) + 1,
+        });
+        await Stages.insertOne(newStage);
+        res.json({
+            message: "Stage creation successful!",
+            stage: newStage,
+        });
+    }
 };
 
 const editStage = async (req, res) => {
