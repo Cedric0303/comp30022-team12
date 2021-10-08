@@ -8,6 +8,7 @@ const activitySchema = new Schema({
     type: { type: String, required: true },
     timeStart: { type: Date, required: true },
     timeEnd: { type: Date, required: true },
+    updatedAt: { type: Date, required: true },
 });
 
 const ActivityModel = mongoose.model("activity", activitySchema);

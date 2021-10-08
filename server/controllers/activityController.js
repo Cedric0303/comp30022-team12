@@ -80,6 +80,7 @@ const createActivity = async (req, res) => {
             type: req.body.type,
             timeStart: new Date(req.body.timeStart),
             timeEnd: new Date(req.body.timeEnd),
+            updatedAt: new Date(),
         });
         const result = await Activities.insertOne(newActivity);
         const activity = await Activities.findOne({
@@ -136,6 +137,7 @@ const editActivity = async (req, res) => {
                     type: req.body.type,
                     timeStart: new Date(req.body.timeStart),
                     timeEnd: new Date(req.body.timeEnd),
+                    updatedAt: new Date(),
                 },
             },
             {

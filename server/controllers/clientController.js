@@ -182,6 +182,7 @@ const createClient = async (req, res) => {
         photoURL: req.body.photoURL,
         userReference: req.body.userReference,
         stage: defaultNewStage.name,
+        updatedAt: new Date(),
         notes: [],
     });
     const result = await newClient.save();
