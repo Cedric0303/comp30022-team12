@@ -19,6 +19,16 @@ axios.interceptors.request.use(
     }
 );
 
+// Get a single user from the database
+export function getUser(username) {
+    const endpoint = BASE_URL + "/api/users/" + username;
+    return axios
+        .get(endpoint, {
+            withCredentials: true,
+        })
+        .then((res) => res.data);
+}
+
 // Get the list of users from the database
 function getUsers() {
     const endpoint = BASE_URL + "/api/users";
@@ -135,6 +145,35 @@ export function postUser(registerBody) {
                 window.location.href = "/admin/users/create";
             }
         });
+}
+
+export function postEditUser(registerBody, uid) {
+    const endpoint = BASE_URL + "/api/users/" + uid + "/edit";
+    return axios
+        .post(endpoint, registerBody, { withCredentials: true })
+        .then((res) => {
+            if (res.data.message === "Edit user successful!") {
+                alert(res.data.message);
+                window.location.href = "/admin/users";
+            } else {
+                alert(res.data.message);
+                return false;
+            }
+        });
+}
+
+export function deleteUser(uid) {
+    const endpoint = BASE_URL + "/api/users/" + uid + "/remove";
+    return axios.get(endpoint, { withCredentials: true }).then((res) => {
+        console.log("deleteUser res");
+        if (res.data.message === "User removal successful!") {
+            alert(res.data.message);
+            window.location.href = "/admin/users";
+        } else {
+            alert(res.data.message);
+            return false;
+        }
+    });
 }
 
 // Get the client from the database
