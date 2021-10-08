@@ -41,6 +41,7 @@ function AdminManageStages(props) {
             postStage(newStage);
             resetStage();
         }
+        e.preventDefault();
     }
 
     // const { loading, stagesData, error } = useStages();

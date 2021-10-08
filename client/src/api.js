@@ -334,6 +334,8 @@ export async function postStage(newStage) {
         var message = response.data.message;
         if (response.status === 200) {
             alert(message);
+            window.location.reload();
+
         }
     } catch (e) {}
 }
@@ -347,6 +349,7 @@ export async function editStage(currStage, stageID) {
         var message = response.data.message;
         if (response.status === 200) {
             alert(message);
+            window.location.reload();
         } else {
             console.log(response.data);
         }
