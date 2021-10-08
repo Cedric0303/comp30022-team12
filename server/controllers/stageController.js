@@ -8,13 +8,18 @@ const Stages = db.collection("stages");
 const RecycleBin = db.collection("recycle-bin");
 
 const getStages = async (req, res) => {
-    const stages = await Stages.find(
-        {}
-    ).toArray();
-    res.json({
-        message: "Get stages successful!",
-        stages: stages,
-    });
+    try {
+        const stages = await Stages.find({}).toArray();
+        res.json({
+            message: "Get stages successful!",
+            stages: stages,
+        });
+    } catch {
+        res.json({
+            message: "No stages available!",
+            stages: [],
+        });
+    }
 };
 
 const getStage = async (req, res) => {
@@ -35,11 +40,12 @@ const getStage = async (req, res) => {
 };
 
 const createStage = async (req, res) => {
+    const maxPos = Stages.find().sort({ position: -1 }).limit(1);
     const stageID = req.body.sname.replace(/\s+/g, "_");
     const newStage = new StageModel({
         id: stageID,
         name: req.body.sname,
-        position: req.body.position,
+        position: parseInt(maxPos) + 1,
     });
     await Stages.insertOne(newStage);
     const stage = await Stages.findOne(
@@ -52,10 +58,23 @@ const createStage = async (req, res) => {
             },
         }
     );
-    res.json({
-        message: "Stage creation successful!",
-        stage: stage,
-    });
+    if (exist) {
+        res.json({
+            message: "Stage already exist!",
+            stage: exist,
+        });
+    } else {
+        const newStage = new StageModel({
+            id: stageID,
+            name: req.body.sname,
+            position: req.body.position,
+        });
+        await Stages.insertOne(newStage);
+        res.json({
+            message: "Stage creation successful!",
+            stage: newStage,
+        });
+    }
 };
 
 const editStage = async (req, res) => {
@@ -68,14 +87,13 @@ const editStage = async (req, res) => {
             $set: {
                 id: stageID,
                 name: req.body.sname,
-                position: req.body.position,
             },
         },
         {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -127,9 +145,26 @@ const removeStage = async (req, res) => {
     await Stages.deleteOne({
         id: req.params.sid,
     });
+    await reorderStages();
     res.json({
         message: "Stage removal successful!",
     });
+};
+
+const reorderStages = async () => {
+    const allStage = await Stages.find({}).sort({ position: 1 }).toArray();
+    for (let i = 0; i < allStage.length; i++) {
+        await Stages.findOneAndUpdate(
+            {
+                id: allStage[i].id,
+            },
+            {
+                $set: {
+                    position: i,
+                },
+            }
+        );
+    }
 };
 
 module.exports = {

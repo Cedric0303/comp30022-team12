@@ -4,21 +4,28 @@
 }
 
 #stagesListActionBar {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     padding: 0.7em 6vw;
+
+    justify-items: center;
+    grid-template-columns: 4fr 2fr 4fr;
 }
 
 #stageSearchBar {
     background-color: #ffffff;
     border: 1px solid #cfcfcf;
     border-radius: 2px;
+
     width: 30vw;
     min-width: 120px;
     padding: 0.4vh 4px;
+
     box-sizing: border-box;
+
     font-family: inherit;
     font-size: 1em;
+
+    justify-self: start;
 }
 
 #addStageButton {
@@ -28,6 +35,8 @@
     font-family: inherit;
     font-size: 1.3em;
     font-weight: 500;
+
+    justify-self: end;
 }
 
 #addStageButton:hover {
@@ -40,7 +49,6 @@
     color: white;
     margin-bottom: 6px;
     margin-left: 6vw;
-
 }
 
 #stagesListHeading {
@@ -71,7 +79,7 @@
 }
 
 .stagePos {
-    margin: 0;
+    margin: -1px 0 0 0;
     padding: 0.4em 0;
     display: flex;
     justify-content: center;
@@ -84,4 +92,88 @@
     height: 2.5em;
 
     background-color: #cecece;
+}
+
+.stagePos.posChanged {
+    background-color: #c1ff7a;
+}
+
+.hide {
+    display: none;
+}
+
+/* add stage modal styling */
+
+.addModal {
+    position: absolute;
+    height: max-content;
+    width: max-content;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    border: none;
+    border-radius: 20px;
+
+    background: white;
+    overflow: auto;
+    outline: none;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.addModalOverlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #70707065;
+}
+
+#addStageTitle {
+    font-size: 1.8em;
+}
+
+#addStageForm {
+    display: grid;
+    grid-template-areas: 
+        "input input"
+        "confirm cancel";
+}
+
+#addStageName {
+    grid-area: input;
+    display: flex;
+    column-gap: 1vw;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0.7em 0;
+    font-size: 1.3em;
+}
+
+#addStageName input {
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.addStageButton {
+    grid-area: confirm;
+    
+    border: none;
+    border-radius: 8px;
+
+    width: max-content;
+    padding: 0.6em 1.2em;
+    background: #81e411;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
 }

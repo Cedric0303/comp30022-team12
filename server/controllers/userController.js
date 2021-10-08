@@ -7,19 +7,26 @@ const Users = db.collection("users");
 const RecycleBin = db.collection("recycle-bin");
 
 const getUsers = async (req, res) => {
-    const users = await Users.find(
-        {},
-        {
-            projection: {
-                _id: true,
-                password: false,
-            },
-        }
-    ).toArray();
-    res.json({
-        message: "Get users successful!",
-        users: users,
-    });
+    try {
+        const users = await Users.find(
+            {},
+            {
+                projection: {
+                    _id: false,
+                    password: false,
+                },
+            }
+        ).toArray();
+        res.json({
+            message: "Get users successful!",
+            users: users,
+        });
+    } catch {
+        res.json({
+            message: "No users available!",
+            users: [],
+        });
+    }
 };
 
 const getUser = async (req, res) => {
@@ -43,7 +50,7 @@ const createUser = async (req, res) => {
     const exist = Object.keys(req.authInfo).length > 0;
     if (exist) {
         res.json({
-            message: "User already exist!",
+            message: "User already exists!",
         });
     } else {
         const user = await Users.findOne({
@@ -57,10 +64,26 @@ const createUser = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-    const hash = await bcrypt.hash(
-        req.body.password,
-        parseInt(process.env.SALT)
+    // find the user
+    const user = await Users.findOne(
+        {
+            username: req.params.uid,
+        },
+        {
+            projection: {
+                password: true,
+                isAdmin: true,
+            },
+        }
     );
+
+    let hash = user.password;
+
+    // Replace with old hash if password field was empty
+    if (req.body.password !== "") {
+        hash = await bcrypt.hash(req.body.password, parseInt(process.env.SALT));
+    }
+
     await Users.findOneAndUpdate(
         {
             username: req.params.uid,
@@ -69,7 +92,7 @@ const editUser = async (req, res) => {
             $set: {
                 username: req.body.username,
                 password: hash,
-                isAdmin: req.body.isAdmin,
+                isAdmin: user.isAdmin,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
             },
@@ -78,7 +101,7 @@ const editUser = async (req, res) => {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {

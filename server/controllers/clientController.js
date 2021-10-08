@@ -23,20 +23,27 @@ const getClients = async (req, res) => {
             clients: clients,
         });
     } else {
-        const clients = await Clients.find(
-            {
-                userReference: req.body.userReference,
-            },
-            {
-                projection: {
-                    _id: false,
+        try {
+            const clients = await Clients.find(
+                {
+                    userReference: req.body.userReference,
                 },
-            }
-        ).toArray();
-        res.json({
-            message: "Get clients successful!",
-            clients: clients,
-        });
+                {
+                    projection: {
+                        _id: false,
+                    },
+                }
+            ).toArray();
+            res.json({
+                message: "Get clients successful!",
+                clients: clients,
+            });
+        } catch {
+            res.json({
+                message: "No clients available!",
+                clients: [],
+            });
+        }
     }
 };
 
@@ -68,12 +75,15 @@ const addClientNote = async (req, res) => {
         },
         {
             $push: { notes: newNote },
+            $set: {
+                updatedAt: new Date(),
+            },
         },
         {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -83,7 +93,7 @@ const addClientNote = async (req, res) => {
             }
             res.json({
                 message: "Add note successful!",
-                user: doc.value,
+                client: doc.value,
                 nid: newNote._id,
             });
         }
@@ -101,12 +111,15 @@ const removeClientNote = async (req, res) => {
                     _id: mongoose.Types.ObjectId(req.body.nid),
                 },
             },
+            $set: {
+                updatedAt: new Date(),
+            },
         },
         {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -116,7 +129,7 @@ const removeClientNote = async (req, res) => {
             }
             res.json({
                 message: "Remove note successful!",
-                user: doc.value,
+                client: doc.value,
             });
         }
     );
@@ -133,13 +146,14 @@ const changeClientStage = async (req, res) => {
         {
             $set: {
                 stage: changeStage.name,
+                updatedAt: new Date(),
             },
         },
         {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
@@ -168,12 +182,13 @@ const createClient = async (req, res) => {
         photoURL: req.body.photoURL,
         userReference: req.body.userReference,
         stage: defaultNewStage.name,
+        updatedAt: new Date(),
         notes: [],
     });
-    const result = await Clients.insertOne(newClient);
+    const result = await newClient.save();
     const client = await Clients.findOne(
         {
-            _id: mongoose.Types.ObjectId(result.insertedId),
+            _id: result._id,
         },
         {
             projection: {
@@ -205,13 +220,14 @@ const editClient = async (req, res) => {
                 photoURL: req.body.photoURL,
                 userReference: req.body.userReference,
                 stage: stage,
+                updatedAt: new Date(),
             },
         },
         {
             projection: {
                 _id: false,
             },
-            returnNewDocument: true,
+            returnDocument: "after",
         },
         (err, doc) => {
             if (err) {
