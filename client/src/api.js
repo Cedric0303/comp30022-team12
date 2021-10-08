@@ -308,7 +308,9 @@ export async function postMeeting(meetingBody) {
 export async function postStage(newStage) {
     const endpoint = BASE_URL + "/api/stages/create";
     try {
-        const response = await axios.post(endpoint, newStage);
+        const response = await axios.post(endpoint, newStage, {
+            withCredentials: true,
+        });
         var message = response.data.message;
         if (response.status === 200) {
             alert(message);
@@ -319,10 +321,14 @@ export async function postStage(newStage) {
 export async function editStage(currStage, stageID) {
     const endpoint = BASE_URL + "/api/stages/" + stageID + "/edit";
     try {
-        const response = await axios.post(endpoint, currStage);
+        const response = await axios.post(endpoint, currStage, {
+            withCredentials: true,
+        });
         var message = response.data.message;
         if (response.status === 200) {
             alert(message);
+        } else {
+            console.log(response.data);
         }
     } catch (e) {}
 }
@@ -330,11 +336,13 @@ export async function editStage(currStage, stageID) {
 export async function deleteStage(stageID) {
     const endpoint = BASE_URL + "/api/stages/" + stageID + "/remove";
     try {
-        const response = await axios.get(endpoint);
+        const response = await axios.get(endpoint, { withCredentials: true });
         var message = response.data.message;
         if (response.status === 200) {
             alert(message);
             window.location.reload();
+        } else {
+            console.log(response.data);
         }
     } catch (e) {}
 }
