@@ -19,6 +19,30 @@ axios.interceptors.request.use(
     }
 );
 
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
+
+// https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
+export function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+  
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+  
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+  
+    return windowDimensions;
+}  
+
 // Get a single user from the database
 export async function getUser(username) {
     const endpoint = BASE_URL + "/api/users/" + username;
@@ -164,7 +188,6 @@ export async function postEditUser(registerBody, uid) {
 export async function deleteUser(uid) {
     const endpoint = BASE_URL + "/api/users/" + uid + "/remove";
     const res = await axios.get(endpoint, { withCredentials: true });
-    console.log("deleteUser res");
     if (res.data.message === "User removal successful!") {
         alert(res.data.message);
         window.location.href = "/admin/users";
@@ -175,7 +198,7 @@ export async function deleteUser(uid) {
 }
 
 // Get the client from the database
-async function getClient(cid) {
+export async function getClient(cid) {
     const endpoint = BASE_URL + "/api/clients/" + cid;
     const res = await axios.get(endpoint, {
         withCredentials: true,
@@ -205,6 +228,34 @@ export function useClient(cid) {
         clientData,
         error,
     };
+}
+
+export function postEditClient(registerBody, cid) {
+    const endpoint = BASE_URL + "/api/clients/" + cid + "/edit";
+    return axios
+        .post(endpoint, registerBody, { withCredentials: true })
+        .then((res) => {
+            if (res.data.message === "Edit client successful!") {
+                alert(res.data.message);
+                window.location.href = "/clients/" + cid;
+            } else {
+                alert(res.data.message);
+                return false;
+            }
+        });
+}
+
+export function deleteClient(cid) {
+    const endpoint = BASE_URL + "/api/clients/" + cid + "/remove";
+    return axios.get(endpoint, { withCredentials: true }).then((res) => {
+        if (res.data.message === "Client removal successful!") {
+            alert(res.data.message);
+            window.location.href = "/clients";
+        } else {
+            alert(res.data.message);
+            return false;
+        }
+    });
 }
 
 // Get the list of activities from the database

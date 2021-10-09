@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
-import { getStages, postStage, postStagePosUpdate } from "../api.js";
+import { getStages, postStage, postStagePosUpdate, useWindowDimensions } from "../api.js";
 import Stage from "../Components/Stage.js";
 import StageUpdateButtons from "../Components/StageUpdateButtons.js";
 import "./css/adminManageStages.css";
@@ -10,6 +10,8 @@ import Modal from "react-modal";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function AdminManageStages(props) {
+    const { height: winHeight } = useWindowDimensions();
+
     //hold the details of a new stage
     const initialState = {
         sname: "",
@@ -157,6 +159,12 @@ function AdminManageStages(props) {
         }
         postStagePosUpdate(payload);
     };
+
+    // make stagesBox fill remaining height
+    useEffect(() => {
+        let stagesBoxElement = document.getElementsByClassName("stagesBox")[0];
+        stagesBoxElement.style.height = winHeight - stagesBoxElement.offsetTop + "px";
+    })
 
     const pageMain = () => {
         if (loading) {

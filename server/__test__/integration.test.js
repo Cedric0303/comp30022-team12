@@ -243,6 +243,7 @@ describe("#5 Client test (logged in)", () => {
             firstName: "test",
             lastName: "test",
             photoURL: "test",
+            stage: "stage1",
             userReference: "default",
         };
         return agent
@@ -267,7 +268,7 @@ describe("#5 Client test (logged in)", () => {
             firstName: "edit",
             lastName: "edit",
             photoURL: "edit",
-            stageID: "stage2",
+            stage: "stage2",
             userReference: "default",
         };
         return agent

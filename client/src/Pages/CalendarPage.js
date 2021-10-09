@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useActivities } from "../api.js";
+import { useActivities, useWindowDimensions } from "../api.js";
 
 function CalendarPage(props) {
+    const { height: winHeight } = useWindowDimensions();
+
+    // make calendar fill remaining height
+    useEffect(() => {
+        let calendarElement = document.getElementsByClassName("calendarElement")[0];
+        calendarElement.style.height = winHeight - calendarElement.offsetTop + "px";
+    })
+
     const getCid = () => {
         if (
             props.location.state === null ||
@@ -70,6 +78,7 @@ function CalendarPage(props) {
                         startAccessor="timeStart"
                         endAccessor="timeEnd"
                         titleAccessor="type"
+                        className="calendarElement"
                         style={{ height: 500 }}
                     />
                 </div>
