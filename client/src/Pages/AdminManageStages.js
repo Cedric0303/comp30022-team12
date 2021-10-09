@@ -165,7 +165,9 @@ function AdminManageStages(props) {
     // make stagesBox fill remaining height
     useEffect(() => {
         let stagesBoxElement = document.getElementsByClassName("stagesBox")[0];
-        stagesBoxElement.style.height = winHeight - stagesBoxElement.offsetTop + "px";
+        if (stagesBoxElement) {
+            stagesBoxElement.style.height = winHeight - stagesBoxElement.offsetTop + "px";
+        }
     })
 
     const pageMain = () => {

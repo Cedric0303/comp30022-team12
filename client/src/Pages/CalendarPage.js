@@ -13,7 +13,9 @@ function CalendarPage(props) {
     // make calendar fill remaining height
     useEffect(() => {
         let calendarElement = document.getElementsByClassName("calendarElement")[0];
-        calendarElement.style.height = winHeight - calendarElement.offsetTop + "px";
+        if (calendarElement) {
+            calendarElement.style.height = winHeight - calendarElement.offsetTop + "px";
+        }
     })
 
     const getCid = () => {

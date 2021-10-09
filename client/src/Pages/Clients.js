@@ -16,7 +16,9 @@ function Clients(props) {
     // make clientsBox fill remaining height
     useEffect(() => {
         let clientsBoxElement = document.getElementsByClassName("clientsBox")[0];
-        clientsBoxElement.style.height = winHeight - clientsBoxElement.offsetTop + "px";
+        if (clientsBoxElement) {
+            clientsBoxElement.style.height = winHeight - clientsBoxElement.offsetTop + "px";
+        }
     })
     
     const stagesFilter = () => {
