@@ -64,8 +64,8 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 160px 160px 160px;
     grid-template-areas:
-        "meetings ."
-        "log orders"
+        "upcomingMeeting ."
+        "pastMeeting orders"
         "notes notes";
     gap: 15px;
     grid-column: 50%;
@@ -85,9 +85,9 @@
     grid-area: notes;
 }
 
-.clientMeetingsPortal {
+.clientUpcomingMeetingPortal {
     border-radius: 15px;
-    grid-area: meetings;
+    grid-area: upcomingMeeting;
 }
 
 .clientOrdersPortal {
@@ -95,7 +95,7 @@
     grid-area: orders;
 }
 
-.clientLogPortal {
+.clientPastMeetingPortal {
     border-radius: 15px;
-    grid-area: log;
+    grid-area: pastMeeting;
 }
