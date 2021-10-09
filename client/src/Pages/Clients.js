@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar.js";
 import "./css/clients.css";
-import { useClients } from "../api.js";
+import { useClients, useStages, useWindowDimensions } from "../api.js";
 import Client from "../Components/Client.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Select from "react-select"
 
 function Clients(props) {
     const { loading, clientsData, error } = useClients();
+    const { stagesLoading, stagesData, stagesError } = useStages();
+    const { height: winHeight } = useWindowDimensions();
+
+    // make clientsBox fill remaining height
+    useEffect(() => {
+        let clientsBoxElement = document.getElementsByClassName("clientsBox")[0];
+        clientsBoxElement.style.height = winHeight - clientsBoxElement.offsetTop + "px";
+    })
+    
+    const stagesFilter = () => {
+        if (stagesLoading) {
+            return (
+                <div id="stagesFilter">Loading Stages...</div>
+            );
+        } else if (stagesError) {
+            return (
+                <div id="stagesFilter">Something went wrong: {error.message}</div>
+            );
+        } else {
+            console.log(stagesData);
+            return (
+                <div id="stagesFilter">FILTERS HERE WOW</div>
+            );
+        }
+    }
 
     const pageMain = () => {
         if (loading) {
@@ -65,6 +91,9 @@ function Clients(props) {
                         <FontAwesomeIcon icon="user-plus" />
                     </NavLink>
                 </h2>
+                <div id="clientsActionBar">
+                    {stagesFilter()}
+                </div>
                 {pageMain()}
             </main>
         </div>
