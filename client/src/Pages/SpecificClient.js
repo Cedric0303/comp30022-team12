@@ -8,7 +8,7 @@ import OrderPortal from "../Components/OrderPortal.js";
 import "./css/specificClient.css";
 import { useClient } from "../api.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Calendar, momentLocalizer } from "react-big-calendar";
+// import { Calendar, momentLocalizer } from "react-big-calendar";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
 
