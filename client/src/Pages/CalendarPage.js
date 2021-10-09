@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import moment from "moment";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 import { useActivities, useWindowDimensions } from "../api.js";
 
 function CalendarPage(props) {
@@ -60,7 +62,22 @@ function CalendarPage(props) {
 
     const pageMain = () => {
         if (loading) {
-            return;
+            return (
+                <div>
+                    <div>
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
+                </div>
+            );
         } else if (error) {
             return (
                 <div className="clientsBox">

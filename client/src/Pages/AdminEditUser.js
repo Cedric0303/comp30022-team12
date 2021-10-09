@@ -8,6 +8,8 @@ import { postEditUser, deleteUser } from "../api.js";
 import "./css/adminEditUser.css";
 import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 
 function validate_password(p) {
     var letter = /[a-zA-Z]/;
@@ -107,7 +109,22 @@ function AdminEditUser(props) {
 
     const pageMain = () => {
         if (loading) {
-            return <div className="edit-userbox">Loading...</div>;
+            return (
+                <div>
+                    <div className="edit-userbox">
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
+                </div>
+            );
         } else if (error) {
             return (
                 <div className="edit-userbox">

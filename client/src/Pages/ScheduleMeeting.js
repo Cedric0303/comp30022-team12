@@ -7,14 +7,20 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { DateTimePicker } from "@material-ui/pickers";
-import Select from 'react-select';
-import { useActivities, useClients, deleteActivity } from "../api.js";
-import { postNewMeeting, postEditMeeting } from "../api.js";
+import Select from "react-select";
+import {
+    postNewMeeting,
+    postEditMeeting,
+    useActivities,
+    useClients,
+    deleteActivity,
+} from "../api.js";
 import "./css/scheduleMeeting.css";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 
 // Handles any scheduling- adds and edits meetings depending on the props
 function ScheduleMeeting(props) {
-
     // Check if a client has been passed through
     const givenClientReference = () => {
         if (
@@ -27,7 +33,7 @@ function ScheduleMeeting(props) {
         } else {
             return null;
         }
-    }
+    };
 
     // Set up default form values
     var currentName = "";
@@ -50,9 +56,11 @@ function ScheduleMeeting(props) {
         } else {
             return null;
         }
-    }
+    };
 
-    const [clientReference, setClientReference] = useState(givenClientReference());
+    const [clientReference, setClientReference] = useState(
+        givenClientReference()
+    );
     const activity = hasActivity();
 
     const { loading, activitiesData, error } = useActivities(clientReference);
@@ -88,29 +96,28 @@ function ScheduleMeeting(props) {
             } else {
                 postEditMeeting(meetingBody, activity._id);
             }
-            
         }
     };
 
     // Set a client as the client involved in the meeting
     const handleSelect = (selectedClient) => {
         setSelectedClient(selectedClient);
-        setClientReference(selectedClient.value.email)
-    }
+        setClientReference(selectedClient.value.email);
+    };
 
     // Creates an options object with the user's clients info
     const clientsToOptions = () => {
         var clientOptions = [];
         if (clientsData.clients) {
-            clientsData.clients.map((client) => (
+            clientsData.clients.map((client) =>
                 clientOptions.push({
                     value: client,
                     label: client.firstName + " " + client.lastName,
                 })
-            ))
+            );
             return clientOptions;
         }
-    }
+    };
 
     // Allows the user to select a client if not already specified
     const selectClient = () => {
@@ -124,15 +131,13 @@ function ScheduleMeeting(props) {
                     <div>
                         <p>Something went wrong: {cliError.message}</p>
                     </div>
-                )
+                );
             } else {
                 const options = clientsToOptions();
                 return (
                     <div>
-                        <label>
-                            Select a client:
-                        </label>
-                        <Select 
+                        <label>Select a client:</label>
+                        <Select
                             className="selectClient"
                             value={selectedClient}
                             onChange={handleSelect}
@@ -140,10 +145,10 @@ function ScheduleMeeting(props) {
                             maxMenuHeight={240}
                         />
                     </div>
-                )
+                );
             }
         }
-    }
+    };
 
     // Navigate back to the appropriate page
     const cancelRedirect = () => {
@@ -152,11 +157,11 @@ function ScheduleMeeting(props) {
         } else {
             return "/clients/" + clientReference;
         }
-    }
+    };
 
     const onDelete = () => {
         deleteActivity(activity._id, clientReference);
-    }
+    };
 
     const deleteMeeting = () => {
         if (!activity) {
@@ -166,8 +171,18 @@ function ScheduleMeeting(props) {
                 return (
                     <div>
                         <span>Are you sure?</span>
-                        <button onClick={onDelete} className="deleteMeetingButton">Yes</button>
-                        <span onClick={()=>setShowConfirm(!showConfirm)} className="cancelDelete">No</span>
+                        <button
+                            onClick={onDelete}
+                            className="deleteMeetingButton"
+                        >
+                            Yes
+                        </button>
+                        <span
+                            onClick={() => setShowConfirm(!showConfirm)}
+                            className="cancelDelete"
+                        >
+                            No
+                        </span>
                     </div>
                 );
             } else {
@@ -176,7 +191,7 @@ function ScheduleMeeting(props) {
                         <button
                             type="button"
                             className="deleteMeetingButton"
-                            onClick={()=>setShowConfirm(!showConfirm)}
+                            onClick={() => setShowConfirm(!showConfirm)}
                         >
                             Delete Meeting
                         </button>
@@ -184,7 +199,7 @@ function ScheduleMeeting(props) {
                 );
             }
         }
-    }
+    };
 
     const pageHeading = () => {
         if (!clientReference) {
@@ -216,7 +231,9 @@ function ScheduleMeeting(props) {
                 return (
                     <div>
                         <h2 className="scheduleMeetingHeading">
-                            <span className="unbold">Schedule Meeting with </span>
+                            <span className="unbold">
+                                Schedule Meeting with{" "}
+                            </span>
                             {client.firstName} {client.lastName}
                         </h2>
                     </div>
@@ -227,7 +244,22 @@ function ScheduleMeeting(props) {
 
     const pageMain = () => {
         if (loading) {
-            return;
+            return (
+                <div>
+                    <div>
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
+                </div>
+            );
         } else if (error) {
             return (
                 <div>
@@ -254,7 +286,9 @@ function ScheduleMeeting(props) {
                             </div>
                             <MuiPickersUtilsProvider utils={MomentUtils}>
                                 <div className="startTime">
-                                    <label className="timeLabel">Start Time:</label>
+                                    <label className="timeLabel">
+                                        Start Time:
+                                    </label>
                                     <DateTimePicker
                                         inputVariant="outlined"
                                         value={startDateTime}

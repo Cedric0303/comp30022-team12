@@ -4,6 +4,7 @@ import "./css/portal.css";
 import { useActivities } from "../api.js";
 import MeetingRow from "../Components/MeetingRow.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../Pages/css/animation.css";
 
 export default function MeetingPortal(props) {
     const { loading, activitiesData, error } = useActivities(
@@ -28,7 +29,11 @@ export default function MeetingPortal(props) {
                 <div className="portalContent">
                     {/* Meetings sorted by date (newest first) */}
                     {activitiesData.activities.map((activity) => (
-                        <MeetingRow key={activity._id} activity={activity} client={props.client} />
+                        <MeetingRow
+                            key={activity._id}
+                            activity={activity}
+                            client={props.client}
+                        />
                     ))}
                 </div>
             );

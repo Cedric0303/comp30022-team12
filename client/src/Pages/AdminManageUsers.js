@@ -6,6 +6,8 @@ import { useUsers } from "../api.js";
 import User from "../Components/User.js";
 import "./css/adminManageUsers.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 
 function AdminManageUsers(props) {
     const { loading, usersData, error } = useUsers();
@@ -13,8 +15,19 @@ function AdminManageUsers(props) {
     const pageMain = () => {
         if (loading) {
             return (
-                <div className="usersBox">
-                    <ul>Loading...</ul>
+                <div>
+                    <div className="usersBox">
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
                 </div>
             );
         } else if (error) {

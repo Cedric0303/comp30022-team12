@@ -5,6 +5,8 @@ import Navbar from "../Components/Navbar/Navbar.js";
 import { postClient, useStages } from "../api.js";
 import "./css/addClient.css";
 import Auth from "./Auth.js";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 
 function AddClient(props) {
     const [firstName, setFirstName] = useState("");
@@ -56,7 +58,22 @@ function AddClient(props) {
     // Render the stages section and check stages are available
     const stage = () => {
         if (loading) {
-            return;
+            return (
+                <div>
+                    <div>
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
+                </div>
+            );
         } else if (error) {
             return (
                 <div>

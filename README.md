@@ -73,6 +73,7 @@ A personal CRM
 -   `react-big-calendar`
 -   `react-dom`
 -   `react-helmet`
+-   `react-loading`
 -   `react-modal`
 -   `react-moment`
 -   `react-router-dom`

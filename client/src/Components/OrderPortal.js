@@ -4,6 +4,8 @@ import "./css/portal.css";
 import { useOrders } from "../api.js";
 import OrderRow from "./OrderRow.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactLoading from "react-loading";
+import "../Pages/css/animation.css";
 
 export default function OrderPortal(props) {
     const { loading, ordersData, error } = useOrders(props.cid);
@@ -11,8 +13,19 @@ export default function OrderPortal(props) {
     const portalContent = () => {
         if (loading) {
             return (
-                <div className="portalContent">
-                    <p>Loading...</p>
+                <div>
+                    <div className="portalContent">
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
                 </div>
             );
         } else if (error) {

@@ -6,6 +6,8 @@ import jwt from "jwt-decode";
 import Auth from "./Auth.js";
 import "./css/login.css";
 import logo from "./css/bobafish-logo.svg";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 
 const Login = (props) => {
     useEffect(
@@ -25,6 +27,10 @@ const Login = (props) => {
         []
     );
 
+    const [loading, setLoading] = useState(false);
+
+    const toggleLoading = () => setLoading((loading) => !loading);
+
     const [user, setState] = useState({
         username: "",
         password: "",
@@ -39,16 +45,21 @@ const Login = (props) => {
             [id]: value,
         }));
     };
+
     const handleLogin = (event) => {
         setErrorMsg("Loading...");
+        toggleLoading();
         if (!user.username.length && !user.password.length) {
             setErrorMsg("Please enter a valid username and password.");
+            toggleLoading();
         } else if (!user.username.length) {
             setErrorMsg("Please enter a valid username.");
+            toggleLoading();
         } else if (!user.password.length) {
             setErrorMsg("Please enter a valid password.");
+            toggleLoading();
         } else {
-            setErrorMsg("Connected.");
+            setErrorMsg("Connected. Loading...");
             const payload = {
                 username: user.username,
                 password: user.password,
@@ -76,7 +87,7 @@ const Login = (props) => {
                     }
                 })
                 .catch((e) => {
-                    console.log(e.toJSON());
+                    toggleLoading();
                     let errorMessage = e.toJSON().message;
                     if (errorMessage.includes(401)) {
                         setErrorMsg(
@@ -182,8 +193,6 @@ const Login = (props) => {
                 />
             </svg>
 
-            {/* <h1 className="title">bobafish CRM</h1> */}
-
             <img
                 title="bobafish"
                 src={logo}
@@ -198,7 +207,6 @@ const Login = (props) => {
                         type="text"
                         className="form-control"
                         id="username"
-                        // placeholder="Username"
                         value={user.username}
                         onChange={handleChange}
                     />
@@ -209,7 +217,6 @@ const Login = (props) => {
                         type="password"
                         className="form-control"
                         id="password"
-                        // placeholder="Password"
                         value={user.password}
                         onChange={handleChange}
                     />
@@ -220,6 +227,16 @@ const Login = (props) => {
                     />
                 </form>
                 <p className="errorMsg">{errorMsg ? errorMsg : ""}</p>
+                <br />
+                {loading && (
+                    <ReactLoading
+                        id="login-loading-anim"
+                        type="spin"
+                        color="ivory"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
+                )}
             </div>
         </div>
     );
