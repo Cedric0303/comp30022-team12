@@ -12,7 +12,7 @@ function AddClient(props) {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
-    const [clientStage, setClientStage] = useState();
+    const [clientStage, setClientStage] = useState("");
     const [inputError, setInputError] = useState("");
 
     const { loading, stagesData, error } = useStages();
@@ -86,7 +86,7 @@ function AddClient(props) {
                                         key={stage.id}
                                         type="radio"
                                         name="stage"
-                                        value={stage.name}
+                                        value={stage.stageID}
                                         onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }
@@ -97,7 +97,7 @@ function AddClient(props) {
                                         key={stage.id}
                                         type="radio"
                                         name="stage"
-                                        value={stage.name}
+                                        value={stage.stageID}
                                         onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }

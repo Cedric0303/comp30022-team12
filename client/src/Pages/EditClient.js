@@ -15,7 +15,7 @@ function EditClient(props) {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
-    const [clientStage, setClientStage] = useState();
+    const [clientStage, setClientStage] = useState("");
     const [inputError, setInputError] = useState("");
 
     const { stagesLoading, stagesData, stagesError } = useStages();
@@ -123,7 +123,7 @@ function EditClient(props) {
                                         type="radio"
                                         name="stage"
                                         value={stage.name}
-                                        onChange={(e) =>
+                                        onChange={(e) => 
                                             setClientStage(e.target.value)
                                         }
                                         checked="checked"
@@ -134,7 +134,7 @@ function EditClient(props) {
                                         type="radio"
                                         name="stage"
                                         value={stage.name}
-                                        onChange={(e) =>
+                                        onChange={(e) => 
                                             setClientStage(e.target.value)
                                         }
                                     />
