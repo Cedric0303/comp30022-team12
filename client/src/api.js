@@ -23,25 +23,27 @@ function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
     return {
         width,
-        height
+        height,
     };
 }
 
 // https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
 export function useWindowDimensions() {
-    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-  
+    const [windowDimensions, setWindowDimensions] = useState(
+        getWindowDimensions()
+    );
+
     useEffect(() => {
         function handleResize() {
             setWindowDimensions(getWindowDimensions());
         }
-  
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
-  
+
     return windowDimensions;
-}  
+}
 
 // Get a single user from the database
 export async function getUser(username) {
@@ -167,7 +169,7 @@ export async function postUser(registerBody) {
     } else {
         // Created new user!
         alert(res.data.message);
-        window.location.href = "/admin/users/create";
+        window.location.href = "/admin/users";
     }
 }
 
@@ -363,16 +365,19 @@ export async function deleteNote(noteBody) {
 export function postNewMeeting(meetingBody) {
     const endpoint = BASE_URL + "/api/activities/create";
     return axios
-        .post(endpoint, {
-            clientReference: meetingBody.clientReference,
-            userReference: Auth.getUsername(),
-            timeStart: meetingBody.start,
-            timeEnd: meetingBody.end,
-            type: meetingBody.name,
-        },
-        {
-            withCredentials: true,
-        })
+        .post(
+            endpoint,
+            {
+                clientReference: meetingBody.clientReference,
+                userReference: Auth.getUsername(),
+                timeStart: meetingBody.start,
+                timeEnd: meetingBody.end,
+                type: meetingBody.name,
+            },
+            {
+                withCredentials: true,
+            }
+        )
         .then(() => {
             window.location.href = "/clients/" + meetingBody.clientReference;
         });
@@ -398,23 +403,20 @@ export function postEditMeeting(meetingBody, aid) {
 // Delete a meeting
 export function deleteActivity(aid, cid) {
     const endpoint = BASE_URL + "/api/activities/" + aid + "/remove";
-    return axios
-        .get(endpoint, { withCredentials: true })
-        .then(() => {
-            window.location.href = "/clients/" + cid;
-        });
+    return axios.get(endpoint, { withCredentials: true }).then(() => {
+        window.location.href = "/clients/" + cid;
+    });
 }
 export async function postStage(newStage) {
     const endpoint = BASE_URL + "/api/stages/create";
     try {
         const response = await axios.post(endpoint, newStage, {
             withCredentials: true,
-        })
+        });
         var message = response.data.message;
         if (response.status === 200) {
             alert(message);
             window.location.reload();
-
         }
     } catch (e) {}
 }
