@@ -51,7 +51,7 @@ function SpecificClient(props) {
                         </NavLink>
                         <NavLink
                             to={{
-                                pathname: "/calendar/scheduleMeeting",
+                                pathname: "/calendar/schedule-meeting",
                                 state: {
                                     client: client,
                                     fromClient: true,

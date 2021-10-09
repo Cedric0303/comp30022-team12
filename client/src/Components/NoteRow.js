@@ -38,7 +38,7 @@ export default function NoteRow(props) {
         if (confirmedDelete) {
             return (
                 <span>
-                    <span className="cancelDelete" onClick={toggleDelete}>
+                    <span className="cancelNoteDelete" onClick={toggleDelete}>
                         Cancel
                     </span>
                     <span className="crossNote" onClick={onDelete}>

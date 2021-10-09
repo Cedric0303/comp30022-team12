@@ -87,7 +87,7 @@ class Router extends React.Component {
                         component={OrderHistory}
                     ></ProtectedRoute>
                     <ProtectedRoute
-                        path="/calendar/scheduleMeeting"
+                        path="/calendar/schedule-meeting"
                         exact
                         component={ScheduleMeeting}
                     ></ProtectedRoute>

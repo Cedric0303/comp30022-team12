@@ -308,12 +308,12 @@ export async function deleteNote(noteBody) {
     return res.data;
 }
 
-export async function postMeeting(meetingBody) {
+// Add a new meeting
+export function postNewMeeting(meetingBody) {
     const endpoint = BASE_URL + "/api/activities/create";
-    await axios.post(
-        endpoint,
-        {
-            clientReference: meetingBody.cid,
+    return axios
+        .post(endpoint, {
+            clientReference: meetingBody.clientReference,
             userReference: Auth.getUsername(),
             timeStart: meetingBody.start,
             timeEnd: meetingBody.end,
@@ -321,16 +321,44 @@ export async function postMeeting(meetingBody) {
         },
         {
             withCredentials: true,
-        }
-    );
-    window.location.href = "/clients/" + meetingBody.cid;
+        })
+        .then(() => {
+            window.location.href = "/clients/" + meetingBody.clientReference;
+        });
+}
+
+// Edit an existing meeting
+export function postEditMeeting(meetingBody, aid) {
+    const endpoint = BASE_URL + "/api/activities/" + aid + "/edit";
+    return axios
+        .post(endpoint, {
+            clientReference: meetingBody.clientReference,
+            userReference: Auth.getUsername(),
+            timeStart: meetingBody.start,
+            timeEnd: meetingBody.end,
+            type: meetingBody.name,
+            withCredentials: true,
+        })
+        .then(() => {
+            window.location.href = "/clients/" + meetingBody.clientReference;
+        });
+}
+
+// Delete a meeting
+export function deleteActivity(aid, cid) {
+    const endpoint = BASE_URL + "/api/activities/" + aid + "/remove";
+    return axios
+        .get(endpoint, { withCredentials: true })
+        .then(() => {
+            window.location.href = "/clients/" + cid;
+        });
 }
 export async function postStage(newStage) {
     const endpoint = BASE_URL + "/api/stages/create";
     try {
         const response = await axios.post(endpoint, newStage, {
             withCredentials: true,
-        });
+        })
         var message = response.data.message;
         if (response.status === 200) {
             alert(message);
