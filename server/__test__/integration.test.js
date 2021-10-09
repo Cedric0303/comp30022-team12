@@ -243,6 +243,7 @@ describe("#5 Client test (logged in)", () => {
             firstName: "test",
             lastName: "test",
             photoURL: "test",
+            stage: "stage1",
             userReference: "default",
         };
         return agent
