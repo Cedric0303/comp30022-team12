@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar.js";
 import "./css/clients.css";
 import { useClients, useStages, useWindowDimensions } from "../api.js";
 import Client from "../Components/Client.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Select from "react-select"
+// import Select from "react-select"
 
 function Clients(props) {
     const { loading, clientsData, error } = useClients();
