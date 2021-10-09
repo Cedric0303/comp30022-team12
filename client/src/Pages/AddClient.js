@@ -14,7 +14,7 @@ function AddClient(props) {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
-    const [clientStage, setClientStage] = useState();
+    const [clientStage, setClientStage] = useState("");
     const [inputError, setInputError] = useState("");
 
     const { loading, stagesData, error } = useStages();
@@ -98,15 +98,28 @@ function AddClient(props) {
                                 key={"label" + stage.id}
                                 className="stageChoice"
                             >
-                                <input
-                                    key={stage.id}
-                                    type="radio"
-                                    name="stage"
-                                    value={stage.name}
-                                    onChange={(e) =>
-                                        setClientStage(e.target.value)
-                                    }
-                                />
+                                {stage.position === 0 ? (
+                                    <input
+                                        key={stage.id}
+                                        type="radio"
+                                        name="stage"
+                                        value={stage.stageID}
+                                        onChange={(e) =>
+                                            setClientStage(e.target.value)
+                                        }
+                                        checked="checked"
+                                    />
+                                ) : (
+                                    <input
+                                        key={stage.id}
+                                        type="radio"
+                                        name="stage"
+                                        value={stage.stageID}
+                                        onChange={(e) =>
+                                            setClientStage(e.target.value)
+                                        }
+                                    />
+                                )}
                                 <span key={"span" + stage.id}>
                                     {stage.name}
                                 </span>

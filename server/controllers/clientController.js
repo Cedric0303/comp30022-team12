@@ -226,7 +226,7 @@ const createClient = async (req, res) => {
 
 const editClient = async (req, res) => {
     const stage = await Stages.findOne({
-        id: req.body.stageID,
+        name: req.body.stage,
     });
     await Clients.findOneAndUpdate(
         {
@@ -241,7 +241,7 @@ const editClient = async (req, res) => {
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
                 userReference: req.body.userReference,
-                stage: stage,
+                stage: stage.id,
                 updatedAt: new Date(),
             },
         },
