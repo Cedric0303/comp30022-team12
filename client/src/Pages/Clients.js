@@ -5,6 +5,8 @@ import "./css/clients.css";
 import { useClients } from "../api.js";
 import Client from "../Components/Client.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 
 function Clients(props) {
     const { loading, clientsData, error } = useClients();
@@ -12,8 +14,19 @@ function Clients(props) {
     const pageMain = () => {
         if (loading) {
             return (
-                <div className="clientsBox">
-                    <ul>Loading...</ul>
+                <div>
+                    <div className="clientsBox">
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
                 </div>
             );
         } else if (error) {

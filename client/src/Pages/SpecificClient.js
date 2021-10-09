@@ -8,6 +8,9 @@ import OrderPortal from "../Components/OrderPortal.js";
 import "./css/specificClient.css";
 import { useClient } from "../api.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 
 function SpecificClient(props) {
     const { loading, clientData, error } = useClient(
@@ -18,7 +21,22 @@ function SpecificClient(props) {
 
     const pageMain = () => {
         if (loading) {
-            return;
+            return (
+                <div>
+                    <div>
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
+                </div>
+            );
         } else if (error) {
             return (
                 <div className="specificClientError">

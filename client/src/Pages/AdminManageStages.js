@@ -8,6 +8,8 @@ import "./css/adminManageStages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import ReactLoading from "react-loading";
+import "./css/animation.css";
 
 function AdminManageStages(props) {
     //hold the details of a new stage
@@ -45,7 +47,7 @@ function AdminManageStages(props) {
             resetStage();
         }
         e.preventDefault();
-    }
+    };
 
     // const { loading, stagesData, error } = useStages();
     const [loading, setLoading] = useState(true);
@@ -161,8 +163,19 @@ function AdminManageStages(props) {
     const pageMain = () => {
         if (loading) {
             return (
-                <div className="stagesBox">
-                    <ul>Loading...</ul>
+                <div>
+                    <div className="stagesBox">
+                        <ul>Loading...</ul>
+                    </div>
+                    {loading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
                 </div>
             );
         } else if (error) {
