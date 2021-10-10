@@ -37,6 +37,7 @@ A personal CRM
 #### Backend
 
 -   `axios`
+-   `boring-avatars`
 -   `bcrypt`
 -   `concurrently`
 -   `cors`

@@ -99,3 +99,9 @@
     border-radius: 15px;
     grid-area: log;
 }
+
+#avatar {
+    position: fixed;
+    left: 65%;
+    top: 10%;
+}

@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { Calendar, momentLocalizer } from "react-big-calendar";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
+import Avatar from "boring-avatars";
 
 function SpecificClient(props) {
     const { loading, clientData, error } = useClient(
@@ -50,6 +51,20 @@ function SpecificClient(props) {
         } else {
             return (
                 <div>
+                    <div id="avatar">
+                        <Avatar
+                            size={240}
+                            name={client.firstName + " " + client.lastName}
+                            variant="beam"
+                            colors={[
+                                "#3E6BB0",
+                                "#8CBAFF",
+                                "#6291D9",
+                                "#FFFFF0",
+                                "#D9B162",
+                            ]}
+                        />
+                    </div>
                     <div id="clientHeader">
                         <h2 id="clientHeading">
                             {client.firstName} {client.lastName}
