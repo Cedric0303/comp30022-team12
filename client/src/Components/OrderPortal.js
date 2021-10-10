@@ -50,7 +50,10 @@ export default function OrderPortal(props) {
     };
     return (
         <div className="clientOrdersPortal">
-            <NavLink to={"/clients/" + props.cid + "/orders"}>
+            <NavLink to={{
+                pathname: "/clients/" + props.cid + "/orders",
+                state: {cid: props.cid}
+            }}>
                 <p className="portalHeading">
                     Order History <FontAwesomeIcon icon="chevron-right" />
                 </p>
