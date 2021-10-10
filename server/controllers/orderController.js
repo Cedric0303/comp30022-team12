@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const db = require("./databaseController.js");
 
-const { OrderItemModel, OrderModel } = require("../models/orderModel.js");
+const OrderModel = require("../models/orderModel.js");
 
 const Orders = db.collection("orders");
 const Clients = db.collection("clients");
@@ -83,24 +83,6 @@ const createOrder = async (req, res) => {
             updatedAt: new Date(),
         });
         const result = await Orders.insertOne(newOrder);
-        const orderItems = req.body.orderArray;
-        for (var i in orderItems) {
-            var newOrderItem = new OrderItemModel({
-                itemName: orderItems[i].itemName,
-                itemPrice: orderItems[i].itemPrice,
-                quantity: orderItems[i].quantity,
-            });
-            await Orders.findOneAndUpdate(
-                {
-                    _id: result.insertedId,
-                },
-                {
-                    $push: {
-                        orderItem: newOrderItem,
-                    },
-                }
-            );
-        }
         await Clients.findOneAndUpdate(
             {
                 email: req.body.clientReference,
@@ -143,22 +125,6 @@ const editOrder = async (req, res) => {
                 },
             }
         );
-        const orderItems = req.body.orderArray;
-        for (var i in orderItems) {
-            var newOrderItem = new OrderItemModel({
-                itemName: orderItems[i].itemName,
-                itemPrice: orderItems[i].itemPrice,
-                quantity: orderItems[i].quantity,
-            });
-            await Orders.findOneAndUpdate(
-                {
-                    _id: mongoose.Types.ObjectId(req.params.oid),
-                },
-                {
-                    $push: { orderItem: newOrderItem },
-                }
-            );
-        }
         await Orders.findOneAndUpdate(
             {
                 _id: mongoose.Types.ObjectId(req.params.oid),
