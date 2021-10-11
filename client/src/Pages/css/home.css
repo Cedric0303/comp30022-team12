@@ -1,0 +1,41 @@
+.homeGrid {
+    display: grid;
+    margin: 0 6vw;
+    height: 75vh;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 3fr 1fr;
+    grid-gap: 100px 6vm;
+
+}
+
+.homeButtonGroup {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+}
+
+
+.homeButtonGroup > .homeAddClient, .homeButtonGroup > .homeViewClient {
+    font-size: 60px;
+    color: white;
+    background: #7aade1;
+    border-radius: 10px;
+    text-align: center;
+    position:relative;
+}
+
+.homeImageContainer {
+    position:relative;
+    top: calc(50% - 40px); /* 50% - 3/4 of icon height */
+}
+
+.homeButtonGroup > .homeAddClient:hover, .homeButtonGroup > .homeViewClient:hover {
+    background: #1d76d8;
+}
+
