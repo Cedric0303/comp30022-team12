@@ -126,7 +126,7 @@ function EditClient(props) {
                                         onChange={(e) => 
                                             setClientStage(e.target.value)
                                         }
-                                        checked="checked"
+                                        defaultChecked
                                     />
                                 ) : (
                                     <input
