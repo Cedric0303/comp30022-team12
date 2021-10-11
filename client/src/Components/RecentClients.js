@@ -1,26 +1,26 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useClients } from "../api.js"
-import "./css/recentClient.css"
-
+import { useClients } from "../api.js";
+import "./css/recentClients.css";
 
 // Obtain the last 3 clients the user has interacted with
 // sorted by most recent interaction first
 function filterClients(clients) {
     clients = clients || []; // ensures clients is not undefined
-    return clients.sort((x, y) => {
-        if (x.updatedAt > y.updatedAt) {
-            return -1
-        } else if (x.updatedAt < y.updatedAt) {
-            return 1
-        } else {
-            return 0
-        }
-    }).slice(0, 3)
+    return clients
+        .sort((x, y) => {
+            if (x.updatedAt > y.updatedAt) {
+                return -1;
+            } else if (x.updatedAt < y.updatedAt) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
+        .slice(0, 3);
 }
 
 export default function RecentClients(props) {
-    
     const { loading, clientsData, error } = useClients();
 
     const clientContent = () => {
@@ -46,9 +46,7 @@ export default function RecentClients(props) {
                         </tr>
                     </thead>
                     {filterClients(clientsData.clients).map((client) => (
-                        <tbody
-                            key={client.email}
-                        >
+                        <tbody key={client.email}>
                             <tr>
                                 <td>
                                     <NavLink to={"/clients/" + client.email}>
@@ -66,16 +64,12 @@ export default function RecentClients(props) {
                 </table>
             );
         }
+    };
 
-    }
-    
     return (
         <div>
-            <div className="recentCliHeading">
-                Recent Clients
-            </div>
+            <div className="recentCliHeading">Recent Clients</div>
             {clientContent()}
-
         </div>
     );
 }

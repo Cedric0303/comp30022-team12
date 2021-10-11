@@ -1,5 +1,5 @@
 .hide {
-    height: 0; 
+    height: 0;
     border: none;
 }
 
@@ -15,7 +15,9 @@
     width: 75%;
 }
 
-.recentClientTable tbody, .recentClientTable tr, .recentClientTable td {
+.recentClientTable tbody,
+.recentClientTable tr,
+.recentClientTable td {
     border: none;
     font-size: 20px;
 }
@@ -27,7 +29,6 @@
 
 .recentClientTable tr {
     border-bottom: 1px solid #ddd;
-    
 }
 
 .recentClientTable td:first-child {
@@ -38,4 +39,3 @@
     color: #b3ddfd;
     font-weight: 650;
 }
-

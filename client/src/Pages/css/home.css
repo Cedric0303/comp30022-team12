@@ -5,7 +5,6 @@
     grid-template-columns: 3fr 2fr;
     grid-template-rows: 3fr 1fr;
     grid-gap: 1em;
-
 }
 
 .homeGrid > UserMeetingPortal {
@@ -41,17 +40,12 @@
     margin-top: 5%;
     display: flex;
     justify-content: space-around;
-
-
-
 }
 
 .calLabelText {
     text-align: center;
     font-weight: 700;
-
 }
-
 
 .homeViewCal {
     display: flex;
@@ -75,22 +69,22 @@
     grid-column-gap: 1em;
 }
 
-
-.homeButtonGroup > .homeAddClient, .homeButtonGroup > .homeViewClient {
+.homeButtonGroup > .homeAddClient,
+.homeButtonGroup > .homeViewClient {
     font-size: 60px;
     color: white;
     background: #7aade1;
     border-radius: 10px;
     text-align: center;
-    position:relative;
+    position: relative;
 }
 
 .homeImageContainer {
-    position:relative;
+    position: relative;
     top: calc(50% - 40px); /* 50% - 3/4 of icon height */
 }
 
-.homeButtonGroup > .homeAddClient:hover, .homeButtonGroup > .homeViewClient:hover {
+.homeButtonGroup > .homeAddClient:hover,
+.homeButtonGroup > .homeViewClient:hover {
     background: #1d76d8;
 }
-

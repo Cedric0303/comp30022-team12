@@ -7,10 +7,9 @@ import { useActivities } from "../api.js";
 import UserMeetingPortal from "../Components/UserMeetingPortal.js";
 import RecentClients from "../Components/RecentClients.js";
 import Navbar from "../Components/Navbar/Navbar.js";
-import "./css/home.css"
+import "./css/home.css";
 
 function Home(props) {
-
     const localizer = momentLocalizer(moment);
 
     const { loading, activitiesData, error } = useActivities();
@@ -37,18 +36,18 @@ function Home(props) {
                     startAccessor="timeStart"
                     endAccessor="timeEnd"
                     titleAccessor="type"
-                    style={{height: "90%"}}
+                    style={{ height: "90%" }}
                 />
             );
         }
-    }
+    };
 
     return (
         <div>
             <Navbar />
             <div className="homeGrid">
-                <div className ="homePortals">
-                    <UserMeetingPortal/>
+                <div className="homePortals">
+                    <UserMeetingPortal />
                 </div>
                 <div className="calGroup">
                     {calendarContent()}
@@ -60,11 +59,12 @@ function Home(props) {
                                 fromClient: true,
                             },
                         }}
-                        className="homeViewCal">
+                        className="homeViewCal"
+                    >
                         View Calendar
                     </NavLink>
                 </div>
-                <RecentClients/>
+                <RecentClients />
 
                 <div className="homeButtonGroup">
                     <NavLink className="homeAddClient" to="clients/create">

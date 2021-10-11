@@ -6,7 +6,6 @@ import UserMeetingRow from "./UserMeetingRow.js";
 import "./css/portal.css";
 
 export default function UserMeetingPortal(props) {
-
     const { cliLoading, clientsData, cliError } = useClients();
     const { loading, activitiesData, error } = useActivities();
 
@@ -14,10 +13,10 @@ export default function UserMeetingPortal(props) {
         if (cliLoading) {
         } else if (cliError) {
         } else if (clientsData !== undefined) {
-            return clientsData.clients.find((c) => c.email === cid)
+            return clientsData.clients.find((c) => c.email === cid);
         } else {
         }
-    }; 
+    };
 
     const portalContent = () => {
         if (loading) {
@@ -39,27 +38,35 @@ export default function UserMeetingPortal(props) {
 
             return (
                 <div className="portalContent">
-                    {/* Display future meetings in the next 7 dats sorted by Meeting time in ascending order */}
-                    {
-                        activitiesData.activities
-                        .filter((a) => (a.timeStart >= now && a.timeStart <= future))
+                    {/* Display future meetings in the next 7 days sorted by Meeting time in ascending order */}
+                    {activitiesData.activities
+                        .filter(
+                            (a) => a.timeStart >= now && a.timeStart <= future
+                        )
+                        .sort((x, y) => {
+                            if (x.timeStart < y.timeStart) {
+                                return -1;
+                            } else if (x.timeStart > y.timeStart) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        })
                         .map((a) => (
-                            <UserMeetingRow 
+                            <UserMeetingRow
                                 key={a._id}
                                 activity={a}
                                 client={findClient(a.clientReference)}
                             />
-                        ))
-                    }
-
+                        ))}
                 </div>
-            )
+            );
         } else {
             <div className="portalContent">
                 <p>{clientsData.message}</p>
-            </div>
+            </div>;
         }
-    }
+    };
 
     return (
         <div>
@@ -78,6 +85,5 @@ export default function UserMeetingPortal(props) {
             </NavLink>
             {portalContent()}
         </div>
-    )
-
+    );
 }
