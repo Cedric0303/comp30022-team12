@@ -8,6 +8,18 @@
 
 }
 
+.homeGrid > UserMeetingPortal {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.homePortals {
+    background-color: white;
+    border-radius: 15px;
+}
+
 .homeButtonGroup {
     grid-row-start: 2;
     grid-row-end: 3;

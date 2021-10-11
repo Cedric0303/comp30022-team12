@@ -41,7 +41,7 @@ const getActivities = async (req, res) => {
             const activities = await Activities.find({
                 userReference: req.body.userReference,
             })
-                .sort({ timeStart: -1 })
+                .sort({ timeStart: 1 })
                 .toArray();
             res.json({
                 message: "Get activities successful!",

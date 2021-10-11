@@ -1,14 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UserMeetingPortal from "../Components/UserMeetingPortal.js";
 import Navbar from "../Components/Navbar/Navbar.js";
 import "./css/home.css"
 
 function Home(props) {
 
-    function routeChange(link) {
-        window.location.href = link;
-    }
+    // function routeChange(link) {
+    //     window.location.href = link;
+    // }
     
     // const { height: winHeight } = useWindowDimensions();
     // // make calendar fill remaining height
@@ -23,11 +24,12 @@ function Home(props) {
         <div>
             <Navbar />
             <div className="homeGrid">
+                <div className ="homePortals">
+                    <UserMeetingPortal/>
+
+                </div>
 
                 <div className="homeButtonGroup">
-                    {/* <HomeButton id="addClient"></HomeButton>
-                    <HomeButton id="addClient"></HomeButton> */}
-
                     <NavLink className="homeAddClient" to="clients/create">
                         <div className="homeImageContainer">
                             <FontAwesomeIcon icon="plus" />
