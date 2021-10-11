@@ -181,7 +181,7 @@ function AdminManageStages(props) {
             return (
                 <div>
                     <div className="stagesBox">
-                        <ul>Loading...</ul>
+                        <p className="stagesMessage">Loading...</p>
                     </div>
                     {loading && (
                         <ReactLoading
@@ -197,7 +197,7 @@ function AdminManageStages(props) {
         } else if (error) {
             return (
                 <div className="stagesBox">
-                    <ul>Something went wrong: {error.message}</ul>
+                    <p className="stagesMessage">Something went wrong: {error.message}</p>
                 </div>
             );
         } else {
