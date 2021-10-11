@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
-import OrderRow from "../Components/OrderRow.js";
+import OrderHistoryRow from "../Components/OrderHistoryRow.js";
 import ReactLoading from "react-loading";
 import {useOrders, postOrder} from "../api.js";
 import Modal from "react-modal";
@@ -8,10 +8,11 @@ import "./css/orderHistory.css";
 
 function OrderHistory(props) {
     
-    const cid = props.location.state;
+    const cid = props.location.state.cid;
     const { loading, ordersData, error } = useOrders(cid);
     
-    console.log(ordersData);
+    console.log(ordersData.orders);
+
     //hold the details of a new order
     const initialState = {
         orderTotal: 0,
@@ -87,7 +88,7 @@ function OrderHistory(props) {
                             <tbody
                                 key={order._id}
                             >
-                                <OrderRow key={order._id} {...order} />
+                                <OrderHistoryRow key={order._id} {...order} />
                             </tbody>
                         ))} 
                     </table>
@@ -95,7 +96,6 @@ function OrderHistory(props) {
             );
         }
     };
-    
     
     return (
         <div>
