@@ -12,10 +12,10 @@ import ReactLoading from "react-loading";
 import "./css/animation.css";
 
 function validate_password(p) {
-    var letter = /[a-zA-Z]/;
-    var number = /[0-9]/;
-    var minLength = 8;
-    var maxLength = 20;
+    const letter = /[a-zA-Z]/;
+    const number = /[0-9]/;
+    const minLength = 8;
+    const maxLength = 20;
     return (
         (letter.test(p) || number.test(p)) &&
         p.length >= minLength &&
@@ -41,10 +41,7 @@ function AdminEditUser(props) {
     }
 
     function requireFieldsFilled() {
-        if (firstName === "" || lastName === "" || username === "") {
-            return false;
-        }
-        return true;
+        return firstName && lastName && username;
     }
 
     const handleSubmit = (e) => {

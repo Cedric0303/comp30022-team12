@@ -36,8 +36,8 @@ export default function UpcomingMeetingPortal(props) {
                     <div className="portalContent">
                         <p>No upcoming meetings!</p>
                     </div>
-                )
-            } else { 
+                );
+            } else {
                 return (
                     <div className="portalContent">
                         {/* Meetings sorted by date (newest first) */}
