@@ -91,8 +91,8 @@ function CalendarPage(props) {
                     Something went wrong: {error.message}
                 </div>
             );
-        } else {
-            const options = clientsToOptions(clientsData.clients);
+        } else if (clientsData.length) {
+            var options = clientsToOptions(clientsData);
             if (options) {
                 return (
                     <div id="calendarFilter">
@@ -137,7 +137,7 @@ function CalendarPage(props) {
     };
 
     const pageMain = () => {
-        if (loading) {
+        if (loading || cliLoading) {
             return (
                 <div>
                     <div>
