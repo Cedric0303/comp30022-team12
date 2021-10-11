@@ -76,7 +76,6 @@ const createOrder = async (req, res) => {
     });
     if (client && user) {
         const newOrder = new OrderModel({
-            orderItem: [],
             clientReference: client.email,
             userReference: user.username,
             orderTotal: req.body.orderTotal,
