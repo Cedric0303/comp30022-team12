@@ -34,15 +34,20 @@ export default function PastMeetingPortal(props) {
                     <div className="portalContent">
                         <p>No past meetings!</p>
                     </div>
-                )
-            } else { 
+                );
+            } else {
                 return (
                     <div className="portalContent">
                         {/* Meetings sorted by date (newest first) */}
                         {upcomingActs.map((activity) => (
                             <div className="portalRow">
-                                <span className="leftAlign">{activity.type}</span>
-                                <Moment className="rightAlign" format="hh:mm A ddd Do MMM YY">
+                                <span className="leftAlign">
+                                    {activity.type}
+                                </span>
+                                <Moment
+                                    className="rightAlign"
+                                    format="hh:mm A ddd Do MMM YY"
+                                >
                                     {activity.timeStart}
                                 </Moment>
                             </div>

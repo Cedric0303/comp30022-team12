@@ -123,7 +123,7 @@ function EditClient(props) {
                                         type="radio"
                                         name="stage"
                                         value={stage.name}
-                                        onChange={(e) => 
+                                        onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }
                                         defaultChecked
@@ -134,7 +134,7 @@ function EditClient(props) {
                                         type="radio"
                                         name="stage"
                                         value={stage.name}
-                                        onChange={(e) => 
+                                        onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }
                                     />

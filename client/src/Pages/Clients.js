@@ -21,9 +21,11 @@ function Clients(props) {
 
     // make clientsBox fill remaining height
     useEffect(() => {
-        let clientsBoxElement = document.getElementsByClassName("clientsBox")[0];
+        let clientsBoxElement =
+            document.getElementsByClassName("clientsBox")[0];
         if (clientsBoxElement) {
-            clientsBoxElement.style.height = winHeight - clientsBoxElement.offsetTop + "px";
+            clientsBoxElement.style.height =
+                winHeight - clientsBoxElement.offsetTop + "px";
         }
     })
 
@@ -94,7 +96,9 @@ function Clients(props) {
             );
         } else if (stagesError) {
             return (
-                <div id="stagesFilter">Something went wrong: {error.message}</div>
+                <div id="stagesFilter">
+                    Something went wrong: {error.message}
+                </div>
             );
         } else {
             return (
@@ -111,7 +115,7 @@ function Clients(props) {
                 </div>
             );
         }
-    }
+    };
 
     useEffect(() => {
         if (clientsData) {
