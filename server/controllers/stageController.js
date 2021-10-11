@@ -58,7 +58,10 @@ const createStage = async (req, res) => {
             stage: exist,
         });
     } else {
-        const maxPos = await Stages.find().sort({ position: -1 }).limit(1).toArray();
+        const maxPos = await Stages.find()
+            .sort({ position: -1 })
+            .limit(1)
+            .toArray();
         const newStage = new StageModel({
             id: stageID,
             name: req.body.sname,

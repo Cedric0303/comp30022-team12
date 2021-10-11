@@ -36,7 +36,6 @@ export default function Client(client) {
                         pathname: "../calendar",
                         state: {
                             client: client,
-                            fromClient: true,
                         },
                     }}
                 >

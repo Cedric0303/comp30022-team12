@@ -8,7 +8,6 @@ import OrderPortal from "../Components/OrderPortal.js";
 import "./css/specificClient.css";
 import { useClient } from "../api.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { Calendar, momentLocalizer } from "react-big-calendar";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
 
@@ -72,7 +71,6 @@ function SpecificClient(props) {
                                 pathname: "/calendar/schedule-meeting",
                                 state: {
                                     client: client,
-                                    fromClient: true,
                                 },
                             }}
                             className="clientHeaderActions"

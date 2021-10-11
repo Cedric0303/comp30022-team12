@@ -15,6 +15,7 @@ import {
     useClients,
     deleteActivity,
 } from "../api.js";
+import { clientsToOptions } from "../Components/CalendarUtilities.js";
 import "./css/scheduleMeeting.css";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
@@ -105,20 +106,6 @@ function ScheduleMeeting(props) {
         setClientReference(selectedClient.value.email);
     };
 
-    // Creates an options object with the user's clients info
-    const clientsToOptions = () => {
-        var clientOptions = [];
-        if (clientsData.clients) {
-            clientsData.clients.map((client) =>
-                clientOptions.push({
-                    value: client,
-                    label: client.firstName + " " + client.lastName,
-                })
-            );
-            return clientOptions;
-        }
-    };
-
     // Allows the user to select a client if not already specified
     const selectClient = () => {
         if (givenClientReference()) {
@@ -133,7 +120,7 @@ function ScheduleMeeting(props) {
                     </div>
                 );
             } else {
-                const options = clientsToOptions();
+                const options = clientsToOptions(clientsData.clients);
                 return (
                     <div>
                         <label>Select a client:</label>
