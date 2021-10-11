@@ -23,7 +23,10 @@ import "./css/animation.css";
 function ScheduleMeeting(props) {
     // Check if a client has been passed through
     const givenClientReference = () => {
-        if (!props.location.state) {
+        if (
+            props.location.state === null ||
+            props.location.state === undefined
+        ) {
             return null;
         } else if (props.location.state.client) {
             return props.location.state.client.email;
@@ -39,7 +42,10 @@ function ScheduleMeeting(props) {
 
     // Check if an activity has been passed through
     const hasActivity = () => {
-        if (!props.location.state) {
+        if (
+            props.location.state === null ||
+            props.location.state === undefined
+        ) {
             return null;
         } else if (props.location.state.activity) {
             // Update rendered default values if editing the meeting
@@ -47,6 +53,8 @@ function ScheduleMeeting(props) {
             currentStart = props.location.state.activity.timeStart;
             currentEnd = props.location.state.activity.timeEnd;
             return props.location.state.activity;
+        } else {
+            return null;
         }
     };
 

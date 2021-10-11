@@ -20,7 +20,16 @@ function AddClient(props) {
     const { loading, stagesData, error } = useStages();
 
     function notEmpty() {
-        return firstName && lastName && email && address && phoneNo;
+        if (
+            firstName === "" ||
+            lastName === "" ||
+            email === "" ||
+            address === "" ||
+            phoneNo === ""
+        ) {
+            return false;
+        }
+        return true;
     }
 
     const onSubmit = (e) => {

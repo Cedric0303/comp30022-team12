@@ -7,77 +7,72 @@ import Client from "../Components/Client.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
-import Select from "react-select";
+import Select from "react-select"
 
 function Clients(props) {
     const { loading, clientsData, error } = useClients();
     const { stagesLoading, stagesData, stagesError } = useStages();
     const { height: winHeight } = useWindowDimensions();
 
-    const [stages, setStages] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [filters, setFilters] = useState([]);
-    const [filteredClients, setFilteredClients] = useState(clientsData);
+    const [ stages, setStages ] = useState([]);
+    const [ searchQuery, setSearchQuery ] = useState("");
+    const [ filters, setFilters ] = useState([]);
+    const [ filteredClients, setFilteredClients ] = useState(clientsData);
 
     // make clientsBox fill remaining height
     useEffect(() => {
-        let clientsBoxElement =
-            document.getElementsByClassName("clientsBox")[0];
+        let clientsBoxElement = document.getElementsByClassName("clientsBox")[0];
         if (clientsBoxElement) {
-            clientsBoxElement.style.height =
-                winHeight - clientsBoxElement.offsetTop + "px";
+            clientsBoxElement.style.height = winHeight - clientsBoxElement.offsetTop + "px";
         }
-    });
+    })
 
     useEffect(() => {
         if (stagesData) {
             let tempStages = [];
-            for (let i = 0; i < stagesData.length; i++) {
-                tempStages.push({
-                    value: stagesData[i].id,
-                    label: stagesData[i].name,
-                });
+            for (let i=0; i<stagesData.length; i++) {
+                tempStages.push({ value: stagesData[i].id, label: stagesData[i].name })
             }
             setStages(tempStages);
         }
     }, [stagesData]);
 
     const handleFilterChange = (selectedOptions) => {
-        setFilters(selectedOptions);
-    };
+        setFilters(selectedOptions)
+    }
 
     function filterClients(clients, query, filter) {
         var pattern = query
-            .split("")
-            .map((x) => {
-                return `(?=.*${x})`;
-            })
-            .join("");
+        .split("")
+        .map((x) => {
+            return `(?=.*${x})`;
+        })
+        .join("");
         var regex = new RegExp(`^${pattern}`, "i");
 
-        if (!query && !filter.length) {
+        if (!query && (filter.length === 0)) {
             // no query no filter
             return clients;
-        } else if (query && !filter.length) {
+        } else if ((filter.length === 0) && query) {
             // yes query no filter
             return clients.filter((client) => {
-                return regex.test(client.firstName + " " + client.lastName);
+                return regex.test(client.firstName+" "+client.lastName);
             });
-        } else if (!query && filter.length) {
+        } else if (!query && (filter.length !== 0)) {
             // no query yes filter
-            let chosenFilters = filter.map((f) => f.value);
+            let chosenFilters = filter.map(f => f.value);
             return clients.filter((client) => {
                 return chosenFilters.includes(client.stage);
-            });
+            })
         } else {
             // yes query yes filter
             let tempClients = clients;
-            let chosenFilters = filter.map((f) => f.value);
+            let chosenFilters = filter.map(f => f.value);
             tempClients = clients.filter((client) => {
                 return chosenFilters.includes(client.stage);
-            });
+            })
             tempClients = tempClients.filter((client) => {
-                return regex.test(client.firstName + " " + client.lastName);
+                return regex.test(client.firstName+" "+client.lastName);
             });
             return tempClients;
         }
@@ -88,45 +83,41 @@ function Clients(props) {
             return (
                 <div id="stagesFilterBox">
                     <div>Filter by stage:</div>
-                    <Select
+                    <Select 
                         isMulti
                         isLoading
                         backspaceRemovesValue
-                        options={stages}
+                        options={stages} 
                         className="stagesFilterBar"
                     />
                 </div>
             );
         } else if (stagesError) {
             return (
-                <div id="stagesFilter">
-                    Something went wrong: {error.message}
-                </div>
+                <div id="stagesFilter">Something went wrong: {error.message}</div>
             );
         } else {
             return (
                 <div id="stagesFilterBox">
                     <div>Filter by stage:</div>
-                    <Select
+                    <Select 
                         isMulti
                         isSearchable
                         backspaceRemovesValue
-                        options={stages}
+                        options={stages} 
                         onChange={handleFilterChange}
                         className="stagesFilterBar"
                     />
                 </div>
             );
         }
-    };
+    }
 
     useEffect(() => {
         if (clientsData) {
-            setFilteredClients(
-                filterClients(clientsData, searchQuery, filters)
-            );
+            setFilteredClients(filterClients(clientsData, searchQuery, filters))
         }
-    }, [clientsData, searchQuery, filters]);
+    }, [clientsData, searchQuery, filters])
 
     const pageMain = () => {
         if (loading) {

@@ -21,7 +21,16 @@ function EditClient(props) {
     const { stagesLoading, stagesData, stagesError } = useStages();
 
     function notEmpty() {
-        return firstName && lastName && email && address && phoneNo;
+        if (
+            firstName === "" ||
+            lastName === "" ||
+            email === "" ||
+            address === "" ||
+            phoneNo === ""
+        ) {
+            return false;
+        }
+        return true;
     }
 
     const handleSubmit = (e) => {
@@ -114,7 +123,7 @@ function EditClient(props) {
                                         type="radio"
                                         name="stage"
                                         value={stage.name}
-                                        onChange={(e) =>
+                                        onChange={(e) => 
                                             setClientStage(e.target.value)
                                         }
                                         defaultChecked
@@ -125,7 +134,7 @@ function EditClient(props) {
                                         type="radio"
                                         name="stage"
                                         value={stage.name}
-                                        onChange={(e) =>
+                                        onChange={(e) => 
                                             setClientStage(e.target.value)
                                         }
                                     />
