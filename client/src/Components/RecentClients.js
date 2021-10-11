@@ -3,6 +3,22 @@ import { NavLink } from "react-router-dom";
 import { useClients } from "../api.js"
 import "./css/recentClient.css"
 
+
+// Obtain the last 3 clients the user has interacted with
+// sorted by most recent interaction first
+function filterClients(clients) {
+    clients = clients || []; // ensures clients is not undefined
+    return clients.sort((x, y) => {
+        if (x.updatedAt > y.updatedAt) {
+            return -1
+        } else if (x.updatedAt < y.updatedAt) {
+            return 1
+        } else {
+            return 0
+        }
+    }).slice(0, 3)
+}
+
 export default function RecentClients(props) {
     
     const { loading, clientsData, error } = useClients();
@@ -22,28 +38,25 @@ export default function RecentClients(props) {
             );
         } else {
             return (
-                <table>
+                <table className="recentClientTable">
                     <thead>
                         <tr className="hide">
                             <th>Name</th>
-                            <th id="clientStage">Stage</th>
+                            <th>Stage</th>
                         </tr>
                     </thead>
-                    {clientsData.clients.map((client) => (
+                    {filterClients(clientsData.clients).map((client) => (
                         <tbody
                             key={client.email}
-                            
                         >
                             <tr>
                                 <td>
                                     <NavLink to={"/clients/" + client.email}>
-                                        <span >
+                                        <p className="recentClientName">
                                             {client.firstName} {client.lastName}
-                                        </span>
+                                        </p>
                                     </NavLink>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <span>{client.stage}</span>
                                 </td>

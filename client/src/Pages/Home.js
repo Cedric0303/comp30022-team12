@@ -74,7 +74,7 @@ function Home(props) {
                     </NavLink>
                     <NavLink className="homeViewClient" to="clients">
                         <div className="homeImageContainer">
-                            <FontAwesomeIcon icon="user-plus" />
+                            <FontAwesomeIcon icon="users" />
                         </div>
                     </NavLink>
                 </div>

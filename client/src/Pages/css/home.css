@@ -1,8 +1,8 @@
 .homeGrid {
     display: grid;
-    margin: 0 6vw;
+    margin: 15px 6vw;
     height: 85vh;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 2fr;
     grid-template-rows: 3fr 1fr;
     grid-gap: 1em;
 
