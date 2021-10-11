@@ -64,6 +64,11 @@
     margin-bottom: 15px;
 }
 
+.pickerInput {
+    background-color: white;
+    border-radius: 5px;
+}
+
 .scheduleCalendar {
     grid-area: scheduleCalendar;
     background-color: white;

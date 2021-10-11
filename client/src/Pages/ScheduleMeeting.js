@@ -279,6 +279,7 @@ function ScheduleMeeting(props) {
                                         Start Time:
                                     </label>
                                     <DateTimePicker
+                                        className="pickerInput"
                                         inputVariant="outlined"
                                         value={startDateTime}
                                         onChange={setStartDateTime}
@@ -286,6 +287,7 @@ function ScheduleMeeting(props) {
                                 </div>
                                 <label className="timeLabel">End Time:</label>
                                 <DateTimePicker
+                                    className="pickerInput"
                                     inputVariant="outlined"
                                     value={endDateTime}
                                     onChange={setEndDateTime}

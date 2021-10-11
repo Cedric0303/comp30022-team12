@@ -16,11 +16,11 @@ function CalendarPage(props) {
 
     // make calendar fill remaining height
     useEffect(() => {
-        let calendarElement =
-            document.getElementsByClassName("calendarElement")[0];
-        if (calendarElement) {
-            calendarElement.style.height =
-                winHeight - calendarElement.offsetTop + "px";
+        let actualCalendar =
+            document.getElementsByClassName("actualCalendar")[0];
+        if (actualCalendar) {
+            actualCalendar.style.height =
+                (0.98*winHeight - actualCalendar.offsetTop + "px");
         }
     });
 
