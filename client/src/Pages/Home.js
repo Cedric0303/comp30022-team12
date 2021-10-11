@@ -5,6 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useActivities } from "../api.js";
 import UserMeetingPortal from "../Components/UserMeetingPortal.js";
+import RecentClients from "../Components/RecentClients.js";
 import Navbar from "../Components/Navbar/Navbar.js";
 import "./css/home.css"
 
@@ -63,6 +64,7 @@ function Home(props) {
                         View Calendar
                     </NavLink>
                 </div>
+                <RecentClients/>
 
                 <div className="homeButtonGroup">
                     <NavLink className="homeAddClient" to="clients/create">

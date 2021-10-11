@@ -1,0 +1,10 @@
+.hide {
+    height: 0; 
+    border: none;
+}
+
+.recentCliHeading {
+    font-size: 25px;
+    padding: 5px 12px;
+    border-bottom: solid black;
+}
