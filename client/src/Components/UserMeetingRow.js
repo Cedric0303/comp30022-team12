@@ -9,12 +9,12 @@ export default function UserMeetingRow(props) {
         const now = new Date();
 
         if (time.getDate() === now.getDate()) {
-            return " [Today at] hh:mm a"
+            return "hh:mm a [Today]"
 
         } else if (time.getDate() === now.getDate() + 1) {
-            return " [Tomorrow at] hh:mm a"
+            return "hh:mm a [Tomorrow] "
         } else {
-            return " dddd [at] hh:mm a"
+            return "hh:mm a dddd"
         }
     }
 
@@ -32,7 +32,7 @@ export default function UserMeetingRow(props) {
                     {props.activity.type} with <b>{props.client.firstName} {props.client.lastName}</b> 
                 </span>
                 
-                <Moment className="leftAlign" format={formatString(props.activity.timeStart)}>
+                <Moment className="rightAlign" format={formatString(props.activity.timeStart)}>
                     {props.activity.timeStart}
                 </Moment>
             </div>
