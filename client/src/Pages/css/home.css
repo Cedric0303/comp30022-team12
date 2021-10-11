@@ -79,9 +79,13 @@
     position: relative;
 }
 
+#homeButtonText {
+    font-size: 15px;
+}
+
 .homeImageContainer {
     position: relative;
-    top: calc(50% - 40px); /* 50% - 3/4 of icon height */
+    top: calc(50% - 45px); /* 50% - 3/4 of icon height */
 }
 
 .homeButtonGroup > .homeAddClient:hover,

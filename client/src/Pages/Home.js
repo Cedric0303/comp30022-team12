@@ -54,10 +54,6 @@ function Home(props) {
                     <NavLink
                         to={{
                             pathname: "../calendar",
-                            state: {
-                                client: props.client,
-                                fromClient: true,
-                            },
                         }}
                         className="homeViewCal"
                     >
@@ -70,11 +66,13 @@ function Home(props) {
                     <NavLink className="homeAddClient" to="clients/create">
                         <div className="homeImageContainer">
                             <FontAwesomeIcon icon="plus" />
+                            <p id="homeButtonText">Add a New Client</p>
                         </div>
                     </NavLink>
                     <NavLink className="homeViewClient" to="clients">
                         <div className="homeImageContainer">
                             <FontAwesomeIcon icon="users" />
+                            <p id="homeButtonText">View All Clients</p>
                         </div>
                     </NavLink>
                 </div>
