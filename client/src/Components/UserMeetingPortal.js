@@ -9,15 +9,6 @@ export default function UserMeetingPortal(props) {
     const { cliLoading, clientsData, cliError } = useClients();
     const { loading, activitiesData, error } = useActivities();
 
-    const findClient = (cid) => {
-        if (cliLoading) {
-        } else if (cliError) {
-        } else if (clientsData !== undefined) {
-            return clientsData.clients.find((c) => c.email === cid);
-        } else {
-        }
-    };
-
     const portalContent = () => {
         if (loading) {
             return (
@@ -35,6 +26,15 @@ export default function UserMeetingPortal(props) {
             const now = new Date();
             let future = new Date();
             future.setDate(now.getDate() + 7);
+
+            const findClient = (cid) => {
+                if (cliLoading) {
+                } else if (cliError) {
+                } else if (clientsData !== undefined) {
+                    return clientsData.clients.find((c) => c.email === cid);
+                } else {
+                }
+            };
 
             return (
                 <div className="portalContent">
