@@ -15,33 +15,35 @@ export default function UserMeetingRow(props) {
             return "hh:mm a dddd";
         }
     };
-
-    return (
-        <NavLink
-            to={{
-                pathname: "/calendar/schedule-meeting",
-                state: {
-                    client: props.client,
-                    fromClient: false,
-                    activity: props.activity,
-                },
-            }}
-        >
-            <div className="meetingRowLink">
-                <span className="leftAlign">
-                    {props.activity.type} with{" "}
-                    <b>
-                        {props.client.firstName} {props.client.lastName}
-                    </b>
-                </span>
-
-                <Moment
-                    className="rightAlign"
-                    format={formatString(props.activity.timeStart)}
-                >
-                    {props.activity.timeStart}
-                </Moment>
-            </div>
-        </NavLink>
-    );
+    if (props.client) {
+        return (
+            <NavLink
+                to={{
+                    pathname: "/calendar/schedule-meeting",
+                    state: {
+                        client: props.client,
+                        fromClient: false,
+                        activity: props.activity,
+                    },
+                }}
+            >
+                <div className="meetingRowLink">
+                    <span className="leftAlign">
+                        {props.activity.type} with{" "}
+                        <b>
+                            {props.client.firstName} {props.client.lastName}
+                        </b>
+                    </span>
+    
+                    <Moment
+                        className="rightAlign"
+                        format={formatString(props.activity.timeStart)}
+                    >
+                        {props.activity.timeStart}
+                    </Moment>
+                </div>
+            </NavLink>
+        );
+    }
+    
 }

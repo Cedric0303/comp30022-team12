@@ -58,6 +58,13 @@
     font-weight: 700;
 }
 
+.homeActualCal {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    height: 85%;
+}
+
 .homeButtonGroup {
     grid-row-start: 2;
     grid-row-end: 3;

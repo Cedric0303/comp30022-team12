@@ -29,15 +29,16 @@ function Home(props) {
             );
         } else {
             return (
-                <Calendar
-                    localizer={localizer}
-                    views={["month"]}
-                    events={activitiesData.activities}
-                    startAccessor="timeStart"
-                    endAccessor="timeEnd"
-                    titleAccessor="type"
-                    style={{ height: "90%", background: "whitesmoke"}}
-                />
+                <div className="homeActualCal">
+                    <Calendar
+                        localizer={localizer}
+                        views={["month"]}
+                        events={activitiesData.activities}
+                        startAccessor="timeStart"
+                        endAccessor="timeEnd"
+                        titleAccessor="type"
+                    />
+                </div>
             );
         }
     };
