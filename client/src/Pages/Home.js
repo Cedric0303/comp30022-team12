@@ -61,7 +61,7 @@ function Home(props) {
                         }}
                         className="homeViewCal"
                     >
-                        View Calendar
+                        View Full Calendar
                     </NavLink>
                 </div>
                 <RecentClients />
