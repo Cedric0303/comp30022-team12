@@ -19,7 +19,7 @@ export default function OrderHistoryRow(order) {
                 </span>
             </td>
             <td>
-                <span className="total">{orderTotal}</span>
+                <span className="total">{orderTotal.toFixed(2)}&nbsp;AUD</span>
             </td>
         </tr>
     );

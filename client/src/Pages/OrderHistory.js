@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import OrderHistoryRow from "../Components/OrderHistoryRow.js";
 import ReactLoading from "react-loading";
-import {useOrders, postOrder} from "../api.js";
+import { useOrders, postOrder, useClient, useWindowDimensions } from "../api.js";
 import Modal from "react-modal";
 import "./css/orderHistory.css";
 
@@ -10,8 +10,15 @@ function OrderHistory(props) {
     
     const cid = props.location.state.cid;
     const { loading, ordersData, error } = useOrders(cid);
-    
-    console.log(ordersData.orders);
+    const { loading: clientLoading, clientData, error: clientError } = useClient(cid);
+    const { height: winHeight } = useWindowDimensions();
+
+    useEffect(() => {
+        let ordersBoxElement = document.getElementById("orderHistoryBox");
+        if (ordersBoxElement) {
+            ordersBoxElement.style.height = winHeight - ordersBoxElement.offsetTop + "px";
+        }
+    })
 
     //hold the details of a new order
     const initialState = {
@@ -50,6 +57,35 @@ function OrderHistory(props) {
         e.preventDefault();
     };
 
+    const clientName = () => {
+        if (clientLoading) {
+            return (
+                <div>
+                    <ul>Loading...</ul>
+                    {clientLoading && (
+                        <ReactLoading
+                            id="loading-anim"
+                            type="spin"
+                            color="black"
+                            height="2%"
+                            width="2%"
+                        ></ReactLoading>
+                    )}
+                </div>
+            );
+        } else if (clientError) {
+            return (
+                <div>
+                    <ul>Something went wrong: {error.message}</ul>
+                </div>
+            );
+        } else {
+            return (
+                <h1 id="clientName">{clientData.client.firstName}&nbsp;{clientData.client.lastName}</h1>
+            )
+        }
+    }
+
     const pageMain = () => {
         if (loading) {
             return (
@@ -74,9 +110,9 @@ function OrderHistory(props) {
             );
         } else {
             return (
-                <div>
-                    <table>
-                        <thead id="orderHistoryHeading">
+                <div id="orderHistoryBox">
+                    <table id="orderHistory">
+                        <thead>
                             <tr>
                                 <th id="orderID">Order ID</th>
                                 <th id="lastUpdate">Last Updated</th>
@@ -101,9 +137,12 @@ function OrderHistory(props) {
         <div>
             <Navbar />
 
-            <main className="OrderBox">
-                <h2 id="orderHeading">Order History</h2>
-                <button onClick={openModal}>Add Order</button>
+            <main id="orderBox">
+                {clientName()}
+                <div id="orderHeader">
+                    <h2 id="orderHeading">Order History</h2>
+                    <button id="addOrderButton" onClick={openModal}>Add Order</button>
+                </div>
                 {pageMain()}
                 
             </main>
@@ -111,25 +150,25 @@ function OrderHistory(props) {
             <Modal
                 isOpen={addModalIsOpen}
                 className="addOrderModal"
+                overlayClassName="addOrderModalOverlay"
                 contentLabel="Add New Order"
             >
-                <h2>Add a new order</h2>
-                <form onSubmit={handleAdd}>
-                    <label>
-                        Order Amount:
+                <h2 id="modalHeading">Add a new order</h2>
+                <form id="addOrderForm" onSubmit={handleAdd}>
+                    <label id="orderTotal">
+                        Order Total:
                         <input
                             type="number"
-                            id="orderTotal"
                             required
                             value={newOrder.orderTotal}
                             onChange={handleChange}
                         />
                     </label>
-                    <button type="submit" className="addOrderButton">
+                    <button type="submit" id="modalAddOrderButton">
                         Add Order
                     </button>
                     <button
-                        className="orderCancelButton"
+                        id="modalOrderCancelButton"
                         onClick={closeAndClear}
                     >
                         Cancel
