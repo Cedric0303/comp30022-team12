@@ -26,8 +26,20 @@ function Home(props) {
             <div className="homeGrid">
                 <div className ="homePortals">
                     <UserMeetingPortal/>
-
                 </div>
+
+                <NavLink
+                    to={{
+                        pathname: "../calendar",
+                        state: {
+                            client: props.client,
+                            fromClient: true,
+                        },
+                    }}
+                    
+                    className="homeViewCal">
+                    View Calendar
+                </NavLink>
 
                 <div className="homeButtonGroup">
                     <NavLink className="homeAddClient" to="clients/create">

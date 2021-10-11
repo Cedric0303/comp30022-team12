@@ -61,9 +61,6 @@ export default function UserMeetingPortal(props) {
         }
     }
 
-    
-
-
     return (
         <div>
             <NavLink
