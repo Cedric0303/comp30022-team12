@@ -1,24 +1,46 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import { useActivities } from "../api.js";
 import UserMeetingPortal from "../Components/UserMeetingPortal.js";
 import Navbar from "../Components/Navbar/Navbar.js";
 import "./css/home.css"
 
 function Home(props) {
 
-    // function routeChange(link) {
-    //     window.location.href = link;
-    // }
-    
-    // const { height: winHeight } = useWindowDimensions();
-    // // make calendar fill remaining height
-    // useEffect(() => {
-    //     let homeGrid = document.getElementsByClassName("homeGrid")[0];
-    //     if (homeGrid) {
-    //         homeGrid.style.height = winHeight - homeGrid.offsetTop + "px";
-    //     }
-    // })
+    const localizer = momentLocalizer(moment);
+
+    const { loading, activitiesData, error } = useActivities();
+
+    const calendarContent = () => {
+        if (loading) {
+            return (
+                <div>
+                    <p>Loading...</p>
+                </div>
+            );
+        } else if (error) {
+            return (
+                <div>
+                    <p>Something went wrong: {error.message}</p>
+                </div>
+            );
+        } else {
+            return (
+                <Calendar
+                    localizer={localizer}
+                    views={["month"]}
+                    events={activitiesData.activities}
+                    startAccessor="timeStart"
+                    endAccessor="timeEnd"
+                    titleAccessor="type"
+                    style={{height: "90%"}}
+                />
+            );
+        }
+    }
 
     return (
         <div>
@@ -27,19 +49,20 @@ function Home(props) {
                 <div className ="homePortals">
                     <UserMeetingPortal/>
                 </div>
-
-                <NavLink
-                    to={{
-                        pathname: "../calendar",
-                        state: {
-                            client: props.client,
-                            fromClient: true,
-                        },
-                    }}
-                    
-                    className="homeViewCal">
-                    View Calendar
-                </NavLink>
+                <div className="calGroup">
+                    {calendarContent()}
+                    <NavLink
+                        to={{
+                            pathname: "../calendar",
+                            state: {
+                                client: props.client,
+                                fromClient: true,
+                            },
+                        }}
+                        className="homeViewCal">
+                        View Calendar
+                    </NavLink>
+                </div>
 
                 <div className="homeButtonGroup">
                     <NavLink className="homeAddClient" to="clients/create">
