@@ -21,16 +21,7 @@ function EditClient(props) {
     const { stagesLoading, stagesData, stagesError } = useStages();
 
     function notEmpty() {
-        if (
-            firstName === "" ||
-            lastName === "" ||
-            email === "" ||
-            address === "" ||
-            phoneNo === ""
-        ) {
-            return false;
-        }
-        return true;
+        return firstName && lastName && email && address && phoneNo;
     }
 
     const handleSubmit = (e) => {
