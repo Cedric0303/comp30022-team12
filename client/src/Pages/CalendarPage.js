@@ -12,17 +12,16 @@ function CalendarPage(props) {
 
     // make calendar fill remaining height
     useEffect(() => {
-        let calendarElement = document.getElementsByClassName("calendarElement")[0];
+        let calendarElement =
+            document.getElementsByClassName("calendarElement")[0];
         if (calendarElement) {
-            calendarElement.style.height = winHeight - calendarElement.offsetTop + "px";
+            calendarElement.style.height =
+                winHeight - calendarElement.offsetTop + "px";
         }
-    })
+    });
 
     const getCid = () => {
-        if (
-            props.location.state === null ||
-            props.location.state === undefined
-        ) {
+        if (!props.location.state) {
             return null;
         } else if (props.location.state.client) {
             return props.location.state.client.email;

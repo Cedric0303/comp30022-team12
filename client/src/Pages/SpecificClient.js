@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar.js";
 import NotePortal from "../Components/NotePortal.js";
-import MeetingPortal from "../Components/MeetingPortal.js";
-import LogPortal from "../Components/LogPortal.js";
+import UpcomingMeetingPortal from "../Components/UpcomingMeetingPortal.js";
+import PastMeetingPortal from "../Components/PastMeetingPortal.js";
 import OrderPortal from "../Components/OrderPortal.js";
 import "./css/specificClient.css";
 import { useClient } from "../api.js";
@@ -123,8 +123,8 @@ function SpecificClient(props) {
                         </p>
                     </div>
                     <div className="clientGrid">
-                        <MeetingPortal client={client} />
-                        <LogPortal cid={client.email} />
+                        <UpcomingMeetingPortal client={client} />
+                        <PastMeetingPortal client={client} />
                         <OrderPortal cid={client.email} />
                         <NotePortal client={client} />
                     </div>

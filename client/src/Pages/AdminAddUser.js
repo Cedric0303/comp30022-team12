@@ -8,10 +8,10 @@ import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
 
 function validate_password(p) {
-    var letter = /[a-zA-Z]/;
-    var number = /[0-9]/;
-    var minLength = 8;
-    var maxLength = 20;
+    const letter = /[a-zA-Z]/;
+    const number = /[0-9]/;
+    const minLength = 8;
+    const maxLength = 20;
     return (
         (letter.test(p) || number.test(p)) &&
         p.length >= minLength &&
@@ -28,15 +28,7 @@ function AdminAddUser(props) {
     const [isRevealPwd, setIsRevealPwd] = useState(false);
 
     function notEmpty() {
-        if (
-            firstName === "" ||
-            lastName === "" ||
-            username === "" ||
-            password === ""
-        ) {
-            return false;
-        }
-        return true;
+        return firstName && lastName && username && password;
     }
 
     const handleSubmit = (e) => {

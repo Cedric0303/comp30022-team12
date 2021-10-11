@@ -20,16 +20,7 @@ function AddClient(props) {
     const { loading, stagesData, error } = useStages();
 
     function notEmpty() {
-        if (
-            firstName === "" ||
-            lastName === "" ||
-            email === "" ||
-            address === "" ||
-            phoneNo === ""
-        ) {
-            return false;
-        }
-        return true;
+        return firstName && lastName && email && address && phoneNo;
     }
 
     const onSubmit = (e) => {
@@ -107,7 +98,7 @@ function AddClient(props) {
                                         onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }
-                                        checked="checked"
+                                        defaultChecked
                                     />
                                 ) : (
                                     <input
