@@ -189,14 +189,16 @@ function CalendarPage(props) {
     };
 
     return (
-        <div id="calendar">
+        <div>
             <Navbar />
-            <div id="calendarHeader">
-                <h2 id="calendarHeading">
-                    <span>Calendar</span>
-                </h2>
+            <div id="calendar">
+                <div id="calendarHeader">
+                    <h2 id="calendarHeading">
+                        <span>Calendar</span>
+                    </h2>
+                </div>
+                {pageMain()}
             </div>
-            {pageMain()}
         </div>
     );
 }

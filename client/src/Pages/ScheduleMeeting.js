@@ -119,20 +119,22 @@ function ScheduleMeeting(props) {
                         <p>Something went wrong: {cliError.message}</p>
                     </div>
                 );
-            } else {
-                const options = clientsToOptions(clientsData.clients);
-                return (
-                    <div>
-                        <label>Select a client:</label>
-                        <Select
-                            className="selectClient"
-                            value={selectedClient}
-                            onChange={handleSelect}
-                            options={options}
-                            maxMenuHeight={240}
-                        />
-                    </div>
-                );
+            } else if (clientsData.length) {
+                var options = clientsToOptions(clientsData);
+                if (options) {
+                    return (
+                        <div>
+                            <label>Select a client:</label>
+                            <Select
+                                className="selectClient"
+                                value={selectedClient}
+                                onChange={handleSelect}
+                                options={options}
+                                maxMenuHeight={240}
+                            />
+                        </div>
+                    );
+                }
             }
         }
     };
@@ -230,7 +232,7 @@ function ScheduleMeeting(props) {
     };
 
     const pageMain = () => {
-        if (loading) {
+        if (loading || cliLoading) {
             return (
                 <div>
                     <div>
@@ -309,14 +311,16 @@ function ScheduleMeeting(props) {
                         </form>
                     </div>
                     <div className="scheduleCalendar">
-                        <Calendar
-                            localizer={localizer}
-                            events={activitiesData.activities}
-                            startAccessor="timeStart"
-                            endAccessor="timeEnd"
-                            titleAccessor="type"
-                            style={{ height: 500 }}
-                        />
+                        <div>
+                            <Calendar
+                                localizer={localizer}
+                                events={activitiesData.activities}
+                                startAccessor="timeStart"
+                                endAccessor="timeEnd"
+                                titleAccessor="type"
+                                style={{ height: 500 }}
+                            />
+                        </div>
                     </div>
                 </div>
             );
