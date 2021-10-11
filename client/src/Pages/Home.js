@@ -36,7 +36,7 @@ function Home(props) {
                     startAccessor="timeStart"
                     endAccessor="timeEnd"
                     titleAccessor="type"
-                    style={{ height: "90%" }}
+                    style={{ height: "90%", background: "whitesmoke"}}
                 />
             );
         }

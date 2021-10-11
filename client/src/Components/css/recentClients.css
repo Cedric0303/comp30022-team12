@@ -12,23 +12,22 @@
 }
 
 .recentClientTable {
-    width: 75%;
+    width: 100%;
 }
 
-.recentClientTable tbody,
-.recentClientTable tr,
-.recentClientTable td {
-    border: none;
+.recentClientTable td{
+    border-bottom: 1px solid #b3ddfd;
+}
+
+.recentClientTable > tbody {
     font-size: 20px;
 }
 
-.recentClientTable td {
+
+
+#recentClientTd {
     padding-top: 12px;
     padding-bottom: 12px;
-}
-
-.recentClientTable tr {
-    border-bottom: 1px solid #ddd;
 }
 
 .recentClientTable td:first-child {
@@ -38,4 +37,8 @@
 .recentClientName {
     color: #b3ddfd;
     font-weight: 650;
+}
+
+.recentClientName:hover {
+    color: #85a7ca;
 }
