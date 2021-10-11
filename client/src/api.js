@@ -480,3 +480,22 @@ export function postStagePosUpdate(payload) {
             }
         });
 }
+
+export function postOrder(cid, orderTotal){
+    const endpoint = BASE_URL + "/api/orders/create";
+    return axios
+        .post(endpoint, {
+            clientReference: cid,
+            userReference: Auth.getUsername(),
+            orderTotal: orderTotal,
+        }, { withCredentials: true })
+
+        .then((response) => {
+            if (response.status === 200) {
+                alert(response.data.message);
+                window.location.reload();
+            } else {
+                console.log(response.data);
+            }
+        });
+}

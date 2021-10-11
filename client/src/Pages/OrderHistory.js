@@ -2,18 +2,19 @@ import React, {useState} from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import OrderRow from "../Components/OrderRow.js";
 import ReactLoading from "react-loading";
-import {useOrders} from "../api.js";
+import {useOrders, postOrder} from "../api.js";
 import Modal from "react-modal";
+import "./css/orderHistory.css";
 
 function OrderHistory(props) {
-    const { loading, ordersData, error } = useOrders(props.location.state);
+    
+    const cid = props.location.state;
+    const { loading, ordersData, error } = useOrders(cid);
+    
     console.log(ordersData);
-
-     //hold the details of a new order
-     const initialState = {
-        clientReference: "",
-        userReference: "",
-        orderTotal: "",
+    //hold the details of a new order
+    const initialState = {
+        orderTotal: 0,
     };
     const [newOrder, setNewOrder] = useState(initialState);
     const resetOrder = () => {
@@ -40,6 +41,13 @@ function OrderHistory(props) {
         }));
     };
 
+    const handleAdd = (e) => {
+        if (newOrder.orderTotal) {
+            postOrder(cid, newOrder.orderTotal);
+            resetOrder();
+        }
+        e.preventDefault();
+    };
 
     const pageMain = () => {
         if (loading) {
@@ -106,11 +114,11 @@ function OrderHistory(props) {
                 contentLabel="Add New Order"
             >
                 <h2>Add a new order</h2>
-                <form>
+                <form onSubmit={handleAdd}>
                     <label>
                         Order Amount:
                         <input
-                            type="text"
+                            type="number"
                             id="orderTotal"
                             required
                             value={newOrder.orderTotal}
