@@ -15,6 +15,7 @@ import {
     useClients,
     deleteActivity,
 } from "../api.js";
+import { clientsToOptions } from "../Components/CalendarUtilities.js";
 import "./css/scheduleMeeting.css";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
@@ -23,10 +24,7 @@ import "./css/animation.css";
 function ScheduleMeeting(props) {
     // Check if a client has been passed through
     const givenClientReference = () => {
-        if (
-            props.location.state === null ||
-            props.location.state === undefined
-        ) {
+        if (!props.location.state) {
             return null;
         } else if (props.location.state.client) {
             return props.location.state.client.email;
@@ -42,10 +40,7 @@ function ScheduleMeeting(props) {
 
     // Check if an activity has been passed through
     const hasActivity = () => {
-        if (
-            props.location.state === null ||
-            props.location.state === undefined
-        ) {
+        if (!props.location.state) {
             return null;
         } else if (props.location.state.activity) {
             // Update rendered default values if editing the meeting
@@ -53,8 +48,6 @@ function ScheduleMeeting(props) {
             currentStart = props.location.state.activity.timeStart;
             currentEnd = props.location.state.activity.timeEnd;
             return props.location.state.activity;
-        } else {
-            return null;
         }
     };
 
@@ -105,20 +98,6 @@ function ScheduleMeeting(props) {
         setClientReference(selectedClient.value.email);
     };
 
-    // Creates an options object with the user's clients info
-    const clientsToOptions = () => {
-        var clientOptions = [];
-        if (clientsData.clients) {
-            clientsData.clients.map((client) =>
-                clientOptions.push({
-                    value: client,
-                    label: client.firstName + " " + client.lastName,
-                })
-            );
-            return clientOptions;
-        }
-    };
-
     // Allows the user to select a client if not already specified
     const selectClient = () => {
         if (givenClientReference()) {
@@ -132,20 +111,22 @@ function ScheduleMeeting(props) {
                         <p>Something went wrong: {cliError.message}</p>
                     </div>
                 );
-            } else {
-                const options = clientsToOptions();
-                return (
-                    <div>
-                        <label>Select a client:</label>
-                        <Select
-                            className="selectClient"
-                            value={selectedClient}
-                            onChange={handleSelect}
-                            options={options}
-                            maxMenuHeight={240}
-                        />
-                    </div>
-                );
+            } else if (clientsData.length) {
+                var options = clientsToOptions(clientsData);
+                if (options) {
+                    return (
+                        <div>
+                            <label>Select a client:</label>
+                            <Select
+                                className="selectClient"
+                                value={selectedClient}
+                                onChange={handleSelect}
+                                options={options}
+                                maxMenuHeight={240}
+                            />
+                        </div>
+                    );
+                }
             }
         }
     };
@@ -243,7 +224,7 @@ function ScheduleMeeting(props) {
     };
 
     const pageMain = () => {
-        if (loading) {
+        if (loading || cliLoading) {
             return (
                 <div>
                     <div>
@@ -290,6 +271,7 @@ function ScheduleMeeting(props) {
                                         Start Time:
                                     </label>
                                     <DateTimePicker
+                                        className="pickerInput"
                                         inputVariant="outlined"
                                         value={startDateTime}
                                         onChange={setStartDateTime}
@@ -297,6 +279,7 @@ function ScheduleMeeting(props) {
                                 </div>
                                 <label className="timeLabel">End Time:</label>
                                 <DateTimePicker
+                                    className="pickerInput"
                                     inputVariant="outlined"
                                     value={endDateTime}
                                     onChange={setEndDateTime}
@@ -322,14 +305,16 @@ function ScheduleMeeting(props) {
                         </form>
                     </div>
                     <div className="scheduleCalendar">
-                        <Calendar
-                            localizer={localizer}
-                            events={activitiesData.activities}
-                            startAccessor="timeStart"
-                            endAccessor="timeEnd"
-                            titleAccessor="type"
-                            style={{ height: 500 }}
-                        />
+                        <div>
+                            <Calendar
+                                localizer={localizer}
+                                events={activitiesData.activities}
+                                startAccessor="timeStart"
+                                endAccessor="timeEnd"
+                                titleAccessor="type"
+                                style={{ height: 500 }}
+                            />
+                        </div>
                     </div>
                 </div>
             );

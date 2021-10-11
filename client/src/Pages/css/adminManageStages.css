@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+.stagesMessage {
+    padding: 12px 6vw;
+    font-size: 20px;
+}
+
 #stagesListActionBar {
     display: grid;
     padding: 0.7em 6vw;

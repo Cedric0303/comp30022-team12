@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
-import { getStages, postStage, postStagePosUpdate, useWindowDimensions } from "../api.js";
+import {
+    getStages,
+    postStage,
+    postStagePosUpdate,
+    useWindowDimensions,
+} from "../api.js";
 import Stage from "../Components/Stage.js";
 import StageUpdateButtons from "../Components/StageUpdateButtons.js";
 import "./css/adminManageStages.css";
@@ -166,16 +171,17 @@ function AdminManageStages(props) {
     useEffect(() => {
         let stagesBoxElement = document.getElementsByClassName("stagesBox")[0];
         if (stagesBoxElement) {
-            stagesBoxElement.style.height = winHeight - stagesBoxElement.offsetTop + "px";
+            stagesBoxElement.style.height =
+                winHeight - stagesBoxElement.offsetTop + "px";
         }
-    })
+    });
 
     const pageMain = () => {
         if (loading) {
             return (
                 <div>
                     <div className="stagesBox">
-                        <ul>Loading...</ul>
+                        <p className="stagesMessage">Loading...</p>
                     </div>
                     {loading && (
                         <ReactLoading
@@ -191,7 +197,7 @@ function AdminManageStages(props) {
         } else if (error) {
             return (
                 <div className="stagesBox">
-                    <ul>Something went wrong: {error.message}</ul>
+                    <p className="stagesMessage">Something went wrong: {error.message}</p>
                 </div>
             );
         } else {

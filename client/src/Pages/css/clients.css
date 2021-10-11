@@ -74,3 +74,46 @@ td:not(:first-child) {
     background-color: #f6f6f6;
     text-align: left;
 }
+
+#clientsActionBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-top: 1px solid #cecece;
+    border-bottom: 1px solid #cecece;
+}
+
+#clientsSearchBar {
+    background-color: #ffffff;
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+
+    width: 30%;
+    min-width: 120px;
+    margin: 0.4em 6vw 0.4em 0;
+    padding: 0.4vh 4px;
+
+    box-sizing: border-box;
+
+    font-family: inherit;
+    font-size: 1em;
+
+    justify-self: start;
+}
+
+#stagesFilterBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 0.6em;
+
+    margin: 0.4em 0 0.4em 6vw;
+
+    width: 50%;
+}
+
+.stagesFilterBar {
+    min-width: 10vw;
+}
