@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const db = require("./databaseController.js");
 
 const { ClientModel, NoteModel } = require("../models/clientModel.js");
-const StageModel = require("../models/stageModel.js");
 
 const Stages = db.collection("stages");
 const Clients = db.collection("clients");

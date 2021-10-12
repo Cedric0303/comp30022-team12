@@ -3,6 +3,7 @@ require("dotenv").config();
 const db = require("./databaseController.js");
 
 const StageModel = require("../models/stageModel.js");
+const { ClientModel } = require("../models/clientModel.js");
 
 const Stages = db.collection("stages");
 const RecycleBin = db.collection("recycle-bin");
@@ -10,6 +11,22 @@ const RecycleBin = db.collection("recycle-bin");
 const getStages = async (req, res) => {
     try {
         const stages = await Stages.find({}).toArray();
+        res.json({
+            message: "Get stages successful!",
+            stages: stages,
+        });
+    } catch {
+        res.json({
+            message: "No stages available!",
+            stages: [],
+        });
+    }
+};
+
+// Don't return default "unassigned" stage when managing stages
+const getManageStages = async (req, res) => {
+    try {
+        const stages = await Stages.find({ name: {$ne: "unassigned"}}).toArray();
         res.json({
             message: "Get stages successful!",
             stages: stages,
@@ -125,6 +142,15 @@ const removeStage = async (req, res) => {
     const removeStage = await Stages.findOne({
         id: req.params.sid,
     });
+    const defaultStage = await Stages.findOne({
+        id: "unassigned",
+    })
+    await ClientModel.updateMany(
+        {
+            stage: removeStage._id,
+        },
+        { stage: defaultStage._id }
+    )
     await RecycleBin.insertOne({
         removeStage: removeStage,
         createdAt: new Date(),
@@ -156,6 +182,7 @@ const reorderStages = async () => {
 
 module.exports = {
     getStages,
+    getManageStages,
     getStage,
     createStage,
     editStage,

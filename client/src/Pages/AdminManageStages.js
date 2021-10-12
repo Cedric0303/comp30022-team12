@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
 import {
-    getStages,
+    getManageStages,
     postStage,
     postStagePosUpdate,
     useWindowDimensions,
@@ -61,7 +61,7 @@ function AdminManageStages(props) {
     const [stagesData, setStages] = useState([]);
     const [error, setError] = useState(null);
     useEffect(() => {
-        getStages()
+        getManageStages()
             .then((data) => {
                 setStages(data.stages);
                 setStages((prevStages) => updateCurrentPositions(prevStages));

@@ -95,6 +95,15 @@ export async function getStages() {
     return stagesData;
 }
 
+// Get the list of manageable stages from the database
+export async function getManageStages() {
+    const endpoint = BASE_URL + "/api/stages/manageStages";
+    const res = await axios.get(endpoint, { withCredentials: true });
+    let stagesData = res.data;
+    stagesData.stages.sort((a, b) => a.position - b.position);
+    return stagesData;
+}
+
 // Use loading, normal, and error states with the returned data
 export function useStages() {
     const [loading, setLoading] = useState(true);

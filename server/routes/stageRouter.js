@@ -6,6 +6,8 @@ const stageController = require("../controllers/stageController.js");
 
 stageRouter.get("/", stageController.getStages);
 
+stageRouter.get("/manageStages", stageController.getManageStages);
+
 stageRouter.get("/:sid", stageController.getStage);
 
 stageRouter.post("/create", stageController.createStage);

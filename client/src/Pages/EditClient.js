@@ -130,10 +130,15 @@ function EditClient(props) {
                                         }
                                     />
                                 )}
-
-                                <span key={"span" + stage.id}>
-                                    {stage.name}
-                                </span>
+                                {stage.name === "unassigned" ? (
+                                    <span className="specStage" key={"span" + stage.id}>
+                                        leave unassigned
+                                    </span>
+                                ) : (
+                                    <span key={"span" + stage.id}>
+                                        {stage.name}
+                                    </span>
+                                )}
                             </label>
                         </div>
                     ))}
