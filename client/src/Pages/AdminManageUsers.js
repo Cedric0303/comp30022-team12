@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
@@ -11,6 +11,38 @@ import "./css/animation.css";
 
 function AdminManageUsers(props) {
     const { loading, usersData, error } = useUsers();
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredUsers, setFilteredUsers] = useState(usersData);
+
+    
+
+    function filterUsers(users, query) {
+        var pattern = query
+            .split("")
+            .map((x) => {
+                return `(?=.*${x})`;
+            })
+            .join("");
+        var regex = new RegExp(`^${pattern}`, "i");
+
+        if (!query) {
+            // no query
+            return users;
+        } else {
+            // yes query
+            return users.filter((users) => {
+                return regex.test(users.firstName + " " + users.lastName);
+            });
+        }
+    }
+
+    useEffect(() => {
+        if (usersData) {
+            setFilteredUsers(
+                filterUsers(usersData.users, searchQuery)
+            );
+        }
+    }, [usersData, searchQuery]);
 
     const pageMain = () => {
         if (loading) {
@@ -36,17 +68,16 @@ function AdminManageUsers(props) {
                     <ul>Something went wrong: {error.message}</ul>
                 </div>
             );
-        } else if (!usersData.users.length) {
+        } else if (usersData.users.length !== 0) {
             return (
                 <div className="usersBox">
                     <ul id="usersList">
-                        <li>
-                            <NavLink id="addUser" to="users/create">
-                                <span>Add New User </span>
-                                <FontAwesomeIcon icon="user-plus" />
-                            </NavLink>
-                        </li>
-                        <li>No users found, please reload or add new users.</li>
+                        <li id="usersListHeading">Name</li>
+                        {filteredUsers.map((user) => (
+                            <div key={user.username} className="specificUser">
+                                <User key={user.username} {...user} />
+                            </div>
+                        ))}
                     </ul>
                 </div>
             );
@@ -54,18 +85,7 @@ function AdminManageUsers(props) {
             return (
                 <div className="usersBox">
                     <ul id="usersList">
-                        <li>
-                            <NavLink id="addUser" to="users/create">
-                                <span>Add New User </span>
-                                <FontAwesomeIcon icon="user-plus" />
-                            </NavLink>
-                        </li>
-                        <li id="usersListHeading">Name</li>
-                        {usersData.users.map((user) => (
-                            <div key={user.username} className="specificUser">
-                                <User key={user.username} {...user} />
-                            </div>
-                        ))}
+                        <li>No users found, please reload or add new users.</li>
                     </ul>
                 </div>
             );
@@ -86,6 +106,18 @@ function AdminManageUsers(props) {
             <Navbar />
             <main className="manageUsersBox">
                 <h2 id="usersHeading">Manage Users</h2>
+                <div className="usersActionBar">
+                    <input
+                        id="userSearchBar"
+                        value={searchQuery}
+                        onInput={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search users"
+                    />
+                    <NavLink id="addUser" to="users/create">
+                        <span>Add New User </span>
+                        <FontAwesomeIcon icon="user-plus" />
+                    </NavLink>
+                </div>
                 {pageMain()}
             </main>
         </div>
