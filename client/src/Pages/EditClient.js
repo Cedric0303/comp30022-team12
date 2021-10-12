@@ -21,16 +21,7 @@ function EditClient(props) {
     const { stagesLoading, stagesData, stagesError } = useStages();
 
     function notEmpty() {
-        if (
-            firstName === "" ||
-            lastName === "" ||
-            email === "" ||
-            address === "" ||
-            phoneNo === ""
-        ) {
-            return false;
-        }
-        return true;
+        return firstName && lastName && email && address && phoneNo;
     }
 
     const handleSubmit = (e) => {
@@ -123,10 +114,10 @@ function EditClient(props) {
                                         type="radio"
                                         name="stage"
                                         value={stage.name}
-                                        onChange={(e) => 
+                                        onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }
-                                        checked="checked"
+                                        defaultChecked
                                     />
                                 ) : (
                                     <input
@@ -134,7 +125,7 @@ function EditClient(props) {
                                         type="radio"
                                         name="stage"
                                         value={stage.name}
-                                        onChange={(e) => 
+                                        onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }
                                     />

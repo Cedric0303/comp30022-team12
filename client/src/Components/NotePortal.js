@@ -16,7 +16,7 @@ export default function NotePortal(props) {
     function toggleModal() {
         setIsOpen(!isOpen);
         // Clear the note if modal is closed
-        if (note !== "") {
+        if (note) {
             setNote("");
         }
     }

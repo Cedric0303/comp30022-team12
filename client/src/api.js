@@ -141,7 +141,7 @@ export function useClients() {
     useEffect(() => {
         getClients()
             .then((clientsData) => {
-                setClients(clientsData);
+                setClients(clientsData.clients);
                 setLoading(false);
             })
             .catch((e) => {
