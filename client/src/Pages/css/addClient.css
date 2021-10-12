@@ -86,3 +86,39 @@
 .stageChoice span {
     padding-left: 10px;
 }
+
+.specStage {
+    color: white;
+}
+
+/* Buttons */
+.addClientButton {
+    margin-top: 60px;
+    padding: 8px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    font-family: inherit;
+    color: white;
+    background-color: #78cd1b;
+}
+
+.addClientButton:hover {
+    background-color: #569417;
+}
+
+.cancelOption {
+    padding: 0;
+    margin: 0;
+    width: 100px;
+    float: right;
+    font-weight: 400;
+    font-size: x-large;
+    color: #e13d55;
+    text-decoration: underline;
+}
+
+.cancelOption:hover {
+    color: #b83548;
+}

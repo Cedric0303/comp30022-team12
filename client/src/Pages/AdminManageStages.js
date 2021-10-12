@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { Helmet } from "react-helmet";
 import {
-    getStages,
+    getManageStages,
     postStage,
     postStagePosUpdate,
     useWindowDimensions,
@@ -61,7 +61,7 @@ function AdminManageStages(props) {
     const [stagesData, setStages] = useState([]);
     const [error, setError] = useState(null);
     useEffect(() => {
-        getStages()
+        getManageStages()
             .then((data) => {
                 setStages(data.stages);
                 setStages((prevStages) => updateCurrentPositions(prevStages));
@@ -114,7 +114,7 @@ function AdminManageStages(props) {
         const updatedList = input.map((current, index) => {
             const currentStage = current;
             currentStage.newPos = index;
-            if (currentStage.position !== index) {
+            if (currentStage.position-1 !== index) {
                 currentStage.movedPos = true;
             } else {
                 currentStage.movedPos = false;
@@ -161,7 +161,7 @@ function AdminManageStages(props) {
             payload.stageArray.push({
                 oldSID: stagesData[i].id,
                 newStageName: stagesData[i].name,
-                newPosition: stagesData[i].newPos,
+                newPosition: stagesData[i].newPos+1,
             });
         }
         postStagePosUpdate(payload);
@@ -292,6 +292,8 @@ function AdminManageStages(props) {
                         background-color: #596e80;
                     }
                 `}</style>
+                <title>Manage Stages - Admin Bobafish CRM</title>
+                <meta name="description" content="Create new stages, edit existing stage names, reorder stage positions or delete stages." />
             </Helmet>
             <Navbar />
             <main className="manageStagesBox">

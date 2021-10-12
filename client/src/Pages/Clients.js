@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
 import Select from "react-select";
+import { Helmet } from "react-helmet";
 
 function Clients(props) {
     const { loading, clientsData, error } = useClients();
@@ -67,14 +68,14 @@ function Clients(props) {
             // no query yes filter
             let chosenFilters = filter.map((f) => f.value);
             return clients.filter((client) => {
-                return chosenFilters.includes(client.stage);
+                return chosenFilters.includes(client.stage.name);
             });
         } else {
             // yes query yes filter
             let tempClients = clients;
             let chosenFilters = filter.map((f) => f.value);
             tempClients = clients.filter((client) => {
-                return chosenFilters.includes(client.stage);
+                return chosenFilters.includes(client.stage.name);
             });
             tempClients = tempClients.filter((client) => {
                 return regex.test(client.firstName + " " + client.lastName);
@@ -178,7 +179,7 @@ function Clients(props) {
         } else {
             return (
                 <div className="clientsBox">
-                    <ul>Start adding clients!</ul>
+                    <ul>No clients found! Reload or start adding clients.</ul>
                 </div>
             );
         }
@@ -186,6 +187,10 @@ function Clients(props) {
 
     return (
         <div className="clients">
+            <Helmet>
+                <title>Clients - Bobafish CRM</title>
+                <meta name="description" content="View clients, check meetings and orders" />
+            </Helmet>
             <Navbar />
             <main className="clientsBox">
                 <h2 id="clientsHeading">

@@ -10,6 +10,7 @@ import "./css/animation.css";
 import { useActivities, useClients, useWindowDimensions } from "../api.js";
 import { clientsToOptions } from "../Components/CalendarUtilities.js";
 import Select from "react-select";
+import { Helmet } from "react-helmet";
 
 function CalendarPage(props) {
     const { height: winHeight } = useWindowDimensions();
@@ -66,7 +67,7 @@ function CalendarPage(props) {
         if (!selectedOptions.length) {
             setFilterActivities(activitiesData.activities);
         } else {
-            var chosenFilters = selectedOptions.map((o) => o.value.email);
+            var chosenFilters = selectedOptions.map((o) => o.value._id);
             setFilterActivities(
                 activitiesData.activities.filter((act) => {
                     return chosenFilters.includes(act.clientReference);
@@ -190,6 +191,10 @@ function CalendarPage(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>Calendar - Bobafish CRM</title>
+                <meta name="description" content="Check your schedule, add a new meeting or check existing ones" />
+            </Helmet>
             <Navbar />
             <div id="calendar">
                 <div id="calendarHeader">

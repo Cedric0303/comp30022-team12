@@ -399,7 +399,7 @@ describe("#7 Activity test (logged in)", () => {
     test("Test 2: Create an activity", async () => {
         let testActivity = {
             clientReference: "ced@ced.com",
-            userReference: "default",
+            userReference: "Cedric0303",
             type: "default",
             timeStart: "123",
             timeEnd: "321",
@@ -422,7 +422,7 @@ describe("#7 Activity test (logged in)", () => {
     test("Test 3: Edit an activity", async () => {
         let editActivity = {
             clientReference: "ced@ced.com",
-            userReference: "default",
+            userReference: "Cedric0303",
             type: "default",
             timeStart: "123",
             timeEnd: "321",
@@ -506,19 +506,7 @@ describe("#9 Order test (logged in)", () => {
     test("Test 2: Create an order", async () => {
         let testOrder = {
             clientReference: "ced@ced.com",
-            userReference: "default",
-            orderArray: [
-                {
-                    itemName: "default1",
-                    itemPrice: 5.0,
-                    quantity: 1,
-                },
-                {
-                    itemName: "default2",
-                    itemPrice: 0.5,
-                    quantity: 1,
-                },
-            ],
+            userReference: "Cedric0303",
             orderTotal: 123.0,
         };
         return agent
@@ -537,19 +525,7 @@ describe("#9 Order test (logged in)", () => {
     test("Test 3: Edit an order", async () => {
         let editOrder = {
             clientReference: "ced@ced.com",
-            userReference: "default",
-            orderArray: [
-                {
-                    itemName: "default3",
-                    itemPrice: 15.0,
-                    quantity: 1,
-                },
-                {
-                    itemName: "default4",
-                    itemPrice: 40.5,
-                    quantity: 5,
-                },
-            ],
+            userReference: "Cedric0303",
             orderTotal: 420.0,
         };
         return agent

@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
 import Avatar from "boring-avatars";
+import { Helmet } from "react-helmet";
 
 function SpecificClient(props) {
     const { loading, clientData, error } = useClient(
@@ -50,6 +51,9 @@ function SpecificClient(props) {
         } else {
             return (
                 <div>
+                    <Helmet>
+                        <title>{client.firstName + " " + client.lastName} - Bobafish CRM</title>
+                    </Helmet>
                     <div id="avatar">
                         <Avatar
                             size={240}
@@ -104,7 +108,7 @@ function SpecificClient(props) {
                         </NavLink>
                     </div>
                     <div id="clientInfo">
-                        <p>Stage: {client.stage}</p>
+                        <p>Stage: {client.stage.name}</p>
                         <p>
                             {client.email}{" "}
                             <FontAwesomeIcon
@@ -133,6 +137,10 @@ function SpecificClient(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>Client - Bobafish CRM</title>
+                <meta name="description" content="Edit an existing client" />
+            </Helmet>
             <Navbar />
             <main className="specificClient">{pageMain()}</main>
         </div>

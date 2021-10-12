@@ -40,11 +40,12 @@ export default function PastMeetingPortal(props) {
                     <div className="portalContent">
                         {/* Meetings sorted by date (newest first) */}
                         {upcomingActs.map((activity) => (
-                            <div className="portalRow">
-                                <span className="leftAlign">
+                            <div key={activity._id} className="portalRow">
+                                <span key={activity.type} className="leftAlign">
                                     {activity.type}
                                 </span>
                                 <Moment
+                                    key={activity.timeStart}
                                     className="rightAlign"
                                     format="hh:mm A ddd Do MMM YY"
                                 >

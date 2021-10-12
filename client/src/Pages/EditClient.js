@@ -6,7 +6,7 @@ import Navbar from "../Components/Navbar/Navbar.js";
 import { getClient, postEditClient, deleteClient, useStages } from "../api.js";
 import Auth from "./Auth.js";
 import "./css/editClient.css";
-import "./css/addEditPage.css";
+import { Helmet } from "react-helmet";
 
 function EditClient(props) {
     const [loading, setLoading] = useState(true);
@@ -80,7 +80,7 @@ function EditClient(props) {
                 setEmail(clientData.client.email);
                 setAddress(clientData.client.address);
                 setPhoneNo(clientData.client.phoneNumber);
-                setClientStage(clientData.client.stage);
+                setClientStage(clientData.client.stage.name);
             })
             .catch((e) => {
                 console.log(e);
@@ -138,10 +138,15 @@ function EditClient(props) {
                                         }
                                     />
                                 )}
-
-                                <span key={"span" + stage.id}>
-                                    {stage.name}
-                                </span>
+                                {stage.name === "unassigned" ? (
+                                    <span className="specStage" key={"span" + stage.id}>
+                                        leave unassigned
+                                    </span>
+                                ) : (
+                                    <span key={"span" + stage.id}>
+                                        {stage.name}
+                                    </span>
+                                )}
                             </label>
                         </div>
                     ))}
@@ -283,6 +288,10 @@ function EditClient(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>Edit Client - Bobafish CRM</title>
+                <meta name="description" content="Edit an existing client" />
+            </Helmet>
             <Navbar />
             <h2 className="editClientHeading">Edit Client</h2>
             {pageMain()}

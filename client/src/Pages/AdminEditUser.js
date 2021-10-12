@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Modal from "react-modal";
 import Navbar from "../Components/Navbar/Navbar.js";
+import Auth from "../Pages/Auth.js";
 import { getUser } from "../api.js";
 import { postEditUser, deleteUser } from "../api.js";
 import "./css/adminEditUser.css";
@@ -37,6 +38,11 @@ function AdminEditUser(props) {
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
+    var isSelf = false;
+    if (Auth.getUsername() === props.match.params.userID) {
+        isSelf = true;
+    }
+
     // Open and close the modal
     function toggleModal() {
         setModalIsOpen(!modalIsOpen);
@@ -70,6 +76,7 @@ function AdminEditUser(props) {
                 isAdmin: false,
                 firstName: firstName,
                 lastName: lastName,
+                isSelf: isSelf,
             };
             postEditUser(registerBody, props.match.params.userID);
         }
@@ -279,6 +286,8 @@ function AdminEditUser(props) {
                         background-color: #596e80;
                     }
                 `}</style>
+                <title>Edit User - Admin Bobafish CRM</title>
+                <meta name="description" content="Edit an existing user" />
             </Helmet>
             <Navbar />
             {pageMain()}

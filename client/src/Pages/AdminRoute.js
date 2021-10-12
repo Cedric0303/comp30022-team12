@@ -1,27 +1,20 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Auth from "./Auth.js";
+import Error from "./Error.js";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
-        render={(props) =>
-            Auth.getIsAdmin() ? (
-                <Component {...props} />
-            ) : (
-                window.location.replace(
-                    "https://www.youtube.com/watch?v=GwmJ76VjXaE"
-                )
-                // window.location.replace(
-                //     "https://i.gifer.com/36Ja.gif"
-                //     )
-                // <Redirect
-                //     to={{
-                //         pathname: "https://www.youtube.com/watch?v=GwmJ76VjXaE",
-                //     }}
-                // />
-            )
-        }
+        render={(props) => {
+            if (!Auth.getAuth()) {
+                return <Error {...props} error={400} />;
+            } else if (!Auth.getIsAdmin()) {
+                return <Error {...props} error={401} />;
+            } else {
+                return <Component {...props} />;
+            }
+        }}
     />
 );
 

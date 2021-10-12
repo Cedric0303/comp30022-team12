@@ -19,6 +19,8 @@ import SpecificClient from "./Pages/SpecificClient.js";
 import EditClient from "./Pages/EditClient.js";
 import OrderHistory from "./Pages/OrderHistory.js";
 import ScheduleMeeting from "./Pages/ScheduleMeeting.js";
+//Error page
+import Error from "./Pages/Error.js";
 
 class Router extends React.Component {
     render() {
@@ -91,6 +93,10 @@ class Router extends React.Component {
                         exact
                         component={ScheduleMeeting}
                     ></ProtectedRoute>
+                    <ProtectedRoute
+                        path="*"
+                        component={(props) => <Error {...props} error={404} />}
+                    />
                 </Switch>
             </BrowserRouter>
         );

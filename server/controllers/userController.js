@@ -12,7 +12,6 @@ const getUsers = async (req, res) => {
             {},
             {
                 projection: {
-                    _id: false,
                     password: false,
                 },
             }
@@ -34,11 +33,7 @@ const getUser = async (req, res) => {
         {
             username: req.params.uid,
         },
-        {
-            projection: {
-                _id: false,
-            },
-        }
+        {}
     );
     res.json({
         message: "Get user successful!",
@@ -98,9 +93,6 @@ const editUser = async (req, res) => {
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
         },
         (err, doc) => {

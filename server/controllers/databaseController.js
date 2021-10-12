@@ -8,6 +8,7 @@ mongoose.connect(CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: false,
 });
 
 const db = mongoose.connection;

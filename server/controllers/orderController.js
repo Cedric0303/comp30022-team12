@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const db = require("./databaseController.js");
 
-const { OrderItemModel, OrderModel } = require("../models/orderModel.js");
+const OrderModel = require("../models/orderModel.js");
 
 const Orders = db.collection("orders");
 const Clients = db.collection("clients");
@@ -24,10 +24,16 @@ const getOrders = async (req, res) => {
             });
         }
     } else if (req.body.clientReference) {
+        const client = await Clients.findOne({
+            email: req.body.clientReference,
+        });
+        const user = await Users.findOne({
+            username: req.body.userReference,
+        });
         try {
             const orders = await Orders.find({
-                userReference: req.body.userReference,
-                clientReference: req.body.clientReference,
+                userReference: user._id,
+                clientReference: client._id,
             }).toArray();
             res.json({
                 message: "Get orders successful!",
@@ -41,8 +47,11 @@ const getOrders = async (req, res) => {
         }
     } else {
         try {
+            const user = await Users.findOne({
+                username: req.body.userReference,
+            });
             const orders = await Orders.find({
-                userReference: req.body.userReference,
+                userReference: user._id,
             }).toArray();
             res.json({
                 message: "Get orders successful!",
@@ -76,31 +85,12 @@ const createOrder = async (req, res) => {
     });
     if (client && user) {
         const newOrder = new OrderModel({
-            orderItem: [],
-            clientReference: client.email,
-            userReference: user.username,
+            clientReference: client._id,
+            userReference: user._id,
             orderTotal: req.body.orderTotal,
             updatedAt: new Date(),
         });
         const result = await Orders.insertOne(newOrder);
-        const orderItems = req.body.orderArray;
-        for (var i in orderItems) {
-            var newOrderItem = new OrderItemModel({
-                itemName: orderItems[i].itemName,
-                itemPrice: orderItems[i].itemPrice,
-                quantity: orderItems[i].quantity,
-            });
-            await Orders.findOneAndUpdate(
-                {
-                    _id: result.insertedId,
-                },
-                {
-                    $push: {
-                        orderItem: newOrderItem,
-                    },
-                }
-            );
-        }
         await Clients.findOneAndUpdate(
             {
                 email: req.body.clientReference,
@@ -143,30 +133,14 @@ const editOrder = async (req, res) => {
                 },
             }
         );
-        const orderItems = req.body.orderArray;
-        for (var i in orderItems) {
-            var newOrderItem = new OrderItemModel({
-                itemName: orderItems[i].itemName,
-                itemPrice: orderItems[i].itemPrice,
-                quantity: orderItems[i].quantity,
-            });
-            await Orders.findOneAndUpdate(
-                {
-                    _id: mongoose.Types.ObjectId(req.params.oid),
-                },
-                {
-                    $push: { orderItem: newOrderItem },
-                }
-            );
-        }
         await Orders.findOneAndUpdate(
             {
                 _id: mongoose.Types.ObjectId(req.params.oid),
             },
             {
                 $set: {
-                    clientReference: client.email,
-                    userReference: user.username,
+                    clientReference: client._id,
+                    userReference: user._id,
                     orderTotal: req.body.orderTotal,
                 },
             }
