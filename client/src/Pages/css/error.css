@@ -11,7 +11,7 @@
     width: 80%;
 }
 
-p {
+.errorText {
     font-size: 20px;
     color: ivory;
 }

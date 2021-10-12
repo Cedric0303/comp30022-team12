@@ -22,7 +22,7 @@ export default function Error(props) {
                 );
             case 401:
                 return (
-                    <div>
+                    <div class="errorText">
                         <p>Error 401: Unauthorized access.</p>
                         <p>
                             You do not have permissions to access this page.
@@ -36,7 +36,7 @@ export default function Error(props) {
                 );
             case 404:
                 return (
-                    <div>
+                    <div class="errorText">
                         <p>Error 404: Page not found.</p>
                         <p>
                             This page couldn't be found. Please contact your
@@ -50,7 +50,7 @@ export default function Error(props) {
                 );
             default:
                 return (
-                    <div>
+                    <div class="errorText">
                         <p>An unknown error has occured.</p>
                         <p>Please contact your administrator.</p>
                         <br />
@@ -66,7 +66,10 @@ export default function Error(props) {
         <div id="errorDiv">
             <Helmet>
                 <title>Error! - Bobafish CRM</title>
-                <meta name="description" content="Error page for Bobafish CRM" />
+                <meta
+                    name="description"
+                    content="Error page for Bobafish CRM"
+                />
             </Helmet>
             <img
                 id="errorImg"
