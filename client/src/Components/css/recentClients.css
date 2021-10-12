@@ -1,0 +1,44 @@
+.hide {
+    height: 0;
+    border: none;
+}
+
+.recentCliHeading {
+    padding: 5px 12px;
+    font-size: 25px;
+    font-weight: 700;
+    color: #051e39;
+    border-bottom: solid #051e39;
+}
+
+.recentClientTable {
+    width: 100%;
+}
+
+.recentClientTable td{
+    border-bottom: 1px solid #b3ddfd;
+}
+
+.recentClientTable > tbody {
+    font-size: 20px;
+}
+
+
+
+#recentClientTd {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.recentClientTable td:first-child {
+    padding-left: 10px;
+}
+
+.recentClientName {
+    color: #b3ddfd;
+    font-weight: 650;
+}
+
+.recentClientName:hover {
+    color: #85a7ca;
+}

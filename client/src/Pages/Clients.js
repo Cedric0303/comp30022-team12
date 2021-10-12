@@ -178,7 +178,7 @@ function Clients(props) {
         } else {
             return (
                 <div className="clientsBox">
-                    <ul>Start adding clients!</ul>
+                    <ul>No clients found! Reload or start adding clients.</ul>
                 </div>
             );
         }
