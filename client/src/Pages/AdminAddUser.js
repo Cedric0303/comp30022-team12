@@ -24,6 +24,7 @@ function AdminAddUser(props) {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [inputError, setInputError] = useState("");
 
     const [isRevealPwd, setIsRevealPwd] = useState(false);
 
@@ -33,7 +34,11 @@ function AdminAddUser(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault(); //prevent reload
-        if (notEmpty()) {
+        if (!notEmpty()) {
+            setInputError("All fields must have a value!");
+        } else if (!validate_password(password)){
+            setInputError("Passwords must only be comprised of letters or numbers and be between 8-20 characters.")
+        } else {
             const registerBody = {
                 username: username,
                 password: password,
@@ -41,17 +46,8 @@ function AdminAddUser(props) {
                 firstName: firstName,
                 lastName: lastName,
             };
-
-            if (validate_password(password)) {
-                //validate password
-                postUser(registerBody);
-            } else {
-                alert(
-                    "Passwords must only be comprised of letters or numbers and be between 8-20 characters."
-                );
-            }
-        } else {
-            alert("All fields must have a value!");
+            postUser(registerBody);
+            
         }
     };
 
@@ -65,17 +61,17 @@ function AdminAddUser(props) {
                 `}</style>
             </Helmet>
             <Navbar />
-            <h2 className="add-user-heading">Add User</h2>
-            <div className="add-user-container">
+            <h2 className="addUserHeading">Add User</h2>
+            <div className="addUserGrid">
                 <div className="add-user-container-item" id="item-left">
                     <form
                         method="post"
                         onSubmit={handleSubmit}
-                        className="add-user-form"
+                        className="addUserForm"
                     >
                         <div className="field-group" id="name-info">
                             <div className="field">
-                                <label className="add-user-label">
+                                <label className="addUserSubheading">
                                     First Name:
                                 </label>
                                 <input
@@ -90,7 +86,7 @@ function AdminAddUser(props) {
                                 />
                             </div>
                             <div className="field">
-                                <label className="add-user-label">
+                                <label className="addUserSubheading">
                                     Last Name:
                                 </label>
                                 <input
@@ -107,7 +103,7 @@ function AdminAddUser(props) {
                         </div>
                         <div className="field-group" id="login-info">
                             <div className="field">
-                                <label className="add-user-label">
+                                <label className="addUserSubheading">
                                     Username:
                                 </label>
                                 <input
@@ -122,7 +118,7 @@ function AdminAddUser(props) {
                                 />
                             </div>
                             <div className="field" id="password-field">
-                                <label className="add-user-label">
+                                <label className="addUserSubheading">
                                     Password:
                                 </label>
                                 <input
@@ -156,6 +152,16 @@ function AdminAddUser(props) {
                                 />
                             </div>
                         </div>
+                        <div className="addUserCreateGroup">
+                            <button
+                                className="addUserButton"
+                                id="create-user"
+                                onClick={handleSubmit}
+                            >
+                                Create User
+                            </button>
+                            <span className="addUserInputError">{inputError}</span>
+                        </div>
                     </form>
                 </div>
                 <div className="add-user-container-item" id="item-right">
@@ -165,13 +171,7 @@ function AdminAddUser(props) {
                 </div>
             </div>
 
-            <button
-                className="add-user-button"
-                id="create-user"
-                onClick={handleSubmit}
-            >
-                Create User
-            </button>
+            
         </div>
     );
 }
