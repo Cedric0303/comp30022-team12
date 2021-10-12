@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-    clientReference: { type: String, required: true },
-    userReference: { type: String, required: true },
+    clientReference: { type: Schema.Types.ObjectId, ref: "Client", required: true },
+    userReference: { type: Schema.Types.ObjectId, ref: "User", required: true },
     orderTotal: { type: Number, required: true },
     updatedAt: { type: Date, required: true },
 });

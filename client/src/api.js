@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Auth from "./Pages/Auth";
+import SignOut from "./Pages/SignOut.js";
 
 const BASE_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -94,6 +95,15 @@ export async function getStages() {
     return stagesData;
 }
 
+// Get the list of manageable stages from the database
+export async function getManageStages() {
+    const endpoint = BASE_URL + "/api/stages/manageStages";
+    const res = await axios.get(endpoint, { withCredentials: true });
+    let stagesData = res.data;
+    stagesData.stages.sort((a, b) => a.position - b.position);
+    return stagesData;
+}
+
 // Use loading, normal, and error states with the returned data
 export function useStages() {
     const [loading, setLoading] = useState(true);
@@ -180,7 +190,12 @@ export async function postEditUser(registerBody, uid) {
     });
     if (res.data.message === "Edit user successful!") {
         alert(res.data.message);
-        window.location.href = "/admin/users";
+        if (registerBody.isSelf) {
+            SignOut();
+            window.location = "/"; // Sign out user if edited self
+        } else {
+            window.location.href = "/admin/users";
+        }
     } else {
         alert(res.data.message);
         return false;
@@ -192,7 +207,11 @@ export async function deleteUser(uid) {
     const res = await axios.get(endpoint, { withCredentials: true });
     if (res.data.message === "User removal successful!") {
         alert(res.data.message);
-        window.location.href = "/admin/users";
+        if (uid === Auth.getUsername()) {
+            window.location = "/";
+        } else {
+            window.location.href = "/admin/users";
+        }
     } else {
         alert(res.data.message);
         return false;
@@ -239,7 +258,7 @@ export function postEditClient(registerBody, cid) {
         .then((res) => {
             if (res.data.message === "Edit client successful!") {
                 alert(res.data.message);
-                window.location.href = "/clients/" + cid;
+                window.location.href = "/clients/" + registerBody.email; // Redirect using new email
             } else {
                 alert(res.data.message);
                 return false;
