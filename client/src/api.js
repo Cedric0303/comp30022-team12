@@ -461,6 +461,7 @@ export function postClient(registerBody) {
                 alert(res.data.message + "\nPlease input a different email");
                 return false;
             } else {
+                alert(res.data.message);
                 window.location.href = "/clients";
             }
         });
