@@ -76,19 +76,3 @@
     width: 100%;
     padding: 10px;
 }
-
-
-/* Confirm Button, Delete User */
-
-.editUserButton {
-    display: inline-block;
-    margin-top: 60px;
-}
-
-.editUserButton {
-    width: auto;
-    padding: 0 10px;
-    border-radius: 10px;
-    border-style: none;
-    cursor: pointer;
-}
