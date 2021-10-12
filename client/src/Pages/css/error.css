@@ -7,6 +7,10 @@
     color: ivory;
 }
 
+#errorImg {
+    width: 80%;
+}
+
 p {
     font-size: 20px;
     color: ivory;
@@ -21,7 +25,7 @@ p {
     background-color: #4cc9f0;
     height: 30px;
     width: 100px;
-    padding: 5 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     border-style: none;
     cursor: pointer;
