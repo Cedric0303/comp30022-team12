@@ -398,8 +398,8 @@ describe("#7 Activity test (logged in)", () => {
     });
     test("Test 2: Create an activity", async () => {
         let testActivity = {
-            clientReference: "jsmith@email.com",
-            userReference: "default",
+            clientReference: "ced@ced.com",
+            userReference: "Cedric0303",
             type: "default",
             timeStart: "123",
             timeEnd: "321",
@@ -410,6 +410,7 @@ describe("#7 Activity test (logged in)", () => {
             .set("Content-Type", "application/json")
             .send(testActivity)
             .then((res) => {
+                console.log(res.body.message);
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
                 assert(
@@ -421,8 +422,8 @@ describe("#7 Activity test (logged in)", () => {
 
     test("Test 3: Edit an activity", async () => {
         let editActivity = {
-            clientReference: "jsmith@email.com",
-            userReference: "default",
+            clientReference: "ced@ced.com",
+            userReference: "Cedric0303",
             type: "default",
             timeStart: "123",
             timeEnd: "321",
@@ -505,8 +506,8 @@ describe("#9 Order test (logged in)", () => {
     });
     test("Test 2: Create an order", async () => {
         let testOrder = {
-            clientReference: "jsmith@email.com",
-            userReference: "default",
+            clientReference: "ced@ced.com",
+            userReference: "Cedric0303",
             orderTotal: 123.0,
         };
         return agent
@@ -524,8 +525,8 @@ describe("#9 Order test (logged in)", () => {
 
     test("Test 3: Edit an order", async () => {
         let editOrder = {
-            clientReference: "jsmith@email.com",
-            userReference: "default",
+            clientReference: "ced@ced.com",
+            userReference: "Cedric0303",
             orderTotal: 420.0,
         };
         return agent
