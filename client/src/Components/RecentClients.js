@@ -45,7 +45,7 @@ export default function RecentClients(props) {
                             <th>Stage</th>
                         </tr>
                     </thead>
-                    {filterClients(clientsData.clients).map((client) => (
+                    {filterClients(clientsData).map((client) => (
                         <tbody key={client.email}>
                             <tr className="recentClientRow">
                                 <td id="recentClientTd">
@@ -56,7 +56,7 @@ export default function RecentClients(props) {
                                     </NavLink>
                                 </td>
                                 <td id="recentClientTd">
-                                    <span>{client.stage}</span>
+                                    <span>{client.stage.name}</span>
                                 </td>
                             </tr>
                         </tbody>

@@ -20,9 +20,15 @@ const getActivities = async (req, res) => {
         });
     } else if (req.body.clientReference) {
         try {
+            const client = await Clients.findOne({
+                email: req.body.clientReference,
+            });
+            const user = await Users.findOne({
+                username: req.body.userReference,
+            });
             const activities = await Activities.find({
-                userReference: req.body.userReference,
-                clientReference: req.body.clientReference,
+                userReference: user._id,
+                clientReference: client._id,
             })
                 .sort({ timeStart: -1 })
                 .toArray();
@@ -38,8 +44,11 @@ const getActivities = async (req, res) => {
         }
     } else {
         try {
+            const user = await Users.findOne({
+                username: req.body.userReference,
+            });
             const activities = await Activities.find({
-                userReference: req.body.userReference,
+                userReference: user._id,
             })
                 .sort({ timeStart: -1 })
                 .toArray();
@@ -75,8 +84,8 @@ const createActivity = async (req, res) => {
     });
     if (client && user) {
         const newActivity = new ActivityModel({
-            clientReference: client.email,
-            userReference: user.username,
+            clientReference: client._id,
+            userReference: user._id,
             type: req.body.type,
             timeStart: new Date(req.body.timeStart),
             timeEnd: new Date(req.body.timeEnd),
@@ -132,8 +141,8 @@ const editActivity = async (req, res) => {
             },
             {
                 $set: {
-                    clientReference: client.email,
-                    userReference: user.username,
+                    clientReference: client._id,
+                    userReference: user._id,
                     type: req.body.type,
                     timeStart: new Date(req.body.timeStart),
                     timeEnd: new Date(req.body.timeEnd),

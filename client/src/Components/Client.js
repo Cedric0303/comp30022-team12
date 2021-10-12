@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Format each client
 export default function Client(client) {
     const { email, firstName, lastName, stage, updatedAt } = client;
-
     return (
         <tr className="clientWrapper">
             <td>
@@ -26,7 +25,7 @@ export default function Client(client) {
                 </span>
             </td>
             <td>
-                <span className="clientStage">{stage}</span>
+                <span className="clientStage">{stage.name}</span>
             </td>
             <td className="actionButtons">
                 <NavLink

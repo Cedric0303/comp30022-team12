@@ -58,6 +58,10 @@
     font-weight: 700;
 }
 
+.homeViewCal:hover {
+    background: #dbdada;
+}
+
 .homeActualCal {
     background-color: white;
     padding: 10px;

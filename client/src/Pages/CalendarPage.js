@@ -66,7 +66,7 @@ function CalendarPage(props) {
         if (!selectedOptions.length) {
             setFilterActivities(activitiesData.activities);
         } else {
-            var chosenFilters = selectedOptions.map((o) => o.value.email);
+            var chosenFilters = selectedOptions.map((o) => o.value._id);
             setFilterActivities(
                 activitiesData.activities.filter((act) => {
                     return chosenFilters.includes(act.clientReference);

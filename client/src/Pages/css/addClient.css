@@ -87,6 +87,10 @@
     padding-left: 10px;
 }
 
+.specStage {
+    color: white;
+}
+
 /* Buttons */
 .addClientButton {
     margin-top: 60px;

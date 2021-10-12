@@ -72,7 +72,7 @@ function EditClient(props) {
                 setEmail(clientData.client.email);
                 setAddress(clientData.client.address);
                 setPhoneNo(clientData.client.phoneNumber);
-                setClientStage(clientData.client.stage);
+                setClientStage(clientData.client.stage.name);
             })
             .catch((e) => {
                 console.log(e);
@@ -130,10 +130,15 @@ function EditClient(props) {
                                         }
                                     />
                                 )}
-
-                                <span key={"span" + stage.id}>
-                                    {stage.name}
-                                </span>
+                                {stage.name === "unassigned" ? (
+                                    <span className="specStage" key={"span" + stage.id}>
+                                        leave unassigned
+                                    </span>
+                                ) : (
+                                    <span key={"span" + stage.id}>
+                                        {stage.name}
+                                    </span>
+                                )}
                             </label>
                         </div>
                     ))}

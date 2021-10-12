@@ -6,34 +6,30 @@ const { ClientModel, NoteModel } = require("../models/clientModel.js");
 
 const Stages = db.collection("stages");
 const Clients = db.collection("clients");
+const Users = db.collection("users");
 const RecycleBin = db.collection("recycle-bin");
 
 const getClients = async (req, res) => {
     if (!req.body.userReference) {
-        const clients = await Clients.find(
+        const clients = await ClientModel.find(
             {},
-            {
-                projection: {
-                    _id: false,
-                },
-            }
-        ).toArray();
+            {}
+        ).populate("stage");
         res.json({
             message: "Get all clients successful!",
             clients: clients,
         });
     } else {
         try {
-            const clients = await Clients.find(
+            const user = await Users.findOne({
+                username: req.body.userReference,
+            });
+            const clients = await ClientModel.find(
                 {
-                    userReference: req.body.userReference,
+                    userReference: user._id,
                 },
-                {
-                    projection: {
-                        _id: false,
-                    },
-                }
-            ).toArray();
+                {}
+            ).populate("stage");
             res.json({
                 message: "Get clients successful!",
                 clients: clients,
@@ -48,16 +44,12 @@ const getClients = async (req, res) => {
 };
 
 const getClient = async (req, res) => {
-    const client = await Clients.findOne(
+    const client = await ClientModel.findOne(
         {
             email: req.params.cid,
         },
-        {
-            projection: {
-                _id: false,
-            },
-        }
-    );
+        {}
+    ).populate("stage");
     res.json({
         message: "Get client successful!",
         client: client,
@@ -80,9 +72,6 @@ const addClientNote = async (req, res) => {
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
         },
         (err, doc) => {
@@ -116,9 +105,6 @@ const removeClientNote = async (req, res) => {
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
         },
         (err, doc) => {
@@ -139,21 +125,19 @@ const changeClientStage = async (req, res) => {
     const changeStage = await Stages.findOne({
         id: req.body.stageID,
     });
-    await Clients.findOneAndUpdate(
+    await ClientModel.findOneAndUpdate(
         {
             email: req.params.cid,
         },
         {
             $set: {
-                stage: changeStage.name,
+                stage: changeStage._id,
                 updatedAt: new Date(),
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
+            populate: { path: "stage" },
         },
         (err, doc) => {
             if (err) {
@@ -184,11 +168,10 @@ const createClient = async (req, res) => {
                 name: req.body.stage,
             });
         }
-        // Set stage as null if no stages are in the database
-        var stageName = null;
-        if (newStage) {
-            stageName = newStage.name;
-        }
+
+        const user = await Users.findOne({
+            username: req.body.userReference,
+        });
 
         const newClient = new ClientModel({
             email: req.body.email,
@@ -197,22 +180,18 @@ const createClient = async (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             photoURL: req.body.photoURL,
-            userReference: req.body.userReference,
-            stage: stageName,
+            userReference: user._id,
+            stage: newStage._id,
             updatedAt: new Date(),
             notes: [],
         });
         const result = await newClient.save();
-        const client = await Clients.findOne(
+        const client = await ClientModel.findOne(
             {
                 _id: result._id,
             },
-            {
-                projection: {
-                    _id: false,
-                },
-            }
-        );
+            {}
+        ).populate("stage");
         res.json({
             message: "Client creation successful!",
             client: client,
@@ -228,7 +207,10 @@ const editClient = async (req, res) => {
     const stage = await Stages.findOne({
         name: req.body.stage,
     });
-    await Clients.findOneAndUpdate(
+    const user = await Users.findOne({
+        username: req.body.userReference,
+    });
+    await ClientModel.findOneAndUpdate(
         {
             email: req.params.cid,
         },
@@ -240,16 +222,14 @@ const editClient = async (req, res) => {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
-                userReference: req.body.userReference,
-                stage: stage.id,
+                userReference: user._id,
+                stage: stage._id,
                 updatedAt: new Date(),
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
+            populate: { path: "stage" },
         },
         (err, doc) => {
             if (err) {

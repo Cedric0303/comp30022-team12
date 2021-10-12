@@ -67,14 +67,14 @@ function Clients(props) {
             // no query yes filter
             let chosenFilters = filter.map((f) => f.value);
             return clients.filter((client) => {
-                return chosenFilters.includes(client.stage);
+                return chosenFilters.includes(client.stage.name);
             });
         } else {
             // yes query yes filter
             let tempClients = clients;
             let chosenFilters = filter.map((f) => f.value);
             tempClients = clients.filter((client) => {
-                return chosenFilters.includes(client.stage);
+                return chosenFilters.includes(client.stage.name);
             });
             tempClients = tempClients.filter((client) => {
                 return regex.test(client.firstName + " " + client.lastName);
