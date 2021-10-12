@@ -294,15 +294,13 @@ function AdminEditUser(props) {
                 </div>
                 <div className="deleteModalButtonGroup">
                     <button
-                        className="editUserButton"
-                        id="delete-user"
+                        id="modalDeleteBtn"
                         onClick={handleDelete}
                     >
                         Delete
                     </button>
                     <button
-                        className="editUserButton"
-                        id="cancel-delete"
+                        id="modalCancelBtn"
                         onClick={() => {
                             toggleModal();
                         }}

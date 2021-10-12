@@ -174,23 +174,32 @@
     justify-content: center;
 }
 
-#delete-user {
+#modalDeleteBtn {
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    padding: 5px 10px;
     color: white;
     font-size: x-large;
+    font-family: inherit;
     background-color: #e13d55;
 }
 
-#delete-user:hover {
+#modalDeleteBtn:hover {
     color: #b83548;
 }
 
-#cancel-delete {
+#modalCancelBtn {
     color: #aaa;
     font-size: x-large;
+    font-family: inherit;
     background: none;
     border: none;
+    cursor: pointer;
+    
 }
 
-#cancel-delete:hover {
+#modalCancelBtn:hover {
     color: black;
+    text-decoration: underline;
 }

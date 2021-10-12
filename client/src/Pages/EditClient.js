@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import validator from "validator";
+import Modal from "react-modal";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { getClient, postEditClient, deleteClient, useStages } from "../api.js";
 import Auth from "./Auth.js";
@@ -17,8 +18,14 @@ function EditClient(props) {
     const [phoneNo, setPhoneNo] = useState("");
     const [clientStage, setClientStage] = useState("");
     const [inputError, setInputError] = useState("");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const { stagesLoading, stagesData, stagesError } = useStages();
+
+    // Open and close the modal
+    function toggleModal() {
+        setModalIsOpen(!modalIsOpen);
+    }
 
     function notEmpty() {
         return firstName && lastName && email && address && phoneNo;
@@ -262,7 +269,9 @@ function EditClient(props) {
                         <button
                             className="editClientButton"
                             id="deleteOption"
-                            onClick={handleDelete}
+                            onClick={() => {
+                                setModalIsOpen(true);
+                            }}
                         >
                             Delete Client
                         </button>
@@ -278,6 +287,33 @@ function EditClient(props) {
             <Navbar />
             <h2 className="editClientHeading">Edit Client</h2>
             {pageMain()}
+            <Modal
+                className="deleteConfirmModal"
+                isOpen={modalIsOpen}
+                contentLabel={"Confirm Delete Client"}
+                overlayClassName={"deleteModalOverlay"}
+                ariaHideApp={false}
+            >
+                <div className="deleteConfirmModalText">
+                    Delete this client for all eternity?
+                </div>
+                <div className="deleteModalButtonGroup">
+                    <button
+                        id="modalDeleteBtn"
+                        onClick={handleDelete}
+                    >
+                        Delete
+                    </button>
+                    <button
+                        id="modalCancelBtn"
+                        onClick={() => {
+                            toggleModal();
+                        }}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </Modal>
         </div>
     );
 }
