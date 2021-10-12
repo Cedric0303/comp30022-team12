@@ -292,6 +292,8 @@ function AdminManageStages(props) {
                         background-color: #596e80;
                     }
                 `}</style>
+                <title>Manage Stages - Admin Bobafish CRM</title>
+                <meta name="description" content="Create new stages, edit existing stage names, reorder stage positions or delete stages." />
             </Helmet>
             <Navbar />
             <main className="manageStagesBox">

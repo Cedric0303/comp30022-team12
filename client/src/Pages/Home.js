@@ -8,6 +8,7 @@ import UserMeetingPortal from "../Components/UserMeetingPortal.js";
 import RecentClients from "../Components/RecentClients.js";
 import Navbar from "../Components/Navbar/Navbar.js";
 import "./css/home.css";
+import { Helmet } from "react-helmet";
 
 function Home(props) {
     const localizer = momentLocalizer(moment);
@@ -45,6 +46,10 @@ function Home(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>Home - Bobafish CRM</title>
+                <meta name="description" content="Main dashboard for Bobafish CRM" />
+            </Helmet>
             <Navbar />
             <div className="homeGrid">
                 <div className="homePortals">

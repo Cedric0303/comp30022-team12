@@ -15,6 +15,8 @@ function Admin(props) {
                         background-color: #596e80;
                     }
                 `}</style>
+                <title>Dashboard - Admin Bobafish CRM</title>
+                <meta name="description" content="Admin Dashboard - Access admin features" />
             </Helmet>
             <Navbar />
             <main>

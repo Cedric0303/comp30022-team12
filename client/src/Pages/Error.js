@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./css/error.css";
 import errorImage from "./css/error.jpg";
+import { Helmet } from "react-helmet";
 
 export default function Error(props) {
     const error = props.error;
@@ -63,6 +64,10 @@ export default function Error(props) {
 
     return (
         <div id="errorDiv">
+            <Helmet>
+                <title>Error! - Bobafish CRM</title>
+                <meta name="description" content="Error page for Bobafish CRM" />
+            </Helmet>
             <img
                 id="errorImg"
                 src={errorImage}

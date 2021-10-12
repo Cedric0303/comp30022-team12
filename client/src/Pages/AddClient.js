@@ -7,6 +7,7 @@ import "./css/addClient.css";
 import Auth from "./Auth.js";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
+import { Helmet } from "react-helmet";
 
 // Returns the first stage as an object
 function firstStage(stages) {
@@ -145,6 +146,10 @@ function AddClient(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>Add Client - Bobafish CRM</title>
+                <meta name="description" content="Add a new client" />
+            </Helmet>
             <Navbar />
             <h2 className="addClientHeading">Add Client</h2>
             <form

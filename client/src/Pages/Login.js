@@ -115,6 +115,8 @@ const Login = (props) => {
                         background-color: #5e779d;
                     }
                 `}</style>
+                <title>Login - Bobafish CRM</title>
+                <meta name="description" content="Login to Bobafish CRM" />
             </Helmet>
 
             <svg
