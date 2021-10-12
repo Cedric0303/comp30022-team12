@@ -44,6 +44,10 @@ export default function UserMeetingRow(props) {
                 </div>
             </NavLink>
         );
+    } else {
+        return (
+            <div></div>
+        );
     }
     
 }

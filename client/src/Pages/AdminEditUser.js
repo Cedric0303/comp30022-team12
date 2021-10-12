@@ -40,7 +40,6 @@ function AdminEditUser(props) {
     if (Auth.getUsername() === props.match.params.userID) {
         isSelf = true;
     }
-    console.log(isSelf);
 
     // Open and close the modal
     function toggleModal() {
@@ -72,7 +71,6 @@ function AdminEditUser(props) {
                 lastName: lastName,
                 isSelf: isSelf,
             };
-            console.log(registerBody.isSelf);
             postEditUser(registerBody, props.match.params.userID);
         } else {
             alert(

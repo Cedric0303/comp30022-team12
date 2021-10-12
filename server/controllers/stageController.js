@@ -27,11 +27,7 @@ const getStage = async (req, res) => {
         {
             name: req.params.sid,
         },
-        {
-            projection: {
-                _id: false,
-            },
-        }
+        {}
     );
     res.json({
         message: "Get stage successful!",
@@ -46,11 +42,7 @@ const createStage = async (req, res) => {
         {
             id: stageID,
         },
-        {
-            projection: {
-                _id: false,
-            },
-        }
+        {}
     );
     if (exist) {
         res.json({
@@ -88,9 +80,6 @@ const editStage = async (req, res) => {
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
         },
         (err, doc) => {

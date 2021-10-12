@@ -104,7 +104,7 @@ function SpecificClient(props) {
                         </NavLink>
                     </div>
                     <div id="clientInfo">
-                        <p>Stage: {client.stage}</p>
+                        <p>Stage: {client.stage.name}</p>
                         <p>
                             {client.email}{" "}
                             <FontAwesomeIcon

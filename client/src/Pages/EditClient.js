@@ -72,7 +72,7 @@ function EditClient(props) {
                 setEmail(clientData.client.email);
                 setAddress(clientData.client.address);
                 setPhoneNo(clientData.client.phoneNumber);
-                setClientStage(clientData.client.stage);
+                setClientStage(clientData.client.stage.name);
             })
             .catch((e) => {
                 console.log(e);

@@ -22,7 +22,6 @@ function filterClients(clients) {
 
 export default function RecentClients(props) {
     const { loading, clientsData, error } = useClients();
-    console.log(clientsData)
 
     const clientContent = () => {
         if (loading) {
@@ -57,7 +56,7 @@ export default function RecentClients(props) {
                                     </NavLink>
                                 </td>
                                 <td id="recentClientTd">
-                                    <span>{client.stage}</span>
+                                    <span>{client.stage.name}</span>
                                 </td>
                             </tr>
                         </tbody>

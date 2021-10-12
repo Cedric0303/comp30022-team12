@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const db = require("./databaseController.js");
 
 const { ClientModel, NoteModel } = require("../models/clientModel.js");
+const StageModel = require("../models/stageModel.js");
 
 const Stages = db.collection("stages");
 const Clients = db.collection("clients");
@@ -11,10 +12,10 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getClients = async (req, res) => {
     if (!req.body.userReference) {
-        const clients = await Clients.find(
+        const clients = await ClientModel.find(
             {},
             {}
-        ).toArray();
+        ).populate("stage");
         res.json({
             message: "Get all clients successful!",
             clients: clients,
@@ -24,12 +25,12 @@ const getClients = async (req, res) => {
             const user = await Users.findOne({
                 username: req.body.userReference,
             });
-            const clients = await Clients.find(
+            const clients = await ClientModel.find(
                 {
                     userReference: user._id,
                 },
                 {}
-            ).toArray();
+            ).populate("stage");
             res.json({
                 message: "Get clients successful!",
                 clients: clients,
@@ -44,12 +45,12 @@ const getClients = async (req, res) => {
 };
 
 const getClient = async (req, res) => {
-    const client = await Clients.findOne(
+    const client = await ClientModel.findOne(
         {
             email: req.params.cid,
         },
         {}
-    );
+    ).populate("stage");
     res.json({
         message: "Get client successful!",
         client: client,
@@ -125,18 +126,19 @@ const changeClientStage = async (req, res) => {
     const changeStage = await Stages.findOne({
         id: req.body.stageID,
     });
-    await Clients.findOneAndUpdate(
+    await ClientModel.findOneAndUpdate(
         {
             email: req.params.cid,
         },
         {
             $set: {
-                stage: changeStage.name,
+                stage: changeStage._id,
                 updatedAt: new Date(),
             },
         },
         {
             returnDocument: "after",
+            populate: { path: "stage" },
         },
         (err, doc) => {
             if (err) {
@@ -167,11 +169,6 @@ const createClient = async (req, res) => {
                 name: req.body.stage,
             });
         }
-        // Set stage as null if no stages are in the database
-        var stageName = null;
-        if (newStage) {
-            stageName = newStage.name;
-        }
 
         const user = await Users.findOne({
             username: req.body.userReference,
@@ -185,17 +182,17 @@ const createClient = async (req, res) => {
             lastName: req.body.lastName,
             photoURL: req.body.photoURL,
             userReference: user._id,
-            stage: stageName,
+            stage: newStage._id,
             updatedAt: new Date(),
             notes: [],
         });
         const result = await newClient.save();
-        const client = await Clients.findOne(
+        const client = await ClientModel.findOne(
             {
                 _id: result._id,
             },
             {}
-        );
+        ).populate("stage");
         res.json({
             message: "Client creation successful!",
             client: client,
@@ -214,7 +211,7 @@ const editClient = async (req, res) => {
     const user = await Users.findOne({
         username: req.body.userReference,
     });
-    await Clients.findOneAndUpdate(
+    await ClientModel.findOneAndUpdate(
         {
             email: req.params.cid,
         },
@@ -227,12 +224,13 @@ const editClient = async (req, res) => {
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
                 userReference: user._id,
-                stage: stage.id,
+                stage: stage._id,
                 updatedAt: new Date(),
             },
         },
         {
             returnDocument: "after",
+            populate: { path: "stage" },
         },
         (err, doc) => {
             if (err) {

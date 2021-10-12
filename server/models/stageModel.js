@@ -8,6 +8,6 @@ const StageSchema = new Schema({
     position: { type: Number, required: true },
 });
 
-const StageModel = mongoose.model("tag", StageSchema);
+const StageModel = mongoose.model("stage", StageSchema);
 
 module.exports = StageModel;
