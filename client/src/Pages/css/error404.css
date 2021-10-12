@@ -1,0 +1,32 @@
+#errorDiv {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -60%);
+    text-align: center;
+    color: ivory;
+}
+
+p {
+    font-size: 20px;
+    color: ivory;
+}
+
+#loginButton {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: ivory;
+    background-color: #4cc9f0;
+    height: 30px;
+    width: 100px;
+    padding: 5 20px;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+}
+
+#loginButton:hover {
+    background-color: #37a3c4;
+}
