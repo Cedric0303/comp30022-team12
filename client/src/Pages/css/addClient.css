@@ -19,7 +19,11 @@
 }
 
 .photoForm {
-    grid-area: photoForm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
 }
 
 /* Form */
@@ -68,11 +72,6 @@
 
 #clientNumberField {
     width: 120px;
-}
-
-.inputError {
-    margin: 16px;
-    color: white;
 }
 
 .stageChoice {

@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { postUser } from "../api.js";
 import "./css/adminAddUser.css";
+import "./css/addEditPage.css";
 import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
 
@@ -24,6 +25,7 @@ function AdminAddUser(props) {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [inputError, setInputError] = useState("");
 
     const [isRevealPwd, setIsRevealPwd] = useState(false);
 
@@ -33,7 +35,11 @@ function AdminAddUser(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault(); //prevent reload
-        if (notEmpty()) {
+        if (!notEmpty()) {
+            setInputError("All fields must have a value!");
+        } else if (!validate_password(password)){
+            setInputError("Passwords must only be comprised of letters or numbers and be between 8-20 characters.")
+        } else {
             const registerBody = {
                 username: username,
                 password: password,
@@ -41,17 +47,8 @@ function AdminAddUser(props) {
                 firstName: firstName,
                 lastName: lastName,
             };
-
-            if (validate_password(password)) {
-                //validate password
-                postUser(registerBody);
-            } else {
-                alert(
-                    "Passwords must only be comprised of letters or numbers and be between 8-20 characters."
-                );
-            }
-        } else {
-            alert("All fields must have a value!");
+            postUser(registerBody);
+            
         }
     };
 
@@ -67,21 +64,21 @@ function AdminAddUser(props) {
                 <meta name="description" content="Add a new user" />
             </Helmet>
             <Navbar />
-            <h2 className="add-user-heading">Add User</h2>
-            <div className="add-user-container">
-                <div className="add-user-container-item" id="item-left">
+            <h2 className="addUserHeading">Add User</h2>
+            <div className="addUserGrid">
+                <div className="addUserItem" id="itemLeft">
                     <form
                         method="post"
                         onSubmit={handleSubmit}
-                        className="add-user-form"
+                        className="addUserForm"
                     >
-                        <div className="field-group" id="name-info">
+                        <div className="field-group" id="nameInfo">
                             <div className="field">
-                                <label className="add-user-label">
+                                <label className="addUserSubheading">
                                     First Name:
                                 </label>
                                 <input
-                                    className="add-user-input"
+                                    className="addUserInput"
                                     required
                                     type="text"
                                     placeholder="First Name"
@@ -92,11 +89,11 @@ function AdminAddUser(props) {
                                 />
                             </div>
                             <div className="field">
-                                <label className="add-user-label">
+                                <label className="addUserSubheading">
                                     Last Name:
                                 </label>
                                 <input
-                                    className="add-user-input"
+                                    className="addUserInput"
                                     required
                                     type="text"
                                     placeholder="Last Name"
@@ -107,13 +104,13 @@ function AdminAddUser(props) {
                                 />
                             </div>
                         </div>
-                        <div className="field-group" id="login-info">
+                        <div className="field-group" id="loginInfo">
                             <div className="field">
-                                <label className="add-user-label">
+                                <label className="addUserSubheading">
                                     Username:
                                 </label>
                                 <input
-                                    className="add-user-input"
+                                    className="addUserInput"
                                     required
                                     type="text"
                                     placeholder="Username"
@@ -123,12 +120,12 @@ function AdminAddUser(props) {
                                     }
                                 />
                             </div>
-                            <div className="field" id="password-field">
-                                <label className="add-user-label">
+                            <div className="field" id="passwordField">
+                                <label className="addUserSubheading">
                                     Password:
                                 </label>
                                 <input
-                                    className="add-user-input"
+                                    className="addUserInput"
                                     required
                                     type={isRevealPwd ? "text" : "password"}
                                     placeholder="Password"
@@ -158,22 +155,26 @@ function AdminAddUser(props) {
                                 />
                             </div>
                         </div>
+                        <div className="addUserCreateGroup">
+                            <button
+                                className="addEditCreateBtn"
+                                onClick={handleSubmit}
+                            >
+                                Create User
+                            </button>
+                            
+                        </div>
                     </form>
                 </div>
-                <div className="add-user-container-item" id="item-right">
-                    <NavLink to="/admin/users" activeClassName="cancel-option">
+                <div className="addUserItem" id="itemRight">
+                    <NavLink to="/admin/users" activeClassName="addEditCancelBtn">
                         Cancel
                     </NavLink>
                 </div>
+                <p className="addEditInputError">{inputError}</p>
             </div>
 
-            <button
-                className="add-user-button"
-                id="create-user"
-                onClick={handleSubmit}
-            >
-                Create User
-            </button>
+            
         </div>
     );
 }

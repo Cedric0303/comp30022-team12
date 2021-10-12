@@ -1,0 +1,128 @@
+/* Common styling between EditUser, AddUser, EditClient, Add Client */
+
+/* Confirm Delete Modal */
+.deleteConfirmModal {
+    text-align: center;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background: white;
+    border-radius: 10px;
+    z-index: 999;
+}
+
+.deleteModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(8px);
+}
+
+.deleteConfirmModalText{
+    font-size: 150%;
+    font-weight: 700;
+    margin: 0 0 15px;
+    padding-bottom: 2em;
+}
+
+.deleteModalButtonGroup {
+    display: grid;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+}
+
+#modalDeleteBtn {
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: white;
+    font-size: x-large;
+    font-family: inherit;
+    background-color: #e13d55;
+}
+
+#modalDeleteBtn:hover {
+    color: #b83548;
+}
+
+#modalCancelBtn {
+    color: #aaa;
+    font-size: x-large;
+    font-family: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+}
+
+#modalCancelBtn:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+/* Input error display text */
+.addEditInputError {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    margin-top: 16px;
+    color: white;
+    font-size: 16px;
+}
+
+/* Common styling between Creat UserClient Button and Confirm Changes Button */
+.addEditCreateBtn, .addEditConfirmChangeBtn {
+    margin-top: 60px;
+    padding: 8px 12px;
+    font-size: 18px;
+    font-family: inherit;
+
+    border-radius: 5px;
+    border: none;
+}
+
+/* Create UserClient Button */
+.addEditCreateBtn {
+    background-color: #78cd1b;
+    color: white;
+}
+.addEditCreateBtn:hover {
+    background-color: #569417;
+}
+
+/* Confirm Changes Button */
+.addEditConfirmChangeBtn {
+    background-color: #4cc9f0;
+    color: white;
+}
+
+.addEditConfirmChangeBtn:hover {
+    background-color: #37a3c4;
+}
+
+/* Cancel Button and Delete User/Client Button*/
+.addEditCancelBtn, .addEditDeleteBtn {
+    float: right;
+    margin: 0;
+    padding: 8px;
+
+    text-align: center;
+    font-weight: 400;
+    font-size: 18px;
+    font-family: inherit;
+    color: white;
+    
+    border-radius: 15px;
+    border: none;
+    background-color: #e13d55;
+}
+
+.addEditCancelBtn:hover, .addEditDeleteBtn:hover {
+    background-color: #b83548;
+}

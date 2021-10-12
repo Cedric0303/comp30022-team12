@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import validator from "validator";
+import Modal from "react-modal";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { getClient, postEditClient, deleteClient, useStages } from "../api.js";
 import Auth from "./Auth.js";
@@ -18,8 +19,14 @@ function EditClient(props) {
     const [phoneNo, setPhoneNo] = useState("");
     const [clientStage, setClientStage] = useState("");
     const [inputError, setInputError] = useState("");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const { stagesLoading, stagesData, stagesError } = useStages();
+
+    // Open and close the modal
+    function toggleModal() {
+        setModalIsOpen(!modalIsOpen);
+    }
 
     function notEmpty() {
         return firstName && lastName && email && address && phoneNo;
@@ -159,127 +166,121 @@ function EditClient(props) {
             );
         } else {
             return (
-                <div>
+                <div className="editClientGrid">
                     <form
                         method="post"
                         onChange={() => setInputError("")}
                         onSubmit={handleSubmit}
-                        className="editClientGrid"
+                        className="editClientForm"
                     >
-                        <div className="editClientForm">
-                            <div>
-                                <h3 className="clientFormSubheading">
-                                    Personal Details
-                                </h3>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        First Name:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        required
-                                        type="text"
-                                        placeholder="First Name"
-                                        value={firstName}
-                                        onChange={(e) =>
-                                            setFirstName(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        Last Name:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        required
-                                        type="text"
-                                        placeholder="Last Name"
-                                        value={lastName}
-                                        onChange={(e) =>
-                                            setLastName(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        Email:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        id="clientEmailField"
-                                        required
-                                        type="text"
-                                        placeholder="Email"
-                                        value={email}
-                                        onChange={(e) =>
-                                            setEmail(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        Phone Number:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        id="clientNumberField"
-                                        required
-                                        type="text"
-                                        placeholder="Phone Number"
-                                        value={phoneNo}
-                                        onChange={(e) =>
-                                            setPhoneNo(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        Address:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        id="clientAddressField"
-                                        required
-                                        type="text"
-                                        placeholder="Address"
-                                        value={address}
-                                        onChange={(e) =>
-                                            setAddress(e.target.value)
-                                        }
-                                    />
-                                </div>
+                        <div>
+                            <h3 className="clientFormSubheading">
+                                Personal Details
+                            </h3>
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    First Name:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    required
+                                    type="text"
+                                    placeholder="First Name"
+                                    value={firstName}
+                                    onChange={(e) =>
+                                        setFirstName(e.target.value)
+                                    }
+                                />
                             </div>
-                            <div className="clientStageChoice">
-                                <h3 className="clientFormSubheading">Stage</h3>
-                                {stage()}
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    Last Name:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    required
+                                    type="text"
+                                    placeholder="Last Name"
+                                    value={lastName}
+                                    onChange={(e) =>
+                                        setLastName(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    Email:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    id="clientEmailField"
+                                    required
+                                    type="text"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) =>
+                                        setEmail(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    Phone Number:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    id="clientNumberField"
+                                    required
+                                    type="text"
+                                    placeholder="Phone Number"
+                                    value={phoneNo}
+                                    onChange={(e) =>
+                                        setPhoneNo(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    Address:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    id="clientAddressField"
+                                    required
+                                    type="text"
+                                    placeholder="Address"
+                                    value={address}
+                                    onChange={(e) =>
+                                        setAddress(e.target.value)
+                                    }
+                                />
                             </div>
                         </div>
-                        <div className="photoForm">
-                            <NavLink to="/clients" className="cancelOption">
-                                Cancel
-                            </NavLink>
-                        </div>
-                    </form>
-
-                    <div className="editClientChanges">
-                        <div id="confirmChanges">
-                            <button
-                                className="editClientButton"
-                                onClick={handleSubmit}
-                            >
-                                Confirm Changes
-                            </button>
-                            <span className="inputError">{inputError}</span>
+                        <div className="clientStageChoice">
+                            <h3 className="clientFormSubheading">Stage</h3>
+                            {stage()}
                         </div>
                         <button
-                            className="editClientButton"
-                            id="deleteOption"
-                            onClick={handleDelete}
+                            className="addEditConfirmChangeBtn"
+                            onClick={handleSubmit}
                         >
-                            Delete User
+                            Confirm Changes
+                        </button>
+                    </form>
+                    <div className="photoForm">
+                        <NavLink to="/clients" className="addEditCancelBtn">
+                            Cancel
+                        </NavLink>
+                        <button
+                            className="addEditDeleteBtn"
+                            onClick={() => {
+                                setModalIsOpen(true);
+                            }}
+                        >
+                            Delete Client
                         </button>
                     </div>
+                    <p className="addEditInputError">{inputError}</p>
                 </div>
             );
         }
@@ -294,6 +295,33 @@ function EditClient(props) {
             <Navbar />
             <h2 className="editClientHeading">Edit Client</h2>
             {pageMain()}
+            <Modal
+                className="deleteConfirmModal"
+                isOpen={modalIsOpen}
+                contentLabel={"Confirm Delete Client"}
+                overlayClassName={"deleteModalOverlay"}
+                ariaHideApp={false}
+            >
+                <div className="deleteConfirmModalText">
+                    Delete this client for all eternity?
+                </div>
+                <div className="deleteModalButtonGroup">
+                    <button
+                        id="modalDeleteBtn"
+                        onClick={handleDelete}
+                    >
+                        Delete
+                    </button>
+                    <button
+                        id="modalCancelBtn"
+                        onClick={() => {
+                            toggleModal();
+                        }}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </Modal>
         </div>
     );
 }

@@ -7,6 +7,7 @@ import Auth from "../Pages/Auth.js";
 import { getUser } from "../api.js";
 import { postEditUser, deleteUser } from "../api.js";
 import "./css/adminEditUser.css";
+import "./css/addEditPage.css";
 import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
 import ReactLoading from "react-loading";
@@ -32,6 +33,7 @@ function AdminEditUser(props) {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [inputError, setInputError] = useState("");
 
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -58,11 +60,16 @@ function AdminEditUser(props) {
             (password.trim() === "") & (password.length > 0) ||
             (password !== "" && !validate_password(password))
         ) {
-            alert(
+            setInputError(
                 "Passwords must only be comprised of letters and numbers and be between 8-20 characters. " +
-                    "Please update your new password to meeting these requirements or leave the field empty."
+                    "Please update your new password or leave the field empty."
             );
-        } else if (requireFieldsFilled()) {
+        } else if (!requireFieldsFilled()){
+            setInputError(
+                "First Name, Last Name and Username fields must have a value!"
+            );
+
+        } else {
             const registerBody = {
                 username: username,
                 password: password,
@@ -72,10 +79,6 @@ function AdminEditUser(props) {
                 isSelf: isSelf,
             };
             postEditUser(registerBody, props.match.params.userID);
-        } else {
-            alert(
-                "First Name, Last Name and Username fields must have a value!"
-            );
         }
     };
 
@@ -115,7 +118,7 @@ function AdminEditUser(props) {
         if (loading) {
             return (
                 <div>
-                    <div className="edit-userbox">
+                    <div className="editUserBox">
                         <ul>Loading...</ul>
                     </div>
                     {loading && (
@@ -131,31 +134,31 @@ function AdminEditUser(props) {
             );
         } else if (error) {
             return (
-                <div className="edit-userbox">
+                <div className="editUserBox">
                     Something went wrong: {error.message}
                 </div>
             );
         } else {
             return (
                 <div>
-                    <h2 className="edit-user-heading">Edit User</h2>
-                    <div className="edit-user-container">
+                    <h2 className="editUserHeading">Edit User</h2>
+                    <div className="editUserGrid">
                         <div
-                            className="edit-user-container-item"
+                            className="editUserItem"
                             id="item-left"
                         >
                             <form
                                 method="post"
                                 onSubmit={handleSubmit}
-                                className="edit-user-form"
+                                className="editUserForm"
                             >
-                                <div className="field-group" id="name-info">
+                                <div className="feildGroup" id="name-info">
                                     <div className="field">
-                                        <label className="edit-user-label">
+                                        <label className="editUserLabel">
                                             First Name:
                                         </label>
                                         <input
-                                            className="edit-user-input"
+                                            className="editUserInput"
                                             required
                                             type="text"
                                             placeholder="First Name"
@@ -166,11 +169,11 @@ function AdminEditUser(props) {
                                         />
                                     </div>
                                     <div className="field">
-                                        <label className="edit-user-label">
+                                        <label className="editUserLabel">
                                             Last Name:
                                         </label>
                                         <input
-                                            className="edit-user-input"
+                                            className="editUserInput"
                                             required
                                             type="text"
                                             placeholder="Last Name"
@@ -181,13 +184,13 @@ function AdminEditUser(props) {
                                         />
                                     </div>
                                 </div>
-                                <div className="field-group" id="login-info">
+                                <div className="feildGroup" id="loginInfo">
                                     <div className="field">
-                                        <label className="edit-user-label">
+                                        <label className="editUserLabel">
                                             Username:
                                         </label>
                                         <input
-                                            className="edit-user-input"
+                                            className="editUserInput"
                                             required
                                             type="text"
                                             placeholder="Username"
@@ -197,12 +200,12 @@ function AdminEditUser(props) {
                                             }
                                         />
                                     </div>
-                                    <div className="field" id="password-field">
-                                        <label className="edit-user-label">
+                                    <div className="field" id="passwordField">
+                                        <label className="editUserLabel">
                                             New Password:
                                         </label>
                                         <input
-                                            className="edit-user-input"
+                                            className="editUserInput"
                                             type={
                                                 isRevealPwd
                                                     ? "text"
@@ -242,37 +245,33 @@ function AdminEditUser(props) {
                                     </div>
                                 </div>
                             </form>
+                                <button
+                                    className="addEditConfirmChangeBtn"
+                                    onClick={handleSubmit}
+                                >
+                                    Confirm Changes
+                                </button>
                         </div>
                         <div
-                            className="edit-user-container-item"
-                            id="item-right"
+                            className="editUserItem"
+                            id="itemRight"
                         >
                             <NavLink
                                 to="/admin/users"
-                                activeClassName="cancel-option"
+                                activeClassName="addEditCancelBtn"
                             >
                                 Cancel
                             </NavLink>
+                            <button
+                                className="addEditDeleteBtn"
+                                onClick={() => {
+                                    setModalIsOpen(true);
+                                }}
+                            >
+                                Delete User
+                            </button>
                         </div>
-                    </div>
-
-                    <div className="edit-user-changes">
-                        <button
-                            className="edit-user-button"
-                            id="confirm-changes"
-                            onClick={handleSubmit}
-                        >
-                            Confirm Changes
-                        </button>
-                        <button
-                            className="edit-user-button"
-                            id="delete-option"
-                            onClick={() => {
-                                setModalIsOpen(true);
-                            }}
-                        >
-                            Delete User
-                        </button>
+                        <p className="addEditInputError">{inputError}</p>
                     </div>
                 </div>
             );
@@ -293,26 +292,24 @@ function AdminEditUser(props) {
             <Navbar />
             {pageMain()}
             <Modal
-                className="delete-user-modal"
+                className="deleteConfirmModal"
                 isOpen={modalIsOpen}
                 contentLabel={"Confirm Delete User"}
-                overlayClassName={"delete-modal-overlay"}
+                overlayClassName={"deleteModalOverlay"}
                 ariaHideApp={false}
             >
-                <div className="delete-user-modal-text">
+                <div className="deleteConfirmModalText">
                     Delete this user for all eternity?
                 </div>
-                <div className="delete-button-group">
+                <div className="deleteModalButtonGroup">
                     <button
-                        className="edit-user-button"
-                        id="delete-user"
+                        id="modalDeleteBtn"
                         onClick={handleDelete}
                     >
                         Delete
                     </button>
                     <button
-                        className="edit-user-button"
-                        id="cancel-delete"
+                        id="modalCancelBtn"
                         onClick={() => {
                             toggleModal();
                         }}
