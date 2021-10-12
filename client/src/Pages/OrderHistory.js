@@ -43,7 +43,7 @@ function OrderHistory(props) {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-     setNewOrder((prevState) => ({
+        setNewOrder((prevState) => ({
             ...prevState,
             [id]: value,
         }));
@@ -159,6 +159,7 @@ function OrderHistory(props) {
                         Order Total:
                         <input
                             type="number"
+                            id="orderTotal"
                             required
                             value={newOrder.orderTotal}
                             onChange={handleChange}

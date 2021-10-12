@@ -50,9 +50,14 @@
     text-align: right;
 }
 
-.centerAlign{
+.centerAlign {
     text-align: center;
-    margin-left: 50%;
+    margin-left: 20%;
+}
+
+.centerHead {
+    text-align: center;
+    margin-left: 40%;
 }
 
 .addNote {
