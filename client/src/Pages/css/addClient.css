@@ -10,7 +10,6 @@
     display: grid;
     margin: 0 16vw 0 6vw;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 4fr 1fr;
     grid-template-areas: "addClientForm photoForm";
     gap: 15px;
 }
