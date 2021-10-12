@@ -410,7 +410,6 @@ describe("#7 Activity test (logged in)", () => {
             .set("Content-Type", "application/json")
             .send(testActivity)
             .then((res) => {
-                console.log(res.body.message);
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe("application/json");
                 assert(
