@@ -63,6 +63,8 @@ function AdminAddUser(props) {
                         background-color: #596e80;
                     }
                 `}</style>
+                <title>Add User - Admin Bobafish CRM</title>
+                <meta name="description" content="Add a new user" />
             </Helmet>
             <Navbar />
             <h2 className="add-user-heading">Add User</h2>

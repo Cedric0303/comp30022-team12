@@ -287,6 +287,8 @@ function AdminEditUser(props) {
                         background-color: #596e80;
                     }
                 `}</style>
+                <title>Edit User - Admin Bobafish CRM</title>
+                <meta name="description" content="Edit an existing user" />
             </Helmet>
             <Navbar />
             {pageMain()}

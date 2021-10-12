@@ -5,6 +5,7 @@ import ReactLoading from "react-loading";
 import { useOrders, postOrder, useClient, useWindowDimensions } from "../api.js";
 import Modal from "react-modal";
 import "./css/orderHistory.css";
+import { Helmet } from "react-helmet";
 
 function OrderHistory(props) {
     
@@ -81,7 +82,12 @@ function OrderHistory(props) {
             );
         } else {
             return (
-                <h1 id="clientName">{clientData.client.firstName}&nbsp;{clientData.client.lastName}</h1>
+                <h1 id="clientName">
+                    <Helmet>
+                        <title>{clientData.client.firstName+" "+clientData.client.lastName} Order History - Bobafish CRM</title>
+                    </Helmet>
+                    {clientData.client.firstName}&nbsp;{clientData.client.lastName}
+                </h1>
             )
         }
     }
@@ -135,6 +141,10 @@ function OrderHistory(props) {
     
     return (
         <div>
+            <Helmet>
+                <title>Order History - Bobafish CRM</title>
+                <meta name="description" content="Order history for client" />
+            </Helmet>
             <Navbar />
 
             <main id="orderBox">

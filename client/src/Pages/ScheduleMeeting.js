@@ -19,6 +19,7 @@ import { clientsToOptions } from "../Components/CalendarUtilities.js";
 import "./css/scheduleMeeting.css";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
+import { Helmet } from "react-helmet";
 
 // Handles any scheduling- adds and edits meetings depending on the props
 function ScheduleMeeting(props) {
@@ -323,6 +324,10 @@ function ScheduleMeeting(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>Schedule Meeting - Bobafish CRM</title>
+                <meta name="description" content="Schedule a meeting with a client" />
+            </Helmet>
             <Navbar />
             <main id="scheduleMeeting">
                 {pageHeading()}

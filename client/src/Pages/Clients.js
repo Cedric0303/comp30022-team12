@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
 import Select from "react-select";
+import { Helmet } from "react-helmet";
 
 function Clients(props) {
     const { loading, clientsData, error } = useClients();
@@ -186,6 +187,10 @@ function Clients(props) {
 
     return (
         <div className="clients">
+            <Helmet>
+                <title>Clients - Bobafish CRM</title>
+                <meta name="description" content="View clients, check meetings and orders" />
+            </Helmet>
             <Navbar />
             <main className="clientsBox">
                 <h2 id="clientsHeading">

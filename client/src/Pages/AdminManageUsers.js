@@ -80,6 +80,8 @@ function AdminManageUsers(props) {
                         background-color: #596e80;
                     }
                 `}</style>
+                <title>Manage Users - Admin Bobafish CRM</title>
+                <meta name="description" content="Create new users, edit existing users or delete users." />
             </Helmet>
             <Navbar />
             <main className="manageUsersBox">
