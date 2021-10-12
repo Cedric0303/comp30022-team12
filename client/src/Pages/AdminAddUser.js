@@ -160,7 +160,7 @@ function AdminAddUser(props) {
                             >
                                 Create User
                             </button>
-                            <span className="addUserInputError">{inputError}</span>
+                            
                         </div>
                     </form>
                 </div>
@@ -169,6 +169,7 @@ function AdminAddUser(props) {
                         Cancel
                     </NavLink>
                 </div>
+                <p className="addUserInputError">{inputError}</p>
             </div>
 
             

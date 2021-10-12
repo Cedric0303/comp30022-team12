@@ -24,7 +24,12 @@
 }
 
 .photoForm {
-    grid-area: photoForm;
+    /* grid-area: photoForm; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
 }
 
 /* Form */
@@ -75,8 +80,10 @@
     width: 120px;
 }
 
-.inputError {
-    margin: 16px;
+.editClientInputError {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    margin-top: 16px;
     color: white;
 }
 
@@ -120,8 +127,8 @@
     text-decoration: underline;
 }
 
-.cancelOption:hover {
-    color: #b83548;
+.editClientChanges > #deleteOption:hover, .cancelOption:hover {
+    color: #cc7985;
 }
 
 .editClientChanges {
@@ -139,6 +146,3 @@
     border: none;
 }
 
-.editClientChanges > #deleteOption:hover {
-    color: #b83548;
-}

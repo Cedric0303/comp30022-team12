@@ -153,110 +153,100 @@ function EditClient(props) {
             );
         } else {
             return (
-                <div>
+                <div className="editClientGrid">
                     <form
                         method="post"
                         onChange={() => setInputError("")}
                         onSubmit={handleSubmit}
-                        className="editClientGrid"
+                        className="editClientForm"
                     >
-                        <div className="editClientForm">
-                            <div>
-                                <h3 className="clientFormSubheading">
-                                    Personal Details
-                                </h3>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        First Name:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        required
-                                        type="text"
-                                        placeholder="First Name"
-                                        value={firstName}
-                                        onChange={(e) =>
-                                            setFirstName(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        Last Name:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        required
-                                        type="text"
-                                        placeholder="Last Name"
-                                        value={lastName}
-                                        onChange={(e) =>
-                                            setLastName(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        Email:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        id="clientEmailField"
-                                        required
-                                        type="text"
-                                        placeholder="Email"
-                                        value={email}
-                                        onChange={(e) =>
-                                            setEmail(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        Phone Number:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        id="clientNumberField"
-                                        required
-                                        type="text"
-                                        placeholder="Phone Number"
-                                        value={phoneNo}
-                                        onChange={(e) =>
-                                            setPhoneNo(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="editClientInput">
-                                    <label className="editClientLabel">
-                                        Address:
-                                    </label>
-                                    <input
-                                        className="editClientField"
-                                        id="clientAddressField"
-                                        required
-                                        type="text"
-                                        placeholder="Address"
-                                        value={address}
-                                        onChange={(e) =>
-                                            setAddress(e.target.value)
-                                        }
-                                    />
-                                </div>
+                        <div>
+                            <h3 className="clientFormSubheading">
+                                Personal Details
+                            </h3>
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    First Name:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    required
+                                    type="text"
+                                    placeholder="First Name"
+                                    value={firstName}
+                                    onChange={(e) =>
+                                        setFirstName(e.target.value)
+                                    }
+                                />
                             </div>
-                            <div className="clientStageChoice">
-                                <h3 className="clientFormSubheading">Stage</h3>
-                                {stage()}
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    Last Name:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    required
+                                    type="text"
+                                    placeholder="Last Name"
+                                    value={lastName}
+                                    onChange={(e) =>
+                                        setLastName(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    Email:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    id="clientEmailField"
+                                    required
+                                    type="text"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) =>
+                                        setEmail(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    Phone Number:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    id="clientNumberField"
+                                    required
+                                    type="text"
+                                    placeholder="Phone Number"
+                                    value={phoneNo}
+                                    onChange={(e) =>
+                                        setPhoneNo(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="editClientInput">
+                                <label className="editClientLabel">
+                                    Address:
+                                </label>
+                                <input
+                                    className="editClientField"
+                                    id="clientAddressField"
+                                    required
+                                    type="text"
+                                    placeholder="Address"
+                                    value={address}
+                                    onChange={(e) =>
+                                        setAddress(e.target.value)
+                                    }
+                                />
                             </div>
                         </div>
-                        <div className="photoForm">
-                            <NavLink to="/clients" className="cancelOption">
-                                Cancel
-                            </NavLink>
+                        <div className="clientStageChoice">
+                            <h3 className="clientFormSubheading">Stage</h3>
+                            {stage()}
                         </div>
-                    </form>
-
-                    <div className="editClientChanges">
                         <div id="confirmChanges">
                             <button
                                 className="editClientButton"
@@ -264,16 +254,21 @@ function EditClient(props) {
                             >
                                 Confirm Changes
                             </button>
-                            <span className="inputError">{inputError}</span>
                         </div>
+                    </form>
+                    <div className="photoForm">
+                        <NavLink to="/clients" className="cancelOption">
+                            Cancel
+                        </NavLink>
                         <button
                             className="editClientButton"
                             id="deleteOption"
                             onClick={handleDelete}
                         >
-                            Delete User
+                            Delete Client
                         </button>
                     </div>
+                    <p className="editClientInputError">{inputError}</p>
                 </div>
             );
         }

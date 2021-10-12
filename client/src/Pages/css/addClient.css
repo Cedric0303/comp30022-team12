@@ -10,6 +10,7 @@
     display: grid;
     margin: 0 16vw 0 6vw;
     grid-template-columns: 2fr 1fr;
+    grid-template-rows: 4fr 1fr;
     grid-template-areas: "addClientForm photoForm";
     gap: 15px;
 }
@@ -19,7 +20,11 @@
 }
 
 .photoForm {
-    grid-area: photoForm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
 }
 
 /* Form */
@@ -70,8 +75,10 @@
     width: 120px;
 }
 
-.inputError {
-    margin: 16px;
+.addClientInputError {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    margin-top: 16px;
     color: white;
 }
 

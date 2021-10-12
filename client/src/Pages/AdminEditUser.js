@@ -31,6 +31,7 @@ function AdminEditUser(props) {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [inputError, setInputError] = useState("");
 
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -52,11 +53,16 @@ function AdminEditUser(props) {
             (password.trim() === "") & (password.length > 0) ||
             (password !== "" && !validate_password(password))
         ) {
-            alert(
+            setInputError(
                 "Passwords must only be comprised of letters and numbers and be between 8-20 characters. " +
-                    "Please update your new password to meeting these requirements or leave the field empty."
+                    "Please update your new password or leave the field empty."
             );
-        } else if (requireFieldsFilled()) {
+        } else if (!requireFieldsFilled()){
+            setInputError(
+                "First Name, Last Name and Username fields must have a value!"
+            );
+
+        } else {
             const registerBody = {
                 username: username,
                 password: password,
@@ -65,10 +71,6 @@ function AdminEditUser(props) {
                 lastName: lastName,
             };
             postEditUser(registerBody, props.match.params.userID);
-        } else {
-            alert(
-                "First Name, Last Name and Username fields must have a value!"
-            );
         }
     };
 
@@ -108,7 +110,7 @@ function AdminEditUser(props) {
         if (loading) {
             return (
                 <div>
-                    <div className="edit-userbox">
+                    <div className="editUserBox">
                         <ul>Loading...</ul>
                     </div>
                     {loading && (
@@ -124,15 +126,15 @@ function AdminEditUser(props) {
             );
         } else if (error) {
             return (
-                <div className="edit-userbox">
+                <div className="editUserBox">
                     Something went wrong: {error.message}
                 </div>
             );
         } else {
             return (
                 <div>
-                    <h2 className="edit-user-heading">Edit User</h2>
-                    <div className="edit-user-container">
+                    <h2 className="editUserHeading">Edit User</h2>
+                    <div className="editUserGrid">
                         <div
                             className="edit-user-container-item"
                             id="item-left"
@@ -235,6 +237,16 @@ function AdminEditUser(props) {
                                     </div>
                                 </div>
                             </form>
+                            {/* <div className="editUserChanges"> */}
+                                <button
+                                    className="edit-user-button"
+                                    id="confirm-changes"
+                                    onClick={handleSubmit}
+                                >
+                                    Confirm Changes
+                                </button>
+                                
+                            {/* </div> */}
                         </div>
                         <div
                             className="edit-user-container-item"
@@ -246,26 +258,16 @@ function AdminEditUser(props) {
                             >
                                 Cancel
                             </NavLink>
+                            <button
+                                className="delete-option"
+                                onClick={() => {
+                                    setModalIsOpen(true);
+                                }}
+                            >
+                                Delete User
+                            </button>
                         </div>
-                    </div>
-
-                    <div className="edit-user-changes">
-                        <button
-                            className="edit-user-button"
-                            id="confirm-changes"
-                            onClick={handleSubmit}
-                        >
-                            Confirm Changes
-                        </button>
-                        <button
-                            className="edit-user-button"
-                            id="delete-option"
-                            onClick={() => {
-                                setModalIsOpen(true);
-                            }}
-                        >
-                            Delete User
-                        </button>
+                        <p className="editUserInputError">{inputError}</p>
                     </div>
                 </div>
             );
