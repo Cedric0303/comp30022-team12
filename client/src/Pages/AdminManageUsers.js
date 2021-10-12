@@ -14,8 +14,6 @@ function AdminManageUsers(props) {
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredUsers, setFilteredUsers] = useState(usersData);
 
-    
-
     function filterUsers(users, query) {
         var pattern = query
             .split("")
@@ -38,9 +36,7 @@ function AdminManageUsers(props) {
 
     useEffect(() => {
         if (usersData) {
-            setFilteredUsers(
-                filterUsers(usersData.users, searchQuery)
-            );
+            setFilteredUsers(filterUsers(usersData.users, searchQuery));
         }
     }, [usersData, searchQuery]);
 
@@ -101,7 +97,10 @@ function AdminManageUsers(props) {
                     }
                 `}</style>
                 <title>Manage Users - Admin Bobafish CRM</title>
-                <meta name="description" content="Create new users, edit existing users or delete users." />
+                <meta
+                    name="description"
+                    content="Create new users, edit existing users or delete users."
+                />
             </Helmet>
             <Navbar />
             <main className="manageUsersBox">
