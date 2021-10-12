@@ -286,13 +286,13 @@ function AdminEditUser(props) {
                 className="deleteConfirmModal"
                 isOpen={modalIsOpen}
                 contentLabel={"Confirm Delete User"}
-                overlayClassName={"delete-modal-overlay"}
+                overlayClassName={"deleteModalOverlay"}
                 ariaHideApp={false}
             >
                 <div className="deleteConfirmModalText">
                     Delete this user for all eternity?
                 </div>
-                <div className="delete-button-group">
+                <div className="deleteModalButtonGroup">
                     <button
                         className="editUserButton"
                         id="delete-user"

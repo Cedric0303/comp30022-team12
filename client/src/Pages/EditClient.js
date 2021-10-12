@@ -247,14 +247,13 @@ function EditClient(props) {
                             <h3 className="clientFormSubheading">Stage</h3>
                             {stage()}
                         </div>
-                        <div id="confirmChanges">
-                            <button
-                                className="editClientButton"
-                                onClick={handleSubmit}
-                            >
-                                Confirm Changes
-                            </button>
-                        </div>
+                        <button
+                            className="editClientButton"
+                            id="confirmChanges"
+                            onClick={handleSubmit}
+                        >
+                            Confirm Changes
+                        </button>
                     </form>
                     <div className="photoForm">
                         <NavLink to="/clients" className="cancelOption">

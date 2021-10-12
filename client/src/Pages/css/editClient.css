@@ -109,11 +109,11 @@
     border: none;
     font-family: inherit;
     color: white;
-    background-color: #78cd1b;
+    background-color: #4cc9f0;
 }
 
 .editClientButton:hover {
-    background-color: #569417;
+    background-color: #37a3c4;
 }
 
 .cancelOption {

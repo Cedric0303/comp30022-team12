@@ -104,7 +104,6 @@
 }
 
 .editUserButton {
-    height: 45px;
     width: auto;
     padding: 0 10px;
     border-radius: 10px;
@@ -114,6 +113,7 @@
 
 #confirmChanges {
     color: white;
+    background-color: #4cc9f0;
     width: auto;
     margin-top: 60px;
     padding: 8px 12px;
@@ -150,7 +150,7 @@
     z-index: 999;
 }
 
-.delete-modal-overlay {
+.deleteModalOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -159,7 +159,7 @@
     backdrop-filter: blur(8px);
 }
 
-.deleteConfirmModalText {
+.deleteConfirmModalText{
     font-size: 150%;
     font-weight: 700;
     margin: 0 0 15px;
@@ -167,7 +167,7 @@
 }
 
 /* Modal Buttons inherit from .editUserButton */
-.delete-button-group {
+.deleteModalButtonGroup {
     display: grid;
     gap: 2em;
     align-items: center;
