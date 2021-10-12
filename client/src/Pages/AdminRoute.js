@@ -16,7 +16,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
                         <div id="errorDiv">
                             <img
                                 src="https://memegenerator.net/img/instances/71496815/404-you-shall-not-pass.jpg"
-                                alt="Error 404 Image"
+                                alt="Error 404 You Shall Not Pass"
                             ></img>
                             <p>Error 404: Page not found.</p>
                             <p>
