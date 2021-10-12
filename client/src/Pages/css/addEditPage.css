@@ -73,6 +73,7 @@
     grid-row-start: 2;
     margin-top: 16px;
     color: white;
+    font-size: 16px;
 }
 
 /* Common styling between Creat UserClient Button and Confirm Changes Button */
