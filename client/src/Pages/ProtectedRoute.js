@@ -8,9 +8,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
         {...rest}
         render={(props) => {
             if (!Auth.getAuth()) {
-                return <Error {...props} error={404} />;
-            } else if (!Auth.getIsAdmin()) {
-                return <Error {...props} error={401} />;
+                return <Error {...props} error={400} />;
             } else {
                 return <Component {...props} />;
             }

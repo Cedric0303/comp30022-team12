@@ -8,6 +8,17 @@ export default function Error(props) {
 
     const handleError = (error) => {
         switch (error) {
+            case 400:
+                return (
+                    <div>
+                        <p>Error 400: Not logged in.</p>
+                        <p>Please log in to access the website.</p>
+                        <br />
+                        <NavLink id="loginButton" to={"/"}>
+                            <p>Login</p>
+                        </NavLink>
+                    </div>
+                );
             case 401:
                 return (
                     <div>
@@ -27,12 +38,12 @@ export default function Error(props) {
                     <div>
                         <p>Error 404: Page not found.</p>
                         <p>
-                            This page does not exist. Please contact your
+                            This page couldn't be found. Please contact your
                             administrator.
                         </p>
                         <br />
-                        <NavLink id="loginButton" to={"/"}>
-                            <p>Login</p>
+                        <NavLink id="loginButton" to={"/home"}>
+                            <p>Home</p>
                         </NavLink>
                     </div>
                 );
