@@ -6,9 +6,9 @@ export default function OrderRow(order) {
     const { _id, updatedAt, orderTotal } = order;
 
     return (
-        <div className="portalRow">
-            <span className="leftAlign">{_id}</span>
-            <span className="centerAlign">
+        <div className="portalRow portalOrderRow">
+            <span>{_id}</span>
+            <span>
                     <Moment format="Do MMM YY">{updatedAt}</Moment>
             </span>
             <span className="rightAlign">{orderTotal}</span>

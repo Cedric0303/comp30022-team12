@@ -160,3 +160,26 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+/* portal Order Box */
+
+.portalOrder {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    column-gap: 1em;
+
+    font-size: 16px;
+    padding: 5px 12px;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.portalOrderRow {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    column-gap: 1em;
+}
+
+.portalOrderRow * {
+    overflow-wrap: anywhere;
+}
