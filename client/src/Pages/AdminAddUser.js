@@ -63,19 +63,19 @@ function AdminAddUser(props) {
             <Navbar />
             <h2 className="addUserHeading">Add User</h2>
             <div className="addUserGrid">
-                <div className="add-user-container-item" id="item-left">
+                <div className="addUserItem" id="itemLeft">
                     <form
                         method="post"
                         onSubmit={handleSubmit}
                         className="addUserForm"
                     >
-                        <div className="field-group" id="name-info">
+                        <div className="field-group" id="nameInfo">
                             <div className="field">
                                 <label className="addUserSubheading">
                                     First Name:
                                 </label>
                                 <input
-                                    className="add-user-input"
+                                    className="addUserInput"
                                     required
                                     type="text"
                                     placeholder="First Name"
@@ -90,7 +90,7 @@ function AdminAddUser(props) {
                                     Last Name:
                                 </label>
                                 <input
-                                    className="add-user-input"
+                                    className="addUserInput"
                                     required
                                     type="text"
                                     placeholder="Last Name"
@@ -101,13 +101,13 @@ function AdminAddUser(props) {
                                 />
                             </div>
                         </div>
-                        <div className="field-group" id="login-info">
+                        <div className="field-group" id="loginInfo">
                             <div className="field">
                                 <label className="addUserSubheading">
                                     Username:
                                 </label>
                                 <input
-                                    className="add-user-input"
+                                    className="addUserInput"
                                     required
                                     type="text"
                                     placeholder="Username"
@@ -117,12 +117,12 @@ function AdminAddUser(props) {
                                     }
                                 />
                             </div>
-                            <div className="field" id="password-field">
+                            <div className="field" id="passwordField">
                                 <label className="addUserSubheading">
                                     Password:
                                 </label>
                                 <input
-                                    className="add-user-input"
+                                    className="addUserInput"
                                     required
                                     type={isRevealPwd ? "text" : "password"}
                                     placeholder="Password"
@@ -155,7 +155,7 @@ function AdminAddUser(props) {
                         <div className="addUserCreateGroup">
                             <button
                                 className="addUserButton"
-                                id="create-user"
+                                id="createUser"
                                 onClick={handleSubmit}
                             >
                                 Create User
@@ -164,8 +164,8 @@ function AdminAddUser(props) {
                         </div>
                     </form>
                 </div>
-                <div className="add-user-container-item" id="item-right">
-                    <NavLink to="/admin/users" activeClassName="cancel-option">
+                <div className="addUserItem" id="itemRight">
+                    <NavLink to="/admin/users" activeClassName="cancelOption">
                         Cancel
                     </NavLink>
                 </div>

@@ -7,8 +7,6 @@
 }
 
 .addUserGrid {
-    /* display: flex;
-    margin: 0 6vw; */
     display: grid;
     margin: 0 16vw 0 6vw;
     grid-template-columns: 2fr 1fr;
@@ -18,7 +16,6 @@
 
 /* Form */
 .addUserForm {
-    
     padding-top: 50px;
     display: grid;
     width: 50%;
@@ -42,17 +39,17 @@
     font-weight: 500;
 }
 
-/* change colour for name-info labels */
-#name-info > .field > .addUserSubheading {
+/* change colour for nameInfo labels */
+#nameInfo > .field > .addUserSubheading {
     color: whitesmoke;
 }
 
-/* change colour for login-info labels */
-#login-info > .field > .addUserSubheading {
+/* change colour for loginInfo labels */
+#loginInfo > .field > .addUserSubheading {
     color: #4cc9f0;
 }
 
-.add-user-input {
+.addUserInput {
     padding: 10px;
     margin: 10px 0;
     border-radius: 10px;
@@ -60,12 +57,12 @@
     border-style: none;
 }
 
-#password-field {
+#passwordField {
     display: flex;
 }
 
 /* Right justify Cancel button*/
-.addUserGrid #item-right {
+.addUserGrid #itemRight {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -75,30 +72,20 @@
 }
 
 /* Styling for Red Underline Options */
-.add-user-container-item > .cancel-option {
+.addUserItem > .cancelOption {
     font-weight: 400;
     font-size: x-large;
     color: #e13d55;
     text-decoration: underline;
 }
 
-.add-user-container-item > .cancel-option:hover {
+.addUserItem > .cancelOption:hover {
     color: #b83548;
 }
 
-/* .addUserCreateGroup {
-    display: inline-block;
-} */
 
 /* Buttons */
-
 .addUserButton {
-    /* margin: 6vw;
-    height: 45px;
-    padding: 0 10px;
-    border-radius: 10px;
-    border-style: none;
-    cursor: pointer; */
     width: auto;
     margin-top: 60px;
     padding: 8px 12px;
@@ -112,14 +99,8 @@
     max-width: fit-content;
 }
 
-/* #create-user {
-    color: white;
-    font-size: x-large;
-    background-color: #52b788;
-} */
-
 /* Button colour darkens on hover */
-#create-user:hover {
+#createUser:hover {
     background-color: #569417;
 }
 
