@@ -37,8 +37,9 @@ export default function OrderPortal(props) {
         } else {
             return (
                 <div className="portalContent">
-                    <div className="portalSub">
-                        <span className="leftAlign">Order ID</span>
+                    <div className="portalOrder">
+                        <span>Order ID</span>
+                        <span>Last Updated</span>
                         <span className="rightAlign">Total</span>
                     </div>
                     {ordersData.orders.map((order) => (
@@ -50,7 +51,10 @@ export default function OrderPortal(props) {
     };
     return (
         <div className="clientOrdersPortal">
-            <NavLink to={"/clients/" + props.cid + "/orders"}>
+            <NavLink to={{
+                pathname: "/clients/" + props.cid + "/orders",
+                state: {cid: props.cid}
+            }}>
                 <p className="portalHeading">
                     Order History <FontAwesomeIcon icon="chevron-right" />
                 </p>
