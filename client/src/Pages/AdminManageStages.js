@@ -114,7 +114,7 @@ function AdminManageStages(props) {
         const updatedList = input.map((current, index) => {
             const currentStage = current;
             currentStage.newPos = index;
-            if (currentStage.position !== index) {
+            if (currentStage.position-1 !== index) {
                 currentStage.movedPos = true;
             } else {
                 currentStage.movedPos = false;
@@ -161,7 +161,7 @@ function AdminManageStages(props) {
             payload.stageArray.push({
                 oldSID: stagesData[i].id,
                 newStageName: stagesData[i].name,
-                newPosition: stagesData[i].newPos,
+                newPosition: stagesData[i].newPos+1,
             });
         }
         postStagePosUpdate(payload);
