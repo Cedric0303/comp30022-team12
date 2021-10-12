@@ -80,13 +80,6 @@
     width: 120px;
 }
 
-.editClientInputError {
-    grid-column-start: 1;
-    grid-row-start: 2;
-    margin-top: 16px;
-    color: white;
-}
-
 .stageChoice {
     display: block;
     margin-top: 10px;
@@ -116,20 +109,7 @@
     background-color: #37a3c4;
 }
 
-.cancelOption {
-    padding: 0;
-    margin: 0;
-    width: 100px;
-    float: right;
-    font-weight: 400;
-    font-size: x-large;
-    color: #e13d55;
-    text-decoration: underline;
-}
 
-.editClientChanges > #deleteOption:hover, .cancelOption:hover {
-    color: #cc7985;
-}
 
 .editClientChanges {
     display: flex;
@@ -137,12 +117,4 @@
     margin: 0 16vw 0 6vw;
 }
 
-#deleteOption {
-    font-weight: 400;
-    font-size: x-large;
-    color: #e13d55;
-    text-decoration: underline;
-    background: none;
-    border: none;
-}
 

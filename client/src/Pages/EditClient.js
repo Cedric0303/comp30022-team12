@@ -6,6 +6,7 @@ import Navbar from "../Components/Navbar/Navbar.js";
 import { getClient, postEditClient, deleteClient, useStages } from "../api.js";
 import Auth from "./Auth.js";
 import "./css/editClient.css";
+import "./css/addEditPage.css";
 
 function EditClient(props) {
     const [loading, setLoading] = useState(true);
@@ -255,20 +256,18 @@ function EditClient(props) {
                             {stage()}
                         </div>
                         <button
-                            className="editClientButton"
-                            id="confirmChanges"
+                            className="addEditConfirmChangeBtn"
                             onClick={handleSubmit}
                         >
                             Confirm Changes
                         </button>
                     </form>
                     <div className="photoForm">
-                        <NavLink to="/clients" className="cancelOption">
+                        <NavLink to="/clients" className="addEditCancelBtn">
                             Cancel
                         </NavLink>
                         <button
-                            className="editClientButton"
-                            id="deleteOption"
+                            className="addEditDeleteBtn"
                             onClick={() => {
                                 setModalIsOpen(true);
                             }}
@@ -276,7 +275,7 @@ function EditClient(props) {
                             Delete Client
                         </button>
                     </div>
-                    <p className="editClientInputError">{inputError}</p>
+                    <p className="addEditInputError">{inputError}</p>
                 </div>
             );
         }

@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { postUser } from "../api.js";
 import "./css/adminAddUser.css";
+import "./css/addEditPage.css";
 import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
 
@@ -154,8 +155,7 @@ function AdminAddUser(props) {
                         </div>
                         <div className="addUserCreateGroup">
                             <button
-                                className="addUserButton"
-                                id="createUser"
+                                className="addEditCreateBtn"
                                 onClick={handleSubmit}
                             >
                                 Create User
@@ -165,11 +165,11 @@ function AdminAddUser(props) {
                     </form>
                 </div>
                 <div className="addUserItem" id="itemRight">
-                    <NavLink to="/admin/users" activeClassName="cancelOption">
+                    <NavLink to="/admin/users" activeClassName="addEditCancelBtn">
                         Cancel
                     </NavLink>
                 </div>
-                <p className="addUserInputError">{inputError}</p>
+                <p className="addEditInputError">{inputError}</p>
             </div>
 
             

@@ -6,6 +6,7 @@ import Navbar from "../Components/Navbar/Navbar.js";
 import { getUser } from "../api.js";
 import { postEditUser, deleteUser } from "../api.js";
 import "./css/adminEditUser.css";
+import "./css/addEditPage.css";
 import showPwdImg from "./css/show-password.png";
 import hidePwdImg from "./css/hide-password.png";
 import ReactLoading from "react-loading";
@@ -238,8 +239,7 @@ function AdminEditUser(props) {
                                 </div>
                             </form>
                                 <button
-                                    className="editUserButton"
-                                    id="confirmChanges"
+                                    className="addEditConfirmChangeBtn"
                                     onClick={handleSubmit}
                                 >
                                     Confirm Changes
@@ -251,12 +251,12 @@ function AdminEditUser(props) {
                         >
                             <NavLink
                                 to="/admin/users"
-                                activeClassName="cancelOption"
+                                activeClassName="addEditCancelBtn"
                             >
                                 Cancel
                             </NavLink>
                             <button
-                                className="deleteOption"
+                                className="addEditDeleteBtn"
                                 onClick={() => {
                                     setModalIsOpen(true);
                                 }}
@@ -264,7 +264,7 @@ function AdminEditUser(props) {
                                 Delete User
                             </button>
                         </div>
-                        <p className="editUserInputError">{inputError}</p>
+                        <p className="addEditInputError">{inputError}</p>
                     </div>
                 </div>
             );

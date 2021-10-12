@@ -4,6 +4,7 @@ import validator from "validator";
 import Navbar from "../Components/Navbar/Navbar.js";
 import { postClient, useStages } from "../api.js";
 import "./css/addClient.css";
+import "./css/addEditPage.css";
 import Auth from "./Auth.js";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
@@ -204,16 +205,16 @@ function AddClient(props) {
                         <h3 className="clientFormSubheading">Stage</h3>
                         {stage()}
                     </div>
-                    <button className="addClientButton" onClick={onSubmit}>
+                    <button className="addEditCreateBtn" onClick={onSubmit}>
                         Create Client
                     </button>
                 </form>
                 <div className="photoForm">
-                    <NavLink to="/clients" className="cancelOption">
+                    <NavLink to="/clients" className="addEditCancelBtn">
                         Cancel
                     </NavLink>
                 </div>
-                <p className="addClientInputError">{inputError}</p>
+                <p className="addEditInputError">{inputError}</p>
             </div>
         </div>
     );
