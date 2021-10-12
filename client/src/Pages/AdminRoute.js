@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import Auth from "./Auth.js";
 import { NavLink } from "react-router-dom";
 import "./css/error404.css";
+import error404Image from "./css/404-you-shall-not-pass.jpg";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -15,7 +16,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
                     <div>
                         <div id="errorDiv">
                             <img
-                                src="https://memegenerator.net/img/instances/71496815/404-you-shall-not-pass.jpg"
+                                src={error404Image}
                                 alt="Error 404 You Shall Not Pass"
                             ></img>
                             <p>Error 404: Page not found.</p>
