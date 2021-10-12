@@ -21,7 +21,7 @@
 }
 
 /* Form */
-.edit-user-form {
+.editUserForm {
     font-size: 20px;
     font-weight: 500;
     padding-top: 50px;
@@ -29,7 +29,7 @@
     width: 50%;
 }
 
-.field-group {
+.feildGroup {
     padding-bottom: 40px;
 }
 
@@ -38,7 +38,7 @@
     align-items: center;
 }
 
-.edit-user-label {
+.editUserLabel {
     padding: 12px 12px 12px 0;
     float: left;
     width: 100px;
@@ -46,16 +46,16 @@
 }
 
 /* change colour for name-info labels */
-#name-info > .field > .edit-user-label {
+#name-info > .field > .editUserLabel {
     color: whitesmoke;
 }
 
-/* change colour for login-info labels */
-#login-info > .field > .edit-user-label {
+/* change colour for loginInfo labels */
+#loginInfo > .field > .editUserLabel {
     color: #4cc9f0;
 }
 
-.edit-user-input {
+.editUserInput {
     padding: 10px;
     margin: 10px 0;
     border-radius: 10px;
@@ -63,12 +63,12 @@
     border-style: none;
 }
 
-#password-field {
+#passwordField {
     display: flex;
 }
 
 /* Right justify Cancel button*/
-.editUserGrid #item-right {
+.editUserGrid #itemRight {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -78,32 +78,32 @@
 }
 
 /* Styling for Red Underline Options */
-.edit-user-container-item > .cancel-option,
-.edit-user-container-item > .delete-option {
+.editUserItem > .cancelOption,
+.editUserItem > .deleteOption {
     font-weight: 400;
     font-size: x-large;
     color: #e13d55;
     text-decoration: underline;
 }
 
-.edit-user-container-item > .delete-option {
+.editUserItem > .deleteOption {
     background: none;
     border: none;
 }
 
-.edit-user-container-item > .cancel-option:hover,
-.edit-user-container-item > .delete-option:hover {
+.editUserItem > .cancelOption:hover,
+.editUserItem > .deleteOption:hover {
     color: #b83548;
 }
 
 /* Confirm Button, Delete User */
 
-.edit-user-button {
+.editUserButton {
     display: inline-block;
     margin-top: 60px;
 }
 
-.edit-user-button {
+.editUserButton {
     height: 45px;
     width: auto;
     padding: 0 10px;
@@ -112,10 +112,8 @@
     cursor: pointer;
 }
 
-#confirm-changes {
+#confirmChanges {
     color: white;
-    /* font-size: x-large; */
-    background-color: #4cc9f0;
     width: auto;
     margin-top: 60px;
     padding: 8px 12px;
@@ -134,12 +132,12 @@
 }
 
 /* Button colour darkens on hover */
-#confirm-changes:hover {
+#confirmChanges:hover {
     background-color: #37a3c4;
 }
 
 /* Modal */
-.delete-user-modal {
+.deleteConfirmModal {
     text-align: center;
     width: 500px;
     position: absolute;
@@ -161,14 +159,14 @@
     backdrop-filter: blur(8px);
 }
 
-.delete-user-modal-text {
+.deleteConfirmModalText {
     font-size: 150%;
     font-weight: 700;
     margin: 0 0 15px;
     padding-bottom: 2em;
 }
 
-/* Modal Buttons inherit from .edit-user-button */
+/* Modal Buttons inherit from .editUserButton */
 .delete-button-group {
     display: grid;
     gap: 2em;
