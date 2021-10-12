@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import validator from "validator";
 import Navbar from "../Components/Navbar/Navbar.js";
-import { postClient, useStages } from "../api.js";
+import { postClient, useStages, getStages } from "../api.js";
 import "./css/addClient.css";
 import Auth from "./Auth.js";
 import ReactLoading from "react-loading";
 import "./css/animation.css";
+
+// Returns the first stage as an object
+function firstStage(stages) {
+    stages = stages || [];
+    return stages.find((s) => s.position === 0)
+}
 
 function AddClient(props) {
     const [firstName, setFirstName] = useState("");
@@ -22,6 +28,15 @@ function AddClient(props) {
     function notEmpty() {
         return firstName && lastName && email && address && phoneNo;
     }
+
+    useEffect(() => {
+        getStages().then((stagesData) => {
+            setClientStage(firstStage(stagesData.stages).name);
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -89,12 +104,12 @@ function AddClient(props) {
                                 key={"label" + stage.id}
                                 className="stageChoice"
                             >
-                                {stage.position === 0 ? (
+                                {stage.name === clientStage ? (
                                     <input
                                         key={stage.id}
                                         type="radio"
                                         name="stage"
-                                        value={stage.stageID}
+                                        value={stage.name}
                                         onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }
@@ -105,7 +120,7 @@ function AddClient(props) {
                                         key={stage.id}
                                         type="radio"
                                         name="stage"
-                                        value={stage.stageID}
+                                        value={stage.name}
                                         onChange={(e) =>
                                             setClientStage(e.target.value)
                                         }

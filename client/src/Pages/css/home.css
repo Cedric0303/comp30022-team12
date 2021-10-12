@@ -1,0 +1,101 @@
+.homeGrid {
+    display: grid;
+    margin: 15px 6vw;
+    height: 85vh;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 3fr 1fr;
+    grid-gap: 1em;
+}
+
+.homeGrid > UserMeetingPortal {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.homePortals {
+    background-color: white;
+    border-radius: 15px;
+}
+
+.homeGrid RecentClient {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.calGroup {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.calLabel {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.calLabelText {
+    text-align: center;
+    font-weight: 700;
+}
+
+.homeViewCal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: whitesmoke;
+    border-radius: 10px;
+    height: 8%;
+    width: 100%;
+    font-weight: 700;
+}
+
+.homeActualCal {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    height: 85%;
+}
+
+.homeButtonGroup {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1em;
+}
+
+.homeButtonGroup > .homeAddClient,
+.homeButtonGroup > .homeViewClient {
+    font-size: 60px;
+    color: white;
+    background: #7aade1;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+#homeButtonText {
+    font-size: 15px;
+}
+
+.homeImageContainer {
+    position: relative;
+    top: calc(50% - 45px); /* 50% - 3/4 of icon height */
+}
+
+.homeButtonGroup > .homeAddClient:hover,
+.homeButtonGroup > .homeViewClient:hover {
+    background: #1d76d8;
+}
