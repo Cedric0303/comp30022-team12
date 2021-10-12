@@ -1,0 +1,188 @@
+#orderBox {
+    margin: 0;
+    padding: 0;
+}
+
+#clientName {
+    font-size: 3em;
+    font-weight: 700;
+    color: white;
+    margin-left: 6vw;
+}
+
+#orderHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 6vw 0.8vh 0;
+}
+
+#orderHeading {
+    font-size: 2em;
+    font-weight: 500;
+    color: #051e39;
+    margin-left: 6vw;
+}
+
+#addOrderButton {
+    border: none;
+    border-radius: 8px;
+
+    width: max-content;
+    padding: 0.6em 1.2em;
+    background: #81e411;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+}
+
+#addOrderButton:hover {
+    filter: brightness(0.8);
+}
+
+
+#orderHistoryBox {
+    height: auto;
+    background-color: white;
+}
+
+#orderHistory {
+    width: 100%;
+    height: max-content;
+    background-color: #ebebeb;
+    border-top: 1px solid #6d6d6d;
+    border-spacing: 0;
+}
+
+#orderHistory th {
+
+    border-bottom: 1px solid #6d6d6d;
+    border-right: 1px solid #6d6d6d;
+    color: #051e39;
+
+    text-align: left;
+    padding: 0.6vh 0.5em;
+    font-weight: 500;
+}
+
+#orderHistory tbody, #orderHistory tr, #orderHistory td {
+    margin: 0;
+    padding: 0.6vh 0.5em;
+    border: none;
+    border-right: 1px solid #6d6d6d;
+    border-bottom: 1px solid #6d6d6d;
+}
+
+#orderHistory td {
+    font-size: 1.2em;
+}
+
+#orderID { width: 40%; }
+#lastUpdate { width: 30%; }
+#amount { width: 30%; }
+
+#orderHistory tbody {
+    background-color: white;
+    border-top: 1px solid #6d6d6d;
+}
+
+/* add order modal styling */
+
+.addOrderModal {
+    position: absolute;
+    height: max-content;
+    width: max-content;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: none;
+    border-radius: 20px;
+
+    background: white;
+    overflow: auto;
+    outline: none;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.addOrderModalOverlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #70707065;
+}
+
+#modalHeading {
+    margin-bottom: 0.5vh;
+}
+
+#addOrderForm {
+    display: grid;
+    row-gap: 0.5em;
+    grid-template-areas:
+        "input input"
+        "addbutton cancel";
+}
+
+#orderTotal { 
+    display: flex;
+    column-gap: 0.4em;
+    justify-content: center;
+    align-items: center;
+    grid-area: input; 
+}
+
+#orderTotal input {
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+#modalAddOrderButton { 
+    grid-area: addbutton; 
+    border: none;
+    border-radius: 8px;
+
+    width: max-content;
+    padding: 0.3em 1em;
+    background: #81e411;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+}
+
+#modalAddOrderButton:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
+#modalOrderCancelButton { 
+    grid-area: cancel; 
+    border: none;
+    background: none;
+
+    display: flex;
+    justify-self: end;
+    align-self: end;
+
+    width: fit-content;
+    height: fit-content;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: #d62626;
+}
+
+#modalOrderCancelButton:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+    text-decoration: underline;
+}
