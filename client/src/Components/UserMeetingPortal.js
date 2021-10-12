@@ -16,7 +16,7 @@ export default function UserMeetingPortal(props) {
                     <p>Loading...</p>
                 </div>
             );
-        } else if (!clientsData.clients) { // allow clients to be populated
+        } else if (!clientsData) { // allow clients to be populated
             return (
                 <div className="portalContent">
                     <p>No clients found! Reload or start adding clients.</p>
@@ -36,8 +36,8 @@ export default function UserMeetingPortal(props) {
             const findClient = (cid) => {
                 if (cliLoading) {
                 } else if (cliError) {
-                } else if (clientsData.clients !== undefined) {
-                    return clientsData.clients.find((c) => c.email === cid);
+                } else if (clientsData !== undefined) {
+                    return clientsData.find((c) => c._id === cid);
                 } else {
                 }
             };

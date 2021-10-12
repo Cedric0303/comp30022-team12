@@ -22,6 +22,7 @@ function filterClients(clients) {
 
 export default function RecentClients(props) {
     const { loading, clientsData, error } = useClients();
+    console.log(clientsData)
 
     const clientContent = () => {
         if (loading) {
@@ -45,7 +46,7 @@ export default function RecentClients(props) {
                             <th>Stage</th>
                         </tr>
                     </thead>
-                    {filterClients(clientsData.clients).map((client) => (
+                    {filterClients(clientsData).map((client) => (
                         <tbody key={client.email}>
                             <tr className="recentClientRow">
                                 <td id="recentClientTd">

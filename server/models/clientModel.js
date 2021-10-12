@@ -13,7 +13,7 @@ const clientSchema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     photoURL: { type: String },
-    userReference: { type: String, required: true },
+    userReference: { type: Schema.Types.ObjectId, ref: "User", required: true },
     stage: { type: String },
     updatedAt: { type: Date, required: true },
     notes: [],

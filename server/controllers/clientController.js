@@ -6,17 +6,14 @@ const { ClientModel, NoteModel } = require("../models/clientModel.js");
 
 const Stages = db.collection("stages");
 const Clients = db.collection("clients");
+const Users = db.collection("users");
 const RecycleBin = db.collection("recycle-bin");
 
 const getClients = async (req, res) => {
     if (!req.body.userReference) {
         const clients = await Clients.find(
             {},
-            {
-                projection: {
-                    _id: false,
-                },
-            }
+            {}
         ).toArray();
         res.json({
             message: "Get all clients successful!",
@@ -24,15 +21,14 @@ const getClients = async (req, res) => {
         });
     } else {
         try {
+            const user = await Users.findOne({
+                username: req.body.userReference,
+            });
             const clients = await Clients.find(
                 {
-                    userReference: req.body.userReference,
+                    userReference: user._id,
                 },
-                {
-                    projection: {
-                        _id: false,
-                    },
-                }
+                {}
             ).toArray();
             res.json({
                 message: "Get clients successful!",
@@ -52,11 +48,7 @@ const getClient = async (req, res) => {
         {
             email: req.params.cid,
         },
-        {
-            projection: {
-                _id: false,
-            },
-        }
+        {}
     );
     res.json({
         message: "Get client successful!",
@@ -80,9 +72,6 @@ const addClientNote = async (req, res) => {
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
         },
         (err, doc) => {
@@ -116,9 +105,6 @@ const removeClientNote = async (req, res) => {
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
         },
         (err, doc) => {
@@ -150,9 +136,6 @@ const changeClientStage = async (req, res) => {
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
         },
         (err, doc) => {
@@ -190,6 +173,10 @@ const createClient = async (req, res) => {
             stageName = newStage.name;
         }
 
+        const user = await Users.findOne({
+            username: req.body.userReference,
+        });
+
         const newClient = new ClientModel({
             email: req.body.email,
             address: req.body.address,
@@ -197,7 +184,7 @@ const createClient = async (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             photoURL: req.body.photoURL,
-            userReference: req.body.userReference,
+            userReference: user._id,
             stage: stageName,
             updatedAt: new Date(),
             notes: [],
@@ -207,11 +194,7 @@ const createClient = async (req, res) => {
             {
                 _id: result._id,
             },
-            {
-                projection: {
-                    _id: false,
-                },
-            }
+            {}
         );
         res.json({
             message: "Client creation successful!",
@@ -228,6 +211,9 @@ const editClient = async (req, res) => {
     const stage = await Stages.findOne({
         name: req.body.stage,
     });
+    const user = await Users.findOne({
+        username: req.body.userReference,
+    });
     await Clients.findOneAndUpdate(
         {
             email: req.params.cid,
@@ -240,15 +226,12 @@ const editClient = async (req, res) => {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 photoURL: req.body.photoURL,
-                userReference: req.body.userReference,
+                userReference: user._id,
                 stage: stage.id,
                 updatedAt: new Date(),
             },
         },
         {
-            projection: {
-                _id: false,
-            },
             returnDocument: "after",
         },
         (err, doc) => {

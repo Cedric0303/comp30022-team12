@@ -10,8 +10,8 @@ const orderItemSchema = new Schema({
 
 const orderSchema = new Schema({
     orderItem: [],
-    clientReference: { type: String, required: true },
-    userReference: { type: String, required: true },
+    clientReference: { type: Schema.Types.ObjectId, ref: "Client", required: true },
+    userReference: { type: Schema.Types.ObjectId, ref: "User", required: true },
     orderTotal: { type: Number, required: true },
     updatedAt: { type: Date, required: true },
 });
