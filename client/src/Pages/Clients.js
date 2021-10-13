@@ -136,15 +136,13 @@ function Clients(props) {
                     <div className="clientsBox">
                         <ul>Loading...</ul>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
@@ -189,7 +187,10 @@ function Clients(props) {
         <div className="clients">
             <Helmet>
                 <title>Clients - Bobafish CRM</title>
-                <meta name="description" content="View clients, check meetings and orders" />
+                <meta
+                    name="description"
+                    content="View clients, check meetings and orders"
+                />
             </Helmet>
             <Navbar />
             <main className="clientsBox">

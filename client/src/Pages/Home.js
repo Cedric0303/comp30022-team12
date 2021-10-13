@@ -9,6 +9,8 @@ import RecentClients from "../Components/RecentClients.js";
 import Navbar from "../Components/Navbar/Navbar.js";
 import "./css/home.css";
 import { Helmet } from "react-helmet";
+import ReactLoading from "react-loading";
+import "../Pages/css/animation.css";
 
 function Home(props) {
     const localizer = momentLocalizer(moment);
@@ -20,6 +22,13 @@ function Home(props) {
             return (
                 <div>
                     <p>Loading...</p>
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
@@ -48,7 +57,10 @@ function Home(props) {
         <div>
             <Helmet>
                 <title>Home - Bobafish CRM</title>
-                <meta name="description" content="Main dashboard for Bobafish CRM" />
+                <meta
+                    name="description"
+                    content="Main dashboard for Bobafish CRM"
+                />
             </Helmet>
             <Navbar />
             <div className="homeGrid">
