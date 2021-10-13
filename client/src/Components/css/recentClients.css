@@ -13,32 +13,57 @@
 
 .recentClientTable {
     width: 100%;
+    border-collapse: collapse;
 }
 
-.recentClientTable td{
+.recentClientRow {
+    margin-top: -1;
     border-bottom: 1px solid #b3ddfd;
+    height: 1px;
 }
-
 .recentClientTable > tbody {
-    font-size: 20px;
-}
-
-
-
-#recentClientTd {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    font-size: 18px;
 }
 
 .recentClientTable td:first-child {
-    padding-left: 10px;
+    text-align: center;
+    width: 60px;
 }
 
-.recentClientName {
+.recentClientTable td:not(:first-child) {
+    padding: 8px 0;
+    height: inherit;
+}
+
+#recentClientTd {
+    padding: 8px 0;
+    height: inherit;
+}
+
+.recentClientNameBox {
+    display:inline-block;
+}
+
+#recentCliNameField {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10%;
     color: #b3ddfd;
     font-weight: 650;
+    height: 100%;
+    align-items: center;
 }
 
-.recentClientName:hover {
-    color: #85a7ca;
+#hide {
+    visibility: hidden;
+}
+
+#recentCliNameField:hover {
+    color: white;
+}
+
+#recentCliNameField:hover #hide {
+    color: white;
+    visibility: visible;
+    cursor: pointer;
 }

@@ -47,15 +47,13 @@ function AdminManageUsers(props) {
                     <div className="usersBox">
                         <ul>Loading...</ul>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {

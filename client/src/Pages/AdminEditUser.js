@@ -64,11 +64,10 @@ function AdminEditUser(props) {
                 "Passwords must only be comprised of letters and numbers and be between 8-20 characters. " +
                     "Please update your new password or leave the field empty."
             );
-        } else if (!requireFieldsFilled()){
+        } else if (!requireFieldsFilled()) {
             setInputError(
                 "First Name, Last Name and Username fields must have a value!"
             );
-
         } else {
             const registerBody = {
                 username: username,
@@ -121,15 +120,13 @@ function AdminEditUser(props) {
                     <div className="editUserBox">
                         <ul>Loading...</ul>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
@@ -143,10 +140,7 @@ function AdminEditUser(props) {
                 <div>
                     <h2 className="editUserHeading">Edit User</h2>
                     <div className="editUserGrid">
-                        <div
-                            className="editUserItem"
-                            id="item-left"
-                        >
+                        <div className="editUserItem" id="item-left">
                             <form
                                 method="post"
                                 onSubmit={handleSubmit}
@@ -245,17 +239,14 @@ function AdminEditUser(props) {
                                     </div>
                                 </div>
                             </form>
-                                <button
-                                    className="addEditConfirmChangeBtn"
-                                    onClick={handleSubmit}
-                                >
-                                    Confirm Changes
-                                </button>
+                            <button
+                                className="addEditConfirmChangeBtn"
+                                onClick={handleSubmit}
+                            >
+                                Confirm Changes
+                            </button>
                         </div>
-                        <div
-                            className="editUserItem"
-                            id="itemRight"
-                        >
+                        <div className="editUserItem" id="itemRight">
                             <NavLink
                                 to="/admin/users"
                                 activeClassName="addEditCancelBtn"
@@ -302,10 +293,7 @@ function AdminEditUser(props) {
                     Delete this user for all eternity?
                 </div>
                 <div className="deleteModalButtonGroup">
-                    <button
-                        id="modalDeleteBtn"
-                        onClick={handleDelete}
-                    >
+                    <button id="modalDeleteBtn" onClick={handleDelete}>
                         Delete
                     </button>
                     <button

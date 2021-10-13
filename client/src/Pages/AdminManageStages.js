@@ -94,7 +94,7 @@ function AdminManageStages(props) {
                 .join("");
             var regex = new RegExp(`^${pattern}`, "i");
             return stages.filter((stage) => {
-                return regex.test(stage.name) || regex.test(stage.position + 1);
+                return regex.test(stage.name) || regex.test(stage.position);
             });
         }
     }
@@ -114,7 +114,7 @@ function AdminManageStages(props) {
         const updatedList = input.map((current, index) => {
             const currentStage = current;
             currentStage.newPos = index;
-            if (currentStage.position-1 !== index) {
+            if (currentStage.position - 1 !== index) {
                 currentStage.movedPos = true;
             } else {
                 currentStage.movedPos = false;
@@ -161,7 +161,7 @@ function AdminManageStages(props) {
             payload.stageArray.push({
                 oldSID: stagesData[i].id,
                 newStageName: stagesData[i].name,
-                newPosition: stagesData[i].newPos+1,
+                newPosition: stagesData[i].newPos + 1,
             });
         }
         postStagePosUpdate(payload);
@@ -183,21 +183,21 @@ function AdminManageStages(props) {
                     <div className="stagesBox">
                         <p className="stagesMessage">Loading...</p>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
             return (
                 <div className="stagesBox">
-                    <p className="stagesMessage">Something went wrong: {error.message}</p>
+                    <p className="stagesMessage">
+                        Something went wrong: {error.message}
+                    </p>
                 </div>
             );
         } else {
@@ -293,7 +293,10 @@ function AdminManageStages(props) {
                     }
                 `}</style>
                 <title>Manage Stages - Admin Bobafish CRM</title>
-                <meta name="description" content="Create new stages, edit existing stage names, reorder stage positions or delete stages." />
+                <meta
+                    name="description"
+                    content="Create new stages, edit existing stage names, reorder stage positions or delete stages."
+                />
             </Helmet>
             <Navbar />
             <main className="manageStagesBox">

@@ -17,15 +17,13 @@ export default function OrderPortal(props) {
                     <div className="portalContent">
                         <ul>Loading...</ul>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
@@ -39,7 +37,7 @@ export default function OrderPortal(props) {
                 <div className="portalContent">
                     <div className="portalOrder">
                         <span>Order ID</span>
-                        <span>Last Updated</span>
+                        <span>Order Date</span>
                         <span className="rightAlign">Total</span>
                     </div>
                     {ordersData.orders.map((order) => (
@@ -51,10 +49,12 @@ export default function OrderPortal(props) {
     };
     return (
         <div className="clientOrdersPortal">
-            <NavLink to={{
-                pathname: "/clients/" + props.cid + "/orders",
-                state: {cid: props.cid}
-            }}>
+            <NavLink
+                to={{
+                    pathname: "/clients/" + props.cid + "/orders",
+                    state: { cid: props.cid },
+                }}
+            >
                 <p className="portalHeading">
                     Order History <FontAwesomeIcon icon="chevron-right" />
                 </p>

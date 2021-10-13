@@ -42,12 +42,12 @@
 }
 
 #clientsList th:first-child,
-td:first-child {
+#clientsList td:first-child {
     padding-left: 6vw;
 }
 
 #clientsList th:not(:first-child),
-td:not(:first-child) {
+#clientsList td:not(:first-child) {
     padding-left: 10px;
 }
 

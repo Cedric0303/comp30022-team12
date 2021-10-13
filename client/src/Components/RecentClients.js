@@ -1,5 +1,7 @@
 import React from "react";
+import Avatar from "boring-avatars";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useClients } from "../api.js";
 import "./css/recentClients.css";
 
@@ -41,6 +43,7 @@ export default function RecentClients(props) {
                 <table className="recentClientTable">
                     <thead>
                         <tr className="hide">
+                            <th>Photo</th>
                             <th>Name</th>
                             <th>Stage</th>
                         </tr>
@@ -49,10 +52,31 @@ export default function RecentClients(props) {
                         <tbody key={client.email}>
                             <tr className="recentClientRow">
                                 <td id="recentClientTd">
+                                    <Avatar
+                                        size={40}
+                                        name={
+                                            client.firstName +
+                                            " " +
+                                            client.lastName
+                                        }
+                                        variant="beam"
+                                        colors={[
+                                            "#3E6BB0",
+                                            "#8CBAFF",
+                                            "#6291D9",
+                                            "#FFFFF0",
+                                            "#D9B162",
+                                        ]}
+                                    />
+                                </td>
+                                <td id="recentClientTd">
                                     <NavLink to={"/clients/" + client.email}>
-                                        <p className="recentClientName">
+                                        <div id="recentCliNameField">
                                             {client.firstName} {client.lastName}
-                                        </p>
+                                            <div id="hide">
+                                                <FontAwesomeIcon icon="chevron-right" />
+                                            </div>
+                                        </div>
                                     </NavLink>
                                 </td>
                                 <td id="recentClientTd">

@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet";
 // Returns the first stage as an object
 function firstStage(stages) {
     stages = stages || [];
-    return stages.find((s) => s.position === 0)
+    return stages.find((s) => s.position === 0);
 }
 
 function AddClient(props) {
@@ -32,13 +32,14 @@ function AddClient(props) {
     }
 
     useEffect(() => {
-        getStages().then((stagesData) => {
-            setClientStage(firstStage(stagesData.stages).name);
-        })
-        .catch((e) => {
-            console.log(e);
-        });
-    }, [])
+        getStages()
+            .then((stagesData) => {
+                setClientStage(firstStage(stagesData.stages).name);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }, []);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -71,15 +72,13 @@ function AddClient(props) {
                     <div>
                         <ul>Loading...</ul>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
@@ -129,7 +128,10 @@ function AddClient(props) {
                                     />
                                 )}
                                 {stage.name === "unassigned" ? (
-                                    <span className="specStage" key={"span" + stage.id}>
+                                    <span
+                                        className="specStage"
+                                        key={"span" + stage.id}
+                                    >
                                         leave unassigned
                                     </span>
                                 ) : (

@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.orderAltText {
+    margin-left: 6vw;
+}
+
 #clientName {
     font-size: 3em;
     font-weight: 700;

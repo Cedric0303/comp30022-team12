@@ -231,15 +231,13 @@ function ScheduleMeeting(props) {
                     <div>
                         <ul>Loading...</ul>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
@@ -326,7 +324,10 @@ function ScheduleMeeting(props) {
         <div>
             <Helmet>
                 <title>Schedule Meeting - Bobafish CRM</title>
-                <meta name="description" content="Schedule a meeting with a client" />
+                <meta
+                    name="description"
+                    content="Schedule a meeting with a client"
+                />
             </Helmet>
             <Navbar />
             <main id="scheduleMeeting">

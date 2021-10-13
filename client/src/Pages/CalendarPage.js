@@ -21,7 +21,7 @@ function CalendarPage(props) {
             document.getElementsByClassName("actualCalendar")[0];
         if (actualCalendar) {
             actualCalendar.style.height =
-                (0.98*winHeight - actualCalendar.offsetTop + "px");
+                0.98 * winHeight - actualCalendar.offsetTop + "px";
         }
     });
 
@@ -144,15 +144,13 @@ function CalendarPage(props) {
                     <div>
                         <ul>Loading...</ul>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
@@ -193,7 +191,10 @@ function CalendarPage(props) {
         <div>
             <Helmet>
                 <title>Calendar - Bobafish CRM</title>
-                <meta name="description" content="Check your schedule, add a new meeting or check existing ones" />
+                <meta
+                    name="description"
+                    content="Check your schedule, add a new meeting or check existing ones"
+                />
             </Helmet>
             <Navbar />
             <div id="calendar">

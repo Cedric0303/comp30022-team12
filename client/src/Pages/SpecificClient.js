@@ -27,15 +27,13 @@ function SpecificClient(props) {
                     <div>
                         <ul>Loading...</ul>
                     </div>
-                    {loading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
                 </div>
             );
         } else if (error) {
@@ -52,7 +50,10 @@ function SpecificClient(props) {
             return (
                 <div>
                     <Helmet>
-                        <title>{client.firstName + " " + client.lastName} - Bobafish CRM</title>
+                        <title>
+                            {client.firstName + " " + client.lastName} -
+                            Bobafish CRM
+                        </title>
                     </Helmet>
                     <div id="avatar">
                         <Avatar
