@@ -52,11 +52,11 @@
 }
 
 #recentCliNameField:hover {
-    color: #85a7ca;
+    color: white;
 }
 
 #recentCliNameField:hover #hide {
-    color: #85a7ca;
+    color: white;
     visibility: visible;
     cursor: pointer;
 }
