@@ -42,7 +42,7 @@
 }
 
 #clientsList th:first-child,
-td:first-child {
+#clientsList td:first-child {
     padding-left: 6vw;
 }
 

@@ -13,25 +13,32 @@
 
 .recentClientTable {
     width: 100%;
+    border-collapse: collapse;
 }
 
-.recentClientTable td{
+.recentClientRow {
     border-bottom: 1px solid #b3ddfd;
 }
-
 .recentClientTable > tbody {
     font-size: 20px;
 }
 
-
-
-#recentClientTd {
-    padding-top: 12px;
-    padding-bottom: 12px;
+.recentClientTable td:first-child {
+    text-align: center;
 }
 
-.recentClientTable td:first-child {
-    padding-left: 10px;
+#recentClientTd {
+    padding: 8px 0;
+}
+
+/* .recentClientRow:hover {
+    background-color: whitesmoke;
+    text-emphasis-color: #85a7ca;
+} */
+
+.recentClientName:hover {
+    /* color: #85a7ca; */
+    color:whitesmoke;
 }
 
 .recentClientName {
@@ -39,6 +46,3 @@
     font-weight: 650;
 }
 
-.recentClientName:hover {
-    color: #85a7ca;
-}
