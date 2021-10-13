@@ -17,6 +17,7 @@
 }
 
 .recentClientRow {
+    margin-top: -1;
     border-bottom: 1px solid #b3ddfd;
     height: 1px;
 }
