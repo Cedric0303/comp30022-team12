@@ -8,10 +8,7 @@ export default function OrderHistoryRow(order) {
     return (
         <tr className="orderHistoryWrapper">
             <td>
-                <span className="left-Align">
-                    {_id}
-                </span>
-                
+                <span className="left-Align">{_id}</span>
             </td>
             <td>
                 <span className="lastUpdated">

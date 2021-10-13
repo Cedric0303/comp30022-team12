@@ -37,8 +37,10 @@ function AdminAddUser(props) {
         e.preventDefault(); //prevent reload
         if (!notEmpty()) {
             setInputError("All fields must have a value!");
-        } else if (!validate_password(password)){
-            setInputError("Passwords must only be comprised of letters or numbers and be between 8-20 characters.")
+        } else if (!validate_password(password)) {
+            setInputError(
+                "Passwords must only be comprised of letters or numbers and be between 8-20 characters."
+            );
         } else {
             const registerBody = {
                 username: username,
@@ -48,7 +50,6 @@ function AdminAddUser(props) {
                 lastName: lastName,
             };
             postUser(registerBody);
-            
         }
     };
 
@@ -162,19 +163,19 @@ function AdminAddUser(props) {
                             >
                                 Create User
                             </button>
-                            
                         </div>
                     </form>
                 </div>
                 <div className="addUserItem" id="itemRight">
-                    <NavLink to="/admin/users" activeClassName="addEditCancelBtn">
+                    <NavLink
+                        to="/admin/users"
+                        activeClassName="addEditCancelBtn"
+                    >
                         Cancel
                     </NavLink>
                 </div>
                 <p className="addEditInputError">{inputError}</p>
             </div>
-
-            
         </div>
     );
 }

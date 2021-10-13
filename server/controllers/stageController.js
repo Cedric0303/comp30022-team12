@@ -26,7 +26,9 @@ const getStages = async (req, res) => {
 // Don't return default "unassigned" stage when managing stages
 const getManageStages = async (req, res) => {
     try {
-        const stages = await Stages.find({ name: {$ne: "unassigned"}}).toArray();
+        const stages = await Stages.find({
+            name: { $ne: "unassigned" },
+        }).toArray();
         res.json({
             message: "Get stages successful!",
             stages: stages,
@@ -144,13 +146,13 @@ const removeStage = async (req, res) => {
     });
     const defaultStage = await Stages.findOne({
         id: "unassigned",
-    })
+    });
     await ClientModel.updateMany(
         {
             stage: removeStage._id,
         },
         { stage: defaultStage._id }
-    )
+    );
     await RecycleBin.insertOne({
         removeStage: removeStage,
         createdAt: new Date(),

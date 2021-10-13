@@ -66,7 +66,7 @@ function CalendarPage(props) {
     function handleSelect(selectedOptions) {
         if (!selectedOptions.length) {
             setFilterActivities(activitiesData.activities);
-        } else {
+        } else if (activitiesData.activities) {
             var chosenFilters = selectedOptions.map((o) => o.value._id);
             setFilterActivities(
                 activitiesData.activities.filter((act) => {
@@ -75,6 +75,16 @@ function CalendarPage(props) {
             );
         }
     }
+
+    useEffect(() => {
+        var defaultFilter = defaultOption();
+        if (defaultFilter) {
+            handleSelect(defaultFilter);
+        } else {
+            return;
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activitiesData.activities]);
 
     // Select clients to filter activities shown on calendar
     const filterClient = () => {

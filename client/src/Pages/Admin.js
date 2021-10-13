@@ -16,7 +16,10 @@ function Admin(props) {
                     }
                 `}</style>
                 <title>Dashboard - Admin Bobafish CRM</title>
-                <meta name="description" content="Admin Dashboard - Access admin features" />
+                <meta
+                    name="description"
+                    content="Admin Dashboard - Access admin features"
+                />
             </Helmet>
             <Navbar />
             <main>
