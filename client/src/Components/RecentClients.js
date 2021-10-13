@@ -54,7 +54,11 @@ export default function RecentClients(props) {
                                 <td id="recentClientTd">
                                     <Avatar
                                         size={40}
-                                        name={client.firstName + " " + client.lastName}
+                                        name={
+                                            client.firstName +
+                                            " " +
+                                            client.lastName
+                                        }
                                         variant="beam"
                                         colors={[
                                             "#3E6BB0",
@@ -66,11 +70,9 @@ export default function RecentClients(props) {
                                     />
                                 </td>
                                 <td id="recentClientTd">
-                                    <NavLink  to={"/clients/" + client.email}>
+                                    <NavLink to={"/clients/" + client.email}>
                                         <div id="recentCliNameField">
-                                            <div id="rcNameFieldText">
-                                                {client.firstName} {client.lastName}
-                                            </div>
+                                            {client.firstName} {client.lastName}
                                             <div id="hide">
                                                 <FontAwesomeIcon icon="chevron-right" />
                                             </div>

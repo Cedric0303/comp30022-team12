@@ -33,11 +33,6 @@
     height: inherit;
 }
 
-/* .recentClientRow:hover {
-    background-color: whitesmoke;
-    text-emphasis-color: #85a7ca;
-} */
-
 .recentClientNameBox {
     display:inline-block;
 }
@@ -48,19 +43,15 @@
     padding-right: 10%;
     color: #b3ddfd;
     font-weight: 650;
+    height: 100%;
+    align-items: center;
 }
-
-#rcNameFieldText {
-    color: #b3ddfd;
-    font-weight: 650;
-}
-
 
 #hide {
     visibility: hidden;
 }
 
-#rcNameFieldText:hover {
+#recentCliNameField:hover {
     color: #85a7ca;
 }
 
@@ -69,25 +60,3 @@
     visibility: visible;
     cursor: pointer;
 }
-
-/* #recentClientTd > #recentCliNameField {
-    color: #b3ddfd;
-    font-weight: 650;
-}
-
-#recentClientTd > #recentCliNameField:hover {
-    color: #85a7ca;
-    color:whitesmoke;
-} */
-
-
-/* #recentClientName {
-    color: #b3ddfd;
-    font-weight: 650;
-}
-*/
-
-/* #recentClientName:hover {
-    color: #85a7ca;
-    color:whitesmoke;
-}  */
