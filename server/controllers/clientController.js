@@ -11,10 +11,7 @@ const RecycleBin = db.collection("recycle-bin");
 
 const getClients = async (req, res) => {
     if (!req.body.userReference) {
-        const clients = await ClientModel.find(
-            {},
-            {}
-        ).populate("stage");
+        const clients = await ClientModel.find({}, {}).populate("stage");
         res.json({
             message: "Get all clients successful!",
             clients: clients,
@@ -239,7 +236,7 @@ const editClient = async (req, res) => {
             }
             res.json({
                 message: "Edit client successful!",
-                user: doc.value,
+                client: doc.value,
             });
         }
     );
