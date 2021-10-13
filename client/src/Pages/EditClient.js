@@ -268,7 +268,10 @@ function EditClient(props) {
                         </button>
                     </form>
                     <div className="photoForm">
-                        <NavLink to="/clients" className="addEditCancelBtn">
+                        <NavLink 
+                            to={"/clients/" + props.match.params.clientID}
+                            className="addEditCancelBtn"
+                        >
                             Cancel
                         </NavLink>
                         <button

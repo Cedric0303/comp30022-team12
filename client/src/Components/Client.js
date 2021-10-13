@@ -29,23 +29,25 @@ export default function Client(client) {
             </td>
             <td className="actionButtons">
                 <NavLink
-                    className="meetingAction"
-                    activeClassName="activeAction"
-                    to={{
-                        pathname: "../calendar",
-                        state: {
-                            client: client,
-                        },
-                    }}
-                >
+                        to={{
+                            pathname: "/calendar/schedule-meeting",
+                            state: {
+                                client: client,
+                            },
+                        }}
+                        className="meetingAction"
+                        activeClassName="activeAction"
+                    >
                     <FontAwesomeIcon icon="calendar-alt" />
-                    <span>Upcoming Meetings</span>
+                    <span>Schedule Meeting</span>
                 </NavLink>
-                <NavLink
+                <NavLink 
                     className="orderAction"
                     activeClassName="activeAction"
-                    to={"/clients/" + email + "/orders"}
-                >
+                    to={{
+                    pathname: "/clients/" + email + "/orders",
+                    state: {cid: email}
+                }}>
                     <FontAwesomeIcon icon="receipt" />
                     <span>Orders</span>
                 </NavLink>

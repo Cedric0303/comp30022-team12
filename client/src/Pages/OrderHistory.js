@@ -60,26 +60,9 @@ function OrderHistory(props) {
 
     const clientName = () => {
         if (clientLoading) {
-            return (
-                <div>
-                    <ul>Loading...</ul>
-                    {clientLoading && (
-                        <ReactLoading
-                            id="loading-anim"
-                            type="spin"
-                            color="black"
-                            height="2%"
-                            width="2%"
-                        ></ReactLoading>
-                    )}
-                </div>
-            );
+            return;
         } else if (clientError) {
-            return (
-                <div>
-                    <ul>Something went wrong: {error.message}</ul>
-                </div>
-            );
+            return;
         } else {
             return (
                 <h1 id="clientName">
@@ -93,10 +76,10 @@ function OrderHistory(props) {
     }
 
     const pageMain = () => {
-        if (loading) {
+        if (loading || clientLoading) {
             return (
                 <div>
-                    <ul>Loading...</ul>
+                    <p className="orderAltText">Loading...</p>
                     {loading && (
                         <ReactLoading
                             id="loading-anim"
@@ -111,7 +94,13 @@ function OrderHistory(props) {
         } else if (error) {
             return (
                 <div>
-                    <ul>Something went wrong: {error.message}</ul>
+                    <p className="orderAltText">Something went wrong: {error.message}</p>
+                </div>
+            );
+        } else if (clientError) {
+            return (
+                <div>
+                    <p className="orderAltText">Something went wrong: {clientError.message}</p>
                 </div>
             );
         } else {
@@ -121,7 +110,7 @@ function OrderHistory(props) {
                         <thead>
                             <tr>
                                 <th id="orderID">Order ID</th>
-                                <th id="lastUpdate">Last Updated</th>
+                                <th id="lastUpdate">Order Date</th>
                                 <th id="amount">Amount</th>
                             </tr>
                         </thead>

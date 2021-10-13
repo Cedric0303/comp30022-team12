@@ -39,7 +39,7 @@ export default function OrderPortal(props) {
                 <div className="portalContent">
                     <div className="portalOrder">
                         <span>Order ID</span>
-                        <span>Last Updated</span>
+                        <span>Order Date</span>
                         <span className="rightAlign">Total</span>
                     </div>
                     {ordersData.orders.map((order) => (
