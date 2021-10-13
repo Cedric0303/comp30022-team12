@@ -27,7 +27,8 @@ export default function Client(client) {
             <td>
                 <NavLink to={"/clients/" + email}>
                     <span className="clientFullName">
-                        {" "}{firstName} {lastName}{" "}
+                        {" "}
+                        {firstName} {lastName}{" "}
                         <FontAwesomeIcon icon="chevron-right" />
                     </span>
                 </NavLink>
@@ -44,25 +45,26 @@ export default function Client(client) {
             </td>
             <td className="actionButtons">
                 <NavLink
-                        to={{
-                            pathname: "/calendar/schedule-meeting",
-                            state: {
-                                client: client,
-                            },
-                        }}
-                        className="meetingAction"
-                        activeClassName="activeAction"
-                    >
+                    to={{
+                        pathname: "/calendar/schedule-meeting",
+                        state: {
+                            client: client,
+                        },
+                    }}
+                    className="meetingAction"
+                    activeClassName="activeAction"
+                >
                     <FontAwesomeIcon icon="calendar-alt" />
                     <span>Schedule Meeting</span>
                 </NavLink>
-                <NavLink 
+                <NavLink
                     className="orderAction"
                     activeClassName="activeAction"
                     to={{
-                    pathname: "/clients/" + email + "/orders",
-                    state: {cid: email}
-                }}>
+                        pathname: "/clients/" + email + "/orders",
+                        state: { cid: email },
+                    }}
+                >
                     <FontAwesomeIcon icon="receipt" />
                     <span>Orders</span>
                 </NavLink>

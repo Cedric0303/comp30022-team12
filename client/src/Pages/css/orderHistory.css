@@ -45,7 +45,6 @@
     filter: brightness(0.8);
 }
 
-
 #orderHistoryBox {
     height: auto;
     background-color: white;
@@ -60,7 +59,6 @@
 }
 
 #orderHistory th {
-
     border-bottom: 1px solid #6d6d6d;
     border-right: 1px solid #6d6d6d;
     color: #051e39;
@@ -70,7 +68,9 @@
     font-weight: 500;
 }
 
-#orderHistory tbody, #orderHistory tr, #orderHistory td {
+#orderHistory tbody,
+#orderHistory tr,
+#orderHistory td {
     margin: 0;
     padding: 0.6vh 0.5em;
     border: none;
@@ -82,9 +82,15 @@
     font-size: 1.2em;
 }
 
-#orderID { width: 40%; }
-#lastUpdate { width: 30%; }
-#amount { width: 30%; }
+#orderID {
+    width: 40%;
+}
+#lastUpdate {
+    width: 30%;
+}
+#amount {
+    width: 30%;
+}
 
 #orderHistory tbody {
     background-color: white;
@@ -136,12 +142,12 @@
         "addbutton cancel";
 }
 
-#orderTotal { 
+#orderTotal {
     display: flex;
     column-gap: 0.4em;
     justify-content: center;
     align-items: center;
-    grid-area: input; 
+    grid-area: input;
 }
 
 #orderTotal input {
@@ -149,8 +155,8 @@
     font-family: inherit;
 }
 
-#modalAddOrderButton { 
-    grid-area: addbutton; 
+#modalAddOrderButton {
+    grid-area: addbutton;
     border: none;
     border-radius: 8px;
 
@@ -168,8 +174,8 @@
     filter: brightness(0.8);
 }
 
-#modalOrderCancelButton { 
-    grid-area: cancel; 
+#modalOrderCancelButton {
+    grid-area: cancel;
     border: none;
     background: none;
 

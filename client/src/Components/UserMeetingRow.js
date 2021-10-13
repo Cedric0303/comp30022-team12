@@ -34,7 +34,7 @@ export default function UserMeetingRow(props) {
                             {props.client.firstName} {props.client.lastName}
                         </b>
                     </span>
-    
+
                     <Moment
                         className="rightAlign"
                         format={formatString(props.activity.timeStart)}
@@ -45,9 +45,6 @@ export default function UserMeetingRow(props) {
             </NavLink>
         );
     } else {
-        return (
-            <div></div>
-        );
+        return <div></div>;
     }
-    
 }

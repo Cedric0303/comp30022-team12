@@ -9,7 +9,7 @@ export default function OrderRow(order) {
         <div className="portalRow portalOrderRow">
             <span>{_id}</span>
             <span>
-                    <Moment format="Do MMM YY">{updatedAt}</Moment>
+                <Moment format="Do MMM YY">{updatedAt}</Moment>
             </span>
             <span className="rightAlign">{orderTotal}</span>
         </div>

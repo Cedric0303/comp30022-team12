@@ -78,13 +78,13 @@ function CalendarPage(props) {
 
     useEffect(() => {
         var defaultFilter = defaultOption();
-        if (defaultFilter) {         
+        if (defaultFilter) {
             handleSelect(defaultFilter);
         } else {
             return;
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[activitiesData.activities]);
+    }, [activitiesData.activities]);
 
     // Select clients to filter activities shown on calendar
     const filterClient = () => {

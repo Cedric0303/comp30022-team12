@@ -22,7 +22,8 @@ export default function UserMeetingPortal(props) {
                     <p>Something went wrong: {error.message}</p>
                 </div>
             );
-        } else if (!clientsData) { // allow clients to be populated
+        } else if (!clientsData) {
+            // allow clients to be populated
             return (
                 <div className="portalContent">
                     <p>No clients found! Reload or start adding clients.</p>
