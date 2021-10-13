@@ -25,7 +25,7 @@ export default function PastMeetingPortal(props) {
         } else {
             var upcomingActs = [];
             activitiesData.activities.forEach((act) => {
-                if (act.timeEnd < new Date()) {
+                if (act.timeStart < new Date()) {
                     upcomingActs.push(act); // Most recent meetings first
                 }
             });

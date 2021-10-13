@@ -157,6 +157,7 @@ function Clients(props) {
                     <table id="clientsList">
                         <thead id="clientsListHeading">
                             <tr>
+                                <th id="clientAvatar"></th>
                                 <th>Name</th>
                                 <th id="lastInteracted">Last Interacted</th>
                                 <th id="clientStage">Stage</th>

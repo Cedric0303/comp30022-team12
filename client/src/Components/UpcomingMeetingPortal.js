@@ -27,7 +27,7 @@ export default function UpcomingMeetingPortal(props) {
         } else {
             var upcomingActs = [];
             activitiesData.activities.forEach((act) => {
-                if (act.timeEnd >= new Date()) {
+                if (act.timeStart >= new Date()) {
                     upcomingActs.unshift(act); // Soonest meetings first
                 }
             });
