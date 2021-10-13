@@ -9,6 +9,7 @@
   - [Team Members](#team-members)
   - [General Info](#general-info)
   - [Packages](#packages)
+    - [Testing / Deployment](#testing--deployment)
       - [Backend](#backend)
       - [Frontend](#frontend)
   - [Installation step](#installation-step)
@@ -34,25 +35,31 @@ A personal CRM
 
 ## Packages
 
+### Testing / Deployment
+
+-   `@testing-library/jest-dom`
+-   `@testing-library/react`
+-   `@testing-library/user-event`
+-   `concurrently`
+-   `eslint-plugin-react`
+-   `nodemon`
+-   `prettier`
+-   `supertest`
+-   `web-vitals`
+
 #### Backend
 
 -   `axios`
--   `boring-avatars`
 -   `bcrypt`
--   `concurrently`
 -   `cors`
 -   `dotenv`
 -   `express`
--   `react`
 -   `jsonwebtoken`
 -   `mongoose`
 -   `passport`
 -   `passport-jwt`
 -   `passport-local`
 -   `jest`
--   `nodemon`
--   `prettier`
--   `supertest`
 
 #### Frontend
 
@@ -61,12 +68,10 @@ A personal CRM
 -   `@fortawesome/free-regular-svg-icons`
 -   `@fortawesome/free-solid-svg-icons`
 -   `@fortawesome/react-fontawesome`
--    `@material-ui/core`
+-   `@material-ui/core`
 -   `@material-ui/pickers`
--   `@testing-library/jest-dom`
--   `@testing-library/react`
--   `@testing-library/user-event`
 -   `axios`
+-   `boring-avatars`
 -   `jwt-decode`
 -   `moment`
 -   `react`
@@ -81,8 +86,6 @@ A personal CRM
 -   `react-scripts`
 -   `react-select`
 -   `validator`
--   `web-vitals`
--   `eslint-plugin-react`
 
 ## Installation step
 
