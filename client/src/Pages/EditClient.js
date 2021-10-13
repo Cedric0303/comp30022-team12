@@ -7,6 +7,8 @@ import { getClient, postEditClient, deleteClient, useStages } from "../api.js";
 import Auth from "./Auth.js";
 import "./css/editClient.css";
 import { Helmet } from "react-helmet";
+import ReactLoading from "react-loading";
+import "../Pages/css/animation.css";
 
 function EditClient(props) {
     const [loading, setLoading] = useState(true);
@@ -139,7 +141,10 @@ function EditClient(props) {
                                     />
                                 )}
                                 {stage.name === "unassigned" ? (
-                                    <span className="specStage" key={"span" + stage.id}>
+                                    <span
+                                        className="specStage"
+                                        key={"span" + stage.id}
+                                    >
                                         leave unassigned
                                     </span>
                                 ) : (
@@ -157,7 +162,18 @@ function EditClient(props) {
 
     const pageMain = () => {
         if (loading) {
-            return <div className="editClientbox">Loading...</div>;
+            return (
+                <div>
+                    <div className="editClientbox">Loading...</div>
+                    <ReactLoading
+                        id="loading-anim"
+                        type="spin"
+                        color="black"
+                        height="2%"
+                        width="2%"
+                    ></ReactLoading>
+                </div>
+            );
         } else if (error) {
             return (
                 <div className="edit-userbox">
@@ -218,9 +234,7 @@ function EditClient(props) {
                                     type="text"
                                     placeholder="Email"
                                     value={email}
-                                    onChange={(e) =>
-                                        setEmail(e.target.value)
-                                    }
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <div className="editClientInput">
@@ -234,9 +248,7 @@ function EditClient(props) {
                                     type="text"
                                     placeholder="Phone Number"
                                     value={phoneNo}
-                                    onChange={(e) =>
-                                        setPhoneNo(e.target.value)
-                                    }
+                                    onChange={(e) => setPhoneNo(e.target.value)}
                                 />
                             </div>
                             <div className="editClientInput">
@@ -250,9 +262,7 @@ function EditClient(props) {
                                     type="text"
                                     placeholder="Address"
                                     value={address}
-                                    onChange={(e) =>
-                                        setAddress(e.target.value)
-                                    }
+                                    onChange={(e) => setAddress(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -268,7 +278,7 @@ function EditClient(props) {
                         </button>
                     </form>
                     <div className="photoForm">
-                        <NavLink 
+                        <NavLink
                             to={"/clients/" + props.match.params.clientID}
                             className="addEditCancelBtn"
                         >
@@ -309,10 +319,7 @@ function EditClient(props) {
                     Delete this client for all eternity?
                 </div>
                 <div className="deleteModalButtonGroup">
-                    <button
-                        id="modalDeleteBtn"
-                        onClick={handleDelete}
-                    >
+                    <button id="modalDeleteBtn" onClick={handleDelete}>
                         Delete
                     </button>
                     <button
