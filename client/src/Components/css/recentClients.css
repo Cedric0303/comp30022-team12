@@ -26,6 +26,12 @@
 
 .recentClientTable td:first-child {
     text-align: center;
+    width: 60px;
+}
+
+.recentClientTable td:not(:first-child) {
+    padding: 8px 0;
+    height: inherit;
 }
 
 #recentClientTd {
