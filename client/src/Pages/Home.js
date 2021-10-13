@@ -33,7 +33,8 @@ function Home(props) {
                 <div className="homeActualCal">
                     <Calendar
                         localizer={localizer}
-                        views={["month"]}
+                        views={["day"]}
+                        defaultView="day"
                         events={activitiesData.activities}
                         startAccessor="timeStart"
                         endAccessor="timeEnd"
