@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./css/error.css";
-import errorImage from "./css/error.jpg";
+import errorImage from "./css/error.gif";
 import { Helmet } from "react-helmet";
 
 export default function Error(props) {
@@ -76,6 +76,8 @@ export default function Error(props) {
                 src={errorImage}
                 alt="Error: You Shall Not Pass"
             ></img>
+            <br />
+            <br />
             {handleError(error)}
         </div>
     );
