@@ -47,7 +47,7 @@
 }
 
 #clientsList th:not(:first-child),
-td:not(:first-child) {
+#clientsList td:not(:first-child) {
     padding-left: 10px;
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import Avatar from "boring-avatars";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useClients } from "../api.js";
 import "./css/recentClients.css";
 
@@ -65,10 +66,15 @@ export default function RecentClients(props) {
                                     />
                                 </td>
                                 <td id="recentClientTd">
-                                    <NavLink to={"/clients/" + client.email}>
-                                        <p className="recentClientName">
-                                            {client.firstName} {client.lastName}
-                                        </p>
+                                    <NavLink  to={"/clients/" + client.email}>
+                                        <div id="recentCliNameField">
+                                            <div id="rcNameFieldText">
+                                                {client.firstName} {client.lastName}
+                                            </div>
+                                            <div id="hide">
+                                                <FontAwesomeIcon icon="chevron-right" />
+                                            </div>
+                                        </div>
                                     </NavLink>
                                 </td>
                                 <td id="recentClientTd">

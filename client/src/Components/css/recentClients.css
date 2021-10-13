@@ -18,9 +18,10 @@
 
 .recentClientRow {
     border-bottom: 1px solid #b3ddfd;
+    height: 1px;
 }
 .recentClientTable > tbody {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .recentClientTable td:first-child {
@@ -29,6 +30,7 @@
 
 #recentClientTd {
     padding: 8px 0;
+    height: inherit;
 }
 
 /* .recentClientRow:hover {
@@ -36,13 +38,56 @@
     text-emphasis-color: #85a7ca;
 } */
 
-.recentClientName:hover {
-    /* color: #85a7ca; */
-    color:whitesmoke;
+.recentClientNameBox {
+    display:inline-block;
 }
 
-.recentClientName {
+#recentCliNameField {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10%;
     color: #b3ddfd;
     font-weight: 650;
 }
 
+#rcNameFieldText {
+    color: #b3ddfd;
+    font-weight: 650;
+}
+
+
+#hide {
+    visibility: hidden;
+}
+
+#rcNameFieldText:hover {
+    color: #85a7ca;
+}
+
+#recentCliNameField:hover #hide {
+    color: #85a7ca;
+    visibility: visible;
+    cursor: pointer;
+}
+
+/* #recentClientTd > #recentCliNameField {
+    color: #b3ddfd;
+    font-weight: 650;
+}
+
+#recentClientTd > #recentCliNameField:hover {
+    color: #85a7ca;
+    color:whitesmoke;
+} */
+
+
+/* #recentClientName {
+    color: #b3ddfd;
+    font-weight: 650;
+}
+*/
+
+/* #recentClientName:hover {
+    color: #85a7ca;
+    color:whitesmoke;
+}  */
