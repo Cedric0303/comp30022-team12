@@ -11,7 +11,7 @@ export default function OrderRow(order) {
             <span>
                 <Moment format="Do MMM YY">{updatedAt}</Moment>
             </span>
-            <span className="rightAlign">{orderTotal}</span>
+            <span className="rightAlign">{orderTotal.toFixed(2)} AUD</span>
         </div>
     );
 }
