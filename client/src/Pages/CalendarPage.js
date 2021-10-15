@@ -147,6 +147,19 @@ function CalendarPage(props) {
         }
     };
 
+    const agendaEvent = (event) => {
+        let eventClient;
+        for (let i=0; i<clientsData.length; i++) {
+            if (clientsData[i]._id === event.event.clientReference) {
+                eventClient = clientsData[i].firstName+" "+clientsData[i].lastName;
+                break;
+            }
+        }
+        return (
+            <span>{event.title} with <strong>{eventClient}</strong></span>
+        )
+    }
+
     const pageMain = () => {
         if (loading || cliLoading) {
             return (
@@ -190,6 +203,11 @@ function CalendarPage(props) {
                             startAccessor="timeStart"
                             endAccessor="timeEnd"
                             titleAccessor="type"
+                            components= {{
+                                agenda: {
+                                    event: agendaEvent
+                                }
+                            }}
                         />
                     </div>
                 </div>
