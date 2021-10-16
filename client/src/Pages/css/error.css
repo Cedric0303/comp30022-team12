@@ -8,8 +8,12 @@
 }
 
 #errorImg {
-    width: 150%;
+    width: 140%;
     transform: translateX(-17%);
+}
+
+#errorImgFish {
+    width: 50%
 }
 
 .errorText {
@@ -30,6 +34,10 @@
     border-radius: 10px;
     border-style: none;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #loginButton:hover {

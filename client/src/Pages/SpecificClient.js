@@ -109,7 +109,7 @@ function SpecificClient(props) {
                         </NavLink>
                     </div>
                     <div id="clientInfo">
-                        <p>Stage: {client.stage.name}</p>
+                        <p>Stage: <strong>{client.stage.name}</strong></p>
                         <p>
                             {client.email}{" "}
                             <FontAwesomeIcon
@@ -122,6 +122,13 @@ function SpecificClient(props) {
                             <FontAwesomeIcon
                                 className="contactIcon"
                                 icon="phone"
+                            />
+                        </p>
+                        <p>
+                            {client.address}{" "}
+                            <FontAwesomeIcon 
+                                className="contactIcon"
+                                icon="map-marker-alt"
                             />
                         </p>
                     </div>

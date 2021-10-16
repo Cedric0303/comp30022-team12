@@ -53,10 +53,11 @@
     justify-content: center;
     background: whitesmoke;
     border-radius: 10px;
-    height: 8%;
+    min-height: 30px;
+    height: 5vh;
     width: 100%;
     font-weight: 700;
-    margin-top: 10px;
+    margin-top: max(1vh, 10px);
 }
 
 .homeViewCal:hover {
@@ -67,7 +68,7 @@
     background-color: white;
     padding: 10px;
     border-radius: 5px;
-    height: 50vh;
+    height: 52vh;
 }
 
 .homeButtonGroup {
