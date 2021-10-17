@@ -44,7 +44,6 @@ function Clients(props) {
     }, [stagesData]);
 
     const handleFilterChange = (selectedOptions) => {
-        console.log(selectedOptions);
         setFilters(selectedOptions);
     };
 
