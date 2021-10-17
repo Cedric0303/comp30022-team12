@@ -44,6 +44,7 @@ function Clients(props) {
     }, [stagesData]);
 
     const handleFilterChange = (selectedOptions) => {
+        console.log(selectedOptions);
         setFilters(selectedOptions);
     };
 
@@ -66,7 +67,7 @@ function Clients(props) {
             });
         } else if (!query && filter.length) {
             // no query yes filter
-            let chosenFilters = filter.map((f) => f.value);
+            let chosenFilters = filter.map((f) => f.label);
             return clients.filter((client) => {
                 return chosenFilters.includes(client.stage.name);
             });
