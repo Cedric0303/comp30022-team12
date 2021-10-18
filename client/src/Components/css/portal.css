@@ -172,6 +172,8 @@
     padding: 5px 12px;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
+    position: sticky;
+    top: 0;
 }
 
 .portalOrderRow {
