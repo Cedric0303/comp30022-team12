@@ -40,9 +40,11 @@ export default function OrderPortal(props) {
                         <span>Order Date</span>
                         <span className="rightAlign">Total</span>
                     </div>
-                    {ordersData.orders.map((order) => (
-                        <OrderRow key={order._id} {...order} />
-                    ))}
+                    <div>
+                        {ordersData.orders.map((order) => (
+                            <OrderRow key={order._id} {...order} />
+                        ))}
+                    </div>
                 </div>
             );
         }
